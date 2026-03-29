@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <meta name="google-site-verification" content="TIhv0tt3FCEP4dnyjAzjaFoRtmCWvtB0UOwRyLWobH0" />
   <title>Peshawa Cinema - پاشا سینەما</title>
-  <meta name="description" content="ماپەرێک بۆ بینینی نوێترین و پربینەرترین فیلم و زنجیرەکان بە باشترین کوالێتی">
+  <meta name="description" content="مـاڵپـەرێـڪ بـۆ بـینـیـنـی نـوێـتـریـن و پـربـینـەرتـریـن فـیلـم و زنـجـیـرەڪـانـ بـە بـاشـتریـن ڪوالـێـتـێی">
   <meta name="keywords" content="فیلم, زنجیرە, سینەما, Peshawa Cinema">
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -18,803 +18,263 @@
       color: #eef2ff;
       line-height: 1.5;
       position: relative;
+      transition: color 0.3s;
     }
+    body.darker-theme::before { background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(25px) saturate(100%); }
     body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: rgba(8, 8, 12, 0.55);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      z-index: -1;
+      content: ''; position: fixed; inset: 0;
+      background: rgba(8, 8, 12, 0.65);
+      backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+      z-index: -1; transition: all 0.4s;
     }
-    .toast-container {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    
+    /* تایبەتمەندی نوێ: دۆخی ڕووناکی (Light Mode) */
+    body.light-theme { color: #111; }
+    body.light-theme::before { background: rgba(240, 242, 245, 0.85); backdrop-filter: blur(25px); }
+    body.light-theme .topbar, body.light-theme .nav-menu, body.light-theme .filter-panel { background: rgba(255, 255, 255, 0.7); border-color: rgba(0,0,0,0.1); }
+    body.light-theme .clock-time, body.light-theme .dropdown-item, body.light-theme .card-title, body.light-theme .section-title, body.light-theme .hero-title, body.light-theme .setting-info h4 { color: #111; }
+    body.light-theme .user-dropdown, body.light-theme .modal-card, body.light-theme .notification-modal { background: rgba(255,255,255,0.98); border-color: rgba(0,0,0,0.1); }
+    body.light-theme .search-box, body.light-theme .form-group input, body.light-theme .form-group select { background: rgba(255,255,255,0.8); color: #111; border-color: #ccc; }
+    body.light-theme .movie-card { background: rgba(255,255,255,0.6); }
+    body.light-theme .card-overlay { background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 40%, transparent 100%); }
+    body.light-theme .modal-hero::after { background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.7) 50%, transparent 100%); }
+    body.light-theme .modal-hero-content h1 { text-shadow: none; color: #111; }
+    body.light-theme .comment-item, body.light-theme .setting-row, body.light-theme .user-list-item { background: rgba(0,0,0,0.03); border-color: rgba(0,0,0,0.05); }
+    body.light-theme .chip { color: #333; border-color: #ccc; }
+    body.light-theme .ep-btn { color: #333; border-color: #ccc; }
+
+    .toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
     .toast {
-      background: rgba(20, 20, 28, 0.95);
-      backdrop-filter: blur(12px);
-      border-radius: 12px;
-      padding: 12px 20px;
-      min-width: 250px;
-      max-width: 350px;
-      color: #fff;
-      font-size: 0.9rem;
-      border-right: 4px solid #f8d64e;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-      animation: slideIn 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      background: rgba(20, 20, 28, 0.95); backdrop-filter: blur(12px); border-radius: 12px;
+      padding: 12px 20px; min-width: 250px; max-width: 350px; color: #fff; font-size: 0.9rem;
+      border-right: 4px solid #f8d64e; box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: slideIn 0.3s ease; display: flex; align-items: center; gap: 12px;
     }
     .toast.success { border-right-color: #4caf50; }
     .toast.error { border-right-color: #ff4757; }
     .toast.info { border-right-color: #f8d64e; }
-    @keyframes slideIn {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
+    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: rgba(30, 30, 42, 0.5); }
     ::-webkit-scrollbar-thumb { background: #f8d64e; border-radius: 10px; }
-    #loader {
-      position: fixed;
-      inset: 0;
-      background: #0a0a0f;
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.4s;
-    }
-    .spinner {
-      width: 58px;
-      height: 58px;
-      border: 4px solid rgba(248,214,78,0.15);
-      border-top-color: #f8d64e;
-      border-radius: 50%;
-      animation: spin 0.75s infinite;
-    }
+    #loader { position: fixed; inset: 0; background: #0a0a0f; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.4s; }
+    .spinner { width: 58px; height: 58px; border: 4px solid rgba(248,214,78,0.15); border-top-color: #f8d64e; border-radius: 50%; animation: spin 0.75s infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(17, 18, 22, 0.7);
-      backdrop-filter: blur(24px);
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      flex: 1;
-    }
-    .header-logo {
-      height: 44px;
-      width: 44px;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 2px solid rgba(248,214,78,0.8);
-      box-shadow: 0 4px 15px rgba(248, 214, 78, 0.3);
-    }
-    .site-badge {
-      font-weight: 800;
-      font-size: 1.2rem;
-      background: linear-gradient(135deg, #ffffff, #f8d64e);
-      -webkit-background-clip: text;
-      color: transparent;
-      white-space: nowrap;
-    }
-    .clock-widget {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(12px);
-      border-radius: 40px;
-      padding: 6px 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid rgba(248, 214, 78, 0.3);
-    }
+    
+    /* Topbar & User */
+    .topbar { position: sticky; top: 0; z-index: 100; background: rgba(17, 18, 22, 0.7); backdrop-filter: blur(24px); padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255, 255, 255, 0.08); flex-wrap: wrap; gap: 10px; }
+    .logo-area { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; flex: 1; }
+    .header-logo { height: 44px; width: 44px; object-fit: cover; border-radius: 12px; border: 2px solid rgba(248,214,78,0.8); box-shadow: 0 4px 15px rgba(248, 214, 78, 0.3); }
+    .site-badge { font-weight: 800; font-size: 1.2rem; background: linear-gradient(135deg, #ffffff, #f8d64e); -webkit-background-clip: text; color: transparent; white-space: nowrap; }
+    .clock-widget { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border-radius: 40px; padding: 6px 12px; display: flex; align-items: center; gap: 8px; border: 1px solid rgba(248, 214, 78, 0.3); }
     .clock-widget i { color: #f8d64e; font-size: 0.9rem; }
     .clock-time { font-size: 0.8rem; font-weight: 600; color: #fff; direction: ltr; font-family: monospace; }
     .clock-date { font-size: 0.65rem; color: #aaa; direction: ltr; }
-    .stats-badge {
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(8px);
-      padding: 4px 10px;
-      border-radius: 40px;
-      font-size: 0.7rem;
-      color: #f8d64e;
-      border: 1px solid rgba(248,214,78,0.3);
-      white-space: nowrap;
-    }
+    .stats-badge { background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); padding: 4px 10px; border-radius: 40px; font-size: 0.7rem; color: #f8d64e; border: 1px solid rgba(248,214,78,0.3); white-space: nowrap; }
     .user-area { display: flex; gap: 8px; align-items: center; position: relative; }
-    .icon-btn, .avatar {
-      width: 40px;
-      height: 40px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s;
-      color: #f8d64e;
-      position: relative;
-    }
-    /* Live Notification Bell Animation */
-    @keyframes bellRing {
-      0% { transform: rotate(0deg); }
-      10% { transform: rotate(15deg); }
-      20% { transform: rotate(-15deg); }
-      30% { transform: rotate(10deg); }
-      40% { transform: rotate(-10deg); }
-      50% { transform: rotate(5deg); }
-      60% { transform: rotate(-5deg); }
-      70% { transform: rotate(2deg); }
-      80% { transform: rotate(-2deg); }
-      90% { transform: rotate(1deg); }
-      100% { transform: rotate(0deg); }
-    }
-    .bell-live {
-      animation: bellRing 0.8s ease-in-out;
-    }
-    .icon-btn:hover, .avatar:hover {
-      background: rgba(248, 214, 78, 0.2);
-      transform: translateY(-2px);
-    }
-    .notif-badge {
-      position: absolute;
-      top: -4px;
-      right: -4px;
-      background: #ff4757;
-      color: white;
-      font-size: 0.6rem;
-      font-weight: 800;
-      min-width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid #14141c;
-      animation: pulseBadge 2s infinite;
-    }
-    @keyframes pulseBadge {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7); }
-      70% { transform: scale(1.05); box-shadow: 0 0 0 6px rgba(255, 71, 87, 0); }
-      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); }
-    }
-    .notification-modal {
-      position: fixed;
-      top: 70px;
-      left: 50%;
-      transform: translateX(-50%) scale(0.95) translateY(-10px);
-      background: rgba(20, 20, 28, 0.9);
-      backdrop-filter: blur(30px);
-      border-radius: 24px;
-      padding: 20px;
-      min-width: 300px;
-      max-width: 90%;
-      z-index: 3000;
-      border: 1px solid rgba(248,214,78,0.25);
-      box-shadow: 0 25px 50px rgba(0,0,0,0.6);
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.4s;
-      pointer-events: none;
-    }
-    .notification-modal.show {
-      opacity: 1;
-      visibility: visible;
-      transform: translateX(-50%) scale(1) translateY(0);
-      pointer-events: auto;
-    }
-    .notification-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .notification-header h3 { color: #fff; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
-    .notification-header h3 i { color: #f8d64e; }
-    .notification-close {
-      background: rgba(255,255,255,0.05);
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s;
-      color: #aaa;
-    }
-    .notification-close:hover { background: rgba(255, 71, 87, 0.2); color: #ff4757; transform: rotate(90deg); }
-    .notification-list {
-      max-height: 320px;
-      overflow-y: auto;
-      padding-right: 5px;
-    }
-    .notification-item {
-      padding: 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.02);
-      margin-bottom: 12px;
-      border: 1px solid rgba(255,255,255,0.03);
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      transition: all 0.2s;
-    }
-    .notification-item:hover {
-      background: rgba(255,255,255,0.05);
-      border-color: rgba(248, 214, 78, 0.3);
-      transform: translateX(4px);
-    }
-    html[dir="ltr"] .notification-item:hover { transform: translateX(-4px); }
-    .notification-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: rgba(248, 214, 78, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #f8d64e;
-      font-size: 1.2rem;
-      flex-shrink: 0;
-    }
-    .notification-content p { font-size: 0.9rem; color: #eee; margin: 0 0 6px 0; line-height: 1.5; }
-    .notification-time {
-      font-size: 0.7rem;
-      color: #f8d64e;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      margin-top: 6px;
-    }
-    .user-dropdown {
-      position: absolute;
-      top: 52px;
-      left: 0;
-      background: rgba(20, 20, 28, 0.9);
-      border-radius: 20px;
-      padding: 16px;
-      min-width: 280px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      z-index: 200;
-      display: none;
-      backdrop-filter: blur(24px);
-      animation: dropFade 0.3s forwards;
-    }
+    .icon-btn, .avatar { width: 40px; height: 40px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; color: #f8d64e; position: relative; }
+    @keyframes bellRing { 0% { transform: rotate(0deg); } 10% { transform: rotate(15deg); } 20% { transform: rotate(-15deg); } 30% { transform: rotate(10deg); } 40% { transform: rotate(-10deg); } 50% { transform: rotate(5deg); } 60% { transform: rotate(-5deg); } 70% { transform: rotate(2deg); } 80% { transform: rotate(-2deg); } 90% { transform: rotate(1deg); } 100% { transform: rotate(0deg); } }
+    .bell-live { animation: bellRing 0.8s ease-in-out; }
+    .icon-btn:hover, .avatar:hover { background: rgba(248, 214, 78, 0.2); transform: translateY(-2px); }
+    .notif-badge { position: absolute; top: -4px; right: -4px; background: #ff4757; color: white; font-size: 0.6rem; font-weight: 800; min-width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #14141c; animation: pulseBadge 2s infinite; }
+    @keyframes pulseBadge { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7); } 70% { transform: scale(1.05); box-shadow: 0 0 0 6px rgba(255, 71, 87, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); } }
+    
+    /* Modals & Dropdowns */
+    .user-dropdown { position: absolute; top: 52px; left: 0; background: rgba(20, 20, 28, 0.9); border-radius: 20px; padding: 16px; min-width: 280px; border: 1px solid rgba(255, 255, 255, 0.1); z-index: 200; display: none; backdrop-filter: blur(24px); animation: dropFade 0.3s forwards; }
     html[dir="ltr"] .user-dropdown { left: auto; right: 0; }
-    @keyframes dropFade {
-      from { opacity: 0; transform: scale(0.95) translateY(-10px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
-    }
+    @keyframes dropFade { from { opacity: 0; transform: scale(0.95) translateY(-10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
     .user-dropdown.show { display: block; }
-    .dropdown-item {
-      padding: 10px 12px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      font-weight: 500;
-      color: #e2e2e2;
-    }
+    .dropdown-item { padding: 10px 12px; border-radius: 12px; cursor: pointer; transition: all 0.2s; display: flex; gap: 12px; align-items: center; font-weight: 500; color: #e2e2e2; }
     .dropdown-item:hover { background: rgba(255, 255, 255, 0.06); color: #fff; transform: translateX(-4px); }
     html[dir="ltr"] .dropdown-item:hover { transform: translateX(4px); }
     .dropdown-item:hover i { color: #f8d64e; }
-    #logoutBtn:hover { background: rgba(255, 77, 77, 0.1); color: #ff4d4d; }
     .dropdown-sep { margin: 12px 0; border-top: 1px solid rgba(255, 255, 255, 0.06); }
-    .mini-note { font-size: 0.75rem; color: #888; margin-top: 14px; text-align: center; }
-    .nav-menu {
-      display: flex;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      gap: 8px;
-      background: rgba(17, 18, 22, 0.6);
-      backdrop-filter: blur(16px);
-      padding: 8px 16px;
-      margin: 8px 16px;
-      border-radius: 50px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
-    }
-    .nav-item {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 8px 18px;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      white-space: nowrap;
-      cursor: pointer;
-    }
-    .nav-item.active, .nav-item:hover {
-      background: #f8d64e;
-      color: #111;
-      border-color: #f8d64e;
-      transform: translateY(-2px);
-    }
-    .filters-row {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin: 0 16px 16px 16px;
-    }
-    .filter-panel {
-      background: rgba(17, 18, 22, 0.5);
-      backdrop-filter: blur(16px);
-      border-radius: 28px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      overflow: hidden;
-    }
-    .panel-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 16px;
-      cursor: pointer;
-      transition: background 0.2s;
-      user-select: none;
-    }
+    
+    .notification-modal { position: fixed; top: 70px; left: 50%; transform: translateX(-50%) scale(0.95) translateY(-10px); background: rgba(20, 20, 28, 0.9); backdrop-filter: blur(30px); border-radius: 24px; padding: 20px; min-width: 300px; max-width: 90%; z-index: 3000; border: 1px solid rgba(248,214,78,0.25); box-shadow: 0 25px 50px rgba(0,0,0,0.6); opacity: 0; visibility: hidden; transition: all 0.4s; pointer-events: none; }
+    .notification-modal.show { opacity: 1; visibility: visible; transform: translateX(-50%) scale(1) translateY(0); pointer-events: auto; }
+    .notification-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .notification-header h3 { color: #fff; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
+    .notification-close { background: rgba(255,255,255,0.05); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; color: #aaa; }
+    .notification-close:hover { background: rgba(255, 71, 87, 0.2); color: #ff4757; transform: rotate(90deg); }
+    .notification-list { max-height: 320px; overflow-y: auto; padding-right: 5px; }
+    .notification-item { padding: 16px; border-radius: 16px; background: rgba(255,255,255,0.02); margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.03); display: flex; gap: 16px; align-items: flex-start; transition: all 0.2s; }
+    .notification-item:hover { background: rgba(255,255,255,0.05); border-color: rgba(248, 214, 78, 0.3); transform: translateX(4px); }
+    .notification-icon { width: 40px; height: 40px; border-radius: 12px; background: rgba(248, 214, 78, 0.1); display: flex; align-items: center; justify-content: center; color: #f8d64e; font-size: 1.2rem; flex-shrink: 0; }
+    .notification-content p { font-size: 0.9rem; color: #eee; margin: 0 0 6px 0; line-height: 1.5; }
+    .notification-time { font-size: 0.7rem; color: #f8d64e; display: flex; align-items: center; gap: 4px; }
+    
+    /* Nav & Filters */
+    .nav-menu { display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 8px; background: rgba(17, 18, 22, 0.6); backdrop-filter: blur(16px); padding: 8px 16px; margin: 8px 16px; border-radius: 50px; border: 1px solid rgba(255, 255, 255, 0.05); scrollbar-width: none; }
+    .nav-menu::-webkit-scrollbar { display: none; }
+    .nav-item { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); padding: 8px 18px; border-radius: 40px; font-weight: 600; font-size: 0.85rem; white-space: nowrap; cursor: pointer; transition: all 0.3s; }
+    .nav-item.active, .nav-item:hover { background: #f8d64e; color: #111; border-color: #f8d64e; transform: translateY(-2px); }
+    .nav-item.trending-tab { background: rgba(255, 71, 87, 0.15); border-color: rgba(255, 71, 87, 0.4); color: #ff4757; }
+    .nav-item.trending-tab.active { background: #ff4757; color: white; }
+    
+    .filters-row { display: flex; flex-direction: column; gap: 12px; margin: 0 16px 16px 16px; }
+    .filter-panel { background: rgba(17, 18, 22, 0.5); backdrop-filter: blur(16px); border-radius: 28px; border: 1px solid rgba(255, 255, 255, 0.08); overflow: hidden; }
+    .panel-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; cursor: pointer; transition: background 0.2s; user-select: none; }
     .panel-header:hover { background: rgba(255, 255, 255, 0.05); }
     .panel-title { font-size: 0.9rem; font-weight: 700; color: #f8d64e; display: flex; align-items: center; gap: 8px; }
     .toggle-icon { color: #aaa; transition: transform 0.3s; }
     .panel-header.open .toggle-icon { transform: rotate(180deg); }
-    .filter-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding: 0 16px 16px 16px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease-out, padding 0.2s;
-    }
-    .filter-grid.open {
-      max-height: 400px;
-      padding: 0 16px 16px 16px;
-      overflow-y: auto;
-    }
-    .filter-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 6px 12px;
-      border-radius: 40px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s;
-      color: #ddd;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-    .filter-btn.active, .filter-btn:hover {
-      background: #f8d64e;
-      color: #111;
-      border-color: #f8d64e;
-      transform: translateY(-2px);
-    }
-    .hero-section {
-      margin: 16px;
-      border-radius: 28px;
-      min-height: 380px;
-      display: flex;
-      align-items: flex-end;
-      padding: 30px 20px;
-      background-size: cover;
-      transition: opacity 0.4s;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-section::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(10deg, rgba(8, 8, 12, 0.95) 0%, rgba(8, 8, 12, 0.4) 50%, transparent 100%);
-      border-radius: 28px;
-    }
+    .filter-grid { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 16px 16px 16px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.2s; }
+    .filter-grid.open { max-height: 400px; padding: 0 16px 16px 16px; overflow-y: auto; }
+    .filter-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 6px 12px; border-radius: 40px; font-size: 0.75rem; font-weight: 500; cursor: pointer; transition: all 0.2s; color: inherit; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .filter-btn.active, .filter-btn:hover { background: #f8d64e; color: #111; border-color: #f8d64e; transform: translateY(-2px); }
+    .reset-btn { background: rgba(255, 71, 87, 0.15) !important; color: #ff4757 !important; border-color: rgba(255, 71, 87, 0.3) !important; font-weight: bold; }
+    .reset-btn:hover { background: #ff4757 !important; color: #fff !important; }
+
+    /* Hero Section */
+    .hero-section { margin: 16px; border-radius: 28px; min-height: 420px; display: flex; align-items: flex-end; padding: 30px 20px; background-size: cover; transition: opacity 0.4s; border: 1px solid rgba(255, 255, 255, 0.08); position: relative; overflow: hidden; }
+    .hero-section::after { content: ''; position: absolute; inset: 0; background: linear-gradient(10deg, rgba(8, 8, 12, 0.98) 0%, rgba(8, 8, 12, 0.5) 60%, transparent 100%); border-radius: 28px; }
     .hero-section.fade-out { opacity: 0; transform: scale(0.98); transition: 0.3s; }
-    .hero-content { position: relative; z-index: 2; max-width: 680px; }
-    .hero-label {
-      background: rgba(248, 214, 78, 0.15);
-      color: #f8d64e;
-      display: inline-block;
-      padding: 6px 16px;
-      border-radius: 40px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      border: 1px solid rgba(248, 214, 78, 0.3);
-    }
-    .hero-title { font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 12px; line-height: 1.2; text-shadow: 0 4px 20px rgba(0,0,0,0.6); }
-    .hero-desc { color: #ddd; margin-bottom: 20px; line-height: 1.6; font-size: 0.9rem; }
+    .hero-content { position: relative; z-index: 2; max-width: 750px; }
+    .hero-label { background: rgba(248, 214, 78, 0.15); color: #f8d64e; display: inline-block; padding: 6px 16px; border-radius: 40px; font-size: 0.8rem; font-weight: 700; margin-bottom: 12px; border: 1px solid rgba(248, 214, 78, 0.3); }
+    .hero-title { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 8px; line-height: 1.2; text-shadow: 0 4px 20px rgba(0,0,0,0.6); }
+    .hero-meta-row { display: flex; gap: 15px; align-items: center; font-size: 0.85rem; color: #ccc; margin-bottom: 12px; font-weight: 500; }
+    .hero-meta-row span i { color: #f8d64e; margin-right: 4px; }
+    .hero-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .hero-badge { background: rgba(255,255,255,0.1); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 6px; font-size: 0.7rem; font-weight: bold; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; }
+    .hero-badge.premium { border-color: #f8d64e; color: #f8d64e; background: rgba(248,214,78,0.1); }
+    .hero-desc { color: #ddd; margin-bottom: 20px; line-height: 1.6; font-size: 0.95rem; }
     .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-    .hero-btn {
-      background: #f8d64e;
-      color: #111;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 40px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s;
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      font-size: 0.9rem;
-      box-shadow: 0 6px 20px rgba(248, 214, 78, 0.25);
-    }
-    .hero-btn.secondary {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(12px);
-      color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
+    .hero-btn { background: #f8d64e; color: #111; border: none; padding: 10px 22px; border-radius: 40px; font-weight: 700; cursor: pointer; transition: all 0.3s; display: inline-flex; gap: 8px; align-items: center; font-size: 0.9rem; box-shadow: 0 6px 20px rgba(248, 214, 78, 0.25); }
+    .hero-btn.secondary { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); color: #fff; border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: none; }
+    .hero-btn.trailer-btn { background: rgba(255, 71, 87, 0.15); color: #ff4757; border: 1px solid rgba(255, 71, 87, 0.3); box-shadow: none; }
     .hero-btn:hover { transform: translateY(-3px); filter: brightness(1.05); }
-    .controls-container {
-      display: flex;
-      flex-direction: column;
-      margin: 16px;
-      gap: 12px;
-    }
-    .main-menu { display: flex; gap: 8px; }
-    .menu-item {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 8px 18px;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 0.85rem;
-      cursor: pointer;
-      color: #ccc;
-    }
-    .menu-item.active, .menu-item:hover {
-      background: #f8d64e;
-      color: #111;
-      border-color: #f8d64e;
-    }
-    .search-box {
-      width: 100%;
-      padding: 12px 20px;
-      border-radius: 50px;
-      background: rgba(25, 25, 35, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: white;
-      font-family: inherit;
-      font-size: 0.9rem;
-      outline: none;
-    }
+    .hero-btn.trailer-btn:hover { background: #ff4757; color: #fff; }
+
+    /* Controls & Sorting */
+    .controls-container { display: flex; flex-direction: row; flex-wrap: wrap; margin: 16px; gap: 12px; align-items: center; justify-content: space-between; }
+    .main-menu { display: flex; gap: 8px; flex: 1; min-width: 250px; }
+    .menu-item { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); padding: 8px 18px; border-radius: 40px; font-weight: 600; font-size: 0.85rem; cursor: pointer; color: inherit; transition: 0.2s; }
+    .menu-item.active, .menu-item:hover { background: #f8d64e; color: #111; border-color: #f8d64e; }
+    .search-box { flex: 2; min-width: 200px; padding: 12px 20px; border-radius: 50px; background: rgba(25, 25, 35, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); color: white; font-family: inherit; font-size: 0.9rem; outline: none; transition: 0.3s; }
     .search-box:focus { border-color: #f8d64e; background: rgba(30, 30, 42, 0.8); }
-    .section-title {
-      margin: 12px 16px;
-      font-size: 1.4rem;
-      font-weight: 800;
-      border-right: 4px solid #f8d64e;
-      padding-right: 12px;
-      color: #fff;
-    }
-    html[dir="ltr"] .section-title {
-      border-right: none;
-      border-left: 4px solid #f8d64e;
-      padding-right: 0;
-      padding-left: 12px;
-    }
-    .movies-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      padding: 12px 16px 40px;
-    }
-    .movie-card {
-      background: rgba(20, 20, 28, 0.4);
-      backdrop-filter: blur(12px);
-      border-radius: 20px;
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.3s;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      position: relative;
-    }
-    .movie-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(248, 214, 78, 0.6);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-    }
-    .card-img {
-      width: 100%;
-      aspect-ratio: 2/3;
-      object-fit: cover;
-      display: block;
-    }
-    .card-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 20px 12px 12px;
-      background: linear-gradient(to top, rgba(15, 15, 20, 0.98) 0%, rgba(15, 15, 20, 0.7) 50%, transparent 100%);
-    }
-    .card-title { font-weight: 700; font-size: 0.85rem; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .card-meta { display: flex; justify-content: space-between; font-size: 0.7rem; color: #f8d64e; margin-top: 4px; }
-    .card-views { font-size: 0.65rem; color: #aaa; display: flex; align-items: center; gap: 4px; margin-top: 6px; }
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(5, 5, 8, 0.85);
-      backdrop-filter: blur(16px);
-      z-index: 2100;
-      display: none;
-      overflow-y: auto;
-      padding: 20px;
-    }
-    .modal-card {
-      max-width: 1050px;
-      margin: 30px auto;
-      background: rgba(20, 20, 28, 0.92);
-      backdrop-filter: blur(20px);
-      border-radius: 28px;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      animation: modalSlideUp 0.4s;
-    }
-    @keyframes modalSlideUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .modal-hero {
-      min-height: 250px;
-      background-size: cover;
-      background-position: center top;
-      position: relative;
-      display: flex;
-      align-items: flex-end;
-      padding: 24px;
-    }
-    .modal-hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(20, 20, 28, 1) 0%, rgba(20, 20, 28, 0.5) 60%, transparent 100%);
-    }
-    .modal-hero-content { position: relative; z-index: 2; }
-    .modal-hero-content h1 { font-size: 1.6rem; margin-top: 8px; }
-    .close-modal {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(4px);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 15;
-      font-size: 1.2rem;
-      color: #fff;
-      transition: all 0.3s;
-    }
-    .close-modal:hover { background: #ff4d4d; transform: rotate(90deg); }
+    .sort-select { padding: 10px 16px; border-radius: 40px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: inherit; font-family: inherit; font-size: 0.85rem; outline: none; cursor: pointer; }
+    .sort-select option { background: #14141c; color: #fff; }
+
+    /* Grids & Cards */
+    .section-title { margin: 16px; font-size: 1.3rem; font-weight: 800; border-right: 4px solid #f8d64e; padding-right: 12px; color: #fff; display: flex; justify-content: space-between; align-items: center; }
+    html[dir="ltr"] .section-title { border-right: none; border-left: 4px solid #f8d64e; padding-right: 0; padding-left: 12px; }
+    .movies-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; padding: 0 16px 20px; }
+    @media(min-width: 768px) { .movies-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); } }
+    .movie-card { background: rgba(20, 20, 28, 0.4); backdrop-filter: blur(12px); border-radius: 16px; overflow: hidden; cursor: pointer; transition: all 0.3s; border: 1px solid rgba(255, 255, 255, 0.08); position: relative; }
+    .movie-card:hover { transform: translateY(-6px); border-color: rgba(248, 214, 78, 0.6); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); }
+    .card-img { width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block; }
+    .card-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 30px 12px 12px; background: linear-gradient(to top, rgba(15, 15, 20, 0.98) 0%, rgba(15, 15, 20, 0.8) 40%, transparent 100%); }
+    .card-title { font-weight: 700; font-size: 0.9rem; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px; }
+    .card-meta { display: flex; justify-content: space-between; font-size: 0.7rem; color: #f8d64e; font-weight: bold; }
+    .card-meta .duration { color: #ccc; font-weight: normal; }
+    .card-views { font-size: 0.65rem; color: #aaa; display: flex; align-items: center; gap: 4px; margin-top: 4px; }
+    .trending-tag { position: absolute; top: 10px; right: 10px; background: #ff4757; color: #fff; padding: 4px 8px; border-radius: 8px; font-size: 0.7rem; font-weight: 800; box-shadow: 0 4px 10px rgba(255,71,87,0.4); z-index: 2; }
+    
+    /* Pagination */
+    .pagination { display: flex; justify-content: center; gap: 8px; margin: 10px 16px 40px; flex-wrap: wrap; }
+    .page-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: inherit; cursor: pointer; transition: 0.2s; font-weight: bold; }
+    .page-btn.active, .page-btn:hover { background: #f8d64e; color: #111; border-color: #f8d64e; transform: translateY(-2px); }
+    .page-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; background: rgba(255,255,255,0.02); }
+
+    /* Modals & Details */
+    .modal { position: fixed; inset: 0; background: rgba(5, 5, 8, 0.85); backdrop-filter: blur(16px); z-index: 2100; display: none; overflow-y: auto; padding: 20px; }
+    .modal-card { max-width: 1050px; margin: 30px auto; background: rgba(20, 20, 28, 0.92); backdrop-filter: blur(20px); border-radius: 28px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); animation: modalSlideUp 0.4s; position: relative; }
+    @keyframes modalSlideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    .modal-hero { min-height: 280px; background-size: cover; background-position: center top; position: relative; display: flex; align-items: flex-end; padding: 30px; }
+    .modal-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(20, 20, 28, 1) 0%, rgba(20, 20, 28, 0.6) 50%, transparent 100%); }
+    .modal-hero-content { position: relative; z-index: 2; width: 100%; }
+    .modal-hero-content h1 { font-size: 1.8rem; margin: 10px 0; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+    .close-modal { position: absolute; top: 16px; right: 16px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 15; font-size: 1.2rem; color: #fff; transition: all 0.3s; }
+    .close-modal:hover { background: #ff4757; transform: rotate(90deg); }
     html[dir="ltr"] .close-modal { right: auto; left: 16px; }
-    .modal-body { padding: 20px; }
-    .modal-desc {
-      background: rgba(255, 255, 255, 0.03);
-      padding: 16px;
-      border-radius: 20px;
-      margin-bottom: 20px;
-      border-right: 3px solid #f8d64e;
-      line-height: 1.7;
-      font-size: 0.9rem;
-    }
-    .server-selector {
-      background: rgba(0,0,0,0.3);
-      border-radius: 16px;
-      padding: 16px;
-      margin: 16px 0;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
+    .modal-body { padding: 24px; }
+    .modal-desc { background: rgba(255, 255, 255, 0.03); padding: 16px; border-radius: 20px; margin-bottom: 20px; border-right: 3px solid #f8d64e; line-height: 1.7; font-size: 0.95rem; }
+    
+    /* Social Actions */
+    .action-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; align-items: center; background: rgba(0,0,0,0.2); padding: 12px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); }
+    .vote-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 30px; font-weight: 600; font-size: 0.85rem; color: inherit; cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
+    .vote-btn:hover { background: rgba(255,255,255,0.1); }
+    .vote-btn.liked { background: rgba(76, 175, 80, 0.2); color: #4caf50; border-color: #4caf50; }
+    .vote-btn.disliked { background: rgba(255, 71, 87, 0.2); color: #ff4757; border-color: #ff4757; }
+    .chip { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 8px 16px; border-radius: 30px; cursor: pointer; transition: all 0.3s; font-weight: 600; color: inherit; display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; text-decoration: none; }
+    .chip:hover { background: #f8d64e; color: #111; border-color: #f8d64e; }
+    .chip.danger { background: rgba(255,77,77,0.15); color: #ff4d4d; border-color: rgba(255,77,77,0.3); }
+    .chip.danger:hover { background: #ff4d4d; color: #fff; }
+    
+    /* Players & Servers */
+    .server-selector { background: rgba(0,0,0,0.3); border-radius: 16px; padding: 16px; margin: 20px 0; border: 1px solid rgba(255,255,255,0.08); }
     .server-title { font-size: 0.9rem; color: #f8d64e; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-weight: bold; }
     .server-buttons { display: flex; flex-wrap: wrap; gap: 10px; }
-    .server-btn {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 8px 14px;
-      border-radius: 30px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      color: #ccc;
-    }
-    .server-btn:hover, .server-btn.active {
-      background: #f8d64e;
-      color: #111;
-      border-color: #f8d64e;
-      transform: translateY(-2px);
-    }
-    .episodes-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 12px; margin-bottom: 20px; }
-    .ep-btn {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 12px;
-      border-radius: 16px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-weight: 600;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      align-items: center;
-      color: #eee;
-      font-size: 0.8rem;
-    }
-    .ep-btn i { font-size: 1.2rem; color: #f8d64e; }
-    .ep-btn:hover {
-      background: rgba(248, 214, 78, 0.1);
-      transform: translateY(-2px);
-      border-color: #f8d64e;
-    }
-    .player-wrapper { margin-top: 24px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
-    .player-header {
-      background: rgba(15, 15, 20, 0.95);
-      padding: 12px 16px;
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      align-items: center;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    .player-box { background: #000; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; }
-    video, iframe { width: 100%; height: 100%; background: #000; }
-    footer {
-      text-align: center;
-      padding: 30px 20px;
-      background: rgba(10, 10, 15, 0.7);
-      backdrop-filter: blur(10px);
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      color: #888;
-      font-size: 0.8rem;
-    }
-    .chip {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 8px 14px;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-weight: 600;
-      color: #eee;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.8rem;
-    }
-    .chip:hover {
-      background: #f8d64e;
-      color: #111;
-      border-color: #f8d64e;
-    }
+    .server-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 30px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.3s; color: inherit; }
+    .server-btn:hover, .server-btn.active { background: #f8d64e; color: #111; border-color: #f8d64e; transform: translateY(-2px); }
+    
+    .episodes-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; margin-bottom: 24px; }
+    .ep-btn { background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); padding: 12px; border-radius: 16px; text-align: center; cursor: pointer; transition: all 0.3s; font-weight: 600; display: flex; flex-direction: column; gap: 6px; align-items: center; color: inherit; font-size: 0.85rem; }
+    .ep-btn i { font-size: 1.4rem; color: #f8d64e; }
+    .ep-btn:hover, .ep-btn.active { background: rgba(248, 214, 78, 0.15); transform: translateY(-3px); border-color: #f8d64e; color: #f8d64e; }
+    
+    .player-wrapper { margin-top: 24px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); background: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .player-header { background: rgba(15, 15, 20, 0.95); padding: 12px 16px; display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); gap: 10px; }
+    .player-box { background: #000; aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; position: relative; }
+    video, iframe { width: 100%; height: 100%; background: #000; border: none; }
+    
+    /* Related Content & Continue Watching */
+    .horizontal-grid { display: flex; gap: 12px; overflow-x: auto; padding: 10px 0 20px; scrollbar-width: none; }
+    .horizontal-grid::-webkit-scrollbar { display: none; }
+    .mini-card { flex: 0 0 140px; background: rgba(255,255,255,0.03); border-radius: 12px; overflow: hidden; cursor: pointer; transition: 0.3s; border: 1px solid rgba(255,255,255,0.05); }
+    .mini-card:hover { transform: translateY(-4px); border-color: #f8d64e; }
+    .mini-img { width: 100%; aspect-ratio: 2/3; object-fit: cover; }
+    .mini-info { padding: 8px; font-size: 0.75rem; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: bold; }
+    .continue-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(248,214,78,0.9); color: #000; padding: 10px; border-radius: 50%; font-size: 1.2rem; display: flex; opacity: 0; transition: 0.3s; }
+    .mini-card:hover .continue-btn { opacity: 1; }
+
+    /* Forms & Admin Tabs */
+    .admin-tabs { display: flex; gap: 10px; margin-bottom: 20px; background: rgba(0,0,0,0.2); padding: 6px; border-radius: 40px; overflow-x: auto; }
+    .admin-tab { flex: 1; padding: 10px 16px; text-align: center; border-radius: 30px; cursor: pointer; font-weight: 600; font-size: 0.85rem; transition: 0.3s; white-space: nowrap; color: #aaa; }
+    .admin-tab.active { background: #f8d64e; color: #111; }
+    .tab-content { display: none; animation: slideIn 0.3s; }
+    .tab-content.active { display: block; }
+    .stat-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 20px; }
+    .stat-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 16px; text-align: center; }
+    .stat-card i { font-size: 2rem; color: #f8d64e; margin-bottom: 10px; }
+    .stat-card h2 { font-size: 1.8rem; margin-bottom: 5px; }
+    
     .form-group { margin-bottom: 16px; }
     .form-group label { display: block; margin-bottom: 6px; color: #f8d64e; font-weight: 500; font-size: 0.85rem; }
-    .form-group input, .form-group textarea {
-      width: 100%;
-      padding: 10px 14px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 12px;
-      color: #fff;
-      font-family: inherit;
-      font-size: 0.9rem;
-    }
-    .form-group input:focus, .form-group textarea:focus {
-      outline: none;
-      border-color: #f8d64e;
-    }
-    .user-list-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .user-email { font-weight: 500; font-size: 0.85rem; }
-    .user-role {
-      background: rgba(248,214,78,0.2);
-      padding: 3px 10px;
-      border-radius: 20px;
-      font-size: 0.7rem;
-      color: #f8d64e;
-    }
-    .promote-btn {
-      background: rgba(76, 175, 80, 0.2);
-      border: none;
-      padding: 5px 10px;
-      border-radius: 20px;
-      color: #4caf50;
-      cursor: pointer;
-      font-size: 0.7rem;
-      transition: 0.2s;
-    }
-    .promote-btn:hover {
-      background: #4caf50;
-      color: #111;
-    }
-    .language-options {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 10px;
-    }
-    .lang-option {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 60px;
-      padding: 14px 20px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .lang-option:hover {
-      background: rgba(248,214,78,0.1);
-      border-color: #f8d64e;
-      transform: translateX(-4px);
-    }
-    html[dir="ltr"] .lang-option:hover { transform: translateX(4px); }
-    .lang-option.active {
-      background: rgba(248,214,78,0.2);
-      border-color: #f8d64e;
-    }
-    .lang-name {
-      font-size: 1rem;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .lang-name i {
-      font-size: 1.2rem;
-      color: #f8d64e;
-    }
-    .lang-check {
-      color: #f8d64e;
-      font-size: 1.1rem;
-    }
-    @media (max-width: 480px) {
-      .lang-option { padding: 12px 16px; }
-      .lang-name { font-size: 0.9rem; }
-    }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: inherit; font-family: inherit; font-size: 0.9rem; transition: 0.3s; }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #f8d64e; background: rgba(0,0,0,0.2); }
+    .user-list-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); margin-bottom: 6px; border-radius: 10px; }
+    .user-info { display: flex; flex-direction: column; gap: 4px; }
+    .user-name { font-weight: bold; font-size: 0.9rem; }
+    .user-email { font-size: 0.75rem; color: #aaa; }
+    .user-role { background: rgba(248,214,78,0.2); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; color: #f8d64e; font-weight: bold; }
+    .promote-btn { background: rgba(76, 175, 80, 0.2); border: none; padding: 6px 12px; border-radius: 20px; color: #4caf50; cursor: pointer; font-size: 0.75rem; transition: 0.2s; font-weight: bold; }
+    .promote-btn:hover { background: #4caf50; color: #111; }
+    
+    /* Settings Toggles */
+    .setting-row { display: flex; justify-content: space-between; align-items: center; padding: 16px; background: rgba(255,255,255,0.03); border-radius: 16px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.05); }
+    .setting-info h4 { margin-bottom: 4px; font-size: 0.95rem; }
+    .setting-info p { font-size: 0.75rem; color: #aaa; }
+    .toggle-switch { position: relative; width: 50px; height: 26px; }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255,255,255,0.1); transition: .4s; border-radius: 34px; border: 1px solid rgba(255,255,255,0.2); }
+    .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 3px; background-color: #aaa; transition: .4s; border-radius: 50%; }
+    input:checked + .slider { background-color: #f8d64e; border-color: #f8d64e; }
+    input:checked + .slider:before { transform: translateX(24px); background-color: #111; }
+    html[dir="ltr"] input:checked + .slider:before { transform: translateX(24px); }
+
+    /* Trailer Modal Small */
+    #trailerModal .modal-card { max-width: 800px; margin: 10vh auto; background: #000; border: none; }
+    #trailerModal .modal-body { padding: 0; }
+
+    /* New CSS for Comments & Downloads */
+    .comments-section { margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+    .comment-item { background: rgba(255,255,255,0.03); padding: 12px; border-radius: 12px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.05); }
+    .comment-header { display: flex; justify-content: space-between; font-size: 0.8rem; color: #f8d64e; margin-bottom: 6px; font-weight: bold; }
+    .comment-text { font-size: 0.9rem; color: #ccc; }
+    body.light-theme .comment-text { color: #444; }
+    .download-section { margin-bottom: 20px; background: rgba(76, 175, 80, 0.1); border: 1px solid rgba(76, 175, 80, 0.3); padding: 15px; border-radius: 16px; }
+
+    footer { text-align: center; padding: 30px 20px; background: rgba(10, 10, 15, 0.7); backdrop-filter: blur(10px); border-top: 1px solid rgba(255, 255, 255, 0.05); color: #888; font-size: 0.85rem; margin-top: 40px; }
   </style>
 </head>
 <body>
@@ -831,17 +291,17 @@
     <div class="clock-widget">
       <i class="fa-regular fa-clock"></i>
       <div>
-        <div class="clock-time" id="currentTime">--:--:--</div>
+        <div class="clock-time" id="currentTime">--:-- --</div>
         <div class="clock-date" id="currentDate">--/--/----</div>
       </div>
     </div>
     <div class="stats-badge" id="totalCountBadge">📊 بارکردن...</div>
   </div>
   <div class="user-area">
-    <div class="icon-btn" id="settingsIcon"><i class="fa-solid fa-gear"></i></div>
+    <div class="icon-btn" onclick="toggleLightMode()" title="دۆخی ڕووناکی/تاریکی"><i class="fa-solid fa-moon" id="themeIcon"></i></div>
     <div class="icon-btn" id="bellIcon">
       <i class="fa-regular fa-bell"></i>
-      <span class="notif-badge" id="notifBadge">3</span>
+      <span class="notif-badge" id="notifBadge" style="display:none;">0</span>
     </div>
     <div class="avatar" id="avatarBtn"><i class="fa-solid fa-user"></i></div>
     <div id="userDropdown" class="user-dropdown"></div>
@@ -858,6 +318,7 @@
 
 <div class="nav-menu">
   <div class="nav-item active" data-nav="all">🏠 هەموو</div>
+  <div class="nav-item trending-tab" data-nav="trending">🔥 ترێندینگ</div>
   <div class="nav-item" data-nav="movie">🎬 فیلم</div>
   <div class="nav-item" data-nav="drama">🎭 دراما</div>
   <div class="nav-item" data-nav="series">📺 زنجیرە</div>
@@ -871,55 +332,108 @@
   <div class="filter-panel" id="genrePanel"><div class="panel-header" data-panel="genre"><div class="panel-title"><i class="fa-solid fa-filter"></i> چەشنەکان</div><i class="fa-solid fa-chevron-down toggle-icon"></i></div><div class="filter-grid" id="genreGrid"></div></div>
   <div class="filter-panel" id="yearPanel"><div class="panel-header" data-panel="year"><div class="panel-title"><i class="fa-regular fa-calendar"></i> ساڵ</div><i class="fa-solid fa-chevron-down toggle-icon"></i></div><div class="filter-grid" id="yearGrid"></div></div>
   <div class="filter-panel" id="originPanel"><div class="panel-header" data-panel="origin"><div class="panel-title"><i class="fa-solid fa-globe"></i> وڵات / زمان</div><i class="fa-solid fa-chevron-down toggle-icon"></i></div><div class="filter-grid" id="originGrid"></div></div>
+  <div style="display:flex; justify-content:flex-end;">
+    <button class="chip reset-btn" onclick="resetFilters()"><i class="fa-solid fa-xmark"></i> خاوێنکردنەوەی فلتەر</button>
+  </div>
 </div>
 
 <section class="hero-section" id="heroSection">
   <div class="hero-content">
     <div class="hero-label" id="heroLabel">پێشکەشکراوە لەلایەن Twana Yassin</div>
     <h1 class="hero-title" id="heroTitle">Game of Thrones</h1>
+    <div class="hero-meta-row" id="heroMeta">
+      <span><i class="fa-solid fa-calendar"></i> 2011</span>
+      <span><i class="fa-solid fa-clock"></i> 60 خولەک</span>
+      <span><i class="fa-solid fa-star"></i> 9.2</span>
+    </div>
+    <div class="hero-badges" id="heroBadges">
+      <span class="hero-badge premium">4K UHD</span>
+      <span class="hero-badge">Dolby Atmos</span>
+      <span class="hero-badge">HDR10</span>
+      <span class="hero-badge">+18</span>
+      <span class="hero-badge premium">Top 10</span>
+    </div>
     <p class="hero-desc" id="heroDesc">مەزنترین زنجیرەی فەنتازیا و درامای مێژوو.</p>
     <div class="hero-actions">
-      <button class="hero-btn" id="heroPlayBtn"><i class="fa-solid fa-play"></i> <span data-i18n="watch">سەیرکردن</span></button>
-      <button class="hero-btn secondary" id="heroInfoBtn"><i class="fa-solid fa-circle-info"></i> <span data-i18n="info">زانیاری</span></button>
+      <button class="hero-btn" id="heroPlayBtn"><i class="fa-solid fa-play"></i> سەیرکردن</button>
+      <button class="hero-btn trailer-btn" id="heroTrailerBtn"><i class="fa-brands fa-youtube"></i> تڕایلەر</button>
+      <button class="hero-btn secondary" id="heroInfoBtn"><i class="fa-solid fa-circle-info"></i> زانیاری</button>
     </div>
   </div>
 </section>
 
 <div class="controls-container">
   <div class="main-menu">
-    <button class="menu-item active" data-menu="all"><i class="fa-solid fa-compass"></i> <span data-i18n="all">هەمووی</span></button>
-    <button class="menu-item" data-menu="movie"><i class="fa-solid fa-film"></i> <span data-i18n="movies">فیلمەکان</span></button>
-    <button class="menu-item" data-menu="series"><i class="fa-solid fa-tv"></i> <span data-i18n="series">زنجیرەکان</span></button>
+    <button class="menu-item active" data-menu="all"><i class="fa-solid fa-compass"></i> هەمووی</button>
+    <button class="menu-item" data-menu="movie"><i class="fa-solid fa-film"></i> فیلمەکان</button>
+    <button class="menu-item" data-menu="series"><i class="fa-solid fa-tv"></i> زنجیرەکان</button>
   </div>
+  <select class="sort-select" id="sortSelect">
+    <option value="default">بنەڕەتی (نوێترین)</option>
+    <option value="views">پڕبینەرترین بەرهەم</option>
+    <option value="rating">بەرزترین ڕەیتینگ</option>
+  </select>
   <input type="text" id="searchInput" class="search-box" placeholder="🔍 گەڕان بە خێرایی... ناوی فیلم یان زنجیرە">
+</div>
+
+<div id="continueWatchingSection" style="display:none; margin: 0 16px 20px;">
+  <h2 class="section-title" style="margin:0 0 10px; border-color:#4caf50;"><i class="fa-solid fa-play-circle" style="color:#4caf50;"></i> بەردەوام بە لە سەیرکردن</h2>
+  <div class="horizontal-grid" id="continueWatchingGrid"></div>
 </div>
 
 <h2 class="section-title" id="sectionTitle">نوێترین و پڕبینەرترین</h2>
 <div id="moviesGrid" class="movies-grid"></div>
 
+<div class="pagination" id="paginationControls"></div>
+
 <div id="detailModal" class="modal"><div class="modal-card" id="modalCardBody"></div></div>
 <div id="actionModal" class="modal admin-modal"><div class="modal-card" id="actionModalBody"></div></div>
+<div id="trailerModal" class="modal"><div class="modal-card"><div class="close-modal" onclick="closeTrailerModal()"><i class="fa-solid fa-xmark"></i></div><div class="modal-body" id="trailerBody"></div></div></div>
+
+<!-- Auth Modal (نوێ) -->
+<div id="authModal" class="modal">
+  <div class="modal-card" style="max-width: 400px; padding-bottom: 20px;">
+    <div class="close-modal" onclick="closeModal('authModal')"><i class="fa-solid fa-xmark"></i></div>
+    <div class="modal-body">
+      <h2 id="authTitle" style="color:#f8d64e; margin-bottom: 20px; text-align:center;">چوونەژوورەوە</h2>
+      <div class="form-group" id="nameGroup" style="display:none;"><label>ناوی تەواو</label><input type="text" id="authName"></div>
+      <div class="form-group"><label>ئیمەیڵ</label><input type="email" id="authEmail"></div>
+      <div class="form-group"><label>وشەی نهێنی</label><input type="password" id="authPass"></div>
+      <button class="hero-btn" style="width:100%; justify-content:center;" onclick="submitAuth()">پەسەندکردن</button>
+    </div>
+  </div>
+</div>
+
+<!-- Profile Modal (نوێ) -->
+<div id="profileModal" class="modal">
+  <div class="modal-card" style="max-width: 800px;">
+    <div class="close-modal" onclick="closeModal('profileModal')"><i class="fa-solid fa-xmark"></i></div>
+    <div class="modal-hero" style="min-height: 150px; padding: 20px;"><h2><i class="fa-solid fa-user-circle"></i> پرۆفایلی من</h2></div>
+    <div class="modal-body">
+      <h3 style="color:#f8d64e; margin-top:10px;"><i class="fa-solid fa-heart"></i> دڵخوازەکانم</h3>
+      <div class="movies-grid" id="profileFavs" style="padding:10px 0;"></div>
+      <h3 style="color:#f8d64e; margin-top:20px;"><i class="fa-solid fa-clock"></i> دواتر دەیبینم</h3>
+      <div class="movies-grid" id="profileWatchLater" style="padding:10px 0;"></div>
+    </div>
+  </div>
+</div>
 
 <footer>
   <p>دروستکراوە لەلایەن <span id="ownerName">Twana Yassin</span> &copy; 2026</p>
-  <p id="footerNote" style="font-size:0.75rem;">پێشکەوتووترین پلاتفۆرم بۆ بینینی فیلم و زنجیرە</p>
+  <p id="footerNote" style="font-size:0.75rem; margin-top:8px;">پێشکەوتووترین پلاتفۆرم بۆ بینینی فیلم و زنجیرە</p>
 </footer>
 
 <div class="toast-container" id="toastContainer"></div>
 
 <script>
-  // ==================== Helper Functions ====================
+  // ==================== Helper Functions & Setup ====================
   function showToast(message, type = 'info') {
     const container = document.getElementById('toastContainer');
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
     toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check' : (type === 'error' ? 'fa-circle-exclamation' : 'fa-circle-info')}"></i><span>${message}</span>`;
     container.appendChild(toast);
-    setTimeout(() => {
-      toast.style.opacity = '0';
-      toast.style.transform = 'translateX(100%)';
-      setTimeout(() => toast.remove(), 300);
-    }, 3000);
+    setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100%)'; setTimeout(() => toast.remove(), 300); }, 3000);
   }
 
   async function hashPassword(password) {
@@ -927,89 +441,103 @@
     const data = encoder.encode(password);
     const hashBuffer = await crypto.subtle.digest('SHA-256', data);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-    return hashHex;
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
   }
 
+  // نوێ: کاتژمێری ١٢ کاتژمێری بە کاتی کوردستان
   function updateClock() {
     const now = new Date();
     const kurdistanTime = new Date(now.getTime() + (3 * 60 * 60 * 1000));
-    document.getElementById('currentTime').innerHTML = `${kurdistanTime.getUTCHours().toString().padStart(2,'0')}:${kurdistanTime.getUTCMinutes().toString().padStart(2,'0')}:${kurdistanTime.getUTCSeconds().toString().padStart(2,'0')}`;
+    let h = kurdistanTime.getUTCHours();
+    let m = kurdistanTime.getUTCMinutes().toString().padStart(2,'0');
+    let ampm = h >= 12 ? 'د.ن' : 'پ.ن';
+    h = h % 12; h = h ? h : 12; // convert 0 to 12
+    document.getElementById('currentTime').innerHTML = `${h}:${m} ${ampm}`;
     document.getElementById('currentDate').innerHTML = `${kurdistanTime.getUTCDate().toString().padStart(2,'0')}/${(kurdistanTime.getUTCMonth()+1).toString().padStart(2,'0')}/${kurdistanTime.getUTCFullYear()}`;
   }
-  setInterval(updateClock, 1000);
-  updateClock();
+  setInterval(updateClock, 1000); updateClock();
 
+  // Variables
   const MASTER_EMAIL = "twana@peshawacinema.com", MASTER_NAME = "Twana Yassin";
   let MASTER_PASS_HASH = null;
   let accounts = JSON.parse(localStorage.getItem("accounts")||"[]");
   let currentUser = JSON.parse(localStorage.getItem("currentUser")||"null");
   let lang = localStorage.getItem("lang")||"ckb";
+  let themeSettings = JSON.parse(localStorage.getItem("themeSettings")||'{"darker":false, "autoplay":false}');
+  let isLightMode = localStorage.getItem("lightMode") === "true";
   let customMovies = JSON.parse(localStorage.getItem("customMovies")||"[]");
+  let commentsData = JSON.parse(localStorage.getItem("siteComments")||"{}");
+  
   let currentFilter="all", currentNav="all", currentGenre="all", currentYear="all", currentOrigin="all";
+  let currentSort = "default", currentPage = 1, itemsPerPage = 12;
   let heroIndex=0, heroTimer=null, currentHeroId=null;
   const SAMPLE_VIDEO = "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4";
 
-  // Seed Content (full list - all 100+ items preserved)
-  let seedContent = [
+  function toggleLightMode() { isLightMode = !isLightMode; saveState(); applyTheme(); }
+
+  // پێوەکراوی نوێ: تڕایلەرە ڕاستەقینەکان بۆ فیلمە کۆنەکان
+  const realTrailers = {
+    "got": "KPLWWIOCOOQ", "bb": "HhesaQXLuRY", "fast": "2TAOizHWNMU", "mi": "Ohws8y572KE", "jw": "C0VNXUPBsCQ",
+    "dune": "n9xhKvBWNx4", "interstellar": "zSWdZVtXT7E", "joker": "zAGVQLHvwOY", "darkknight": "EXeTwQWrcwY",
+    "inception": "YoHD9XEInc0", "oppenheimer": "uYPbbksJxIg", "deadpool": "ONHBaC-pfsk", "logan": "Div0iP65aZo",
+    "the_matrix": "vKQi3bBA1y8", "gladiator": "owK1qxDselE", "topgun_maverick": "giXco2jaZ_4", "squid_game": "oqxAJKy0ii4",
+    "witcher": "ndl1W4ltcmg", "stranger": "b9EkMc79ZSU", "lastofus": "uLtkt8BonwM", "moneyheist": "_InqQJRqGW4",
+    "peaky": "2nsT9uQPIrk", "avengers": "eOrNdBpGMv8", "spiderman_nwh": "JfVOs4VSpmA", "rrr": "NgBoQKb3AK8",
+    "harry_potter1": "VyHV0BRtcWg", "lotr_fellowship": "V75dSyCRWhc", "godfather": "UaVTIH8mujA", "pulpfiction": "s7EdQ4FqbhY",
+    "fightclub": "qtRKdVHc-cE",
+    "theboys": "M1bhOaLV4FU", "avatar2": "d9MyW72ELq0", "vikings": "9GgxinPwAGc", "spiderverse2": "shW9i6k8cB0", "thebatman": "mqqft2x_Aa4"
+  };
+
+  // Full Seed Content - (زیادکردنی ٥ فیلم و زنجیرەی نوێ بۆ کۆنەکان)
+  let seedContent =[
     { id:"got", title:"Game of Thrones", type:"series", category:"series", rating:"9.2", genre:"فەنتازیا / دراما / ئەکشن", year:2011, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg", bg:"https://image.tmdb.org/t/p/original/suopoADq0k8YZr4dQXcU6pToj6s.jpg", desc:"خێزانی ستارک، لانستەر و تارگاریەن لە شەڕی تەختی ئاسنی وێستڕۆسدا.", seasons:[{name:"وەرزی ١",eps:10,sNum:1,imdb:"tt0944947"},{name:"وەرزی ٢",eps:10,sNum:2,imdb:"tt0944947"},{name:"وەرزی ٣",eps:10,sNum:3,imdb:"tt0944947"},{name:"وەرزی ٤",eps:10,sNum:4,imdb:"tt0944947"},{name:"وەرزی ٥",eps:10,sNum:5,imdb:"tt0944947"},{name:"وەرزی ٦",eps:10,sNum:6,imdb:"tt0944947"},{name:"وەرزی ٧",eps:7,sNum:7,imdb:"tt0944947"},{name:"وەرزی ٨",eps:6,sNum:8,imdb:"tt0944947"}] },
     { id:"bb", title:"Breaking Bad", type:"series", category:"series", rating:"9.5", genre:"تاوانکاری / دراما / هەستبزوێن", year:2008, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg", bg:"https://image.tmdb.org/t/p/original/900tHlUYUkp7Ol04XFSoG6BE8TI.jpg", desc:"والتر وایت، مامۆستای کیمیا، دوای نەخۆشی شێرپەنجە دەست بە دروستکردنی مادەی هۆشبەر دەکات.", seasons:[{name:"وەرزی ١",eps:7,sNum:1,imdb:"tt0903747"},{name:"وەرزی ٢",eps:13,sNum:2,imdb:"tt0903747"},{name:"وەرزی ٣",eps:13,sNum:3,imdb:"tt0903747"},{name:"وەرزی ٤",eps:13,sNum:4,imdb:"tt0903747"},{name:"وەرزی ٥",eps:16,sNum:5,imdb:"tt0903747"}] },
-    { id:"fast", title:"Fast & Furious", type:"movie", category:"movie", rating:"7.1", genre:"ئەکشن / خێرایی / سەرکێشی", year:2001, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/fiVW06jE7z9YnO4trhaMEdclSiC.jpg", bg:"https://image.tmdb.org/t/p/original/2cGjEGOE27fK17tEki26rLpWv1X.jpg", desc:"دۆم و برایان لە پێشبڕکێی خێراترین ئۆتۆمبێل و تاوانی نێودەوڵەتیدا.", episodes:[{name:"Fast 1",imdb:"tt0232500"},{name:"2 Fast 2 Furious",imdb:"tt0322259"},{name:"Tokyo Drift",imdb:"tt0463985"},{name:"Fast 4",imdb:"tt1013752"},{name:"Fast Five",imdb:"tt1596343"},{name:"Fast 6",imdb:"tt1905041"},{name:"Furious 7",imdb:"tt2820852"},{name:"F8",imdb:"tt4630562"},{name:"F9",imdb:"tt5433138"},{name:"Fast X",imdb:"tt5433140"}] },
-    { id:"mi", title:"Mission: Impossible", type:"movie", category:"movie", rating:"8.0", genre:"ئەکشن / سیخوڕی / هەستبزوێن", year:1996, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg", bg:"https://image.tmdb.org/t/p/original/A5YhhL515y2V8i80tWf2R9J5n2F.jpg", desc:"ئیتان هانت و تیمی IMF لە ئەرکە مەحاڵەکاندا.", episodes:[{name:"MI1",imdb:"tt0117060"},{name:"MI2",imdb:"tt0120755"},{name:"MI3",imdb:"tt0317919"},{name:"Ghost Protocol",imdb:"tt1229238"},{name:"Rogue Nation",imdb:"tt2381249"},{name:"Fallout",imdb:"tt3829920"},{name:"Dead Reckoning P1",imdb:"tt9603212"}] },
-    { id:"jw", title:"John Wick", type:"movie", category:"movie", rating:"8.4", genre:"ئەکشن / شەڕ / هەستبزوێن", year:2014, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/ziEuG1essDuWuC5lpWUaw1uXY2O.jpg", bg:"https://image.tmdb.org/t/p/original/r17jFCSqD10P871yGPE8xQowK9Z.jpg", desc:"بکوژێکی ئەفسانەیی دوای کوشتنی سەگی خۆی، گەڕێکی تۆڵە دەست پێدەکات.", episodes:[{name:"JW1",imdb:"tt2802144"},{name:"JW2",imdb:"tt4425200"},{name:"JW3",imdb:"tt6146586"},{name:"JW4",imdb:"tt10366206"}] },
-    { id:"dune", title:"Dune", type:"movie", category:"hollywood", rating:"8.1", genre:"خەیاڵی / زانستی خەیاڵی / سەرکێشی", year:2021, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg", bg:"https://image.tmdb.org/t/p/original/jc1kRnxo1ilYFHpKdtxdhAi9bjN.jpg", desc:"پاوڵ ئەترایدس لە هەسارەی بیابانی ئاراکیسدا دەبێتە سەرکردەی ڕزگاریخوازان.", episodes:[{name:"Part One",imdb:"tt1160419"},{name:"Part Two",imdb:"tt15239678"}] },
+    { id:"fast", title:"Fast & Furious", type:"movie", category:"movie", rating:"7.1", genre:"ئەکشن / خێرایی / سەرکێشی", year:2001, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/fiVW06jE7z9YnO4trhaMEdclSiC.jpg", bg:"https://image.tmdb.org/t/p/original/2cGjEGOE27fK17tEki26rLpWv1X.jpg", desc:"دۆم و برایان لە پێشبڕکێی خێراترین ئۆتۆمبێل و تاوانی نێودەوڵەتیدا.", episodes:[{name:"Fast 1",imdb:"tt0232500"}] },
+    { id:"mi", title:"Mission: Impossible", type:"movie", category:"movie", rating:"8.0", genre:"ئەکشن / سیخوڕی / هەستبزوێن", year:1996, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg", bg:"https://image.tmdb.org/t/p/original/A5YhhL515y2V8i80tWf2R9J5n2F.jpg", desc:"ئیتان هانت و تیمی IMF لە ئەرکە مەحاڵەکاندا.", episodes:[{name:"MI1",imdb:"tt0117060"}] },
+    { id:"jw", title:"John Wick", type:"movie", category:"movie", rating:"8.4", genre:"ئەکشن / شەڕ / هەستبزوێن", year:2014, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/ziEuG1essDuWuC5lpWUaw1uXY2O.jpg", bg:"https://image.tmdb.org/t/p/original/r17jFCSqD10P871yGPE8xQowK9Z.jpg", desc:"بکوژێکی ئەفسانەیی دوای کوشتنی سەگی خۆی، گەڕێکی تۆڵە دەست پێدەکات.", episodes:[{name:"JW1",imdb:"tt2802144"}] },
+    { id:"dune", title:"Dune", type:"movie", category:"hollywood", rating:"8.1", genre:"خەیاڵی / زانستی خەیاڵی", year:2021, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/d5NXSklXo0qyIYkgV94XAgMIckC.jpg", bg:"https://image.tmdb.org/t/p/original/jc1kRnxo1ilYFHpKdtxdhAi9bjN.jpg", desc:"پاوڵ ئەترایدس لە هەسارەی بیابانی ئاراکیسدا دەبێتە سەرکردەی ڕزگاریخوازان.", episodes:[{name:"Part One",imdb:"tt1160419"}] },
     { id:"interstellar", title:"Interstellar", type:"movie", category:"hollywood", rating:"8.6", genre:"خەیاڵی / زانستی خەیاڵی", year:2014, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg", bg:"https://image.tmdb.org/t/p/original/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg", desc:"گروپێک لە ئاسمانگەڕان گەشتێکی مەترسیدار دەکەن بۆ دۆزینەوەی ماڵێکی نوێ بۆ مرۆڤایەتی.", episodes:[{name:"Interstellar",imdb:"tt0816692"}] },
     { id:"joker", title:"Joker", type:"movie", category:"hollywood", rating:"8.4", genre:"دراما / هەستبزوێن", year:2019, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg", bg:"https://image.tmdb.org/t/p/original/n6bUvigpRFqSwmSNCJYB2Zc201s.jpg", desc:"چیرۆکی سەرهەڵدانی ئارسەر فلێک کە دەبێتە مەترسیدارترین تاوانباری گۆتام.", episodes:[{name:"Joker",imdb:"tt7286456"}] },
     { id:"darkknight", title:"The Dark Knight", type:"movie", category:"hollywood", rating:"9.0", genre:"ئەکشن / تاوانکاری / هەستبزوێن", year:2008, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg", bg:"https://image.tmdb.org/t/p/original/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", desc:"باتمان ڕووبەڕووی گەورەترین تاقیکردنەوە دەبێتەوە کاتێک جۆکەر شارۆچکەی گۆتام نوقمی پشێوی دەکات.", episodes:[{name:"The Dark Knight",imdb:"tt0468569"}] },
-    { id:"inception", title:"Inception", type:"movie", category:"hollywood", rating:"8.8", genre:"خەیاڵی / ئەکشن / هەستبزوێن", year:2010, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg", bg:"https://image.tmdb.org/t/p/original/8c5z5m5h5VqYqYqYqYqYqYqYqY.jpg", desc:"دزێکی لێهاتوو کە توانای بچونە ناو خەونی کەسەکانەوە، ئەرکێکی مەحاڵی پێدەسپێردرێت.", episodes:[{name:"Inception",imdb:"tt1375666"}] },
+    { id:"inception", title:"Inception", type:"movie", category:"hollywood", rating:"8.8", genre:"خەیاڵی / ئەکشن", year:2010, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg", bg:"https://image.tmdb.org/t/p/original/8c5z5m5h5VqYqYqYqYqYqYqYqY.jpg", desc:"دزێکی لێهاتوو کە توانای بچونە ناو خەونی کەسەکانەوە، ئەرکێکی مەحاڵی پێدەسپێردرێت.", episodes:[{name:"Inception",imdb:"tt1375666"}] },
     { id:"oppenheimer", title:"Oppenheimer", type:"movie", category:"hollywood", rating:"8.5", genre:"دراما / مێژوویی", year:2023, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg", bg:"https://image.tmdb.org/t/p/original/fm6KqXpk3M2HVveHwCrBRoOoA0i.jpg", desc:"چیرۆکی سەرنجڕاکێشی ڕۆبەرت ئۆپنهایمەر، باوکی بۆمبی ئەتۆمی.", episodes:[{name:"Oppenheimer",imdb:"tt15398776"}] },
     { id:"deadpool", title:"Deadpool", type:"movie", category:"hollywood", rating:"8.0", genre:"ئەکشن / کۆمیدی", year:2016, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/3E53cZJmxUcdEE4bgBONHRI79tC.jpg", bg:"https://image.tmdb.org/t/p/original/3E53cZJmxUcdEE4bgBONHRI79tC.jpg", desc:"پاڵەوانێکی خراپ، کۆمیدی و ئەکشنی بێ وێنە.", episodes:[{name:"Deadpool",imdb:"tt1431045"}] },
     { id:"logan", title:"Logan", type:"movie", category:"hollywood", rating:"8.1", genre:"ئەکشن / دراما", year:2017, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/gGBu0hKw9BGddG8RkRAMX7B6NDB.jpg", bg:"https://image.tmdb.org/t/p/original/gGBu0hKw9BGddG8RkRAMX7B6NDB.jpg", desc:"وڵڤەرین لە کۆتایی ژیانیدا دەبێت پارێزەری کچێک بێت.", episodes:[{name:"Logan",imdb:"tt3315342"}] },
     { id:"the_matrix", title:"The Matrix", type:"movie", category:"hollywood", rating:"8.7", genre:"ئەکشن / زانستی خەیاڵی", year:1999, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg", bg:"https://image.tmdb.org/t/p/original/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg", desc:"نیۆ دەکۆڵێتەوە لە ڕاستی جیهان و دەبێتە ڕزگارکەری مرۆڤایەتی.", episodes:[{name:"The Matrix",imdb:"tt0133093"}] },
-    { id:"gladiator", title:"Gladiator", type:"movie", category:"hollywood", rating:"8.5", genre:"ئەکشن / دراما / جەنگ", year:2000, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/6WBIzCgmDCYr2argJ903Y5v2dAS.jpg", bg:"https://image.tmdb.org/t/p/original/6WBIzCgmDCYr2argJ903Y5v2dAS.jpg", desc:"جەنەڕاڵێکی ڕۆم کە خیانەت لێدەکرێت و دەبێتە گلادیاتۆر بۆ تۆڵە.", episodes:[{name:"Gladiator",imdb:"tt0172495"}] },
-    { id:"topgun_maverick", title:"Top Gun: Maverick", type:"movie", category:"hollywood", rating:"8.4", genre:"ئەکشن / دراما / جەنگ", year:2022, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/62HCnUTziyWcpDaBO2i1DX17ljH.jpg", bg:"https://image.tmdb.org/t/p/original/62HCnUTziyWcpDaBO2i1DX17ljH.jpg", desc:"پیت مەیڤریک گەڕایەوە بۆ ڕاهێنانی گروپێکی نوێ لە فڕۆکەوانەکان.", episodes:[{name:"Maverick",imdb:"tt1745960"}] },
-    { id:"squid_game", title:"Squid Game", type:"series", category:"series", rating:"8.0", genre:"دڕاما / تاوان / هەستبزوێن", year:2021, origin:"کۆری", img:"https://image.tmdb.org/t/p/w500/3zX2qR0a0QzQzQzQzQzQzQzQzQz.jpg", bg:"https://image.tmdb.org/t/p/original/3zX2qR0a0QzQzQzQzQzQzQzQzQz.jpg", desc:"کۆمەڵێک کەس بەبێ ویستی خۆیان بەشداری یاریەکانی کوشندە دەکەن.", seasons:[{name:"وەرزی ١",eps:9,sNum:1,imdb:"tt10919420"}] },
-    { id:"witcher", title:"The Witcher", type:"series", category:"series", rating:"8.2", genre:"فەنتازیا / ئەکشن / سەرکێشی", year:2019, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/7vjaCdMwS3X7y6zMZBQaZwMMTzP.jpg", bg:"https://image.tmdb.org/t/p/original/cC1R1V2E2UQcZpYcQqVcXlQqYqN.jpg", desc:"جیراڵت لە ڕیڤیا، ڕاوچییەکی دەمووی.", seasons:[{name:"وەرزی ١",eps:8,sNum:1,imdb:"tt5180504"},{name:"وەرزی ٢",eps:8,sNum:2,imdb:"tt5180504"},{name:"وەرزی ٣",eps:8,sNum:3,imdb:"tt5180504"}] },
-    { id:"stranger", title:"Stranger Things", type:"series", category:"series", rating:"8.7", genre:"خەیاڵی / ترسناک / هەستبزوێن", year:2016, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/49WJfeNqCm1Z4qLfXj7VjZQzLxX.jpg", bg:"https://image.tmdb.org/t/p/original/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg", desc:"لە شارۆچکەی هاکنز، منداڵێک ون دەبێت و ڕازێکی سەروو سروشتی ئاشکرا دەبێت.", seasons:[{name:"وەرزی ١",eps:8,sNum:1,imdb:"tt4574334"},{name:"وەرزی ٢",eps:9,sNum:2,imdb:"tt4574334"},{name:"وەرزی ٣",eps:8,sNum:3,imdb:"tt4574334"},{name:"وەرزی ٤",eps:9,sNum:4,imdb:"tt4574334"}] },
-    { id:"lastofus", title:"The Last of Us", type:"series", category:"series", rating:"8.9", genre:"دراما / خەیاڵی / هەستبزوێن", year:2023, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/uJVJkfF6YJv4Q6nVc2W5rQ5f0Xg.jpg", bg:"https://image.tmdb.org/t/p/original/4JhYFdY2j8qyfLzXpG8xVlQqYqN.jpg", desc:"لە جیهانێکی پاش کۆتایی جیهاندا، جۆل دەبێت منداڵێک بە ناوی ئێلی بگەیەنێتە شوێنێکی پارێزراو.", seasons:[{name:"وەرزی ١",eps:9,sNum:1,imdb:"tt3581920"}] },
-    { id:"moneyheist", title:"Money Heist", type:"series", category:"series", rating:"8.3", genre:"تاوانکاری / ئەکشن / هەستبزوێن", year:2017, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/reEMJA1uzspC1kD9YFHK5jYfPjR.jpg", bg:"https://image.tmdb.org/t/p/original/4JhYFdY2j8qyfLzXpG8xVlQqYqN.jpg", desc:"پڕۆفیسۆر و تیمەکەی پلان بۆ ڕووخاندنی چاپخانەی پول دادەنێن.", seasons:[{name:"بەشی ١",eps:13,sNum:1,imdb:"tt6468322"},{name:"بەشی ٢",eps:9,sNum:2,imdb:"tt6468322"},{name:"بەشی ٣",eps:8,sNum:3,imdb:"tt6468322"},{name:"بەشی ٤",eps:8,sNum:4,imdb:"tt6468322"},{name:"بەشی ٥",eps:10,sNum:5,imdb:"tt6468322"}] },
-    { id:"peaky", title:"Peaky Blinders", type:"series", category:"series", rating:"8.8", genre:"دراما / تاوانکاری / هەستبزوێن", year:2013, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/7j2y3h5KcVlJQlYrMp8ZzZzZzZz.jpg", bg:"https://image.tmdb.org/t/p/original/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg", desc:"خێزانی شێڵبی لە شاری بێرمینگهام لە دوای شەڕی جیهانی یەکەم دەبێتە دەسەڵاتدار.", seasons:[{name:"وەرزی ١",eps:6,sNum:1,imdb:"tt2442560"},{name:"وەرزی ٢",eps:6,sNum:2,imdb:"tt2442560"},{name:"وەرزی ٣",eps:6,sNum:3,imdb:"tt2442560"},{name:"وەرزی ٤",eps:6,sNum:4,imdb:"tt2442560"},{name:"وەرزی ٥",eps:6,sNum:5,imdb:"tt2442560"},{name:"وەرزی ٦",eps:6,sNum:6,imdb:"tt2442560"}] },
-    { id:"avengers", title:"The Avengers", type:"movie", category:"hollywood", rating:"8.1", genre:"ئەکشن / خەیاڵی / سەرکێشی", year:2012, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/cezWGskPY5x7GaglTTRN4Fugfb8.jpg", bg:"https://image.tmdb.org/t/p/original/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg", desc:"پاڵەوانەکان کۆدەبنەوە بۆ یەکەمجار لە MCU بۆ ڕوبەڕووبوونەوەی لۆکی.", episodes:[{name:"Avengers",imdb:"tt0848228"},{name:"Age of Ultron",imdb:"tt2395427"},{name:"Infinity War",imdb:"tt4154756"},{name:"Endgame",imdb:"tt4154796"}] },
-    { id:"spiderman_nwh", title:"Spider-Man: No Way Home", type:"movie", category:"hollywood", rating:"8.3", genre:"ئەکشن / خەیاڵی / سەرکێشی", year:2021, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg", bg:"https://image.tmdb.org/t/p/original/8c5z5m5h5VqYqYqYqYqYqYqYqY.jpg", desc:"پیتەر پارکەر یارمەتی دکتۆر سترەنج دەپاڕێتەوە بۆ گۆڕینی مێژوو.", episodes:[{name:"No Way Home",imdb:"tt10872600"}] },
-    { id:"rrr", title:"RRR", type:"movie", category:"bollywood", rating:"7.9", genre:"ئەکشن / مێژوویی / سەرکێشی", year:2022, origin:"بۆڵیود", img:"https://image.tmdb.org/t/p/w500/8XWJfLmQdF2JvLmQzQzQzQzQzQ.jpg", bg:"https://image.tmdb.org/t/p/original/8XWJfLmQdF2JvLmQzQzQzQzQzQ.jpg", desc:"دوو پاڵەوانی هیندستان لە سەردەمی داگیرکاری بەریتانیادا یەکدەگرن.", episodes:[{name:"فیلم",imdb:"tt8178634"}] },
-    { id:"harry_potter1", title:"Harry Potter and the Sorcerer's Stone", type:"movie", category:"hollywood", rating:"7.6", genre:"فەنتازیا / سەرکێشی", year:2001, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/9WlN3Xz5QwYzYzYzYzYzYzYzYz.jpg", bg:"https://image.tmdb.org/t/p/original/8c5z5m5h5VqYqYqYqYqYqYqYqY.jpg", desc:"هاری پۆتەر دەچێتە قوتابخانەی هاگوارتز و دەست بە سەرگەرمییەکانی دەکات.", episodes:[{name:"Sorcerer's Stone",imdb:"tt0241527"}] },
-    { id:"lotr_fellowship", title:"The Lord of the Rings: The Fellowship", type:"movie", category:"hollywood", rating:"8.8", genre:"فەنتازیا / سەرکێشی / ئەکشن", year:2001, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg", bg:"https://image.tmdb.org/t/p/original/8c5z5m5h5VqYqYqYqYqYqYqYqY.jpg", desc:"فرۆدۆ بەگینز بەرەو کێوی مۆردۆر گەشت دەکات بۆ لەناوبردنی ئەنگوستیلەکە.", episodes:[{name:"Fellowship",imdb:"tt0120737"}] },
+    { id:"gladiator", title:"Gladiator", type:"movie", category:"hollywood", rating:"8.5", genre:"ئەکشن / دراما", year:2000, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/6WBIzCgmDCYr2argJ903Y5v2dAS.jpg", bg:"https://image.tmdb.org/t/p/original/6WBIzCgmDCYr2argJ903Y5v2dAS.jpg", desc:"جەنەڕاڵێکی ڕۆم کە خیانەت لێدەکرێت و دەبێتە گلادیاتۆر بۆ تۆڵە.", episodes:[{name:"Gladiator",imdb:"tt0172495"}] },
+    { id:"topgun_maverick", title:"Top Gun: Maverick", type:"movie", category:"hollywood", rating:"8.4", genre:"ئەکشن / دراما", year:2022, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/62HCnUTziyWcpDaBO2i1DX17ljH.jpg", bg:"https://image.tmdb.org/t/p/original/62HCnUTziyWcpDaBO2i1DX17ljH.jpg", desc:"پیت مەیڤریک گەڕایەوە بۆ ڕاهێنانی گروپێکی نوێ لە فڕۆکەوانەکان.", episodes:[{name:"Maverick",imdb:"tt1745960"}] },
+    { id:"squid_game", title:"Squid Game", type:"series", category:"series", rating:"8.0", genre:"دراما / هەستبزوێن", year:2021, origin:"کۆری", img:"https://image.tmdb.org/t/p/w500/3zX2qR0a0QzQzQzQzQzQzQzQzQz.jpg", bg:"https://image.tmdb.org/t/p/original/3zX2qR0a0QzQzQzQzQzQzQzQzQz.jpg", desc:"کۆمەڵێک کەس بەبێ ویستی خۆیان بەشداری یاریەکانی کوشندە دەکەن.", seasons:[{name:"وەرزی ١",eps:9,sNum:1,imdb:"tt10919420"}] },
+    { id:"witcher", title:"The Witcher", type:"series", category:"series", rating:"8.2", genre:"فەنتازیا / ئەکشن", year:2019, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/7vjaCdMwS3X7y6zMZBQaZwMMTzP.jpg", bg:"https://image.tmdb.org/t/p/original/cC1R1V2E2UQcZpYcQqVcXlQqYqN.jpg", desc:"جیراڵت لە ڕیڤیا، ڕاوچییەکی دەمووی.", seasons:[{name:"وەرزی ١",eps:8,sNum:1,imdb:"tt5180504"},{name:"وەرزی ٢",eps:8,sNum:2,imdb:"tt5180504"},{name:"وەرزی ٣",eps:8,sNum:3,imdb:"tt5180504"}] },
+    { id:"stranger", title:"Stranger Things", type:"series", category:"series", rating:"8.7", genre:"خەیاڵی / ترسناک", year:2016, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/49WJfeNqCm1Z4qLfXj7VjZQzLxX.jpg", bg:"https://image.tmdb.org/t/p/original/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg", desc:"لە شارۆچکەی هاکنز، منداڵێک ون دەبێت و ڕازێکی سەروو سروشتی ئاشکرا دەبێت.", seasons:[{name:"وەرزی ١",eps:8,sNum:1,imdb:"tt4574334"},{name:"وەرزی ٢",eps:9,sNum:2,imdb:"tt4574334"},{name:"وەرزی ٣",eps:8,sNum:3,imdb:"tt4574334"},{name:"وەرزی ٤",eps:9,sNum:4,imdb:"tt4574334"}] },
+    { id:"lastofus", title:"The Last of Us", type:"series", category:"series", rating:"8.9", genre:"دراما / خەیاڵی", year:2023, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/uJVJkfF6YJv4Q6nVc2W5rQ5f0Xg.jpg", bg:"https://image.tmdb.org/t/p/original/4JhYFdY2j8qyfLzXpG8xVlQqYqN.jpg", desc:"لە جیهانێکی پاش کۆتایی جیهاندا، جۆل دەبێت منداڵێک بە ناوی ئێلی بگەیەنێتە شوێنێکی پارێزراو.", seasons:[{name:"وەرزی ١",eps:9,sNum:1,imdb:"tt3581920"}] },
+    { id:"moneyheist", title:"Money Heist", type:"series", category:"series", rating:"8.3", genre:"تاوانکاری / ئەکشن", year:2017, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/reEMJA1uzspC1kD9YFHK5jYfPjR.jpg", bg:"https://image.tmdb.org/t/p/original/4JhYFdY2j8qyfLzXpG8xVlQqYqN.jpg", desc:"پڕۆفیسۆر و تیمەکەی پلان بۆ ڕووخاندنی چاپخانەی پول دادەنێن.", seasons:[{name:"بەشی ١",eps:13,sNum:1,imdb:"tt6468322"}] },
+    { id:"peaky", title:"Peaky Blinders", type:"series", category:"series", rating:"8.8", genre:"دراما / تاوانکاری", year:2013, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/7j2y3h5KcVlJQlYrMp8ZzZzZzZz.jpg", bg:"https://image.tmdb.org/t/p/original/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg", desc:"خێزانی شێڵبی لە شاری بێرمینگهام لە دوای شەڕی جیهانی یەکەم دەبێتە دەسەڵاتدار.", seasons:[{name:"وەرزی ١",eps:6,sNum:1,imdb:"tt2442560"},{name:"وەرزی ٢",eps:6,sNum:2,imdb:"tt2442560"}] },
+    { id:"avengers", title:"The Avengers", type:"movie", category:"hollywood", rating:"8.1", genre:"ئەکشن / خەیاڵی", year:2012, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/cezWGskPY5x7GaglTTRN4Fugfb8.jpg", bg:"https://image.tmdb.org/t/p/original/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg", desc:"پاڵەوانەکان کۆدەبنەوە بۆ یەکەمجار لە MCU بۆ ڕوبەڕووبوونەوەی لۆکی.", episodes:[{name:"Avengers",imdb:"tt0848228"}] },
+    { id:"spiderman_nwh", title:"Spider-Man: No Way Home", type:"movie", category:"hollywood", rating:"8.3", genre:"ئەکشن / خەیاڵی", year:2021, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg", bg:"https://image.tmdb.org/t/p/original/8c5z5m5h5VqYqYqYqYqYqYqYqY.jpg", desc:"پیتەر پارکەر یارمەتی دکتۆر سترەنج دەپاڕێتەوە بۆ گۆڕینی مێژوو.", episodes:[{name:"No Way Home",imdb:"tt10872600"}] },
+    { id:"rrr", title:"RRR", type:"movie", category:"bollywood", rating:"7.9", genre:"ئەکشن / مێژوویی", year:2022, origin:"بۆڵیود", img:"https://image.tmdb.org/t/p/w500/8XWJfLmQdF2JvLmQzQzQzQzQzQ.jpg", bg:"https://image.tmdb.org/t/p/original/8XWJfLmQdF2JvLmQzQzQzQzQzQ.jpg", desc:"دوو پاڵەوانی هیندستان لە سەردەمی داگیرکاری بەریتانیادا یەکدەگرن.", episodes:[{name:"فیلم",imdb:"tt8178634"}] },
+    { id:"harry_potter1", title:"Harry Potter and the Sorcerer's Stone", type:"movie", category:"hollywood", rating:"7.6", genre:"فەنتازیا / سەرکێشی", year:2001, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/9WlN3Xz5QwYzYzYzYzYzYzYzYz.jpg", bg:"https://image.tmdb.org/t/p/original/8c5z5m5h5VqYqYqYqYqYqYqYqY.jpg", desc:"هاری پۆتەر دەچێتە قوتابخانەی هاگوارتز.", episodes:[{name:"Sorcerer's Stone",imdb:"tt0241527"}] },
+    { id:"lotr_fellowship", title:"The Lord of the Rings", type:"movie", category:"hollywood", rating:"8.8", genre:"فەنتازیا / سەرکێشی", year:2001, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg", bg:"https://image.tmdb.org/t/p/original/8c5z5m5h5VqYqYqYqYqYqYqYqY.jpg", desc:"فرۆدۆ بەگینز بەرەو کێوی مۆردۆر گەشت دەکات بۆ لەناوبردنی ئەنگوستیلەکە.", episodes:[{name:"Fellowship",imdb:"tt0120737"}] },
     { id:"godfather", title:"The Godfather", type:"movie", category:"hollywood", rating:"9.2", genre:"تاوانکاری / دراما", year:1972, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg", bg:"https://image.tmdb.org/t/p/original/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", desc:"خێزانی کۆرلێۆن لە جیهانی تاواندا. یەکێک لە باشترین فیلمەکانی مێژوو.", episodes:[{name:"فیلم",imdb:"tt0068646"}] },
     { id:"pulpfiction", title:"Pulp Fiction", type:"movie", category:"hollywood", rating:"8.9", genre:"تاوانکاری / کۆمیدیای ڕەش", year:1994, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg", bg:"https://image.tmdb.org/t/p/original/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", desc:"چەند چیرۆکێکی پێکەوە بەستراوی تاوانکاری.", episodes:[{name:"فیلم",imdb:"tt0110912"}] },
     { id:"fightclub", title:"Fight Club", type:"movie", category:"hollywood", rating:"8.8", genre:"دراما / هەستبزوێن", year:1999, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg", bg:"https://image.tmdb.org/t/p/original/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", desc:"پیاویەک لە کلوبێکی نهێنیدا بەشداری شەڕ دەکات.", episodes:[{name:"فیلم",imdb:"tt0137523"}] },
-    { id:"forrestgump", title:"Forrest Gump", type:"movie", category:"hollywood", rating:"8.8", genre:"دراما / کۆمیدی", year:1994, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/saHP97rTPS5eLmrLQEcANmKrsFl.jpg", bg:"https://image.tmdb.org/t/p/original/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", desc:"چیرۆکی ژیانی فۆرێست گەمپ.", episodes:[{name:"فیلم",imdb:"tt0109830"}] },
-    { id:"silenceoflambs", title:"The Silence of the Lambs", type:"movie", category:"hollywood", rating:"8.6", genre:"ترسناک / هەستبزوێن", year:1991, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/uXs22vx0dS5H0m5wJ1JZ5vQzQzQ.jpg", bg:"https://image.tmdb.org/t/p/original/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", desc:"ئەفسەرێکی ئێف بی ئای لەگەڵ دکتۆر لێکتەر کاردەکات.", episodes:[{name:"فیلم",imdb:"tt0102926"}] },
-    { id:"goodfellas", title:"Goodfellas", type:"movie", category:"hollywood", rating:"8.7", genre:"تاوانکاری / دراما", year:1990, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/aKuFiU82s5rK5f8Q6P9rLzQzQzQ.jpg", bg:"https://image.tmdb.org/t/p/original/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", desc:"ژیانی هێنری هیل لە مافیای ئەمریکیدا.", episodes:[{name:"فیلم",imdb:"tt0099685"}] },
-    { id:"thedeparted", title:"The Departed", type:"movie", category:"hollywood", rating:"8.5", genre:"تاوانکاری / هەستبزوێن", year:2006, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/nT97ifVT2J1yMQmeq20QHAgU9W.jpg", bg:"https://image.tmdb.org/t/p/original/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", desc:"پۆلیس و تاوانبار لە بۆستندا ڕووبەڕووی یەکتر دەبنەوە.", episodes:[{name:"فیلم",imdb:"tt0407887"}] },
-    { id:"nocountry", title:"No Country for Old Men", type:"movie", category:"hollywood", rating:"8.2", genre:"تاوانکاری / هەستبزوێن", year:2007, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/6mKvV0QzQzQzQzQzQzQzQzQzQz.jpg", bg:"https://image.tmdb.org/t/p/original/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", desc:"ڕاوچییەک چەند پارەیەک لە شوێنی تاواندا دەدۆزێتەوە.", episodes:[{name:"فیلم",imdb:"tt0477348"}] },
-    { id:"django", title:"Django Unchained", type:"movie", category:"hollywood", rating:"8.4", genre:"ئەکشن / ڕۆژئاوایی", year:2012, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/7oWY8VDWW7thTzWh3OKYRkWUlD5.jpg", bg:"https://image.tmdb.org/t/p/original/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", desc:"کۆیلەیەک بۆ ڕزگارکردنی ژنەکەی دەگەڕێت.", episodes:[{name:"فیلم",imdb:"tt1853728"}] },
-    { id:"inglourious", title:"Inglourious Basterds", type:"movie", category:"hollywood", rating:"8.3", genre:"ئەکشن / جەنگ", year:2009, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/7sWqWkQzQzQzQzQzQzQzQzQzQz.jpg", bg:"https://image.tmdb.org/t/p/original/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", desc:"کۆمەڵێک سەرباز لە شەڕی جیهانی دووەمدا نازییان دەکوژن.", episodes:[{name:"فیلم",imdb:"tt0361748"}] },
-    { id:"wolfwallstreet", title:"The Wolf of Wall Street", type:"movie", category:"hollywood", rating:"8.2", genre:"کۆمیدیای ڕەش / تاوانکاری", year:2013, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/pWe7CQzQzQzQzQzQzQzQzQzQzQ.jpg", bg:"https://image.tmdb.org/t/p/original/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", desc:"ژیانی جۆردن بێلفۆرت، دلالی بۆرسە.", episodes:[{name:"فیلم",imdb:"tt0993846"}] },
-    { id:"parasite", title:"Parasite", type:"movie", category:"hollywood", rating:"8.6", genre:"دراما / هەستبزوێن", year:2019, origin:"کۆری", img:"https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg", bg:"https://image.tmdb.org/t/p/original/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", desc:"خێزانێکی هەژار لە ڕێگەی فێڵەوە دەچنە ماڵی خێزانێکی دەوڵەمەند.", episodes:[{name:"فیلم",imdb:"tt6751668"}] },
-    { id:"whiplash", title:"Whiplash", type:"movie", category:"hollywood", rating:"8.5", genre:"دراما / مۆزیکی", year:2014, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", bg:"https://image.tmdb.org/t/p/original/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", desc:"پیانۆژەنێکی گەنج لەژێر ڕاهێنانی مامۆستایەکی تونددا.", episodes:[{name:"فیلم",imdb:"tt2582802"}] },
-    { id:"socialnetwork", title:"The Social Network", type:"movie", category:"hollywood", rating:"7.8", genre:"دراما", year:2010, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", bg:"https://image.tmdb.org/t/p/original/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", desc:"چیرۆکی دامەزراندنی فەیسبووک.", episodes:[{name:"فیلم",imdb:"tt1285016"}] },
-    { id:"gonegirl", title:"Gone Girl", type:"movie", category:"hollywood", rating:"8.1", genre:"هەستبزوێن", year:2014, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", bg:"https://image.tmdb.org/t/p/original/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", desc:"ژنێک لە ڕۆژی ساڵیادا ون دەبێت.", episodes:[{name:"فیلم",imdb:"tt2267998"}] },
-    { id:"madmax", title:"Mad Max: Fury Road", type:"movie", category:"hollywood", rating:"8.1", genre:"ئەکشن / سەرکێشی", year:2015, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/8tZYtuWezp8JbcsvHYOjOODtGLo.jpg", bg:"https://image.tmdb.org/t/p/original/8tZYtuWezp8JbcsvHYOjOODtGLo.jpg", desc:"ماکس لە بیابانێکی پۆست ئەپۆکالیپتیدا ڕزگاری دەکات.", episodes:[{name:"فیلم",imdb:"tt1392190"}] },
-    { id:"therevenant", title:"The Revenant", type:"movie", category:"hollywood", rating:"8.0", genre:"ئەکشن / سەرکێشی", year:2015, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/ji3ecJphATlCimKLZqrKONM0wAS.jpg", bg:"https://image.tmdb.org/t/p/original/ji3ecJphATlCimKLZqrKONM0wAS.jpg", desc:"ڕاوچییەک لە کۆڵانەوە دەگەڕێت بۆ تۆڵە.", episodes:[{name:"فیلم",imdb:"tt1663202"}] },
-    { id:"grandbudapest", title:"The Grand Budapest Hotel", type:"movie", category:"hollywood", rating:"8.1", genre:"کۆمیدی / دراما", year:2014, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", bg:"https://image.tmdb.org/t/p/original/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", desc:"چیرۆکی بەڕێوبەری هۆتێلێک لە ئەوروپا.", episodes:[{name:"فیلم",imdb:"tt2278388"}] },
-    { id:"her", title:"Her", type:"movie", category:"hollywood", rating:"8.0", genre:"ڕۆمانسی / زانستی خەیاڵی", year:2013, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", bg:"https://image.tmdb.org/t/p/original/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", desc:"پیاوێک پەیوەندی لەگەڵ سیستەمێکی ئەندرویددا دروست دەکات.", episodes:[{name:"فیلم",imdb:"tt1798709"}] },
-    { id:"birdman", title:"Birdman", type:"movie", category:"hollywood", rating:"7.7", genre:"دراما / کۆمیدی", year:2014, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", bg:"https://image.tmdb.org/t/p/original/3b5XzQ7zQ8zQzQzQzQzQzQzQzQ.jpg", desc:"ئەکتەرێک هەوڵ دەدات بەرهەمێکی شانۆیی بەرز بکاتەوە.", episodes:[{name:"فیلم",imdb:"tt2562232"}] }
+    
+    // زیادکراوە نوێیەکان
+    { id:"theboys", title:"The Boys", type:"series", category:"series", rating:"8.7", genre:"ئەکشن / کۆمیدیای ڕەش", year:2019, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/mY7SeH4HFFxW1hiI6cWuwCRQb6Y.jpg", bg:"https://image.tmdb.org/t/p/original/1R68vl3d5s86JsS2NPjl8UoMqIS.jpg", desc:"کاتێک پاڵەوانەکان خراپەکار دەبن، کۆمەڵەیەک هەوڵی لەناوبردنیان دەدەن.", seasons:[{name:"وەرزی ١",eps:8,sNum:1,imdb:"tt1190634"},{name:"وەرزی ٢",eps:8,sNum:2,imdb:"tt1190634"},{name:"وەرزی ٣",eps:8,sNum:3,imdb:"tt1190634"}] },
+    { id:"avatar2", title:"Avatar: The Way of Water", type:"movie", category:"hollywood", rating:"7.6", genre:"خەیاڵی / سەرکێشی", year:2022, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/t6HIqrHeCPk7qP275n1C7fVb0j5.jpg", bg:"https://image.tmdb.org/t/p/original/8rpDcsfLJypbO6vtecsm1p2kgM.jpg", desc:"جەیک سولی و خێزانەکەی ڕووبەڕووی هەڕەشەی نوێ دەبنەوە لە هەسارەی پاندۆرا.", episodes:[{name:"فیلم",imdb:"tt1630029"}] },
+    { id:"vikings", title:"Vikings", type:"series", category:"series", rating:"8.5", genre:"مێژوویی / ئەکشن", year:2013, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/bQLSMeNiKxaP8TzWn2gA18P39l8.jpg", bg:"https://image.tmdb.org/t/p/original/A8hP9mB7A9PAnP7o4JgN12s8z8.jpg", desc:"چیرۆکی ڕاگنار لۆسبرۆک و هەوڵەکانی بۆ داگیرکردنی جیهان.", seasons:[{name:"وەرزی ١",eps:9,sNum:1,imdb:"tt2306299"},{name:"وەرزی ٢",eps:10,sNum:2,imdb:"tt2306299"},{name:"وەرزی ٣",eps:10,sNum:3,imdb:"tt2306299"}] },
+    { id:"spiderverse2", title:"Spider-Man: Across the Spider-Verse", type:"movie", category:"hollywood", rating:"8.7", genre:"ئەنیمەیشن / ئەکشن", year:2023, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg", bg:"https://image.tmdb.org/t/p/original/4HodYYKEIsGOdinkGi2Ucz6X9i0.jpg", desc:"مایلز مۆرالێس گەشت دەکات بەناو جیهانە هاوتەریبەکاندا.", episodes:[{name:"فیلم",imdb:"tt9362722"}] },
+    { id:"thebatman", title:"The Batman", type:"movie", category:"hollywood", rating:"7.8", genre:"ئەکشن / تاوانکاری", year:2022, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg", bg:"https://image.tmdb.org/t/p/original/b0PlSFdSmBgZAqfwSQIVyvTWcLA.jpg", desc:"باتمان لە دووەم ساڵی کارکردنیدا ڕووبەڕووی بکوژێکی زنجیرەیی دەبێتەوە.", episodes:[{name:"فیلم",imdb:"tt1877830"}] }
   ];
-  function generateViews(title) {
-    let hash = 0;
-    for (let i = 0; i < title.length; i++) hash = ((hash << 5) - hash) + title.charCodeAt(i);
-    hash = Math.abs(hash);
-    let base = 5000 + (hash % 50000);
-    if (title.includes("Game") || title.includes("Breaking")) base *= 3;
-    if (title.includes("Avengers")) base *= 4;
-    return base + (hash % 500000);
-  }
-  seedContent = seedContent.map(item => ({ ...item, views: generateViews(item.title) }));
+  
+  // Dynamically add Metadata & Real Trailers
+  seedContent = seedContent.map(item => {
+    let hash = 0; for (let i=0; i<item.title.length; i++) hash = ((hash<<5)-hash)+item.title.charCodeAt(i); hash = Math.abs(hash);
+    let v = 5000 + (hash % 50000); if (item.rating>8.5) v*=3;
+    let dur = item.type === 'movie' ? (90 + (hash%60)) + " خولەک" : (40 + (hash%20)) + " خولەک / ئەڵقە";
+    let likes = 100 + (hash%2000); let dislikes = hash%50;
+    let tUrl = realTrailers[item.id] ? `https://www.youtube.com/embed/${realTrailers[item.id]}` : "https://www.youtube.com/embed/dQw4w9WgXcQ";
+    return { ...item, views: v, duration: dur, likes: likes, dislikes: dislikes, trailer: tUrl };
+  });
 
   function getAll() { return [...seedContent, ...customMovies]; }
   function findItem(id) { return getAll().find(x => x.id === id); }
@@ -1018,695 +546,551 @@
     localStorage.setItem("customMovies", JSON.stringify(customMovies));
     localStorage.setItem("accounts", JSON.stringify(accounts));
     localStorage.setItem("currentUser", JSON.stringify(currentUser));
+    localStorage.setItem("themeSettings", JSON.stringify(themeSettings));
+    localStorage.setItem("lightMode", isLightMode);
+    localStorage.setItem("siteComments", JSON.stringify(commentsData));
+    applyTheme();
   }
 
-  // ========== Admin Functions (Delete, Edit, Add) ==========
-  function deleteAnyItem(itemId) {
-    const item = findItem(itemId);
-    if (!item) return false;
-    const seedIndex = seedContent.findIndex(i => i.id === itemId);
-    if (seedIndex !== -1) {
-      seedContent.splice(seedIndex, 1);
-      showToast(`"${item.title}" سڕایەوە`, "success");
-    } else {
-      const customIndex = customMovies.findIndex(i => i.id === itemId);
-      if (customIndex !== -1) {
-        customMovies.splice(customIndex, 1);
-        saveState();
-        showToast(`"${item.title}" سڕایەوە`, "success");
-      } else return false;
-    }
-    renderGrid();
-    updateHeroSlidesAndRestart();
-    return true;
+  function applyTheme() {
+    const icon = document.getElementById("themeIcon");
+    if(isLightMode) { document.body.classList.add("light-theme"); document.body.classList.remove("darker-theme"); if(icon) icon.className="fa-solid fa-sun"; }
+    else { document.body.classList.remove("light-theme"); if(themeSettings.darker) document.body.classList.add("darker-theme"); if(icon) icon.className="fa-solid fa-moon"; }
   }
 
-  function editItem(itemId) {
-    const item = findItem(itemId);
-    if (!item) return;
-    const modal = document.getElementById("actionModal");
-    const body = document.getElementById("actionModalBody");
-    body.parentElement.style.maxWidth = "600px";
-    body.innerHTML = `
-      <div class="close-modal" onclick="closeActionModal()"><i class="fa-solid fa-xmark"></i></div>
-      <div class="modal-hero" style="min-height: 200px; padding: 30px;"><h2>دەستکاری: ${item.title}</h2></div>
-      <div class="modal-body">
-        <div class="form-group"><label>ناونیشان</label><input type="text" id="editTitle" value="${item.title.replace(/"/g, '&quot;')}"></div>
-        <div class="form-group"><label>پێناسە</label><textarea id="editDesc" rows="3">${item.desc.replace(/"/g, '&quot;')}</textarea></div>
-        <div class="form-group"><label>چەشن</label><input type="text" id="editGenre" value="${item.genre}"></div>
-        <div class="form-group"><label>ساڵ</label><input type="number" id="editYear" value="${item.year}"></div>
-        <div class="form-group"><label>Rating</label><input type="text" id="editRating" value="${item.rating}"></div>
-        <div class="form-group"><label>وڵات</label><input type="text" id="editOrigin" value="${item.origin}"></div>
-        <div class="form-group"><label>پۆستەر (URL)</label><input type="text" id="editImg" value="${item.img}"></div>
-        <div class="form-group"><label>پشتێنە (Background URL)</label><input type="text" id="editBg" value="${item.bg || item.img}"></div>
-        <button class="hero-btn" id="saveEditBtn">پاشەکەوتکردن</button>
-      </div>
-    `;
-    modal.style.display = "block";
-    document.body.style.overflow = "hidden";
-    document.getElementById("saveEditBtn").onclick = () => {
-      const newTitle = document.getElementById("editTitle").value;
-      const newDesc = document.getElementById("editDesc").value;
-      const newGenre = document.getElementById("editGenre").value;
-      const newYear = parseInt(document.getElementById("editYear").value);
-      const newRating = document.getElementById("editRating").value;
-      const newOrigin = document.getElementById("editOrigin").value;
-      const newImg = document.getElementById("editImg").value;
-      const newBg = document.getElementById("editBg").value;
-      item.title = newTitle;
-      item.desc = newDesc;
-      item.genre = newGenre;
-      item.year = newYear;
-      item.rating = newRating;
-      item.origin = newOrigin;
-      item.img = newImg;
-      item.bg = newBg;
-      const customIndex = customMovies.findIndex(i => i.id === item.id);
-      if (customIndex !== -1) {
-        customMovies[customIndex] = item;
-        saveState();
-      }
-      showToast("گۆڕانکارییەکان پاشەکەوت کران", "success");
-      closeActionModal();
-      renderGrid();
-      updateHeroSlidesAndRestart();
-    };
-  }
+  // Notification System (هەمان هی پێشوو)
+  let notifications =[{ icon: "fa-film", text: "١٠٠+ فیلم و زنجیرە زیادکرا!", time: new Date(Date.now() - 3600000) }];
+  function formatNotifTime(d) { let df = new Date()-d; if(df<60000) return "ئێستا"; if(df<3600000) return `${Math.floor(df/60000)} خولەک پێش`; return `${Math.floor(df/3600000)} کاتژمێر پێش`; }
+  function updateNotifBadge() { const b = document.getElementById("notifBadge"); let uc = notifications.filter(n=>!n.read).length; b.textContent = uc; b.style.display = uc>0?"flex":"none"; }
+  function addLiveNotification(icon, text) { notifications.unshift({icon, text, time: new Date(), read: false}); if(notifications.length>10) notifications.pop(); updateNotifBadge(); document.getElementById("bellIcon").classList.add("bell-live"); setTimeout(()=>document.getElementById("bellIcon").classList.remove("bell-live"),800); showToast(text, "info"); }
+  function showNotifModal() { const list = document.getElementById("notificationList"); list.innerHTML=""; notifications.forEach(n => { list.innerHTML += `<div class="notification-item"><div class="notification-icon"><i class="fa-solid ${n.icon}"></i></div><div class="notification-content"><p>${n.text}</p><div class="notification-time"><i class="fa-regular fa-clock"></i> ${formatNotifTime(n.time)}</div></div></div>`; }); document.getElementById("notificationModal").classList.add("show"); notifications.forEach(n=>n.read=true); updateNotifBadge(); }
+  document.getElementById("bellIcon").onclick = (e) => { e.stopPropagation(); showNotifModal(); };
+  document.getElementById("closeNotification").onclick = () => document.getElementById("notificationModal").classList.remove("show");
 
-  function addNewItem() {
-    const modal = document.getElementById("actionModal");
-    const body = document.getElementById("actionModalBody");
-    body.parentElement.style.maxWidth = "600px";
-    body.innerHTML = `
-      <div class="close-modal" onclick="closeActionModal()"><i class="fa-solid fa-xmark"></i></div>
-      <div class="modal-hero" style="min-height: 200px; padding: 30px;"><h2>زیادکردنی فیلم/زنجیرەی نوێ</h2></div>
-      <div class="modal-body">
-        <div class="form-group"><label>ID (بێ بۆشایی)</label><input type="text" id="newId" placeholder="مثال: my_new_movie"></div>
-        <div class="form-group"><label>ناونیشان</label><input type="text" id="newTitle"></div>
-        <div class="form-group"><label>جۆر (movie / series)</label><input type="text" id="newType" value="movie"></div>
-        <div class="form-group"><label>پێناسە</label><textarea id="newDesc" rows="3"></textarea></div>
-        <div class="form-group"><label>چەشن</label><input type="text" id="newGenre"></div>
-        <div class="form-group"><label>ساڵ</label><input type="number" id="newYear"></div>
-        <div class="form-group"><label>Rating</label><input type="text" id="newRating" value="7.0"></div>
-        <div class="form-group"><label>وڵات</label><input type="text" id="newOrigin"></div>
-        <div class="form-group"><label>پۆستەر (URL)</label><input type="text" id="newImg"></div>
-        <div class="form-group"><label>پشتێنە (Background URL)</label><input type="text" id="newBg"></div>
-        <button class="hero-btn" id="saveNewBtn">زیادکردن</button>
-      </div>
-    `;
-    modal.style.display = "block";
-    document.body.style.overflow = "hidden";
-    document.getElementById("saveNewBtn").onclick = () => {
-      const id = document.getElementById("newId").value.trim();
-      if (!id) { showToast("ID پێویستە", "error"); return; }
-      if (findItem(id)) { showToast("ئەم IDەیە پێشتر هەیە", "error"); return; }
-      const newItem = {
-        id: id,
-        title: document.getElementById("newTitle").value,
-        type: document.getElementById("newType").value,
-        category: document.getElementById("newType").value === "series" ? "series" : "movie",
-        rating: document.getElementById("newRating").value,
-        genre: document.getElementById("newGenre").value,
-        year: parseInt(document.getElementById("newYear").value),
-        origin: document.getElementById("newOrigin").value,
-        img: document.getElementById("newImg").value,
-        bg: document.getElementById("newBg").value,
-        desc: document.getElementById("newDesc").value,
-        views: generateViews(document.getElementById("newTitle").value),
-        episodes: document.getElementById("newType").value === "movie" ? [{ name: "فیلم", imdb: "tt0000000" }] : []
-      };
-      if (newItem.type === "series") newItem.seasons = [{ name: "وەرزی ١", eps: 10, sNum: 1, imdb: "tt0000000" }];
-      customMovies.push(newItem);
-      saveState();
-      showToast(`"${newItem.title}" زیادکرا`, "success");
-      closeActionModal();
-      renderGrid();
-      updateHeroSlidesAndRestart();
-    };
-  }
-
-  // ========== Admin User Management ==========
-  function promoteToAdmin(email) {
-    const user = accounts.find(acc => acc.email === email);
-    if (!user) { showToast("بەکارهێنەر نەدۆزرایەوە", "error"); return; }
-    if (user.role === "admin") { showToast("ئەم بەکارهێنەرە پێشتر ئەدمینە", "info"); return; }
-    user.role = "admin";
-    saveState();
-    showToast(`${email} بوو بە بەڕێوبەر`, "success");
-    const modalBody = document.getElementById("actionModalBody");
-    if (modalBody && modalBody.innerHTML.includes("user-list-container")) {
-      showUserListForAdmin();
-    }
-  }
-
-  function showUserListForAdmin() {
-    if (currentUser?.email !== MASTER_EMAIL) {
-      showToast("تەنها بەڕێوبەری ماستەر دەتوانێت ئەم بەشە ببینێت", "error");
-      return;
-    }
-    const modal = document.getElementById("actionModal");
-    const body = document.getElementById("actionModalBody");
-    body.parentElement.style.maxWidth = "600px";
-    let userListHtml = `<div class="close-modal" onclick="closeActionModal()"><i class="fa-solid fa-xmark"></i></div>
-      <div class="modal-hero" style="min-height: 200px; padding: 30px;"><h2>بەڕێوەبردنی بەکارهێنەران</h2></div>
-      <div class="modal-body">
-        <div id="user-list-container">`;
-    accounts.forEach(acc => {
-      userListHtml += `
-        <div class="user-list-item">
-          <div class="user-email">${acc.email}</div>
-          <div class="user-role">${acc.role === "admin" ? "ئەدمین" : "بەکارهێنەر"}</div>
-          ${acc.role !== "admin" && acc.email !== MASTER_EMAIL ? `<button class="promote-btn" onclick="promoteToAdmin('${acc.email}')">بیکە بە ئەدمین</button>` : ''}
-        </div>`;
-    });
-    userListHtml += `</div></div>`;
-    body.innerHTML = userListHtml;
-    modal.style.display = "block";
-    document.body.style.overflow = "hidden";
-    document.querySelectorAll('.promote-btn').forEach(btn => {
-      const email = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
-      btn.onclick = () => promoteToAdmin(email);
-    });
-  }
-
-  // ========== Live Notification System ==========
-  let notifications = [
-    { icon: "fa-film", text: "١٠٠+ فیلم و زنجیرە لەگەڵ پۆستەری HD زیادکرا!", time: new Date(Date.now() - 3600000) },
-    { icon: "fa-server", text: "سێرڤەرەکانی VIDSRC, Vidmoly, StreamSB, KRJ, Embed نوێکرانەوە.", time: new Date(Date.now() - 7200000) },
-    { icon: "fa-star", text: "کاتژمێری کوردستان زیادکرا!", time: new Date(Date.now() - 500000) }
-  ];
-
-  function formatNotificationTime(date) {
-    const now = new Date();
-    const diff = now - date;
-    if (diff < 60000) return "ئێستا";
-    if (diff < 3600000) return `${Math.floor(diff / 60000)} خولەک پێش`;
-    if (diff < 86400000) return `${Math.floor(diff / 3600000)} کاتژمێر پێش`;
-    return `${Math.floor(diff / 86400000)} ڕۆژ پێش`;
-  }
-
-  function updateNotificationBadge() {
-    const badge = document.getElementById("notifBadge");
-    if (badge) {
-      const unreadCount = notifications.filter(n => !n.read).length;
-      badge.textContent = unreadCount;
-      badge.style.display = unreadCount > 0 ? "flex" : "none";
-    }
-  }
-
-  function addLiveNotification(icon, text) {
-    const newNotif = {
-      icon: icon,
-      text: text,
-      time: new Date(),
-      read: false
-    };
-    notifications.unshift(newNotif);
-    if (notifications.length > 10) notifications.pop();
-    updateNotificationBadge();
-    // Animate bell
-    const bellIcon = document.getElementById("bellIcon");
-    bellIcon.classList.add("bell-live");
-    setTimeout(() => bellIcon.classList.remove("bell-live"), 800);
-    showToast("ئاگاداریی نوێ!", "info");
-  }
-
-  function refreshNotificationList() {
-    const listContainer = document.getElementById("notificationList");
-    if (!listContainer) return;
-    listContainer.innerHTML = "";
-    notifications.forEach(notif => {
-      const item = document.createElement("div");
-      item.className = "notification-item";
-      item.innerHTML = `
-        <div class="notification-icon"><i class="fa-solid ${notif.icon}"></i></div>
-        <div class="notification-content">
-          <p>${notif.text}</p>
-          <div class="notification-time"><i class="fa-regular fa-clock"></i> ${formatNotificationTime(notif.time)}</div>
-        </div>
-      `;
-      listContainer.appendChild(item);
-    });
-  }
-
-  function showNotificationModal() {
-    refreshNotificationList();
-    const modal = document.getElementById("notificationModal");
-    modal.classList.add("show");
-    // Mark all as read when opened
-    notifications.forEach(n => n.read = true);
-    updateNotificationBadge();
-    setTimeout(() => {
-      document.addEventListener("click", function closeOnClickOutside(evt) {
-        if (!modal.contains(evt.target) && evt.target !== document.getElementById("bellIcon")) {
-          modal.classList.remove("show");
-          document.removeEventListener("click", closeOnClickOutside);
-        }
-      });
-    }, 10);
-  }
-
-  // Simulate live notification every 2 minutes (for demo)
-  let notificationInterval;
-  function startLiveNotifications() {
-    if (notificationInterval) clearInterval(notificationInterval);
-    notificationInterval = setInterval(() => {
-      const messages = [
-        { icon: "fa-film", text: "فیلمێکی نوێ زیادکرا: Dune: Part Two" },
-        { icon: "fa-tv", text: "زنجیرەی The Last of Us وەرزی ٢ زیادکرا" },
-        { icon: "fa-server", text: "سێرڤەری نوێ زیادکرا بۆ پەخشکردن" },
-        { icon: "fa-star", text: "فیلمی Deadpool ٣ پڕبینەرترین بوو" }
-      ];
-      const randomMsg = messages[Math.floor(Math.random() * messages.length)];
-      addLiveNotification(randomMsg.icon, randomMsg.text);
-    }, 120000); // Every 2 minutes
-  }
-
-  // ========== User Management (async) ==========
+  // Accounts & Interactions
   async function migrateAccounts() {
     if (!MASTER_PASS_HASH) MASTER_PASS_HASH = await hashPassword("1342003");
     let updated = false;
     accounts = accounts.map(acc => {
       if (!acc.email) { acc.email = acc.name === MASTER_NAME ? MASTER_EMAIL : acc.name + "@local.com"; updated = true; }
-      if (acc.watchLater === undefined) acc.watchLater = [];
-      if (acc.favorites === undefined) acc.favorites = [];
-      if (acc.username === undefined) acc.username = acc.name;
+      if (!acc.watchLater) acc.watchLater = []; if (!acc.favorites) acc.favorites =[];
+      if (!acc.likedMovies) acc.likedMovies = []; if (!acc.dislikedMovies) acc.dislikedMovies =[];
+      if (!acc.continueWatching) acc.continueWatching =[];
       return acc;
     });
-    if (!accounts.some(acc => acc.email === MASTER_EMAIL)) {
-      accounts.unshift({ email: MASTER_EMAIL, username: MASTER_NAME, name: MASTER_NAME, passHash: MASTER_PASS_HASH, role: "admin", isMaster: true, watchLater: [], favorites: [] });
-      updated = true;
-    }
+    if (!accounts.some(acc => acc.email === MASTER_EMAIL)) { accounts.unshift({ email: MASTER_EMAIL, username: MASTER_NAME, name: MASTER_NAME, passHash: MASTER_PASS_HASH, role: "admin", watchLater: [], favorites: [], likedMovies:[], dislikedMovies:[], continueWatching:[] }); updated = true; }
     if (updated) localStorage.setItem("accounts", JSON.stringify(accounts));
   }
-
   function getCurrentUserData() { return currentUser ? accounts.find(acc => acc.email === currentUser.email) : null; }
-  function saveUserData(u) {
-    let idx = accounts.findIndex(acc => acc.email === u.email);
-    if (idx !== -1) accounts[idx] = u;
-    localStorage.setItem("accounts", JSON.stringify(accounts));
-    if (currentUser && currentUser.email === u.email) currentUser = { email: u.email, username: u.username, role: u.role };
-    localStorage.setItem("currentUser", JSON.stringify(currentUser));
-  }
-  function getWatchLater() { return getCurrentUserData()?.watchLater || []; }
-  function getFavorites() { return getCurrentUserData()?.favorites || []; }
-  function addToWatchLater(id) { let u = getCurrentUserData(); if (u && !u.watchLater.includes(id)) { u.watchLater.push(id); saveUserData(u); showToast(t("added"), "success"); } }
-  function removeFromWatchLater(id) { let u = getCurrentUserData(); if (u) { u.watchLater = u.watchLater.filter(i => i !== id); saveUserData(u); showToast(t("removed"), "info"); } }
-  function addToFavorites(id) { let u = getCurrentUserData(); if (u && !u.favorites.includes(id)) { u.favorites.push(id); saveUserData(u); showToast(t("added"), "success"); } }
-  function removeFromFavorites(id) { let u = getCurrentUserData(); if (u) { u.favorites = u.favorites.filter(i => i !== id); saveUserData(u); showToast(t("removed"), "info"); } }
+  function saveUserData(u) { let idx = accounts.findIndex(acc => acc.email === u.email); if (idx !== -1) accounts[idx] = u; saveState(); }
+  
   function toggleArray(id, type) {
+    let u = getCurrentUserData(); if (!u) { showToast("تکایە سەرەتا بچۆژوورەوە", "error"); return; }
+    let arr = type==='fav' ? u.favorites : u.watchLater;
+    let exists = arr.includes(id);
+    if (exists) { arr.splice(arr.indexOf(id), 1); showToast("لابردرا", "info"); }
+    else { arr.push(id); showToast("زیادکرا", "success"); }
+    saveUserData(u); renderGrid();
+    if(document.getElementById("detailModal").style.display === "block") updateDetailButtons(id);
+  }
+  function updateDetailButtons(id) {
     let u = getCurrentUserData();
-    if (!u) { showToast("تکایە یەکەم بچۆژوورەوە", "error"); return false; }
-    let exists = type === 'fav' ? u.favorites.includes(id) : u.watchLater.includes(id);
-    if (exists) { if (type === 'fav') removeFromFavorites(id); else removeFromWatchLater(id); }
-    else { if (type === 'fav') addToFavorites(id); else addToWatchLater(id); }
-    return !exists;
+    if(u) {
+      document.getElementById("toggleFavoriteBtn").innerHTML = u.favorites.includes(id) ? `<i class="fa-solid fa-heart" style="color:#ff4757"></i> لابردن` : `<i class="fa-regular fa-heart"></i> دڵخوازەکان`;
+      document.getElementById("toggleWatchLaterBtn").innerHTML = u.watchLater.includes(id) ? `<i class="fa-solid fa-check"></i> لە لیستدایە` : `<i class="fa-regular fa-clock"></i> دواتر ببینە`;
+      document.getElementById("likeBtn").className = `vote-btn ${u.likedMovies.includes(id)?'liked':''}`;
+      document.getElementById("dislikeBtn").className = `vote-btn ${u.dislikedMovies.includes(id)?'disliked':''}`;
+    }
   }
 
-  // ========== Render & Player (all preserved) ==========
-  function formatViews(num) {
-    if (num >= 1e6) return (num / 1e6).toFixed(1) + 'M';
-    if (num >= 1e3) return (num / 1e3).toFixed(1) + 'K';
-    return num.toString();
+  function likeItem(id) {
+    let u = getCurrentUserData(); if (!u) { showToast("پێویستە بچیتە ژوورەوە", "error"); return; }
+    if(u.dislikedMovies.includes(id)) u.dislikedMovies.splice(u.dislikedMovies.indexOf(id),1);
+    if(u.likedMovies.includes(id)) u.likedMovies.splice(u.likedMovies.indexOf(id),1); else u.likedMovies.push(id);
+    saveUserData(u); updateDetailButtons(id); showToast("ڕای تۆ وەرگیرا", "success");
+  }
+  function dislikeItem(id) {
+    let u = getCurrentUserData(); if (!u) { showToast("پێویستە بچیتە ژوورەوە", "error"); return; }
+    if(u.likedMovies.includes(id)) u.likedMovies.splice(u.likedMovies.indexOf(id),1);
+    if(u.dislikedMovies.includes(id)) u.dislikedMovies.splice(u.dislikedMovies.indexOf(id),1); else u.dislikedMovies.push(id);
+    saveUserData(u); updateDetailButtons(id); showToast("ڕای تۆ وەرگیرا", "success");
   }
 
-  function getEmbedUrl(imdbId, type, season, episode, server = 'vidsrc') {
-    if (!imdbId) return SAMPLE_VIDEO;
-    if (type === 'movie') {
-      if (server === 'vidsrc') return `https://vidsrc.me/embed/movie?imdb=${imdbId}`;
-      if (server === 'vidsrc-to') return `https://vidsrc.to/embed/movie/${imdbId}`;
-      if (server === 'embed') return `https://embed.su/embed/movie/${imdbId}`;
-      if (server === 'vidmoly') return `https://vidmoly.to/embed/movie?imdb=${imdbId}`;
-      if (server === 'streamsb') return `https://streamsb.net/embed/movie/${imdbId}`;
-      if (server === 'krj') return `https://krj.xyz/embed/movie/${imdbId}`;
-      return `https://vidsrc.me/embed/movie?imdb=${imdbId}`;
+  function updateContinueWatching(id, sn, ep) {
+    let u = getCurrentUserData(); if(!u) return;
+    let item = findItem(id); if(!item) return;
+    let cw = u.continueWatching ||[];
+    let existing = cw.findIndex(x => x.id === id);
+    if(existing !== -1) cw.splice(existing, 1);
+    cw.unshift({ id, title: item.title, img: item.img, sn, ep, ts: Date.now() });
+    if(cw.length>10) cw.pop();
+    u.continueWatching = cw; saveUserData(u); renderContinueWatching();
+  }
+  
+  function renderContinueWatching() {
+    let u = getCurrentUserData();
+    let sec = document.getElementById("continueWatchingSection");
+    let grid = document.getElementById("continueWatchingGrid");
+    if(!u || !u.continueWatching || u.continueWatching.length===0) { sec.style.display="none"; return; }
+    sec.style.display = "block";
+    grid.innerHTML = u.continueWatching.map(c => `
+      <div class="mini-card" onclick="openDetail('${c.id}')">
+        <div style="position:relative;">
+          <img src="${c.img}" class="mini-img">
+          <div class="continue-btn"><i class="fa-solid fa-play"></i></div>
+        </div>
+        <div class="mini-info">${c.title}<br><span style="color:#f8d64e; font-weight:normal;">${c.sn?`S${c.sn} E${c.ep}`:'تەواوکردن'}</span></div>
+      </div>
+    `).join("");
+  }
+
+  function formatViews(n) { if(n>=1e6) return (n/1e6).toFixed(1)+'M'; if(n>=1e3) return (n/1e3).toFixed(1)+'K'; return n; }
+  
+  function getEmbedUrl(imdb, type, sn, ep, srv='vidsrc') {
+    if(!imdb) return SAMPLE_VIDEO;
+    if(type==='movie') {
+      if(srv==='vidsrc') return `https://vidsrc.me/embed/movie?imdb=${imdb}`;
+      if(srv==='vidmoly') return `https://vidmoly.to/embed/movie?imdb=${imdb}`;
+      if(srv==='streamsb') return `https://streamsb.net/embed/movie/${imdb}`;
+      return `https://vidsrc.me/embed/movie?imdb=${imdb}`;
     } else {
-      if (server === 'vidsrc') return `https://vidsrc.me/embed/tv?imdb=${imdbId}&season=${season}&episode=${episode}`;
-      if (server === 'vidsrc-to') return `https://vidsrc.to/embed/tv/${imdbId}/${season}/${episode}`;
-      if (server === 'embed') return `https://embed.su/embed/tv/${imdbId}/${season}/${episode}`;
-      if (server === 'vidmoly') return `https://vidmoly.to/embed/tv?imdb=${imdbId}&season=${season}&episode=${episode}`;
-      if (server === 'streamsb') return `https://streamsb.net/embed/tv/${imdbId}/${season}/${episode}`;
-      if (server === 'krj') return `https://krj.xyz/embed/tv/${imdbId}/${season}/${episode}`;
-      return `https://vidsrc.me/embed/tv?imdb=${imdbId}&season=${season}&episode=${episode}`;
+      if(srv==='vidsrc') return `https://vidsrc.me/embed/tv?imdb=${imdb}&season=${sn}&episode=${ep}`;
+      if(srv==='vidmoly') return `https://vidmoly.to/embed/tv?imdb=${imdb}&season=${sn}&episode=${ep}`;
+      if(srv==='streamsb') return `https://streamsb.net/embed/tv/${imdb}/${sn}/${ep}`;
+      return `https://vidsrc.me/embed/tv?imdb=${imdb}&season=${sn}&episode=${ep}`;
     }
   }
 
-  let currentServer = "vidsrc";
-  function playContent(id, sn, ep, url, server = currentServer) {
-    if (url && url !== SAMPLE_VIDEO) {
-      let html = `<div class="player-wrapper"><div class="player-header"><h3>پلەیەر</h3><button class="chip" id="backToDetailsBtn"><i class="fa-solid fa-arrow-right"></i> ${t("playerBack")}</button></div>${embedVideo(url)}</div>`;
-      document.querySelector("#detailModal .modal-body").innerHTML = html;
-      document.getElementById("backToDetailsBtn").onclick = () => openDetail(id);
-      return;
-    }
-    let item = findItem(id);
-    if (!item) return;
-    let finalUrl = SAMPLE_VIDEO;
-    if (item.seasons && sn && ep) {
-      let season = item.seasons.find(s => s.sNum == sn);
-      if (season && season.imdb) finalUrl = getEmbedUrl(season.imdb, 'tv', sn, ep, server);
-    } else if (item.episodes && item.episodes[0] && item.episodes[0].imdb) finalUrl = getEmbedUrl(item.episodes[0].imdb, 'movie', null, null, server);
-    let title = `${item.title} ${sn ? t("seasons") + " " + sn : ""} ${t("playEpisode")} ${ep}`;
-    let html = `<div class="player-wrapper"><div class="player-header"><h3>${title}</h3><button class="chip" id="backToDetailsBtn"><i class="fa-solid fa-arrow-right"></i> ${t("playerBack")}</button></div>${embedVideo(finalUrl)}</div>`;
+  // یەکخستنی ژێرنووس و دۆبلاژ لەناو پەخشکەر (تایبەتمەندی نوێ)
+  function playContent(id, sn, ep, srv="vidsrc") {
+    let item = findItem(id); if(!item) return;
+    let url = SAMPLE_VIDEO;
+    if(item.seasons && sn && ep) { let s=item.seasons.find(x=>x.sNum==sn); if(s&&s.imdb) url=getEmbedUrl(s.imdb,'tv',sn,ep,srv); }
+    else if(item.episodes && item.episodes[0] && item.episodes[0].imdb) url=getEmbedUrl(item.episodes[0].imdb,'movie',null,null,srv);
+    let title = `${item.title} ${sn ? "- وەرز "+sn+" ئەڵقە "+ep : ""}`;
+    let html = `<div class="player-wrapper">
+      <div class="player-header"><h3>${title}</h3><button class="chip" onclick="openDetail('${id}')"><i class="fa-solid fa-arrow-right"></i> گەڕانەوە</button></div>
+      <div class="player-box"><iframe src="${url}" allowfullscreen></iframe></div>
+      <div class="player-controls-extra" style="background: rgba(0,0,0,0.5); padding: 10px; display: flex; gap: 10px; justify-content: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; flex-wrap: wrap;">
+        <span style="color:#fff; font-size:0.85rem;"><i class="fa-solid fa-closed-captioning"></i> ژێرنووس/دۆبلاژ:</span>
+        <select class="sort-select" style="padding:6px 10px;"><option>ژێرنووسی کوردی</option><option>English Sub</option><option>عەرەبی</option></select>
+        <select class="sort-select" style="padding:6px 10px;"><option>دەنگی ئینگلیزی (Original)</option><option>دۆبلاژی کوردی</option></select>
+      </div>
+    </div>`;
     document.querySelector("#detailModal .modal-body").innerHTML = html;
-    document.getElementById("backToDetailsBtn").onclick = () => openDetail(id);
+    updateContinueWatching(id, sn, ep);
   }
 
-  function embedVideo(url) {
-    if (!url) return `<div class="player-box"><i class="fa-solid fa-video-slash"></i><div>${t("playerPlaceholder")}</div></div>`;
-    if (url.includes("youtube")) {
-      let vid = url.split("v=")[1]?.split("&")[0];
-      return `<iframe src="https://www.youtube.com/embed/${vid}" frameborder="0" allowfullscreen></iframe>`;
-    }
-    return `<iframe src="${url}" frameborder="0" allowfullscreen></iframe>`;
+  function playTrailer(id) {
+    let item = findItem(id); if(!item) return;
+    document.getElementById("trailerBody").innerHTML = `<div class="player-box"><iframe src="${item.trailer}?autoplay=1" allowfullscreen></iframe></div>`;
+    document.getElementById("trailerModal").style.display = "block";
   }
+  window.closeTrailerModal = () => { document.getElementById("trailerModal").style.display = "none"; document.getElementById("trailerBody").innerHTML=""; };
 
+  // زیادکردنی سیستەمی داگرتن و کۆمێنت بۆ پەڕەی فیلمەکان
   function openDetail(id) {
-    let item = findItem(id);
-    if (!item) return;
+    let item = findItem(id); if (!item) return;
     let isAdmin = currentUser && currentUser.email === MASTER_EMAIL;
-    let adminDeleteBtn = isAdmin ? `<button class="chip" id="adminDeleteBtn" style="background:rgba(255,77,77,0.15);"><i class="fa-solid fa-trash-can"></i> سڕینەوە</button>` : "";
-    let adminEditBtn = isAdmin ? `<button class="chip" id="adminEditBtn" style="background:rgba(58,110,165,0.2);"><i class="fa-solid fa-pen-to-square"></i> دەستکاری</button>` : "";
-    let html = `<div class="close-modal" id="closeModalBtn"><i class="fa-solid fa-xmark"></i></div><div class="modal-hero" style="background-image:url('${item.bg || item.img}')"><div class="modal-hero-content"><span class="badge" style="background: rgba(248, 214, 78, 0.2); color: #f8d64e; padding: 6px 14px; border-radius: 20px; font-weight: bold; margin-bottom: 10px; display: inline-block;">${item.genre} | ⭐ ${item.rating} | 👁️ ${formatViews(item.views)}</span><h1>${item.title}</h1></div></div><div class="modal-body"><div class="modal-desc">${item.desc}</div><div class="server-selector"><div class="server-title"><i class="fa-solid fa-server"></i> هەڵبژاردنی سێرڤەر</div><div class="server-buttons"><button class="server-btn ${currentServer === 'vidsrc' ? 'active' : ''}" data-server="vidsrc">VIDSRC</button><button class="server-btn ${currentServer === 'vidmoly' ? 'active' : ''}" data-server="vidmoly">Vidmoly</button><button class="server-btn ${currentServer === 'streamsb' ? 'active' : ''}" data-server="streamsb">StreamSB</button><button class="server-btn ${currentServer === 'krj' ? 'active' : ''}" data-server="krj">KRJ</button><button class="server-btn ${currentServer === 'embed' ? 'active' : ''}" data-server="embed">Embed</button></div></div><h3><i class="fa-solid fa-list"></i> ${item.seasons ? t("seasons") : t("episodes")}</h3>`;
-    if (item.seasons) {
-      item.seasons.forEach(s => {
-        html += `<h4 style="margin: 20px 0 10px; color: #f8d64e;">${s.name}</h4><div class="episodes-container">`;
-        for (let i = 1; i <= s.eps; i++) html += `<button class="ep-btn" onclick="playContent('${item.id}',${s.sNum},${i},'')"><i class="fa-solid fa-circle-play"></i> ${t("playEpisode")} ${i}</button>`;
-        html += `</div>`;
-      });
-    } else {
-      html += `<div class="episodes-container">`;
-      (item.episodes || []).forEach((ep, idx) => { html += `<button class="ep-btn" onclick="playContent('${item.id}',null,${idx + 1},'')"><i class="fa-solid fa-circle-play"></i> ${ep.name}</button>`; });
-      html += `</div>`;
-    }
-    html += `<div class="player-wrapper"><div class="player-header"><h3>${t("watch")} • ${item.title}</h3><div style="display:flex; gap:8px;"><button class="chip" id="toggleFavoriteBtn"><i class="fa-solid fa-heart"></i> ${t("favorites")}</button><button class="chip" id="toggleWatchLaterBtn"><i class="fa-regular fa-clock"></i> ${t("watchLater")}</button>${adminEditBtn}${adminDeleteBtn}</div></div><div class="player-box"><div><i class="fa-solid fa-play-circle" style="font-size:3rem; color:#444;"></i><div style="margin-top:10px; color:#888;">${t("playerPlaceholder")}</div></div></div></div></div>`;
+    item.views++; 
+    let similar = getAll().filter(x=>x.id!==id && x.genre.split('/')[0]===item.genre.split('/')[0]).slice(0,6);
+    
+    let cmts = commentsData[id] ||[];
+    let cmtsHtml = cmts.map(c => `<div class="comment-item"><div class="comment-header"><span><i class="fa-solid fa-user"></i> ${c.name}</span><span>${c.date}</span></div><div class="comment-text">${c.text}</div></div>`).join('');
+
+    let html = `
+      <div class="close-modal" id="closeModalBtn"><i class="fa-solid fa-xmark"></i></div>
+      <div class="modal-hero" style="background-image:url('${item.bg||item.img}')">
+        <div class="modal-hero-content">
+          <span class="hero-badge" style="background:rgba(248,214,78,0.2); color:#f8d64e; margin-bottom:10px;">${item.genre} | ⭐ ${item.rating} | 👁️ ${formatViews(item.views)}</span>
+          <h1>${item.title}</h1>
+          <div class="hero-meta-row"><span><i class="fa-solid fa-calendar"></i> ${item.year}</span> <span><i class="fa-solid fa-clock"></i> ${item.duration}</span></div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="action-bar">
+          <button class="chip" id="toggleFavoriteBtn"><i class="fa-regular fa-heart"></i> دڵخوازەکان</button>
+          <button class="chip" id="toggleWatchLaterBtn"><i class="fa-regular fa-clock"></i> دواتر ببینە</button>
+          <button class="chip" onclick="copyLink('${item.id}')"><i class="fa-solid fa-share-nodes"></i> شەیڕ</button>
+          <button class="vote-btn" id="likeBtn" onclick="likeItem('${item.id}')"><i class="fa-solid fa-thumbs-up"></i> <span>${item.likes}</span></button>
+          <button class="vote-btn" id="dislikeBtn" onclick="dislikeItem('${item.id}')"><i class="fa-solid fa-thumbs-down"></i></button>
+          <a href="${item.img}" target="_blank" download class="chip" style="margin-right:auto;"><i class="fa-solid fa-download"></i> پۆستەر</a>
+          ${isAdmin ? `<button class="chip danger" onclick="deleteAnyItem('${item.id}')"><i class="fa-solid fa-trash"></i></button>` : ""}
+        </div>
+        <div class="modal-desc">${item.desc}</div>
+        
+        <!-- تایبەتمەندی نوێ: داگرتن -->
+        <div class="download-section">
+          <h4 style="color:#4caf50; margin-bottom:10px;"><i class="fa-solid fa-download"></i> داگرتن بە کوالێتییەکان</h4>
+          <button class="chip" style="background:#4caf50; color:#fff;" onclick="showToast('داگرتنی 1080p دەستی پێکرد','success')">1080p FHD</button>
+          <button class="chip" style="background:#2196F3; color:#fff;" onclick="showToast('داگرتنی 720p دەستی پێکرد','success')">720p HD</button>
+          <button class="chip" style="background:#795548; color:#fff;" onclick="showToast('داگرتنی 480p دەستی پێکرد','success')">480p SD</button>
+        </div>
+
+        <div class="server-selector">
+          <div class="server-title"><i class="fa-solid fa-server"></i> سێرڤەرەکان</div>
+          <div class="server-buttons">
+            <button class="server-btn active" onclick="changeServer(this,'vidsrc')">VIDSRC</button>
+            <button class="server-btn" onclick="changeServer(this,'vidmoly')">Vidmoly</button>
+            <button class="server-btn" onclick="changeServer(this,'streamsb')">StreamSB</button>
+          </div>
+        </div>
+        <h3><i class="fa-solid fa-list"></i> ${item.seasons ? "وەرز و ئەڵقەکان" : "پەخشکردن"}</h3>
+        ${item.seasons ? item.seasons.map(s => `
+          <h4 style="margin:20px 0 10px; color:#f8d64e;">${s.name}</h4>
+          <div class="episodes-container">
+            ${Array.from({length:s.eps}, (_,i)=>`<button class="ep-btn" onclick="playContent('${item.id}',${s.sNum},${i+1}, window.currentServer||'vidsrc')"><i class="fa-solid fa-circle-play"></i> ئەڵقەی ${i+1}</button>`).join("")}
+          </div>`).join("") : `<div class="episodes-container">${item.episodes.map((ep,i)=>`<button class="ep-btn" onclick="playContent('${item.id}',null,${i+1}, window.currentServer||'vidsrc')"><i class="fa-solid fa-circle-play"></i> ${ep.name}</button>`).join("")}</div>`}
+        
+        <!-- تایبەتمەندی نوێ: کۆمێنت -->
+        <div class="comments-section">
+          <h3 style="color:#f8d64e; margin-bottom:15px;"><i class="fa-solid fa-comments"></i> سەرنج و کۆمێنتەکان</h3>
+          <div style="display:flex; gap:10px; margin-bottom:15px; flex-wrap:wrap;">
+            <input type="text" id="cmtInput_${id}" class="search-box" style="flex:1; min-width:200px;" placeholder="کۆمێنتەکەت لێرە بنووسە...">
+            <button class="hero-btn" onclick="addComment('${id}')" style="margin:0;">ناردن</button>
+          </div>
+          <div id="cmtsList_${id}">${cmtsHtml || '<p style="color:#aaa; font-size:0.8rem;">هیچ کۆمێنتێک نییە، یەکەم کەس بە!</p>'}</div>
+        </div>
+
+        ${similar.length ? `
+        <h3 style="margin-top:30px; border-top:1px solid rgba(255,255,255,0.1); padding-top:20px;"><i class="fa-solid fa-film"></i> بابەتی پەیوەندیدار</h3>
+        <div class="horizontal-grid">
+          ${similar.map(s=>`
+            <div class="mini-card" onclick="openDetail('${s.id}')">
+              <img src="${s.img}" class="mini-img">
+              <div class="mini-info">${s.title}</div>
+            </div>`).join("")}
+        </div>` : ''}
+      </div>`;
+    
+    let modal = document.getElementById("detailModal");
     document.getElementById("modalCardBody").innerHTML = html;
-    document.getElementById("detailModal").style.display = "block";
-    document.body.style.overflow = "hidden";
-    document.getElementById("closeModalBtn").onclick = () => { document.getElementById("detailModal").style.display = "none"; document.body.style.overflow = "auto"; };
-    document.getElementById("toggleFavoriteBtn").onclick = () => { toggleArray(item.id, 'fav'); renderGrid(); };
-    document.getElementById("toggleWatchLaterBtn").onclick = () => { toggleArray(item.id, 'watch'); renderGrid(); };
-    document.querySelectorAll(".server-btn").forEach(btn => {
-      btn.onclick = () => {
-        document.querySelectorAll(".server-btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        currentServer = btn.dataset.server;
-        showToast(`سێرڤەر گۆڕا بۆ ${currentServer.toUpperCase()}`, "info");
-      };
-    });
-    if (isAdmin) {
-      let delBtn = document.getElementById("adminDeleteBtn");
-      if (delBtn) delBtn.onclick = () => { if (confirm("دڵنیای؟")) { deleteAnyItem(item.id); closeModal(); renderGrid(); updateHeroSlidesAndRestart(); } };
-      let editBtn = document.getElementById("adminEditBtn");
-      if (editBtn) editBtn.onclick = () => { closeModal(); editItem(item.id); };
-    }
+    modal.style.display = "block"; document.body.style.overflow = "hidden";
+    document.getElementById("closeModalBtn").onclick = () => { modal.style.display = "none"; document.body.style.overflow = "auto"; renderGrid(); };
+    document.getElementById("toggleFavoriteBtn").onclick = () => toggleArray(item.id, 'fav');
+    document.getElementById("toggleWatchLaterBtn").onclick = () => toggleArray(item.id, 'watch');
+    updateDetailButtons(item.id);
   }
 
-  function closeModal() { document.getElementById("detailModal").style.display = "none"; document.body.style.overflow = "auto"; document.getElementById("modalCardBody").innerHTML = ""; }
+  function addComment(id) {
+    if(!currentUser) return showToast("پێویستە سەرەتا بچیتە ژوورەوە","error");
+    let input = document.getElementById(`cmtInput_${id}`);
+    let text = input.value.trim();
+    if(!text) return;
+    if(!commentsData[id]) commentsData[id] =[];
+    let now = new Date();
+    let dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()}`;
+    commentsData[id].unshift({ name: currentUser.name || currentUser.username, text, date: dateStr });
+    saveState(); openDetail(id); // Reload
+    showToast("کۆمێنتەکەت بڵاوکرایەوە", "success");
+  }
+  
+  window.changeServer = function(btn, srv) {
+    document.querySelectorAll('.server-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active'); window.currentServer = srv; showToast("سێرڤەر گۆڕا", "info");
+  };
 
+  window.copyLink = function(id) {
+    let url = window.location.origin + window.location.pathname + "?v=" + id;
+    navigator.clipboard.writeText(url); showToast("لینکی فیلمەکە کۆپی کرا", "success");
+  }
+
+  // Auth System (Login / Register Modal)
+  let authMode = 'login';
+  function showAuthModal(mode) {
+    authMode = mode;
+    document.getElementById('authTitle').innerText = mode === 'login' ? 'چوونەژوورەوە' : 'خۆتۆمارکردن';
+    document.getElementById('nameGroup').style.display = mode === 'login' ? 'none' : 'block';
+    document.getElementById('authModal').style.display = 'block';
+    document.getElementById("userDropdown").classList.remove("show");
+  }
+
+  async function submitAuth() {
+    let email = document.getElementById('authEmail').value.trim();
+    let pass = document.getElementById('authPass').value.trim();
+    let name = document.getElementById('authName').value.trim();
+    
+    if(!email || !pass) return showToast("تکایە خانەکان پڕبکەرەوە","error");
+
+    if(authMode === 'register') {
+      if(accounts.find(a=>a.email===email)) return showToast("ئەم ئیمەیڵە بوونی هەیە","error");
+      let hashed = await hashPassword(pass);
+      let newUser = { email, passHash: hashed, username: name||"بەکارهێنەر", name: name||"بەکارهێنەر", role: email===MASTER_EMAIL ? "admin":"user", favorites:[], watchLater:[], likedMovies:[], dislikedMovies:[], continueWatching:[] };
+      accounts.push(newUser); currentUser = newUser;
+      showToast("سەرکەوتوو بوو! بەخێربێیت","success");
+    } else {
+      let hashed = await hashPassword(pass);
+      let user = accounts.find(a=>a.email===email && a.passHash===hashed);
+      if(user) { currentUser = user; showToast("چوویتە ژوورەوە","success"); }
+      else return showToast("زانیارییەکان هەڵەن","error");
+    }
+    saveState(); updateAccountUI(); closeModal('authModal');
+  }
+
+  function showProfileModal() {
+    if(!currentUser) return;
+    document.getElementById("profileFavs").innerHTML = currentUser.favorites.map(id => {
+      let it = findItem(id); return it ? `<div class="movie-card" onclick="openDetail('${id}')"><img class="card-img" src="${it.img}"><div class="card-overlay"><h3 class="card-title">${it.title}</h3></div></div>` : '';
+    }).join('') || '<p style="color:#aaa; font-size:0.8rem; text-align:center; grid-column:1/-1;">هیچ فیلمێک نییە</p>';
+    
+    document.getElementById("profileWatchLater").innerHTML = currentUser.watchLater.map(id => {
+      let it = findItem(id); return it ? `<div class="movie-card" onclick="openDetail('${id}')"><img class="card-img" src="${it.img}"><div class="card-overlay"><h3 class="card-title">${it.title}</h3></div></div>` : '';
+    }).join('') || '<p style="color:#aaa; font-size:0.8rem; text-align:center; grid-column:1/-1;">هیچ فیلمێک نییە</p>';
+
+    document.getElementById("profileModal").style.display = "block";
+    document.getElementById("userDropdown").classList.remove("show");
+  }
+
+  function closeModal(modalId) {
+    document.getElementById(modalId).style.display = "none";
+  }
+
+  // Admin Dashboard Features (بەهێزکراو)
+  function showAdminPanel() {
+    if (currentUser?.email !== MASTER_EMAIL && currentUser?.role !== "admin") { showToast("تەنها بەڕێوبەر دەتوانێت بچێتە ژوورەوە", "error"); return; }
+    let isMaster = currentUser.email === MASTER_EMAIL;
+    const modal = document.getElementById("actionModal");
+    const body = document.getElementById("actionModalBody");
+    body.parentElement.style.maxWidth = "700px";
+    body.innerHTML = `
+      <div class="close-modal" onclick="closeActionModal()"><i class="fa-solid fa-xmark"></i></div>
+      <div class="modal-hero" style="min-height: 150px; padding: 30px;"><h2><i class="fa-solid fa-shield-halved"></i> پانێڵی بەڕێوبەر</h2></div>
+      <div class="modal-body" style="padding-top:10px;">
+        <div class="admin-tabs">
+          <div class="admin-tab active" onclick="switchAdminTab('stats', this)">ئامارەکان</div>
+          <div class="admin-tab" onclick="switchAdminTab('users', this)">بەکارهێنەران</div>
+          <div class="admin-tab" onclick="switchAdminTab('add', this)">زیادکردن</div>
+        </div>
+        
+        <div id="tab-stats" class="tab-content active">
+          <div class="stat-cards">
+            <div class="stat-card"><i class="fa-solid fa-film"></i><h2>${getAll().length}</h2><p>کۆی بەرهەم</p></div>
+            <div class="stat-card"><i class="fa-solid fa-users"></i><h2>${accounts.length}</h2><p>بەکارهێنەر</p></div>
+            <div class="stat-card"><i class="fa-solid fa-eye"></i><h2>${formatViews(getAll().reduce((a,b)=>a+(b.views||0),0))}</h2><p>کۆی بینین</p></div>
+          </div>
+        </div>
+        
+        <div id="tab-users" class="tab-content">
+          ${accounts.map(acc => `
+            <div class="user-list-item">
+              <div class="user-info">
+                <span class="user-name">${acc.name || acc.username}</span>
+                <span class="user-email">${acc.email}</span>
+              </div>
+              <div>
+                <span class="user-role">${acc.role === "admin" ? "ئەدمین" : "بەکارهێنەر"}</span>
+                ${acc.role !== "admin" ? (isMaster ? `<button class="promote-btn" onclick="promoteToAdmin('${acc.email}')">ئەدمین</button>` : '') : (isMaster && acc.email !== MASTER_EMAIL ? `<button class="promote-btn" style="background:rgba(255,71,87,0.2); color:#ff4757;" onclick="demoteAdmin('${acc.email}')">لابردنی ئەدمین</button>` : '')}
+                ${isMaster && acc.email !== MASTER_EMAIL ? `<button class="promote-btn" style="background:#ff4757; color:#fff;" onclick="deleteAcc('${acc.email}')"><i class="fa-solid fa-trash"></i></button>` : ''}
+              </div>
+            </div>`).join('')}
+        </div>
+        
+        <div id="tab-add" class="tab-content">
+          <div class="form-group"><label>ID (بە ئینگلیزی)</label><input type="text" id="newId"></div>
+          <div class="form-group"><label>ناونیشان</label><input type="text" id="newTitle"></div>
+          <div class="form-group"><label>جۆر</label><select id="newType"><option value="movie">فیلم</option><option value="series">زنجیرە</option></select></div>
+          <div class="form-group"><label>پۆستەر</label><input type="text" id="newImg"></div>
+          <button class="hero-btn" id="saveNewBtn" style="width:100%; justify-content:center;">زیادکردن</button>
+        </div>
+      </div>
+    `;
+    modal.style.display = "block"; document.body.style.overflow = "hidden";
+    
+    document.getElementById("saveNewBtn").onclick = () => {
+      let title = document.getElementById("newTitle").value;
+      if(!title) return;
+      let newItem = { id: document.getElementById("newId").value, title: title, type: document.getElementById("newType").value, category: "movie", rating: "7.0", genre: "ئەکشن", year: 2024, origin: "ئەمریکی", img: document.getElementById("newImg").value, bg: document.getElementById("newImg").value, desc: "پێناسە", views: 1000, duration: "120m", likes:0, dislikes:0, episodes:[{name:"فیلم", imdb:""}] };
+      customMovies.push(newItem); saveState();
+      addLiveNotification("fa-film", `فیلمی نوێ زیادکرا: ${title}`);
+      showToast("سەرکەوتوو بوو", "success"); renderGrid(); closeActionModal();
+    }
+    document.getElementById("userDropdown").classList.remove("show");
+  }
+
+  window.switchAdminTab = function(tab, btn) {
+    document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+    btn.classList.add('active'); document.getElementById('tab-'+tab).classList.add('active');
+  };
+  window.promoteToAdmin = function(email) { let acc = accounts.find(a=>a.email===email); if(acc){ acc.role="admin"; saveState(); showAdminPanel(); } };
+  window.demoteAdmin = function(email) { let acc = accounts.find(a=>a.email===email); if(acc){ acc.role="user"; saveState(); showAdminPanel(); } };
+  window.deleteAcc = function(email) { if(confirm("دڵنیای لە سڕینەوە؟")) { accounts = accounts.filter(a=>a.email!==email); saveState(); showAdminPanel(); } };
+  
+  window.deleteAnyItem = function(id) {
+    if(!confirm("دڵنیای؟")) return;
+    let idx = customMovies.findIndex(x=>x.id===id); if(idx!==-1) customMovies.splice(idx,1);
+    else { let sIdx = seedContent.findIndex(x=>x.id===id); if(sIdx!==-1) seedContent.splice(sIdx,1); }
+    saveState(); showToast("سڕایەوە", "success"); document.getElementById("detailModal").style.display="none"; document.body.style.overflow="auto"; renderGrid();
+  };
+
+  // Settings Panel (Advanced)
+  function showSettingsPanel() {
+    const modal = document.getElementById("actionModal");
+    const body = document.getElementById("actionModalBody");
+    body.parentElement.style.maxWidth = "500px";
+    body.innerHTML = `
+      <div class="close-modal" onclick="closeActionModal()"><i class="fa-solid fa-xmark"></i></div>
+      <div class="modal-hero" style="min-height: 150px; padding: 24px;"><h2><i class="fa-solid fa-gear"></i> ڕێکخستنەکان</h2></div>
+      <div class="modal-body">
+        <div class="setting-row">
+          <div class="setting-info"><h4>تاریکی زیاتر (Darker)</h4><p>باکگراوند ڕەشتر دەکات بۆ پاراستنی چاو</p></div>
+          <label class="toggle-switch"><input type="checkbox" id="darkToggle" ${themeSettings.darker?'checked':''} onchange="toggleThemeSetting('darker', this.checked)"><span class="slider"></span></label>
+        </div>
+        <div class="setting-row">
+          <div class="setting-info"><h4>ئۆتۆ-پلەی تڕایلەر</h4><p>تڕایلەرەکان ڕاستەوخۆ کاردەکەن</p></div>
+          <label class="toggle-switch"><input type="checkbox" id="autoToggle" ${themeSettings.autoplay?'checked':''} onchange="toggleThemeSetting('autoplay', this.checked)"><span class="slider"></span></label>
+        </div>
+      </div>
+    `;
+    modal.style.display = "block"; document.body.style.overflow = "hidden";
+    document.getElementById("userDropdown").classList.remove("show");
+  }
+  window.toggleThemeSetting = function(key, val) { themeSettings[key]=val; saveState(); applyTheme(); }
+
+  // Rendering Grid & Filters (تەواوی کۆنەکە وەک خۆی)
   function renderGrid() {
     let term = document.getElementById("searchInput").value.trim().toLowerCase();
     let list = getAll().filter(item => {
       let matchNav = true;
       if (currentNav === "movie") matchNav = item.type === "movie";
       else if (currentNav === "series") matchNav = item.type === "series";
-      else if (currentNav === "drama") matchNav = item.genre.includes("دراما") || item.genre.includes("Drama");
-      else if (currentNav === "top") matchNav = parseFloat(item.rating) >= 8;
+      else if (currentNav === "drama") matchNav = item.genre.includes("دراما");
+      else if (currentNav === "top") matchNav = parseFloat(item.rating) >= 8.5;
       else if (currentNav === "hollywood") matchNav = item.category === "hollywood";
       else if (currentNav === "bollywood") matchNav = item.category === "bollywood";
-      else if (currentNav === "info") matchNav = false;
-      else matchNav = true;
+      else if (currentNav === "trending") matchNav = true;
       if (currentNav === "all") matchNav = true;
+      
       let matchType = (currentFilter === "all" || item.type === currentFilter);
-      let matchGenre = (currentGenre === "all") ? true : item.genre.toLowerCase().includes(currentGenre.toLowerCase());
+      let matchGenre = (currentGenre === "all") ? true : item.genre.includes(currentGenre);
       let matchYear = (currentYear === "all") ? true : item.year == currentYear;
       let matchOrigin = (currentOrigin === "all") ? true : item.origin === currentOrigin;
-      let matchText = [item.title, item.genre, item.desc].join(" ").toLowerCase().includes(term);
+      let matchText =[item.title, item.genre].join(" ").toLowerCase().includes(term);
       return matchNav && matchType && matchGenre && matchYear && matchOrigin && matchText;
     });
+
+    if(currentNav === "trending") { list.sort((a,b)=>b.views - a.views); list = list.slice(0, 15); }
+    else {
+      if(currentSort === "views") list.sort((a,b)=>b.views - a.views);
+      else if(currentSort === "rating") list.sort((a,b)=>b.rating - a.rating);
+    }
+
+    let totalPages = Math.ceil(list.length / itemsPerPage);
+    if(currentPage > totalPages) currentPage = 1;
+    let paged = list.slice((currentPage-1)*itemsPerPage, currentPage*itemsPerPage);
+
     let grid = document.getElementById("moviesGrid");
-    if (currentNav === "info") {
-      grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px;"><i class="fa-solid fa-circle-info" style="font-size:3rem; color:#f8d64e; margin-bottom:20px;"></i><h3>دەربارەی ئێمە</h3><p style="color:#aaa; max-width:500px; margin:10px auto; line-height:1.8;">سینەمای پێشەوا پلاتفۆرمێکی پێشکەوتووە بۆ بینینی فیلم و زنجیرە.<br>خاوەن: Twana Yassin</p></div>`;
-      return;
+    if(paged.length===0) grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:40px;color:#aaa;">هیچ ئەنجامێک نەدۆزرایەوە</div>`;
+    else {
+      grid.innerHTML = paged.map((i, idx) => `
+        <div class="movie-card" onclick="openDetail('${i.id}')">
+          ${(currentNav==="trending" && idx<5) ? `<div class="trending-tag">🔥 Top ${idx+1}</div>` : ''}
+          <img class="card-img" src="${i.img}" loading="lazy">
+          <div class="card-overlay">
+            <h3 class="card-title">${i.title}</h3>
+            <div class="card-meta"><span>⭐ ${i.rating}</span><span class="duration"><i class="fa-regular fa-clock"></i> ${i.duration.split(' ')[0]}</span><span>${i.year}</span></div>
+            <div class="card-views"><i class="fa-regular fa-eye"></i> ${formatViews(i.views)}</div>
+          </div>
+        </div>`).join("");
     }
-    if (list.length === 0) { grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px; color:#aaa;">هیچ ئەنجامێک نەدۆزرایەوە</div>`; return; }
-    grid.innerHTML = list.map(i => `<div class="movie-card" data-id="${i.id}"><img class="card-img" src="${i.img}" alt="${i.title}"><div class="card-overlay"><h3 class="card-title">${i.title}</h3><div class="card-meta"><span>⭐ ${i.rating}</span><span>${i.year || '?'}</span></div><div class="card-views"><i class="fa-regular fa-eye"></i> ${formatViews(i.views)}</div></div></div>`).join("");
-    document.querySelectorAll(".movie-card").forEach(c => c.addEventListener("click", () => openDetail(c.dataset.id)));
-    document.getElementById("totalCountBadge").innerHTML = `📽️ کۆی گشتی: ${list.length}`;
+    document.getElementById("totalCountBadge").innerHTML = `📽️ ${list.length}`;
+    renderPagination(totalPages);
   }
 
-  function updateHeroSlides() {
-    let allItems = getAll();
-    let topRated = [...allItems].sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating)).slice(0, 8);
-    return topRated.map(item => ({ title: item.title, desc: item.desc.length > 120 ? item.desc.slice(0, 120) + "..." : item.desc, bg: item.bg || item.img, itemId: item.id }));
-  }
-  let heroSlides = [];
-  function loadHero(i) {
-    let slides = heroSlides;
-    if (slides.length === 0) return;
-    if (i >= slides.length) i = 0;
-    let s = slides[i];
-    if (!s) return;
-    currentHeroId = s.itemId;
-    let hero = document.getElementById("heroSection");
-    hero.style.background = `linear-gradient(10deg, rgba(8,8,12,0.95) 0%, rgba(8,8,12,0.3) 60%, transparent 100%), url('${s.bg}') center/cover`;
-    document.getElementById("heroLabel").textContent = t("heroLabel") || "پێشکەشکراوە لەلایەن Twana Yassin";
-    document.getElementById("heroTitle").textContent = s.title;
-    document.getElementById("heroDesc").textContent = s.desc;
-  }
-  function fadeHeroTo(i) {
-    let h = document.getElementById("heroSection");
-    h.classList.add("fade-out");
-    setTimeout(() => { heroIndex = i; loadHero(heroIndex); h.classList.remove("fade-out"); }, 400);
-  }
-  function startHeroAuto() {
-    if (heroTimer) clearInterval(heroTimer);
-    heroTimer = setInterval(() => { if (heroSlides.length > 1) { heroIndex = (heroIndex + 1) % heroSlides.length; fadeHeroTo(heroIndex); } }, 7000);
-  }
-  function updateHeroSlidesAndRestart() { heroSlides = updateHeroSlides(); heroIndex = 0; if (heroSlides.length) loadHero(0); startHeroAuto(); }
-
-  // ========== Internationalization ==========
-  const i18n = {
-    ckb: {
-      siteTitle: "سینەمای پێشەوا", account: "ئەکاونت", favorites: "دڵخوازەکان", watchLater: "دواتر ببینە", adminPanel: "پانێڵی بەڕێوبەر", settings: "ڕێکخستنەکان", language: "زمان",
-      login: "چوونەژوورەوە", register: "دروستکردنی ئەکاونت", logout: "دەرچوون", dropdownNote: "ئەکاونت و ڕێکخستنەکانت لێرە بەڕێوە ببە.", watch: "سەیرکردن", info: "زانیاری",
-      all: "هەمووی", movies: "فیلمەکان", series: "زنجیرەکان", added: "زیادکرا", removed: "لابردرا", playerPlaceholder: "سەرچاوەی ڤیدیۆ نەدۆزرایەوە.", playerBack: "گەڕانەوە", playEpisode: "ئەڵقە", seasons: "وەرزەکان", episodes: "ئەڵقەکان"
-    },
-    en: {
-      siteTitle: "Peshawa Cinema", account: "Account", favorites: "Favorites", watchLater: "Watch Later", adminPanel: "Admin Panel", settings: "Settings", language: "Language",
-      login: "Login", register: "Register", logout: "Logout", dropdownNote: "Manage account.", watch: "Watch", info: "Info",
-      all: "All", movies: "Movies", series: "Series", added: "Added", removed: "Removed", playerPlaceholder: "No video source.", playerBack: "Back", playEpisode: "Ep", seasons: "Seasons", episodes: "Eps"
-    },
-    ar: {
-      siteTitle: "سينما پێشەوا", account: "الحساب", favorites: "المفضلة", watchLater: "المشاهدة لاحقًا", adminPanel: "لوحة المدير", settings: "الإعدادات", language: "اللغة",
-      login: "تسجيل الدخول", register: "إنشاء حساب", logout: "تسجيل الخروج", dropdownNote: "إدارة الحساب.", watch: "مشاهدة", info: "معلومات",
-      all: "الكل", movies: "الأفلام", series: "المسلسلات", added: "تمت الإضافة", removed: "تمت الإزالة", playerPlaceholder: "لا يوجد فيديو.", playerBack: "رجوع", playEpisode: "حلقة", seasons: "مواسم", episodes: "حلقات"
+  function renderPagination(total) {
+    let p = document.getElementById("paginationControls");
+    if(total <= 1) { p.innerHTML=""; return; }
+    let html = `<button class="page-btn" ${currentPage===1?'disabled':''} onclick="changePage(${currentPage-1})"><i class="fa-solid fa-chevron-right"></i></button>`;
+    for(let i=1; i<=total; i++) {
+      if(i===1 || i===total || (i>=currentPage-1 && i<=currentPage+1)) {
+        html += `<button class="page-btn ${currentPage===i?'active':''}" onclick="changePage(${i})">${i}</button>`;
+      } else if (i===currentPage-2 || i===currentPage+2) {
+        html += `<span style="color:#888; align-self:center;">...</span>`;
+      }
     }
-  };
-  function t(k) { return i18n[lang]?.[k] || i18n.ckb[k] || k; }
-
-  // ========== UI Helpers ==========
-  function showModernModal(title, html) {
-    const modal = document.getElementById("actionModal");
-    const body = document.getElementById("actionModalBody");
-    body.parentElement.style.maxWidth = "480px";
-    body.innerHTML = `<div class="close-modal" onclick="closeActionModal()"><i class="fa-solid fa-xmark"></i></div><div class="modal-hero" style="min-height: 200px; padding: 30px;"><h2>${title}</h2></div><div class="modal-body">${html}</div>`;
-    modal.style.display = "block";
-    document.body.style.overflow = "hidden";
+    html += `<button class="page-btn" ${currentPage===total?'disabled':''} onclick="changePage(${currentPage+1})"><i class="fa-solid fa-chevron-left"></i></button>`;
+    p.innerHTML = html;
   }
+  window.changePage = function(num) { currentPage=num; renderGrid(); window.scrollTo({top: document.querySelector(".controls-container")?.offsetTop||500, behavior:'smooth'}); }
+
+  window.resetFilters = function() {
+    currentGenre="all"; currentYear="all"; currentOrigin="all"; document.getElementById("searchInput").value=""; currentSort="default"; document.getElementById("sortSelect").value="default";
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('[data-genre="all"], [data-year="all"],[data-origin="all"]').forEach(b=>b.classList.add('active'));
+    renderGrid(); showToast("فلتەرەکان خاوێنکرانەوە", "info");
+  }
+
+  // Init Modals & Dropdowns
   window.closeActionModal = function () { document.getElementById("actionModal").style.display = "none"; document.body.style.overflow = "auto"; };
-  async function registerModal() {
-    showModernModal(t("register"), `<div class="form-group"><label>ئیمێڵ</label><input type="email" id="regEmail"></div><div class="form-group"><label>ناوی بەکارهێنەر</label><input type="text" id="regUsername"></div><div class="form-group"><label>وشەی نهێنی</label><input type="password" id="regPass"></div><div class="form-group"><label>دووبارە وشەی نهێنی</label><input type="password" id="regPass2"></div><button class="hero-btn" id="doRegisterBtn">دروستکردن</button>`);
-    document.getElementById("doRegisterBtn").onclick = async () => {
-      let email = document.getElementById("regEmail").value.trim();
-      let username = document.getElementById("regUsername").value.trim();
-      let pwd = document.getElementById("regPass").value;
-      let pwd2 = document.getElementById("regPass2").value;
-      if (!email || !username || !pwd) { showToast("پڕکردنەوەی هەموو خانەکان پێویستە", "error"); return; }
-      if (pwd !== pwd2) { showToast("وشەی نهێنی هاوبەش نییە", "error"); return; }
-      if (accounts.some(acc => acc.email === email)) { showToast("ئیمێڵ پێشتر بەکارهاتووە", "error"); return; }
-      const hashed = await hashPassword(pwd);
-      const newUser = { email, username, name: username, passHash: hashed, role: "user", watchLater: [], favorites: [] };
-      accounts.push(newUser);
-      localStorage.setItem("accounts", JSON.stringify(accounts));
-      currentUser = { email, username, role: "user" };
-      localStorage.setItem("currentUser", JSON.stringify(currentUser));
-      saveState();
-      closeActionModal();
-      updateAccountUI();
-      showToast(`بەخێربێیت ${username}`, "success");
-    };
-  }
-  async function loginModal() {
-    showModernModal(t("login"), `<div class="form-group"><label>ئیمێڵ</label><input type="email" id="loginEmail"></div><div class="form-group"><label>وشەی نهێنی</label><input type="password" id="loginPass"></div><button class="hero-btn" id="doLoginBtn">چوونەژوورەوە</button>`);
-    document.getElementById("doLoginBtn").onclick = async () => {
-      let email = document.getElementById("loginEmail").value.trim();
-      let pwd = document.getElementById("loginPass").value;
-      let hashed = await hashPassword(pwd);
-      let acc = accounts.find(a => a.email === email && a.passHash === hashed);
-      if (!acc) { showToast("ئیمێڵ یان وشەی نهێنی هەڵەیە", "error"); return; }
-      currentUser = { email: acc.email, username: acc.username, role: acc.role };
-      localStorage.setItem("currentUser", JSON.stringify(currentUser));
-      closeActionModal();
-      updateAccountUI();
-      showToast(`بەخێربێیت ${acc.username}`, "success");
-    };
-  }
+  
   function updateAccountUI() {
     let isLogged = !!currentUser;
-    let name = isLogged ? currentUser.username : (lang === "en" ? "Guest" : "میوان");
-    let role = !isLogged ? (lang === "en" ? "Guest" : "میوان") : (currentUser.role === "admin" ? (lang === "en" ? "Admin" : "بەڕێوبەر") : (lang === "en" ? "User" : "بەکارهێنەر"));
-    document.getElementById("accountName").textContent = name;
-    document.getElementById("accountRole").textContent = role;
-    let isMaster = isLogged && currentUser.email === MASTER_EMAIL;
-    let adminPanel = document.getElementById("dropdownAdminPanel");
-    if (adminPanel) adminPanel.style.display = isMaster ? "flex" : "none";
-    document.getElementById("loginBtn").style.display = isLogged ? "none" : "flex";
-    document.getElementById("registerBtn").style.display = isLogged ? "none" : "flex";
-    document.getElementById("logoutBtn").style.display = isLogged ? "flex" : "none";
-    let avatarBadge = document.getElementById("avatarBadge");
-    if (avatarBadge) avatarBadge.innerHTML = isLogged ? (currentUser.role === "admin" ? '<i class="fa-solid fa-crown"></i>' : '<i class="fa-solid fa-user"></i>') : '<i class="fa-solid fa-user"></i>';
-  }
-  function logoutAccount() { currentUser = null; localStorage.removeItem("currentUser"); updateAccountUI(); showToast(t("logout"), "info"); }
-  function showFavorites() { let favs = getFavorites().map(id => findItem(id)?.title).filter(Boolean); showToast(favs.length ? favs.join("\n") : "هیچ دڵخوازێک نییە", "info"); }
-  function showWatchLater() { let later = getWatchLater().map(id => findItem(id)?.title).filter(Boolean); showToast(later.length ? later.join("\n") : "هیچ ناوەڕۆکێک نەهێڵراوە بۆ دواتر", "info"); }
-  function openAdminPanel() { 
-    if (currentUser?.email !== MASTER_EMAIL) { showToast("تەنها بەڕێوبەری ماستەر دەتوانێت ئەم بەشە ببینێت", "error"); return; }
-    showUserListForAdmin();
-  }
-  function openSettingsPanel() { openLanguagePanel(); }
-  
-  function openLanguagePanel() {
-    const modal = document.getElementById("actionModal");
-    const body = document.getElementById("actionModalBody");
-    body.parentElement.style.maxWidth = "500px";
-    const currentLang = lang;
-    body.innerHTML = `
-      <div class="close-modal" onclick="closeActionModal()"><i class="fa-solid fa-xmark"></i></div>
-      <div class="modal-hero" style="min-height: 150px; padding: 24px;"><h2><i class="fa-solid fa-language"></i> ${t("language")}</h2></div>
-      <div class="modal-body">
-        <div class="language-options">
-          <div class="lang-option ${currentLang === 'ckb' ? 'active' : ''}" onclick="setLang('ckb')">
-            <div class="lang-name"><i class="fa-solid fa-flag"></i> کوردی (سۆرانی)</div>
-            ${currentLang === 'ckb' ? '<div class="lang-check"><i class="fa-solid fa-check-circle"></i></div>' : ''}
-          </div>
-          <div class="lang-option ${currentLang === 'en' ? 'active' : ''}" onclick="setLang('en')">
-            <div class="lang-name"><i class="fa-solid fa-language"></i> English</div>
-            ${currentLang === 'en' ? '<div class="lang-check"><i class="fa-solid fa-check-circle"></i></div>' : ''}
-          </div>
-          <div class="lang-option ${currentLang === 'ar' ? 'active' : ''}" onclick="setLang('ar')">
-            <div class="lang-name"><i class="fa-solid fa-flag"></i> العربية</div>
-            ${currentLang === 'ar' ? '<div class="lang-check"><i class="fa-solid fa-check-circle"></i></div>' : ''}
-          </div>
-        </div>
+    document.getElementById("userDropdown").innerHTML = `
+      <div style="display:flex; gap:16px; align-items:center; margin-bottom:16px; padding:16px; background:rgba(255,255,255,0.03); border-radius:18px;">
+        <div style="width:48px; height:48px; background:linear-gradient(135deg, #f8d64e, #d8b22a); border-radius:14px; display:flex; align-items:center; justify-content:center; color:#000;"><i class="fa-solid fa-user"></i></div>
+        <div><h4 style="margin:0;">${isLogged ? currentUser.username : "میوان"}</h4><span style="font-size:0.8rem; color:#aaa;">${isLogged ? (currentUser.role === "admin" ? "بەڕێوبەر" : "بەکارهێنەر") : "سەردانکەر"}</span></div>
       </div>
-    `;
-    modal.style.display = "block";
-    document.body.style.overflow = "hidden";
+      ${isLogged ? `<div class="dropdown-item" onclick="showProfileModal()"><i class="fa-solid fa-circle-user"></i> پرۆفایلی من</div>` : ''}
+      ${isLogged && currentUser.role === "admin" ? `<div class="dropdown-item" onclick="showAdminPanel()"><i class="fa-solid fa-shield-halved"></i> پانێڵی بەڕێوبەر</div>` : ''}
+      <hr class="dropdown-sep">
+      <div class="dropdown-item" onclick="showSettingsPanel()"><i class="fa-solid fa-gear"></i> ڕێکخستنی پێشکەوتوو</div>
+      <hr class="dropdown-sep">
+      ${!isLogged ? `<div class="dropdown-item" onclick="showAuthModal('login')"><i class="fa-solid fa-right-to-bracket"></i> چوونەژوورەوە</div>` : ''}
+      ${!isLogged ? `<div class="dropdown-item" onclick="showAuthModal('register')"><i class="fa-solid fa-user-plus"></i> خۆتۆمارکردن</div>` : ''}
+      ${isLogged ? `<div class="dropdown-item" style="color:#ff6b6b;" onclick="currentUser=null;saveState();updateAccountUI();"><i class="fa-solid fa-right-from-bracket"></i> دەرچوون</div>` : ''}`;
+    
+    document.getElementById("avatarBtn").innerHTML = isLogged && currentUser.role==="admin" ? '<i class="fa-solid fa-crown"></i>' : '<i class="fa-solid fa-user"></i>';
+    renderContinueWatching();
   }
+
+  // Hero Section
+  function updateHeroSlides() { return [...getAll()].sort((a,b)=>b.rating-a.rating).slice(0,5); }
+  let heroSlides =[];
+  function loadHero(i) {
+    if(heroSlides.length===0) return; if(i>=heroSlides.length) i=0; let s=heroSlides[i]; currentHeroId=s.id;
+    let h=document.getElementById("heroSection");
+    h.style.background=`linear-gradient(10deg, rgba(8,8,12,0.95) 0%, rgba(8,8,12,0.3) 60%, transparent 100%), url('${s.bg}') center/cover`;
+    document.getElementById("heroTitle").textContent=s.title; document.getElementById("heroDesc").textContent=s.desc;
+    document.getElementById("heroMeta").innerHTML = `<span><i class="fa-solid fa-calendar"></i> ${s.year}</span> <span><i class="fa-solid fa-clock"></i> ${s.duration}</span> <span><i class="fa-solid fa-star" style="color:#f8d64e"></i> ${s.rating}</span>`;
+  }
+  function fadeHeroTo(i) { let h=document.getElementById("heroSection"); h.classList.add("fade-out"); setTimeout(()=>{heroIndex=i; loadHero(heroIndex); h.classList.remove("fade-out");},400); }
+  setInterval(()=>{ if(heroSlides.length>1) fadeHeroTo((heroIndex+1)%heroSlides.length); }, 8000);
+
+  // Filter Panels Init
+  const genres =["دراما", "تاوانکاری", "هەستبزوێن", "زانستی خەیاڵی", "سەرکێشی", "ئەکشن", "خەیاڵی", "کۆمیدی", "ئەنیمەیشن", "ترسناک", "ڕۆمانسی"];
+  document.getElementById("genreGrid").innerHTML = `<button class="filter-btn active" data-genre="all">هەموو</button>` + genres.map(g=>`<button class="filter-btn" data-genre="${g}">${g}</button>`).join('');
+  document.getElementById("yearGrid").innerHTML = `<button class="filter-btn active" data-year="all">هەموو</button>` + Array.from({length:25},(_,i)=>2024-i).map(y=>`<button class="filter-btn" data-year="${y}">${y}</button>`).join('');
+  document.getElementById("originGrid").innerHTML = `<button class="filter-btn active" data-origin="all">هەموو</button>` +["ئەمریکی", "بۆڵیود", "کۆری"].map(o=>`<button class="filter-btn" data-origin="${o}">${o}</button>`).join('');
   
-  window.setLang = function (newLang) { lang = newLang; localStorage.setItem("lang", lang); applyLanguage(); closeActionModal(); };
-  function applyLanguage() {
-    document.querySelectorAll("[data-i18n]").forEach(el => { let k = el.getAttribute("data-i18n"); if (el.tagName === "INPUT") el.placeholder = t(k); else el.textContent = t(k); });
-    document.querySelector(".site-badge").textContent = t("siteTitle");
-    document.getElementById("sectionTitle").textContent = t("sectionTitle");
-    updateAccountUI();
-    document.getElementById("htmlRoot").setAttribute("dir", lang === "en" ? "ltr" : "rtl");
-    loadHero(heroIndex);
-    renderGrid();
-  }
+  document.querySelectorAll('.filter-grid').forEach(g => { g.addEventListener('click', e => { if(e.target.classList.contains('filter-btn')){ g.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); e.target.classList.add('active'); if(g.id==="genreGrid") currentGenre=e.target.dataset.genre; if(g.id==="yearGrid") currentYear=e.target.dataset.year; if(g.id==="originGrid") currentOrigin=e.target.dataset.origin; renderGrid(); } }); });
+  document.querySelectorAll('.panel-header').forEach(h => { h.addEventListener('click', () => { let grid=h.nextElementSibling; grid.classList.toggle('open'); h.classList.toggle('open'); }); });
 
-  // ========== Filters ==========
-  const genreList = ["دراما", "تاوانکاری", "هەستبزوێن", "زانستی خەیاڵی", "سەرکێشی", "نھێنی ئامێز", "ئەکشن", "خەیاڵی", "کۆمیدی", "ئەنیمەیشن", "ڕۆمانسی", "مۆزیکی", "بایۆگرافی", "ترسناک", "دۆکیومێنتاری", "جەنگ", "ڕۆژئاوایی", "پزیشکی", "وەرزشی", "سایکۆلۆژی", "کورتە", "کۆمەڵایەتی", "کۆمیدیای ڕەش", "سیخوڕی", "کلاسیک", "گەشتی کات", "سامۆرایی", "مانەوە لە ژیان"];
-  const genreIcons = { "دراما": "fa-mask", "ئەکشن": "fa-fist-raised", "کۆمیدی": "fa-laugh", "ئەنیمەیشن": "fa-film", "ترسناک": "fa-ghost", "جەنگ": "fa-shield-halbed", "سەرکێشی": "fa-map-location-dot" };
-  function buildGenrePanel() {
-    const grid = document.getElementById("genreGrid");
-    if (!grid) return;
-    grid.innerHTML = `<button class="filter-btn active" data-genre="all"><i class="fa-solid fa-border-all"></i> هەموو</button>`;
-    genreList.forEach(genre => { const icon = genreIcons[genre] || "fa-tag"; grid.innerHTML += `<button class="filter-btn" data-genre="${genre}"><i class="fa-solid ${icon}"></i> ${genre}</button>`; });
-    document.querySelectorAll("#genreGrid .filter-btn").forEach(btn => { btn.addEventListener("click", () => { document.querySelectorAll("#genreGrid .filter-btn").forEach(b => b.classList.remove("active")); btn.classList.add("active"); currentGenre = btn.getAttribute("data-genre"); renderGrid(); }); });
-  }
-  let yearList = []; for (let y = 2000; y <= 2026; y++) yearList.push(y.toString());
-  function buildYearPanel() {
-    const grid = document.getElementById("yearGrid");
-    if (!grid) return;
-    grid.innerHTML = `<button class="filter-btn active" data-year="all"><i class="fa-regular fa-calendar"></i> هەموو ساڵەکان</button>`;
-    yearList.forEach(year => { grid.innerHTML += `<button class="filter-btn" data-year="${year}"><i class="fa-regular fa-calendar"></i> ${year}</button>`; });
-    document.querySelectorAll("#yearGrid .filter-btn").forEach(btn => { btn.addEventListener("click", () => { document.querySelectorAll("#yearGrid .filter-btn").forEach(b => b.classList.remove("active")); btn.classList.add("active"); currentYear = btn.getAttribute("data-year"); renderGrid(); }); });
-  }
-  const originList = ["ئەمریکی", "بۆڵیود", "کۆری", "چینی", "تورکی", "عەرەبی", "فارسی"];
-  const originIcons = { "ئەمریکی": "fa-flag-usa", "بۆڵیود": "fa-flag-india", "کۆری": "fa-flag-korea", "چینی": "fa-flag-china", "تورکی": "fa-flag-turkey", "عەرەبی": "fa-flag-iraq", "فارسی": "fa-flag-iran" };
-  function buildOriginPanel() {
-    const grid = document.getElementById("originGrid");
-    if (!grid) return;
-    grid.innerHTML = `<button class="filter-btn active" data-origin="all"><i class="fa-solid fa-globe"></i> هەموو</button>`;
-    originList.forEach(origin => { const icon = originIcons[origin] || "fa-globe"; grid.innerHTML += `<button class="filter-btn" data-origin="${origin}"><i class="fa-solid ${icon}"></i> ${origin}</button>`; });
-    document.querySelectorAll("#originGrid .filter-btn").forEach(btn => { btn.addEventListener("click", () => { document.querySelectorAll("#originGrid .filter-btn").forEach(b => b.classList.remove("active")); btn.classList.add("active"); currentOrigin = btn.getAttribute("data-origin"); renderGrid(); }); });
-  }
-  function initCollapsiblePanels() {
-    document.querySelectorAll('.filter-panel').forEach(panel => {
-      const header = panel.querySelector('.panel-header');
-      const grid = panel.querySelector('.filter-grid');
-      if (header && grid) {
-        header.addEventListener('click', () => {
-          const isOpen = grid.classList.contains('open');
-          if (isOpen) { grid.classList.remove('open'); header.classList.remove('open'); } else { grid.classList.add('open'); header.classList.add('open'); }
-        });
-        grid.classList.remove('open'); header.classList.remove('open');
-      }
-    });
-  }
-
-  // ========== Initialization ==========
+  // On Load
   window.onload = async () => {
-    await migrateAccounts();
-    document.getElementById("userDropdown").innerHTML = `<div style="display:flex; gap:16px; align-items:center; margin-bottom:16px; padding:16px; background: rgba(255,255,255,0.03); border-radius:18px;"><div id="avatarBadge" style="width:48px; height:48px; background: linear-gradient(135deg, #f8d64e, #d8b22a); border-radius:14px; display:flex; align-items:center; justify-content:center; color:#000;"><i class="fa-solid fa-user"></i></div><div><h4 id="accountName" style="margin:0; color:#fff;">میوان</h4><span id="accountRole" style="font-size:0.8rem; color:#aaa;">میوان</span></div></div>
-      <div class="dropdown-item" id="dropdownFavorites"><i class="fa-solid fa-bookmark"></i> <span data-i18n="favorites">دڵخوازەکانم</span></div>
-      <div class="dropdown-item" id="dropdownWatchLater"><i class="fa-regular fa-clock"></i> <span data-i18n="watchLater">بعدتر ببینە</span></div>
-      <div class="dropdown-item" id="dropdownAdminPanel" style="display:none;"><i class="fa-solid fa-shield-halved"></i> <span data-i18n="adminPanel">پانێڵی بەڕێوبەر</span></div>
-      <hr class="dropdown-sep">
-      <div class="dropdown-item" id="openSettingsItem"><i class="fa-solid fa-gear"></i> <span data-i18n="settings">ڕێکخستنەکان</span></div>
-      <div class="dropdown-item" id="openLanguageItem"><i class="fa-solid fa-language"></i> <span data-i18n="language">زمان</span></div>
-      <hr class="dropdown-sep">
-      <div class="dropdown-item" id="loginBtn"><i class="fa-solid fa-right-to-bracket"></i> <span data-i18n="login">چوونەژوورەوە</span></div>
-      <div class="dropdown-item" id="registerBtn"><i class="fa-solid fa-user-plus"></i> <span data-i18n="register">دروستکردنی ئەکاونت</span></div>
-      <div class="dropdown-item" id="logoutBtn" style="color:#ff6b6b;"><i class="fa-solid fa-right-from-bracket"></i> <span data-i18n="logout">دەرچوون</span></div>
-      <div class="mini-note" data-i18n="dropdownNote">ئەکاونت و ڕێکخستنەکانت لێرە بەڕێوە ببە.</div>`;
-    document.getElementById("loginBtn").onclick = loginModal;
-    document.getElementById("registerBtn").onclick = registerModal;
-    document.getElementById("logoutBtn").onclick = logoutAccount;
-    document.getElementById("dropdownFavorites").onclick = showFavorites;
-    document.getElementById("dropdownWatchLater").onclick = showWatchLater;
-    document.getElementById("dropdownAdminPanel").onclick = openAdminPanel;
-    document.getElementById("openSettingsItem").onclick = openSettingsPanel;
-    document.getElementById("openLanguageItem").onclick = openLanguagePanel;
-    document.getElementById("avatarBtn").onclick = e => { e.stopPropagation(); document.getElementById("userDropdown").classList.toggle("show"); };
-    document.getElementById("settingsIcon").onclick = () => document.getElementById("userDropdown").classList.toggle("show");
-    const bellIcon = document.getElementById("bellIcon"), notifModal = document.getElementById("notificationModal"), closeNotif = document.getElementById("closeNotification");
-    bellIcon.addEventListener("click", (e) => { e.stopPropagation(); showNotificationModal(); });
-    closeNotif.addEventListener("click", () => notifModal.classList.remove("show"));
-    window.addEventListener("click", e => { if (!e.target.closest(".user-area") && !e.target.closest(".notification-modal")) document.getElementById("userDropdown").classList.remove("show"); });
-    document.querySelectorAll(".menu-item").forEach(btn => btn.onclick = () => { document.querySelectorAll(".menu-item").forEach(b => b.classList.remove("active")); btn.classList.add("active"); currentFilter = btn.dataset.menu; renderGrid(); });
-    document.querySelectorAll(".nav-item").forEach(nav => nav.onclick = () => { document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active")); nav.classList.add("active"); currentNav = nav.dataset.nav; renderGrid(); });
-    document.getElementById("searchInput").addEventListener("input", renderGrid);
-    document.getElementById("heroPlayBtn").onclick = () => openDetail(currentHeroId);
-    document.getElementById("heroInfoBtn").onclick = () => { if (currentHeroId) openDetail(currentHeroId); };
-    buildGenrePanel();
-    buildYearPanel();
-    buildOriginPanel();
-    initCollapsiblePanels();
-    updateHeroSlidesAndRestart();
-    renderGrid();
-    applyLanguage();
+    await migrateAccounts(); applyTheme();
     updateAccountUI();
-    startLiveNotifications();
-    setTimeout(() => { let l = document.getElementById("loader"); l.style.opacity = "0"; setTimeout(() => l.style.display = "none", 400); }, 600);
+    
+    document.getElementById("avatarBtn").onclick = e => { e.stopPropagation(); document.getElementById("userDropdown").classList.toggle("show"); };
+    window.addEventListener("click", e => { if (!e.target.closest(".user-area")) document.getElementById("userDropdown").classList.remove("show"); });
+    
+    document.querySelectorAll(".nav-item").forEach(n => n.onclick=()=>{ document.querySelectorAll(".nav-item").forEach(x=>x.classList.remove("active")); n.classList.add("active"); currentNav=n.dataset.nav; currentPage=1; renderGrid(); });
+    document.querySelectorAll(".menu-item").forEach(n => n.onclick=()=>{ document.querySelectorAll(".menu-item").forEach(x=>x.classList.remove("active")); n.classList.add("active"); currentFilter=n.dataset.menu; currentPage=1; renderGrid(); });
+    document.getElementById("searchInput").addEventListener("input", ()=>{currentPage=1;renderGrid();});
+    document.getElementById("sortSelect").addEventListener("change", (e)=>{currentSort=e.target.value; currentPage=1; renderGrid();});
+    
+    document.getElementById("heroPlayBtn").onclick = () => openDetail(currentHeroId);
+    document.getElementById("heroInfoBtn").onclick = () => openDetail(currentHeroId);
+    document.getElementById("heroTrailerBtn").onclick = () => { let it = findItem(currentHeroId); if(it) playTrailer(it.trailer); };
+
+    heroSlides = updateHeroSlides(); loadHero(0);
+    renderGrid();
+    
+    // Check Shared URL Link
+    let urlParams = new URLSearchParams(window.location.search);
+    if(urlParams.has('v')) { setTimeout(() => openDetail(urlParams.get('v')), 800); }
+
+    setTimeout(() => { document.getElementById("loader").style.opacity="0"; setTimeout(()=>document.getElementById("loader").style.display="none",400); }, 800);
   };
-  window.openDetail = openDetail;
-  window.editItem = editItem;
-  window.deleteAnyItem = deleteAnyItem;
-  window.playContent = playContent;
-  window.promoteToAdmin = promoteToAdmin;
 </script>
 </body>
 </html>
