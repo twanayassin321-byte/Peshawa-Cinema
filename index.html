@@ -4,14 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <meta name="google-site-verification" content="TIhv0tt3FCEP4dnyjAzjaFoRtmCWvtB0UOwRyLWobH0" />
-  <title>Peshawa Cinema - پاشا سینەما</title>
-  <meta name="description" content="ماپەرێک بۆ بینینی نوێترین و پربینەرترین فیلم و زنجیرەکان بە باشترین کوالێتی">
+  <title>Peshawa Cinema - پێـشەوایـ سیـنـەمـا</title>
+  <meta name="description" content="ماڵپەرێک بۆ بینینی نوێترین و پربینەرترین فیلم و زنجیرەکان بە باشترین کوالێتی">
   <meta name="keywords" content="فیلم, زنجیرە, سینەما, Peshawa Cinema">
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    /* ========== BASE STYLES (unchanged except filters, clock, AI button) ========== */
+    /* هەموو ستایلەکانی پێشوو بە تەواوی پارێزراو */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Vazirmatn', 'Segoe UI', system-ui, sans-serif;
@@ -28,6 +27,8 @@
       backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
       z-index: -1; transition: all 0.4s;
     }
+    
+    /* تایبەتمەندی نوێ: دۆخی ڕووناکی (Light Mode) */
     body.light-theme { color: #111; }
     body.light-theme::before { background: rgba(240, 242, 245, 0.85); backdrop-filter: blur(25px); }
     body.light-theme .topbar, body.light-theme .nav-menu, body.light-theme .filter-panel { background: rgba(255, 255, 255, 0.7); border-color: rgba(0,0,0,0.1); }
@@ -43,7 +44,11 @@
     body.light-theme .ep-btn { color: #333; border-color: #ccc; }
 
     .toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px; }
-    .toast { background: rgba(20, 20, 28, 0.95); backdrop-filter: blur(12px); border-radius: 12px; padding: 12px 20px; min-width: 250px; max-width: 350px; color: #fff; font-size: 0.9rem; border-right: 4px solid #f8d64e; box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: slideIn 0.3s ease; display: flex; align-items: center; gap: 12px; }
+    .toast {
+      background: rgba(20, 20, 28, 0.95); backdrop-filter: blur(12px); border-radius: 12px;
+      padding: 12px 20px; min-width: 250px; max-width: 350px; color: #fff; font-size: 0.9rem;
+      border-right: 4px solid #f8d64e; box-shadow: 0 5px 15px rgba(0,0,0,0.3); animation: slideIn 0.3s ease; display: flex; align-items: center; gap: 12px;
+    }
     .toast.success { border-right-color: #4caf50; }
     .toast.error { border-right-color: #ff4757; }
     .toast.info { border-right-color: #f8d64e; }
@@ -60,49 +65,10 @@
     .logo-area { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; flex: 1; }
     .header-logo { height: 44px; width: 44px; object-fit: cover; border-radius: 12px; border: 2px solid rgba(248,214,78,0.8); box-shadow: 0 4px 15px rgba(248, 214, 78, 0.3); }
     .site-badge { font-weight: 800; font-size: 1.2rem; background: linear-gradient(135deg, #ffffff, #f8d64e); -webkit-background-clip: text; color: transparent; white-space: nowrap; }
-    
-    /* ========== MODERN CLOCK ========== */
-    .clock-widget {
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
-      border-radius: 60px;
-      padding: 6px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      border: 1px solid rgba(248, 214, 78, 0.3);
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-    .clock-widget:hover {
-      border-color: #f8d64e;
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateY(-2px);
-    }
-    .clock-widget i {
-      color: #f8d64e;
-      font-size: 1rem;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-    }
-    .clock-time {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: #fff;
-      direction: ltr;
-      font-family: 'JetBrains Mono', monospace;
-      letter-spacing: 0.5px;
-      background: rgba(0,0,0,0.3);
-      padding: 2px 8px;
-      border-radius: 40px;
-    }
-    .clock-date {
-      font-size: 0.7rem;
-      color: #e2e2e2;
-      direction: ltr;
-      font-weight: 500;
-    }
-    /* End Modern Clock */
-    
+    .clock-widget { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border-radius: 40px; padding: 6px 12px; display: flex; align-items: center; gap: 8px; border: 1px solid rgba(248, 214, 78, 0.3); }
+    .clock-widget i { color: #f8d64e; font-size: 0.9rem; }
+    .clock-time { font-size: 0.8rem; font-weight: 600; color: #fff; direction: ltr; font-family: monospace; }
+    .clock-date { font-size: 0.65rem; color: #aaa; direction: ltr; }
     .stats-badge { background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); padding: 4px 10px; border-radius: 40px; font-size: 0.7rem; color: #f8d64e; border: 1px solid rgba(248,214,78,0.3); white-space: nowrap; }
     .user-area { display: flex; gap: 8px; align-items: center; position: relative; }
     .icon-btn, .avatar { width: 40px; height: 40px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; color: #f8d64e; position: relative; }
@@ -112,10 +78,6 @@
     .notif-badge { position: absolute; top: -4px; right: -4px; background: #ff4757; color: white; font-size: 0.6rem; font-weight: 800; min-width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #14141c; animation: pulseBadge 2s infinite; }
     @keyframes pulseBadge { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7); } 70% { transform: scale(1.05); box-shadow: 0 0 0 6px rgba(255, 71, 87, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); } }
     
-    /* Language Switcher */
-    .lang-switcher { background: rgba(255,255,255,0.05); border-radius: 40px; padding: 4px 8px; display: flex; gap: 5px; }
-    .lang-option { cursor: pointer; padding: 4px 8px; border-radius: 30px; font-size: 0.7rem; transition: 0.2s; color: #ccc; }
-    .lang-option.active { background: #f8d64e; color: #111; }
     /* Modals & Dropdowns */
     .user-dropdown { position: absolute; top: 52px; left: 0; background: rgba(20, 20, 28, 0.9); border-radius: 20px; padding: 16px; min-width: 280px; border: 1px solid rgba(255, 255, 255, 0.1); z-index: 200; display: none; backdrop-filter: blur(24px); animation: dropFade 0.3s forwards; }
     html[dir="ltr"] .user-dropdown { left: auto; right: 0; }
@@ -148,140 +110,33 @@
     .nav-item.trending-tab { background: rgba(255, 71, 87, 0.15); border-color: rgba(255, 71, 87, 0.4); color: #ff4757; }
     .nav-item.trending-tab.active { background: #ff4757; color: white; }
     
-    /* ========== MODERN FILTERS - COLLAPSIBLE BY DEFAULT ========== */
-    .filters-row {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin: 0 16px 24px 16px;
-    }
-    .filter-panel {
-      background: rgba(20, 22, 27, 0.75);
-      backdrop-filter: blur(20px);
-      border-radius: 32px;
-      border: 1px solid rgba(248, 214, 78, 0.2);
-      overflow: hidden;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    }
-    .filter-panel:hover {
-      border-color: rgba(248, 214, 78, 0.5);
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
-    }
-    .panel-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 20px;
-      cursor: pointer;
-      transition: background 0.2s;
-      user-select: none;
-      border-bottom: 1px solid transparent;
-    }
-    .panel-header.open {
-      border-bottom-color: rgba(248, 214, 78, 0.3);
-    }
-    .panel-header:hover {
-      background: rgba(248, 214, 78, 0.05);
-    }
-    .panel-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #f8d64e;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      letter-spacing: -0.3px;
-    }
-    .panel-title i {
-      font-size: 1.2rem;
-    }
-    .toggle-icon {
-      color: #f8d64e;
-      transition: transform 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
-      font-size: 0.9rem;
-    }
-    .panel-header.open .toggle-icon {
-      transform: rotate(180deg);
-    }
-    .filter-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      padding: 0 20px 20px 20px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s cubic-bezier(0.33, 1, 0.68, 1), padding 0.2s;
-    }
-    .filter-grid.open {
-      max-height: 500px;
-      padding: 0 20px 20px 20px;
-      overflow-y: auto;
-    }
-    .filter-btn {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 8px 18px;
-      border-radius: 60px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      color: inherit;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      white-space: nowrap;
-      backdrop-filter: blur(4px);
-    }
-    .filter-btn i {
-      font-size: 0.8rem;
-      opacity: 0.7;
-    }
-    .filter-btn.active {
-      background: linear-gradient(135deg, #f8d64e, #e0b82e);
-      color: #111;
-      border-color: #f8d64e;
-      box-shadow: 0 4px 12px rgba(248, 214, 78, 0.4);
-      transform: scale(1.02);
-    }
-    .filter-btn:hover:not(.active) {
-      background: rgba(248, 214, 78, 0.2);
-      border-color: rgba(248, 214, 78, 0.6);
-      transform: translateY(-2px);
-    }
-    .reset-btn {
-      background: rgba(255, 71, 87, 0.2) !important;
-      border-color: rgba(255, 71, 87, 0.5) !important;
-      color: #ff4757 !important;
-      font-weight: bold;
-    }
-    .reset-btn:hover {
-      background: #ff4757 !important;
-      color: #fff !important;
-      border-color: #ff4757 !important;
-      transform: translateY(-2px);
-    }
-    /* Light mode adjustments */
-    body.light-theme .filter-panel {
-      background: rgba(255, 255, 255, 0.8);
-      border-color: rgba(0, 0, 0, 0.1);
-    }
-    body.light-theme .filter-btn {
-      background: rgba(0, 0, 0, 0.04);
-      border-color: rgba(0, 0, 0, 0.1);
-    }
-    body.light-theme .filter-btn.active {
-      background: linear-gradient(135deg, #f8d64e, #e0b82e);
-      color: #111;
-    }
-    
-    /* Hero Section */
+    .filters-row { display: flex; flex-direction: column; gap: 12px; margin: 0 16px 16px 16px; }
+    .filter-panel { background: rgba(17, 18, 22, 0.5); backdrop-filter: blur(16px); border-radius: 28px; border: 1px solid rgba(255, 255, 255, 0.08); overflow: hidden; }
+    .panel-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; cursor: pointer; transition: background 0.2s; user-select: none; }
+    .panel-header:hover { background: rgba(255, 255, 255, 0.05); }
+    .panel-title { font-size: 0.9rem; font-weight: 700; color: #f8d64e; display: flex; align-items: center; gap: 8px; }
+    .toggle-icon { color: #aaa; transition: transform 0.3s; }
+    .panel-header.open .toggle-icon { transform: rotate(180deg); }
+    .filter-grid { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 16px 16px 16px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding 0.2s; }
+    .filter-grid.open { max-height: 400px; padding: 0 16px 16px 16px; overflow-y: auto; }
+    .filter-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 6px 12px; border-radius: 40px; font-size: 0.75rem; font-weight: 500; cursor: pointer; transition: all 0.2s; color: inherit; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .filter-btn.active, .filter-btn:hover { background: #f8d64e; color: #111; border-color: #f8d64e; transform: translateY(-2px); }
+    .reset-btn { background: rgba(255, 71, 87, 0.15) !important; color: #ff4757 !important; border-color: rgba(255, 71, 87, 0.3) !important; font-weight: bold; }
+    .reset-btn:hover { background: #ff4757 !important; color: #fff !important; }
+
+    /* Hero Section - UPDATED WITH ZOOM & FADE */
     .hero-section { margin: 16px; border-radius: 28px; min-height: 420px; display: flex; align-items: flex-end; padding: 30px 20px; background-size: cover; transition: opacity 0.6s ease, transform 0.6s ease; border: 1px solid rgba(255, 255, 255, 0.08); position: relative; overflow: hidden; }
     .hero-section::after { content: ''; position: absolute; inset: 0; background: linear-gradient(10deg, rgba(8, 8, 12, 0.98) 0%, rgba(8, 8, 12, 0.5) 60%, transparent 100%); border-radius: 28px; }
+    
+    /* Animation classes for Hero transition */
     .hero-animate-in { opacity: 1 !important; transform: scale(1) !important; animation: heroZoomIn 0.8s ease-out; }
     .hero-fade-out { opacity: 0 !important; transform: scale(1.05) !important; transition: 0.4s ease-in; }
-    @keyframes heroZoomIn { from { transform: scale(1.1); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    
+    @keyframes heroZoomIn {
+      from { transform: scale(1.1); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
     .hero-content { position: relative; z-index: 2; max-width: 750px; }
     .hero-label { background: rgba(248, 214, 78, 0.15); color: #f8d64e; display: inline-block; padding: 6px 16px; border-radius: 40px; font-size: 0.8rem; font-weight: 700; margin-bottom: 12px; border: 1px solid rgba(248, 214, 78, 0.3); }
     .hero-title { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 8px; line-height: 1.2; text-shadow: 0 4px 20px rgba(0,0,0,0.6); }
@@ -307,33 +162,6 @@
     .search-box:focus { border-color: #f8d64e; background: rgba(30, 30, 42, 0.8); }
     .sort-select { padding: 10px 16px; border-radius: 40px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: inherit; font-family: inherit; font-size: 0.85rem; outline: none; cursor: pointer; }
     .sort-select option { background: #14141c; color: #fff; }
-    
-    /* ========== MODERN AI BUTTON ========== */
-    .ai-recommend-btn {
-      background: linear-gradient(135deg, #6a1b9a, #8e24aa, #ab47bc);
-      color: white;
-      border: none;
-      padding: 10px 22px;
-      border-radius: 40px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      gap: 10px;
-      align-items: center;
-      font-size: 0.9rem;
-      box-shadow: 0 6px 20px rgba(106, 27, 154, 0.4);
-      backdrop-filter: blur(4px);
-    }
-    .ai-recommend-btn:hover {
-      transform: translateY(-3px);
-      filter: brightness(1.05);
-      box-shadow: 0 12px 28px rgba(106, 27, 154, 0.5);
-    }
-    .ai-recommend-btn i {
-      font-size: 1.1rem;
-    }
-    /* End AI Button */
 
     /* Grids & Cards */
     .section-title { margin: 16px; font-size: 1.3rem; font-weight: 800; border-right: 4px solid #f8d64e; padding-right: 12px; color: #fff; display: flex; justify-content: space-between; align-items: center; }
@@ -418,7 +246,6 @@
     .stat-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 16px; text-align: center; }
     .stat-card i { font-size: 2rem; color: #f8d64e; margin-bottom: 10px; }
     .stat-card h2 { font-size: 1.8rem; margin-bottom: 5px; }
-    .stats-chart { background: rgba(255,255,255,0.03); border-radius: 20px; padding: 15px; margin-top: 20px; }
     
     .form-group { margin-bottom: 16px; }
     .form-group label { display: block; margin-bottom: 6px; color: #f8d64e; font-weight: 500; font-size: 0.85rem; }
@@ -448,13 +275,11 @@
     #trailerModal .modal-card { max-width: 800px; margin: 10vh auto; background: #000; border: none; }
     #trailerModal .modal-body { padding: 0; }
 
-    /* Comments & Downloads */
+    /* New CSS for Comments & Downloads */
     .comments-section { margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
     .comment-item { background: rgba(255,255,255,0.03); padding: 12px; border-radius: 12px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.05); }
     .comment-header { display: flex; justify-content: space-between; font-size: 0.8rem; color: #f8d64e; margin-bottom: 6px; font-weight: bold; }
-    .comment-text { font-size: 0.9rem; color: #ccc; margin-bottom: 6px; }
-    .comment-reply { margin-left: 20px; margin-top: 10px; border-left: 2px solid #f8d64e; padding-left: 12px; }
-    .reply-btn { font-size: 0.7rem; cursor: pointer; color: #f8d64e; }
+    .comment-text { font-size: 0.9rem; color: #ccc; }
     body.light-theme .comment-text { color: #444; }
     .download-section { margin-bottom: 20px; background: rgba(76, 175, 80, 0.1); border: 1px solid rgba(76, 175, 80, 0.3); padding: 15px; border-radius: 16px; }
 
@@ -482,15 +307,10 @@
     <div class="stats-badge" id="totalCountBadge">📊 بارکردن...</div>
   </div>
   <div class="user-area">
-    <div class="icon-btn" id="themeToggleBtn" title="دۆخی ڕووناکی/تاریکی"><i class="fa-solid fa-moon" id="themeIcon"></i></div>
+    <div class="icon-btn" onclick="toggleLightMode()" title="دۆخی ڕووناکی/تاریکی"><i class="fa-solid fa-moon" id="themeIcon"></i></div>
     <div class="icon-btn" id="bellIcon">
       <i class="fa-regular fa-bell"></i>
       <span class="notif-badge" id="notifBadge" style="display:none;">0</span>
-    </div>
-    <div class="lang-switcher">
-      <span class="lang-option active" data-lang="ckb">کوردی</span>
-      <span class="lang-option" data-lang="en">EN</span>
-      <span class="lang-option" data-lang="ar">عربي</span>
     </div>
     <div class="avatar" id="avatarBtn"><i class="fa-solid fa-user"></i></div>
     <div id="userDropdown" class="user-dropdown"></div>
@@ -506,11 +326,11 @@
 </div>
 
 <div class="nav-menu">
-  <div class="nav-item active" data-nav="all" data-i18n="all">🏠 هەموو</div>
-  <div class="nav-item trending-tab" data-nav="trending" data-i18n="trending">🔥 ترێندینگ</div>
-  <div class="nav-item" data-nav="movie" data-i18n="movie">🎬 فیلم</div>
+  <div class="nav-item active" data-nav="all">🏠 هەموو</div>
+  <div class="nav-item trending-tab" data-nav="trending">🔥 ترێندینگ</div>
+  <div class="nav-item" data-nav="movie">🎬 فیلم</div>
   <div class="nav-item" data-nav="drama">🎭 دراما</div>
-  <div class="nav-item" data-nav="series" data-i18n="series">📺 زنجیرە</div>
+  <div class="nav-item" data-nav="series">📺 زنجیرە</div>
   <div class="nav-item" data-nav="top">⭐ Top Film</div>
   <div class="nav-item" data-nav="hollywood">🇺🇸 هۆلیود</div>
   <div class="nav-item" data-nav="bollywood">🇮🇳 بۆڵیود</div>
@@ -518,20 +338,23 @@
 </div>
 
 <div class="filters-row">
+  <!-- چەشنەکان بە شێوەی ئارەزوومەندانە (Openable) -->
   <div class="filter-panel" id="genrePanel">
     <div class="panel-header" data-panel="genre">
-      <div class="panel-title"><i class="fa-solid fa-tags"></i> چەشنەکان</div>
+      <div class="panel-title"><i class="fa-solid fa-filter"></i> چەشنەکان</div>
       <i class="fa-solid fa-chevron-down toggle-icon"></i>
     </div>
     <div class="filter-grid" id="genreGrid"></div>
   </div>
+  
   <div class="filter-panel" id="yearPanel">
     <div class="panel-header" data-panel="year">
-      <div class="panel-title"><i class="fa-regular fa-calendar-alt"></i> ساڵی بڵاوبوونەوە</div>
+      <div class="panel-title"><i class="fa-regular fa-calendar"></i> ساڵ</div>
       <i class="fa-solid fa-chevron-down toggle-icon"></i>
     </div>
     <div class="filter-grid" id="yearGrid"></div>
   </div>
+  
   <div class="filter-panel" id="originPanel">
     <div class="panel-header" data-panel="origin">
       <div class="panel-title"><i class="fa-solid fa-globe"></i> وڵات / زمان</div>
@@ -539,9 +362,9 @@
     </div>
     <div class="filter-grid" id="originGrid"></div>
   </div>
-  <div style="display:flex; justify-content:space-between; align-items:center;">
-    <button class="chip reset-btn" onclick="resetFilters()"><i class="fa-solid fa-eraser"></i> خاوێنکردنەوەی هەموو فلتەرەکان</button>
-    <button class="ai-recommend-btn" id="aiRandomBtn"><i class="fa-regular fa-message-bot"></i> پێشنیاری ژیری دەستکرد</button>
+  
+  <div style="display:flex; justify-content:flex-end;">
+    <button class="chip reset-btn" onclick="resetFilters()"><i class="fa-solid fa-xmark"></i> خاوێنکردنەوەی فلتەر</button>
   </div>
 </div>
 
@@ -572,9 +395,9 @@
 
 <div class="controls-container">
   <div class="main-menu">
-    <button class="menu-item active" data-menu="all" data-i18n="all"><i class="fa-solid fa-compass"></i> هەمووی</button>
-    <button class="menu-item" data-menu="movie" data-i18n="movie"><i class="fa-solid fa-film"></i> فیلمەکان</button>
-    <button class="menu-item" data-menu="series" data-i18n="series"><i class="fa-solid fa-tv"></i> زنجیرەکان</button>
+    <button class="menu-item active" data-menu="all"><i class="fa-solid fa-compass"></i> هەمووی</button>
+    <button class="menu-item" data-menu="movie"><i class="fa-solid fa-film"></i> فیلمەکان</button>
+    <button class="menu-item" data-menu="series"><i class="fa-solid fa-tv"></i> زنجیرەکان</button>
   </div>
   <select class="sort-select" id="sortSelect">
     <option value="default">بنەڕەتی (نوێترین)</option>
@@ -584,6 +407,7 @@
   <input type="text" id="searchInput" class="search-box" placeholder="🔍 گەڕان بە خێرایی... ناوی فیلم یان زنجیرە">
 </div>
 
+<!-- پێشنیاری زیرەک -->
 <div id="aiRecSection" style="display:none; margin: 0 16px 20px;">
   <h2 class="section-title" style="margin:0 0 10px; border-color:#f8d64e;"><i class="fa-solid fa-wand-magic-sparkles" style="color:#f8d64e;"></i> پێشنیاری زیرەک بۆ تۆ</h2>
   <div class="horizontal-grid" id="aiRecGrid"></div>
@@ -603,6 +427,7 @@
 <div id="actionModal" class="modal admin-modal"><div class="modal-card" id="actionModalBody"></div></div>
 <div id="trailerModal" class="modal"><div class="modal-card"><div class="close-modal" onclick="closeTrailerModal()"><i class="fa-solid fa-xmark"></i></div><div class="modal-body" id="trailerBody"></div></div></div>
 
+<!-- Auth Modal (نوێ) -->
 <div id="authModal" class="modal">
   <div class="modal-card" style="max-width: 400px; padding-bottom: 20px;">
     <div class="close-modal" onclick="closeModal('authModal')"><i class="fa-solid fa-xmark"></i></div>
@@ -611,14 +436,12 @@
       <div class="form-group" id="nameGroup" style="display:none;"><label>ناوی تەواو</label><input type="text" id="authName"></div>
       <div class="form-group"><label>ئیمەیڵ</label><input type="email" id="authEmail"></div>
       <div class="form-group"><label>وشەی نهێنی</label><input type="password" id="authPass"></div>
-      <div class="form-group"><label><input type="checkbox" id="rememberMe"> لەبیرم مەکە</label></div>
       <button class="hero-btn" style="width:100%; justify-content:center;" onclick="submitAuth()">پەسەندکردن</button>
-      <div class="dropdown-sep"></div>
-      <button class="hero-btn secondary" style="width:100%;" onclick="sendVerificationCode()">ڤێرێفیکەیشن (دەستنیشانکردن)</button>
     </div>
   </div>
 </div>
 
+<!-- Profile Modal (نوێ) -->
 <div id="profileModal" class="modal">
   <div class="modal-card" style="max-width: 800px;">
     <div class="close-modal" onclick="closeModal('profileModal')"><i class="fa-solid fa-xmark"></i></div>
@@ -632,47 +455,6 @@
   </div>
 </div>
 
-<div id="settingsModal" class="modal">
-  <div class="modal-card" style="max-width: 500px;">
-    <div class="close-modal" onclick="closeModal('settingsModal')"><i class="fa-solid fa-xmark"></i></div>
-    <div class="modal-hero" style="min-height: 100px; padding: 20px;"><h2><i class="fa-solid fa-gear"></i> ڕێکخستنی پێشکەوتوو</h2></div>
-    <div class="modal-body">
-      <div class="setting-row">
-        <div class="setting-info">
-          <h4>شێوازی تاریکتر (Darker Theme)</h4>
-          <p>زۆرتر تاریک کردن (بۆ چاوی پشوو)</p>
-        </div>
-        <label class="toggle-switch">
-          <input type="checkbox" id="darkerThemeToggle">
-          <span class="slider"></span>
-        </label>
-      </div>
-      <div class="setting-row">
-        <div class="setting-info">
-          <h4>ئۆتۆپلەی (Auto Play)</h4>
-          <p>پەخشکردنی خۆکار دوای کردنەوەی فیلم</p>
-        </div>
-        <label class="toggle-switch">
-          <input type="checkbox" id="autoplayToggle">
-          <span class="slider"></span>
-        </label>
-      </div>
-      <div class="setting-row">
-        <div class="setting-info">
-          <h4>ژێرنووسی بنەڕەتی</h4>
-          <p>هەڵبژاردنی زمانی ژێرنووس بە شێوەی بنەڕەت</p>
-        </div>
-        <select id="defaultSubtitle" class="sort-select" style="width:auto;">
-          <option value="ckb">کوردی</option>
-          <option value="en">English</option>
-          <option value="ar">عربي</option>
-        </select>
-      </div>
-      <button class="hero-btn" style="width:100%; margin-top:20px;" onclick="saveSettings()">پاشەکەوتکردن</button>
-    </div>
-  </div>
-</div>
-
 <footer>
   <p>دروستکراوە لەلایەن <span id="ownerName">Twana Yassin</span> &copy; 2026</p>
   <p id="footerNote" style="font-size:0.75rem; margin-top:8px;">پێشکەوتووترین پلاتفۆرم بۆ بینینی فیلم و زنجیرە</p>
@@ -681,172 +463,56 @@
 <div class="toast-container" id="toastContainer"></div>
 
 <script>
-  // ========== IndexedDB Setup - Persistent Storage (unchanged) ==========
-  const DB_NAME = 'PeshawaCinemaDB';
-  const DB_VERSION = 1;
-  let db = null;
-
-  function openDB() {
-    return new Promise((resolve, reject) => {
-      const request = indexedDB.open(DB_NAME, DB_VERSION);
-      request.onerror = () => reject(request.error);
-      request.onsuccess = () => { db = request.result; resolve(db); };
-      request.onupgradeneeded = (event) => {
-        const db = event.target.result;
-        if (!db.objectStoreNames.contains('movies')) {
-          const movieStore = db.createObjectStore('movies', { keyPath: 'id' });
-          movieStore.createIndex('type', 'type');
-          movieStore.createIndex('year', 'year');
-        }
-        if (!db.objectStoreNames.contains('users')) {
-          const userStore = db.createObjectStore('users', { keyPath: 'email' });
-          userStore.createIndex('role', 'role');
-        }
-        if (!db.objectStoreNames.contains('comments')) {
-          db.createObjectStore('comments', { keyPath: 'id', autoIncrement: true });
-        }
-        if (!db.objectStoreNames.contains('watchHistory')) {
-          db.createObjectStore('watchHistory', { keyPath: 'id', autoIncrement: true });
-        }
-        if (!db.objectStoreNames.contains('notifications')) {
-          db.createObjectStore('notifications', { keyPath: 'id', autoIncrement: true });
-        }
-        if (!db.objectStoreNames.contains('userInteractions')) {
-          db.createObjectStore('userInteractions', { keyPath: 'id', autoIncrement: true });
-        }
-      };
-    });
+  // ==================== Helper Functions & Setup ====================
+  function showToast(message, type = 'info') {
+    const container = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check' : (type === 'error' ? 'fa-circle-exclamation' : 'fa-circle-info')}"></i><span>${message}</span>`;
+    container.appendChild(toast);
+    setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100%)'; setTimeout(() => toast.remove(), 300); }, 3000);
   }
 
-  async function getAllMovies() {
-    if (!db) await openDB();
-    return new Promise((resolve) => {
-      const tx = db.transaction('movies', 'readonly');
-      const store = tx.objectStore('movies');
-      const request = store.getAll();
-      request.onsuccess = () => resolve(request.result || []);
-      request.onerror = () => resolve([]);
-    });
+  async function hashPassword(password) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
   }
 
-  async function saveMovie(movie) {
-    if (!db) await openDB();
-    const tx = db.transaction('movies', 'readwrite');
-    const store = tx.objectStore('movies');
-    store.put(movie);
-    return tx.complete;
+  // نوێ: کاتژمێری ١٢ کاتژمێری بە کاتی کوردستان
+  function updateClock() {
+    const now = new Date();
+    const kurdistanTime = new Date(now.getTime() + (3 * 60 * 60 * 1000));
+    let h = kurdistanTime.getUTCHours();
+    let m = kurdistanTime.getUTCMinutes().toString().padStart(2,'0');
+    let ampm = h >= 12 ? 'د.ن' : 'پ.ن';
+    h = h % 12; h = h ? h : 12; // convert 0 to 12
+    document.getElementById('currentTime').innerHTML = `${h}:${m} ${ampm}`;
+    document.getElementById('currentDate').innerHTML = `${kurdistanTime.getUTCDate().toString().padStart(2,'0')}/${(kurdistanTime.getUTCMonth()+1).toString().padStart(2,'0')}/${kurdistanTime.getUTCFullYear()}`;
   }
+  setInterval(updateClock, 1000); updateClock();
 
-  async function deleteMovie(id) {
-    if (!db) await openDB();
-    const tx = db.transaction('movies', 'readwrite');
-    const store = tx.objectStore('movies');
-    store.delete(id);
-    return tx.complete;
-  }
+  // Variables
+  const MASTER_EMAIL = "twana@peshawacinema.com", MASTER_NAME = "Twana Yassin";
+  let MASTER_PASS_HASH = null;
+  let accounts = JSON.parse(localStorage.getItem("accounts")||"[]");
+  let currentUser = JSON.parse(localStorage.getItem("currentUser")||"null");
+  let lang = localStorage.getItem("lang")||"ckb";
+  let themeSettings = JSON.parse(localStorage.getItem("themeSettings")||'{"darker":false, "autoplay":false}');
+  let isLightMode = localStorage.getItem("lightMode") === "true";
+  let customMovies = JSON.parse(localStorage.getItem("customMovies")||"[]");
+  let commentsData = JSON.parse(localStorage.getItem("siteComments")||"{}");
+  
+  let currentFilter="all", currentNav="all", currentGenre="all", currentYear="all", currentOrigin="all";
+  let currentSort = "default", currentPage = 1, itemsPerPage = 12;
+  let heroIndex=0, heroTimer=null, currentHeroId=null;
+  const SAMPLE_VIDEO = "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4";
 
-  async function getAllUsers() {
-    if (!db) await openDB();
-    return new Promise((resolve) => {
-      const tx = db.transaction('users', 'readonly');
-      const store = tx.objectStore('users');
-      const request = store.getAll();
-      request.onsuccess = () => resolve(request.result || []);
-      request.onerror = () => resolve([]);
-    });
-  }
+  function toggleLightMode() { isLightMode = !isLightMode; saveState(); applyTheme(); }
 
-  async function saveUser(user) {
-    if (!db) await openDB();
-    const tx = db.transaction('users', 'readwrite');
-    const store = tx.objectStore('users');
-    store.put(user);
-    return tx.complete;
-  }
-
-  async function deleteUser(email) {
-    if (!db) await openDB();
-    const tx = db.transaction('users', 'readwrite');
-    const store = tx.objectStore('users');
-    store.delete(email);
-    return tx.complete;
-  }
-
-  async function getComments(movieId) {
-    if (!db) await openDB();
-    return new Promise((resolve) => {
-      const tx = db.transaction('comments', 'readonly');
-      const store = tx.objectStore('comments');
-      const request = store.getAll();
-      request.onsuccess = () => {
-        const all = request.result || [];
-        resolve(all.filter(c => c.movieId === movieId));
-      };
-      request.onerror = () => resolve([]);
-    });
-  }
-
-  async function addComment(comment) {
-    if (!db) await openDB();
-    const tx = db.transaction('comments', 'readwrite');
-    const store = tx.objectStore('comments');
-    store.add(comment);
-    return tx.complete;
-  }
-
-  async function saveWatchHistory(entry) {
-    if (!db) await openDB();
-    const tx = db.transaction('watchHistory', 'readwrite');
-    const store = tx.objectStore('watchHistory');
-    store.put(entry);
-    return tx.complete;
-  }
-
-  async function getWatchHistory(userEmail) {
-    if (!db) await openDB();
-    return new Promise((resolve) => {
-      const tx = db.transaction('watchHistory', 'readonly');
-      const store = tx.objectStore('watchHistory');
-      const request = store.getAll();
-      request.onsuccess = () => {
-        const all = request.result || [];
-        resolve(all.filter(w => w.userEmail === userEmail));
-      };
-      request.onerror = () => resolve([]);
-    });
-  }
-
-  async function saveNotification(notif) {
-    if (!db) await openDB();
-    const tx = db.transaction('notifications', 'readwrite');
-    const store = tx.objectStore('notifications');
-    store.add(notif);
-    return tx.complete;
-  }
-
-  async function getUserInteractions(userEmail) {
-    if (!db) await openDB();
-    return new Promise((resolve) => {
-      const tx = db.transaction('userInteractions', 'readonly');
-      const store = tx.objectStore('userInteractions');
-      const request = store.getAll();
-      request.onsuccess = () => {
-        const all = request.result || [];
-        resolve(all.filter(i => i.userEmail === userEmail));
-      };
-      request.onerror = () => resolve([]);
-    });
-  }
-
-  async function saveUserInteraction(interaction) {
-    if (!db) await openDB();
-    const tx = db.transaction('userInteractions', 'readwrite');
-    const store = tx.objectStore('userInteractions');
-    store.add(interaction);
-    return tx.complete;
-  }
-
-  // ========== Seed Data (original content) ==========
+  // پێوەکراوی نوێ: تڕایلەرە ڕاستەقینەکان بۆ فیلمە کۆنەکان
   const realTrailers = {
     "got": "KPLWWIOCOOQ", "bb": "HhesaQXLuRY", "fast": "2TAOizHWNMU", "mi": "Ohws8y572KE", "jw": "C0VNXUPBsCQ",
     "dune": "n9xhKvBWNx4", "interstellar": "zSWdZVtXT7E", "joker": "zAGVQLHvwOY", "darkknight": "EXeTwQWrcwY",
@@ -859,7 +525,8 @@
     "theboys": "M1bhOaLV4FU", "avatar2": "d9MyW72ELq0", "vikings": "9GgxinPwAGc", "spiderverse2": "shW9i6k8cB0", "thebatman": "mqqft2x_Aa4"
   };
 
-  let seedContent = [
+  // Full Seed Content
+  let seedContent =[
     { id:"got", title:"Game of Thrones", type:"series", category:"series", rating:"9.2", genre:"فەنتازیا / دراما / ئەکشن", year:2011, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg", bg:"https://image.tmdb.org/t/p/original/suopoADq0k8YZr4dQXcU6pToj6s.jpg", desc:"خێزانی ستارک، لانستەر و تارگاریەن لە شەڕی تەختی ئاسنی وێستڕۆسدا.", seasons:[{name:"وەرزی ١",eps:10,sNum:1,imdb:"tt0944947"},{name:"وەرزی ٢",eps:10,sNum:2,imdb:"tt0944947"},{name:"وەرزی ٣",eps:10,sNum:3,imdb:"tt0944947"},{name:"وەرزی ٤",eps:10,sNum:4,imdb:"tt0944947"},{name:"وەرزی٥",eps:10,sNum:5,imdb:"tt0944947"},{name:"وەرزی ٦",eps:10,sNum:6,imdb:"tt0944947"},{name:"وەرزی ٧",eps:7,sNum:7,imdb:"tt0944947"},{name:"وەرزی ٨",eps:6,sNum:8,imdb:"tt0944947"}] },
     { id:"bb", title:"Breaking Bad", type:"series", category:"series", rating:"9.5", genre:"تاوانکاری / دراما / هەستبزوێن", year:2008, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg", bg:"https://image.tmdb.org/t/p/original/900tHlUYUkp7Ol04XFSoG6BE8TI.jpg", desc:"والتر وایت، مامۆستای کیمیا، دوای نەخۆشی شێرپەنجە دەست بە دروستکردنی مادەی هۆشبەر دەکات.", seasons:[{name:"وەرزی ١",eps:7,sNum:1,imdb:"tt0903747"},{name:"وەرزی ٢",eps:13,sNum:2,imdb:"tt0903747"},{name:"وەرزی ٣",eps:13,sNum:3,imdb:"tt0903747"},{name:"وەرزی ٤",eps:13,sNum:4,imdb:"tt0903747"},{name:"وەرزی ٥",eps:16,sNum:5,imdb:"tt0903747"}] },
     { id:"fast", title:"Fast & Furious", type:"movie", category:"movie", rating:"7.1", genre:"ئەکشن / خێرایی / سەرکێشی", year:2001, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/fiVW06jE7z9YnO4trhaMEdclSiC.jpg", bg:"https://image.tmdb.org/t/p/original/2cGjEGOE27fK17tEki26rLpWv1X.jpg", desc:"دۆم و برایان لە پێشبڕکێی خێراترین ئۆتۆمبێل و تاوانی نێودەوڵەتیدا.", episodes:[{name:"Fast 1",imdb:"tt0232500"}] },
@@ -896,331 +563,198 @@
     { id:"spiderverse2", title:"Spider-Man: Across the Spider-Verse", type:"movie", category:"hollywood", rating:"8.7", genre:"ئەنیمەیشن / ئەکشن", year:2023, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg", bg:"https://image.tmdb.org/t/p/original/4HodYYKEIsGOdinkGi2Ucz6X9i0.jpg", desc:"مایلز مۆرالێس گەشت دەکات بەناو جیهانە هاوتەریبەکاندا.", episodes:[{name:"فیلم",imdb:"tt9362722"}] },
     { id:"thebatman", title:"The Batman", type:"movie", category:"hollywood", rating:"7.8", genre:"ئەکشن / تاوانکاری", year:2022, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg", bg:"https://image.tmdb.org/t/p/original/b0PlSFdSmBgZAqfwSQIVyvTWcLA.jpg", desc:"باتمان لە دووەم ساڵی کارکردنیدا ڕووبەڕووی بکوژێکی زنجیرەیی دەبێتەوە.", episodes:[{name:"فیلم",imdb:"tt1877830"}] }
   ];
-
-  // Add views, duration, likes etc.
+  
   seedContent = seedContent.map(item => {
     let hash = 0; for (let i=0; i<item.title.length; i++) hash = ((hash<<5)-hash)+item.title.charCodeAt(i); hash = Math.abs(hash);
     let v = 5000 + (hash % 50000); if (item.rating>8.5) v*=3;
     let dur = item.type === 'movie' ? (90 + (hash%60)) + " خولەک" : (40 + (hash%20)) + " خولەک / ئەڵقە";
     let likes = 100 + (hash%2000); let dislikes = hash%50;
     let tUrl = realTrailers[item.id] ? `https://www.youtube.com/embed/${realTrailers[item.id]}` : "https://www.youtube.com/embed/dQw4w9WgXcQ";
-    return { ...item, views: v, duration: dur, likes: likes, dislikes: dislikes, trailer: tUrl, videoUrl: null, downloadLinks: [] };
+    return { ...item, views: v, duration: dur, likes: likes, dislikes: dislikes, trailer: tUrl };
   });
 
-  // Initialize IndexedDB with seed data if empty
-  async function initDB() {
-    await openDB();
-    const movies = await getAllMovies();
-    if (movies.length === 0) {
-      for (let movie of seedContent) {
-        await saveMovie(movie);
-      }
-    }
-    const users = await getAllUsers();
-    if (users.length === 0) {
-      const masterPassHash = await hashPassword("1342003");
-      const masterUser = { email: "twana@peshawacinema.com", username: "Twana Yassin", name: "Twana Yassin", passHash: masterPassHash, role: "admin", favorites: [], watchLater: [], likedMovies: [], dislikedMovies: [], continueWatching: [] };
-      await saveUser(masterUser);
-    }
-  }
-
-  // ========== Helper Functions (existing) ==========
-  function showToast(message, type = 'info') {
-    const container = document.getElementById('toastContainer');
-    const toast = document.createElement('div');
-    toast.className = `toast ${type}`;
-    toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check' : (type === 'error' ? 'fa-circle-exclamation' : 'fa-circle-info')}"></i><span>${message}</span>`;
-    container.appendChild(toast);
-    setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100%)'; setTimeout(() => toast.remove(), 300); }, 3000);
-  }
-
-  async function hashPassword(password) {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(password);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-  }
-
-  function updateClock() {
-    const now = new Date();
-    const kurdistanTime = new Date(now.getTime() + (3 * 60 * 60 * 1000));
-    let h = kurdistanTime.getUTCHours();
-    let m = kurdistanTime.getUTCMinutes().toString().padStart(2,'0');
-    let ampm = h >= 12 ? 'د.ن' : 'پ.ن';
-    h = h % 12; h = h ? h : 12;
-    document.getElementById('currentTime').innerHTML = `${h}:${m} ${ampm}`;
-    document.getElementById('currentDate').innerHTML = `${kurdistanTime.getUTCDate().toString().padStart(2,'0')}/${(kurdistanTime.getUTCMonth()+1).toString().padStart(2,'0')}/${kurdistanTime.getUTCFullYear()}`;
-  }
-  setInterval(updateClock, 1000); updateClock();
-
-  // Variables
-  let currentUser = null;
-  let lang = localStorage.getItem("lang") || "ckb";
-  let themeSettings = JSON.parse(localStorage.getItem("themeSettings") || '{"darker":false, "autoplay":false}');
-  let isLightMode = localStorage.getItem("lightMode") === "true";
-  let currentFilter="all", currentNav="all", currentGenre="all", currentYear="all", currentOrigin="all";
-  let currentSort = "default", currentPage = 1, itemsPerPage = 12;
-  let heroIndex=0, heroTimer=null, currentHeroId=null;
-  let currentServer = "vidsrc";
-
-  // Language strings
-  const i18n = {
-    ckb: {
-      siteTitle: "سینەمای پێشەوا",
-      all: "هەموو",
-      trending: "ترێندینگ",
-      movie: "فیلم",
-      series: "زنجیرە",
-    },
-    en: {
-      siteTitle: "Peshawa Cinema",
-      all: "All",
-      trending: "Trending",
-      movie: "Movie",
-      series: "Series",
-    },
-    ar: {
-      siteTitle: "سينما بيشوا",
-      all: "الكل",
-      trending: "رائج",
-      movie: "فيلم",
-      series: "مسلسل",
-    }
-  };
-
-  function applyLanguage() {
-    const texts = i18n[lang];
-    if (texts) {
-      document.querySelectorAll("[data-i18n]").forEach(el => {
-        const key = el.getAttribute("data-i18n");
-        if (texts[key]) {
-          const iconSpan = el.querySelector('i');
-          if (iconSpan) {
-            el.innerHTML = iconSpan.outerHTML + ' ' + texts[key];
-          } else {
-            el.innerText = texts[key];
-          }
-        }
-      });
-    }
-  }
-
-  document.querySelectorAll(".lang-option").forEach(opt => {
-    opt.addEventListener("click", () => {
-      lang = opt.getAttribute("data-lang");
-      localStorage.setItem("lang", lang);
-      document.querySelectorAll(".lang-option").forEach(o => o.classList.remove("active"));
-      opt.classList.add("active");
-      applyLanguage();
-      renderGrid();
-    });
-  });
-
-  function toggleLightMode() { 
-    isLightMode = !isLightMode; 
-    localStorage.setItem("lightMode", isLightMode);
-    applyTheme(); 
-  }
-  
-  function applyTheme() {
-    const icon = document.getElementById("themeIcon");
-    if(isLightMode) { 
-      document.body.classList.add("light-theme"); 
-      document.body.classList.remove("darker-theme"); 
-      if(icon) icon.className="fa-solid fa-sun"; 
-    } else { 
-      document.body.classList.remove("light-theme"); 
-      if(themeSettings.darker) document.body.classList.add("darker-theme"); 
-      if(icon) icon.className="fa-solid fa-moon"; 
-    }
-  }
-
-  function applyDarkerTheme(value) {
-    themeSettings.darker = value;
+  function getAll() { return [...seedContent, ...customMovies]; }
+  function findItem(id) { return getAll().find(x => x.id === id); }
+  function saveState() {
+    localStorage.setItem("lang", lang);
+    localStorage.setItem("customMovies", JSON.stringify(customMovies));
+    localStorage.setItem("accounts", JSON.stringify(accounts));
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
     localStorage.setItem("themeSettings", JSON.stringify(themeSettings));
+    localStorage.setItem("lightMode", isLightMode);
+    localStorage.setItem("siteComments", JSON.stringify(commentsData));
     applyTheme();
   }
 
-  function saveSettings() {
-    const darker = document.getElementById("darkerThemeToggle").checked;
-    const autoplay = document.getElementById("autoplayToggle").checked;
-    const defaultSub = document.getElementById("defaultSubtitle").value;
-    themeSettings = { darker, autoplay };
-    localStorage.setItem("themeSettings", JSON.stringify(themeSettings));
-    localStorage.setItem("defaultSubtitle", defaultSub);
-    applyDarkerTheme(darker);
-    showToast("ڕێکخستنەکان پاشەکەوتکران", "success");
-    closeModal("settingsModal");
+  function applyTheme() {
+    const icon = document.getElementById("themeIcon");
+    if(isLightMode) { document.body.classList.add("light-theme"); document.body.classList.remove("darker-theme"); if(icon) icon.className="fa-solid fa-sun"; }
+    else { document.body.classList.remove("light-theme"); if(themeSettings.darker) document.body.classList.add("darker-theme"); if(icon) icon.className="fa-solid fa-moon"; }
   }
 
-  function loadSettingsToModal() {
-    document.getElementById("darkerThemeToggle").checked = themeSettings.darker || false;
-    document.getElementById("autoplayToggle").checked = themeSettings.autoplay || false;
-    document.getElementById("defaultSubtitle").value = localStorage.getItem("defaultSubtitle") || "ckb";
-  }
+  // Notification System
+  let notifications =[{ icon: "fa-film", text: "١٠٠+ فیلم و زنجیرە زیادکرا!", time: new Date(Date.now() - 3600000) }];
+  function formatNotifTime(d) { let df = new Date()-d; if(df<60000) return "ئێستا"; if(df<3600000) return `${Math.floor(df/60000)} خولەک پێش`; return `${Math.floor(df/3600000)} کاتژمێر پێش`; }
+  function updateNotifBadge() { const b = document.getElementById("notifBadge"); let uc = notifications.filter(n=>!n.read).length; b.textContent = uc; b.style.display = uc>0?"flex":"none"; }
+  function addLiveNotification(icon, text) { notifications.unshift({icon, text, time: new Date(), read: false}); if(notifications.length>10) notifications.pop(); updateNotifBadge(); document.getElementById("bellIcon").classList.add("bell-live"); setTimeout(()=>document.getElementById("bellIcon").classList.remove("bell-live"),800); showToast(text, "info"); }
+  function showNotifModal() { const list = document.getElementById("notificationList"); list.innerHTML=""; notifications.forEach(n => { list.innerHTML += `<div class="notification-item"><div class="notification-icon"><i class="fa-solid ${n.icon}"></i></div><div class="notification-content"><p>${n.text}</p><div class="notification-time"><i class="fa-regular fa-clock"></i> ${formatNotifTime(n.time)}</div></div></div>`; }); document.getElementById("notificationModal").classList.add("show"); notifications.forEach(n=>n.read=true); updateNotifBadge(); }
+  document.getElementById("bellIcon").onclick = (e) => { e.stopPropagation(); showNotifModal(); };
+  document.getElementById("closeNotification").onclick = () => document.getElementById("notificationModal").classList.remove("show");
 
-  function showSettingsPanel() {
-    loadSettingsToModal();
-    document.getElementById("settingsModal").style.display = "block";
+  // Accounts & Interactions
+  async function migrateAccounts() {
+    if (!MASTER_PASS_HASH) MASTER_PASS_HASH = await hashPassword("1342003");
+    let updated = false;
+    accounts = accounts.map(acc => {
+      if (!acc.email) { acc.email = acc.name === MASTER_NAME ? MASTER_EMAIL : acc.name + "@local.com"; updated = true; }
+      if (!acc.watchLater) acc.watchLater = []; if (!acc.favorites) acc.favorites =[];
+      if (!acc.likedMovies) acc.likedMovies = []; if (!acc.dislikedMovies) acc.dislikedMovies =[];
+      if (!acc.continueWatching) acc.continueWatching =[];
+      return acc;
+    });
+    if (!accounts.some(acc => acc.email === MASTER_EMAIL)) { accounts.unshift({ email: MASTER_EMAIL, username: MASTER_NAME, name: MASTER_NAME, passHash: MASTER_PASS_HASH, role: "admin", watchLater: [], favorites: [], likedMovies:[], dislikedMovies:[], continueWatching:[] }); updated = true; }
+    if (updated) localStorage.setItem("accounts", JSON.stringify(accounts));
   }
-
-  // User & Auth
-  async function saveCurrentUser(user) {
-    currentUser = user;
-    if (user) {
-      localStorage.setItem("currentUser", JSON.stringify({ email: user.email, token: "session" }));
-      await saveUser(user);
-    } else {
-      localStorage.removeItem("currentUser");
-    }
-    updateAccountUI();
-  }
-
-  let authMode = 'login';
-  function showAuthModal(mode) { 
-    authMode = mode; 
-    document.getElementById('authTitle').innerText = mode === 'login' ? 'چوونەژوورەوە' : 'خۆتۆمارکردن'; 
-    document.getElementById('nameGroup').style.display = mode === 'login' ? 'none' : 'block'; 
-    document.getElementById('authModal').style.display = 'block'; 
-    document.getElementById("userDropdown").classList.remove("show");
-  }
-
-  async function submitAuth() {
-    const email = document.getElementById('authEmail').value.trim();
-    const pass = document.getElementById('authPass').value.trim();
-    const name = document.getElementById('authName').value.trim();
-    const remember = document.getElementById('rememberMe').checked;
-    if(!email || !pass) return showToast("تکایە خانەکان پڕبکەرەوە","error");
-    const hashed = await hashPassword(pass);
-    const users = await getAllUsers();
-    if (authMode === 'register') {
-      if(users.find(u => u.email === email)) return showToast("ئەم ئیمەیڵە بوونی هەیە","error");
-      const newUser = { email, passHash: hashed, username: name||"بەکارهێنەر", name: name||"بەکارهێنەر", role: email==="twana@peshawacinema.com" ? "admin":"user", favorites: [], watchLater: [], likedMovies: [], dislikedMovies: [], continueWatching: [] };
-      await saveUser(newUser);
-      await saveCurrentUser(newUser);
-      showToast("سەرکەوتوو بوو! بەخێربێیت","success");
-    } else {
-      const user = users.find(u => u.email === email && u.passHash === hashed);
-      if(user) { await saveCurrentUser(user); showToast("چوویتە ژوورەوە","success"); }
-      else return showToast("زانیارییەکان هەڵەن","error");
-    }
-    closeModal('authModal');
+  function getCurrentUserData() { return currentUser ? accounts.find(acc => acc.email === currentUser.email) : null; }
+  function saveUserData(u) { let idx = accounts.findIndex(acc => acc.email === u.email); if (idx !== -1) accounts[idx] = u; saveState(); }
+  
+  function toggleArray(id, type) {
+    let u = getCurrentUserData(); if (!u) { showToast("تکایە سەرەتا بچۆژوورەوە", "error"); return; }
+    let arr = type==='fav' ? u.favorites : u.watchLater;
+    let exists = arr.includes(id);
+    if (exists) { arr.splice(arr.indexOf(id), 1); showToast("لابردرا", "info"); }
+    else { arr.push(id); showToast("زیادکرا", "success"); }
+    saveUserData(u); renderGrid();
+    if(document.getElementById("detailModal").style.display === "block") updateDetailButtons(id);
     renderSmartSuggestions();
-    renderGrid();
+  }
+  function updateDetailButtons(id) {
+    let u = getCurrentUserData();
+    if(u) {
+      document.getElementById("toggleFavoriteBtn").innerHTML = u.favorites.includes(id) ? `<i class="fa-solid fa-heart" style="color:#ff4757"></i> لابردن` : `<i class="fa-regular fa-heart"></i> دڵخوازەکان`;
+      document.getElementById("toggleWatchLaterBtn").innerHTML = u.watchLater.includes(id) ? `<i class="fa-solid fa-check"></i> لە لیستدایە` : `<i class="fa-regular fa-clock"></i> دواتر ببینە`;
+      document.getElementById("likeBtn").className = `vote-btn ${u.likedMovies.includes(id)?'liked':''}`;
+      document.getElementById("dislikeBtn").className = `vote-btn ${u.dislikedMovies.includes(id)?'disliked':''}`;
+    }
   }
 
-  function logout() {
-    saveCurrentUser(null);
-    showToast("دەرچوویت", "info");
-    renderGrid();
+  function likeItem(id) {
+    let u = getCurrentUserData(); if (!u) { showToast("پێویستە بچیتە ژوورەوە", "error"); return; }
+    if(u.dislikedMovies.includes(id)) u.dislikedMovies.splice(u.dislikedMovies.indexOf(id),1);
+    if(u.likedMovies.includes(id)) u.likedMovies.splice(u.likedMovies.indexOf(id),1); else u.likedMovies.push(id);
+    saveUserData(u); updateDetailButtons(id); showToast("ڕای تۆ وەرگیرا", "success");
+    renderSmartSuggestions();
+  }
+  function dislikeItem(id) {
+    let u = getCurrentUserData(); if (!u) { showToast("پێویستە بچیتە ژوورەوە", "error"); return; }
+    if(u.likedMovies.includes(id)) u.likedMovies.splice(u.likedMovies.indexOf(id),1);
+    if(u.dislikedMovies.includes(id)) u.dislikedMovies.splice(u.dislikedMovies.indexOf(id),1); else u.dislikedMovies.push(id);
+    saveUserData(u); updateDetailButtons(id); showToast("ڕای تۆ وەرگیرا", "success");
   }
 
-  function updateAccountUI() {
-    const isLogged = !!currentUser;
-    document.getElementById("userDropdown").innerHTML = `
-      <div style="display:flex; gap:16px; align-items:center; margin-bottom:16px; padding:16px; background:rgba(255,255,255,0.03); border-radius:18px;">
-        <div style="width:48px; height:48px; background:linear-gradient(135deg, #f8d64e, #d8b22a); border-radius:14px; display:flex; align-items:center; justify-content:center; color:#000;"><i class="fa-solid fa-user"></i></div>
-        <div><h4 style="margin:0;">${isLogged ? currentUser.username : "میوان"}</h4><span style="font-size:0.8rem; color:#aaa;">${isLogged ? (currentUser.role === "admin" ? "بەڕێوبەر" : "بەکارهێنەر") : "سەردانکەر"}</span></div>
+  function updateContinueWatching(id, sn, ep) {
+    let u = getCurrentUserData(); if(!u) return;
+    let item = findItem(id); if(!item) return;
+    let cw = u.continueWatching ||[];
+    let existing = cw.findIndex(x => x.id === id);
+    if(existing !== -1) cw.splice(existing, 1);
+    cw.unshift({ id, title: item.title, img: item.img, sn, ep, ts: Date.now() });
+    if(cw.length>10) cw.pop();
+    u.continueWatching = cw; saveUserData(u); renderContinueWatching();
+  }
+  
+  function renderContinueWatching() {
+    let u = getCurrentUserData();
+    let sec = document.getElementById("continueWatchingSection");
+    let grid = document.getElementById("continueWatchingGrid");
+    if(!u || !u.continueWatching || u.continueWatching.length===0) { sec.style.display="none"; return; }
+    sec.style.display = "block";
+    grid.innerHTML = u.continueWatching.map(c => `
+      <div class="mini-card" onclick="openDetail('${c.id}')">
+        <div style="position:relative;">
+          <img src="${c.img}" class="mini-img">
+          <div class="continue-btn"><i class="fa-solid fa-play"></i></div>
+        </div>
+        <div class="mini-info">${c.title}<br><span style="color:#f8d64e; font-weight:normal;">${c.sn?`S${c.sn} E${c.ep}`:'تەواوکردن'}</span></div>
       </div>
-      ${isLogged ? `<div class="dropdown-item" onclick="showProfileModal()"><i class="fa-solid fa-circle-user"></i> پرۆفایلی من</div>` : ''}
-      ${isLogged && currentUser.role === "admin" ? `<div class="dropdown-item" onclick="showAdminPanel()"><i class="fa-solid fa-shield-halved"></i> پانێڵی بەڕێوبەر</div>` : ''}
-      <hr class="dropdown-sep">
-      <div class="dropdown-item" onclick="showSettingsPanel()"><i class="fa-solid fa-gear"></i> ڕێکخستنی پێشکەوتوو</div>
-      <hr class="dropdown-sep">
-      ${!isLogged ? `<div class="dropdown-item" onclick="showAuthModal('login')"><i class="fa-solid fa-right-to-bracket"></i> چوونەژوورەوە</div>` : ''}
-      ${!isLogged ? `<div class="dropdown-item" onclick="showAuthModal('register')"><i class="fa-solid fa-user-plus"></i> خۆتۆمارکردن</div>` : ''}
-      ${isLogged ? `<div class="dropdown-item" style="color:#ff6b6b;" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> دەرچوون</div>` : ''}`;
-    document.getElementById("avatarBtn").innerHTML = isLogged && currentUser.role==="admin" ? '<i class="fa-solid fa-crown"></i>' : '<i class="fa-solid fa-user"></i>';
-    renderContinueWatching();
+    `).join("");
   }
 
-  // Core functions
-  async function getAllMoviesFromDB() {
-    return await getAllMovies();
+  function renderSmartSuggestions() {
+    let u = getCurrentUserData();
+    let sec = document.getElementById("aiRecSection");
+    let grid = document.getElementById("aiRecGrid");
+    if (!u || u.favorites.length === 0) {
+      let topRated = getAll().sort((a,b) => b.rating - a.rating).slice(0, 10);
+      sec.style.display = "block";
+      grid.innerHTML = topRated.map(m => `<div class="mini-card" onclick="openDetail('${m.id}')"><img src="${m.img}" class="mini-img"><div class="mini-info">${m.title}</div></div>`).join("");
+      return;
+    }
+    let favGenres = [];
+    u.favorites.forEach(id => { let m = findItem(id); if(m) favGenres.push(...m.genre.split(' / ')); });
+    favGenres = [...new Set(favGenres)];
+    let recs = getAll().filter(m => !u.favorites.includes(m.id) && favGenres.some(g => m.genre.includes(g))).slice(0, 15);
+    if(recs.length === 0) {
+        let topRated = getAll().sort((a,b) => b.rating - a.rating).slice(0, 10);
+        grid.innerHTML = topRated.map(m => `<div class="mini-card" onclick="openDetail('${m.id}')"><img src="${m.img}" class="mini-img"><div class="mini-info">${m.title}</div></div>`).join("");
+    } else {
+        grid.innerHTML = recs.map(m => `<div class="mini-card" onclick="openDetail('${m.id}')"><img src="${m.img}" class="mini-img"><div class="mini-info">${m.title}</div></div>`).join("");
+    }
+    sec.style.display = "block";
   }
 
   function formatViews(n) { if(n>=1e6) return (n/1e6).toFixed(1)+'M'; if(n>=1e3) return (n/1e3).toFixed(1)+'K'; return n; }
-
-  async function renderGrid() {
-    let movies = await getAllMoviesFromDB();
-    const term = document.getElementById("searchInput").value.trim().toLowerCase();
-    let filtered = movies.filter(item => {
-      let matchNav = true;
-      if (currentNav === "movie") matchNav = item.type === "movie";
-      else if (currentNav === "series") matchNav = item.type === "series";
-      else if (currentNav === "drama") matchNav = item.genre.includes("دراما");
-      else if (currentNav === "top") matchNav = parseFloat(item.rating) >= 8.5;
-      else if (currentNav === "hollywood") matchNav = item.category === "hollywood";
-      else if (currentNav === "bollywood") matchNav = item.category === "bollywood";
-      else if (currentNav === "trending") matchNav = true;
-      if (currentNav === "all") matchNav = true;
-      let matchType = (currentFilter === "all" || item.type === currentFilter);
-      let matchGenre = (currentGenre === "all") ? true : item.genre.includes(currentGenre);
-      let matchYear = (currentYear === "all") ? true : item.year == currentYear;
-      let matchOrigin = (currentOrigin === "all") ? true : item.origin === currentOrigin;
-      let matchText = [item.title, item.genre].join(" ").toLowerCase().includes(term);
-      return matchNav && matchType && matchGenre && matchYear && matchOrigin && matchText;
-    });
-    if(currentNav === "trending") { filtered.sort((a,b)=>b.views - a.views); filtered = filtered.slice(0, 15); }
-    else {
-      if(currentSort === "views") filtered.sort((a,b)=>b.views - a.views);
-      else if(currentSort === "rating") filtered.sort((a,b)=>b.rating - a.rating);
+  
+  function getEmbedUrl(imdb, type, sn, ep, srv='vidsrc') {
+    if(!imdb) return SAMPLE_VIDEO;
+    if(type==='movie') {
+      if(srv==='vidsrc') return `https://vidsrc.me/embed/movie?imdb=${imdb}`;
+      if(srv==='vidmoly') return `https://vidmoly.to/embed/movie?imdb=${imdb}`;
+      if(srv==='streamsb') return `https://streamsb.net/embed/movie/${imdb}`;
+      return `https://vidsrc.me/embed/movie?imdb=${imdb}`;
+    } else {
+      if(srv==='vidsrc') return `https://vidsrc.me/embed/tv?imdb=${imdb}&season=${sn}&episode=${ep}`;
+      if(srv==='vidmoly') return `https://vidmoly.to/embed/tv?imdb=${imdb}&season=${sn}&episode=${ep}`;
+      if(srv==='streamsb') return `https://streamsb.net/embed/tv/${imdb}/${sn}/${ep}`;
+      return `https://vidsrc.me/embed/tv?imdb=${imdb}&season=${sn}&episode=${ep}`;
     }
-    const totalPages = Math.ceil(filtered.length / itemsPerPage);
-    if(currentPage > totalPages) currentPage = 1;
-    const paged = filtered.slice((currentPage-1)*itemsPerPage, currentPage*itemsPerPage);
-    const grid = document.getElementById("moviesGrid");
-    if(paged.length===0) grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:40px;color:#aaa;">هیچ ئەنجامێک نەدۆزرایەوە</div>`;
-    else {
-      grid.innerHTML = paged.map((i, idx) => `
-        <div class="movie-card" onclick="openDetail('${i.id}')">
-          ${(currentNav==="trending" && idx<5) ? `<div class="trending-tag">🔥 Top ${idx+1}</div>` : ''}
-          <img class="card-img" src="${i.img}" loading="lazy">
-          <div class="card-overlay">
-            <h3 class="card-title">${i.title}</h3>
-            <div class="card-meta"><span>⭐ ${i.rating}</span><span class="duration"><i class="fa-regular fa-clock"></i> ${i.duration.split(' ')[0]}</span><span>${i.year}</span></div>
-            <div class="card-views"><i class="fa-regular fa-eye"></i> ${formatViews(i.views)}</div>
-          </div>
-        </div>`).join("");
-    }
-    document.getElementById("totalCountBadge").innerHTML = `📽️ ${filtered.length}`;
-    renderPagination(totalPages);
   }
 
-  function renderPagination(total) {
-    const p = document.getElementById("paginationControls");
-    if(total <= 1) { p.innerHTML=""; return; }
-    let html = `<button class="page-btn" ${currentPage===1?'disabled':''} onclick="changePage(${currentPage-1})"><i class="fa-solid fa-chevron-right"></i></button>`;
-    for(let i=1; i<=total; i++) {
-      if(i===1 || i===total || (i>=currentPage-1 && i<=currentPage+1)) {
-        html += `<button class="page-btn ${currentPage===i?'active':''}" onclick="changePage(${i})">${i}</button>`;
-      } else if (i===currentPage-2 || i===currentPage+2) {
-        html += `<span style="color:#888; align-self:center;">...</span>`;
-      }
-    }
-    html += `<button class="page-btn" ${currentPage===total?'disabled':''} onclick="changePage(${currentPage+1})"><i class="fa-solid fa-chevron-left"></i></button>`;
-    p.innerHTML = html;
+  function playContent(id, sn, ep, srv="vidsrc") {
+    let item = findItem(id); if(!item) return;
+    let url = SAMPLE_VIDEO;
+    if(item.seasons && sn && ep) { let s=item.seasons.find(x=>x.sNum==sn); if(s&&s.imdb) url=getEmbedUrl(s.imdb,'tv',sn,ep,srv); }
+    else if(item.episodes && item.episodes[0] && item.episodes[0].imdb) url=getEmbedUrl(item.episodes[0].imdb,'movie',null,null,srv);
+    let title = `${item.title} ${sn ? "- وەرز "+sn+" ئەڵقە "+ep : ""}`;
+    let html = `<div class="player-wrapper">
+      <div class="player-header"><h3>${title}</h3><button class="chip" onclick="openDetail('${id}')"><i class="fa-solid fa-arrow-right"></i> گەڕانەوە</button></div>
+      <div class="player-box"><iframe src="${url}" allowfullscreen></iframe></div>
+      <div class="player-controls-extra" style="background: rgba(0,0,0,0.5); padding: 10px; display: flex; gap: 10px; justify-content: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; flex-wrap: wrap;">
+        <span style="color:#fff; font-size:0.85rem;"><i class="fa-solid fa-closed-captioning"></i> ژێرنووس/دۆبلاژ:</span>
+        <select class="sort-select" style="padding:6px 10px;"><option>ژێرنووسی کوردی</option><option>English Sub</option><option>عەرەبی</option></select>
+        <select class="sort-select" style="padding:6px 10px;"><option>دەنگی ئینگلیزی (Original)</option><option>دۆبلاژی کوردی</option></select>
+      </div>
+    </div>`;
+    document.querySelector("#detailModal .modal-body").innerHTML = html;
+    updateContinueWatching(id, sn, ep);
   }
-  window.changePage = function(num) { currentPage=num; renderGrid(); window.scrollTo({top: document.querySelector(".controls-container")?.offsetTop||500, behavior:'smooth'}); }
 
-  async function openDetail(id) {
-    const movies = await getAllMoviesFromDB();
-    const item = movies.find(x => x.id === id);
-    if (!item) return;
-    item.views++;
-    await saveMovie(item);
-    const isAdmin = currentUser && currentUser.role === "admin";
-    const similar = movies.filter(x=>x.id!==id && x.genre.split('/')[0]===item.genre.split('/')[0]).slice(0,6);
-    const comments = await getComments(id);
-    let cmtsHtml = comments.map(c => `
-      <div class="comment-item">
-        <div class="comment-header"><span><i class="fa-solid fa-user"></i> ${c.userName}</span><span>${c.date}</span></div>
-        <div class="comment-text">${c.text}</div>
-        ${c.replies ? c.replies.map(r => `<div class="comment-reply"><div class="comment-header"><span><i class="fa-solid fa-reply"></i> ${r.userName}</span><span>${r.date}</span></div><div class="comment-text">${r.text}</div></div>`).join('') : ''}
-        <div class="reply-btn" onclick="showReplyInput('${id}', ${c.id})">وەڵامدانەوە</div>
-      </div>`).join('');
-    const html = `
+  function playTrailer(id) {
+    let item = findItem(id); if(!item) return;
+    document.getElementById("trailerBody").innerHTML = `<div class="player-box"><iframe src="${item.trailer}?autoplay=1" allowfullscreen></iframe></div>`;
+    document.getElementById("trailerModal").style.display = "block";
+  }
+  window.closeTrailerModal = () => { document.getElementById("trailerModal").style.display = "none"; document.getElementById("trailerBody").innerHTML=""; };
+
+  function openDetail(id) {
+    let item = findItem(id); if (!item) return;
+    let isAdmin = currentUser && currentUser.email === MASTER_EMAIL;
+    item.views++; 
+    let similar = getAll().filter(x=>x.id!==id && x.genre.split('/')[0]===item.genre.split('/')[0]).slice(0,6);
+    let cmts = commentsData[id] ||[];
+    let cmtsHtml = cmts.map(c => `<div class="comment-item"><div class="comment-header"><span><i class="fa-solid fa-user"></i> ${c.name}</span><span>${c.date}</span></div><div class="comment-text">${c.text}</div></div>`).join('');
+
+    let html = `
       <div class="close-modal" id="closeModalBtn"><i class="fa-solid fa-xmark"></i></div>
       <div class="modal-hero" style="background-image:url('${item.bg||item.img}')">
         <div class="modal-hero-content">
@@ -1243,23 +777,25 @@
         
         <div class="download-section">
           <h4 style="color:#4caf50; margin-bottom:10px;"><i class="fa-solid fa-download"></i> داگرتن بە کوالێتییەکان</h4>
-          ${item.downloadLinks && item.downloadLinks.length ? item.downloadLinks.map(link => `<button class="chip" onclick="downloadFile('${link.url}')">${link.quality}</button>`).join('') : '<p>هیچ لینکی داگرتنێک نییە</p>'}
+          <button class="chip" style="background:#4caf50; color:#fff;" onclick="showToast('داگرتنی 1080p دەستی پێکرد','success')">1080p FHD</button>
+          <button class="chip" style="background:#2196F3; color:#fff;" onclick="showToast('داگرتنی 720p دەستی پێکرد','success')">720p HD</button>
+          <button class="chip" style="background:#795548; color:#fff;" onclick="showToast('داگرتنی 480p دەستی پێکرد','success')">480p SD</button>
         </div>
 
         <div class="server-selector">
           <div class="server-title"><i class="fa-solid fa-server"></i> سێرڤەرەکان</div>
           <div class="server-buttons">
-            <button class="server-btn ${currentServer==='vidsrc' ? 'active':''}" onclick="changeServer('vidsrc')">VIDSRC</button>
-            <button class="server-btn ${currentServer==='vidmoly' ? 'active':''}" onclick="changeServer('vidmoly')">Vidmoly</button>
-            <button class="server-btn ${currentServer==='streamsb' ? 'active':''}" onclick="changeServer('streamsb')">StreamSB</button>
+            <button class="server-btn active" onclick="changeServer(this,'vidsrc')">VIDSRC</button>
+            <button class="server-btn" onclick="changeServer(this,'vidmoly')">Vidmoly</button>
+            <button class="server-btn" onclick="changeServer(this,'streamsb')">StreamSB</button>
           </div>
         </div>
         <h3><i class="fa-solid fa-list"></i> ${item.seasons ? "وەرز و ئەڵقەکان" : "پەخشکردن"}</h3>
         ${item.seasons ? item.seasons.map(s => `
           <h4 style="margin:20px 0 10px; color:#f8d64e;">${s.name}</h4>
           <div class="episodes-container">
-            ${Array.from({length:s.eps}, (_,i)=>`<button class="ep-btn" onclick="playContent('${item.id}',${s.sNum},${i+1})"><i class="fa-solid fa-circle-play"></i> ئەڵقەی ${i+1}</button>`).join("")}
-          </div>`).join("") : `<div class="episodes-container"><button class="ep-btn" onclick="playContent('${item.id}',null,null)"><i class="fa-solid fa-circle-play"></i> بینین</button></div>`}
+            ${Array.from({length:s.eps}, (_,i)=>`<button class="ep-btn" onclick="playContent('${item.id}',${s.sNum},${i+1}, window.currentServer||'vidsrc')"><i class="fa-solid fa-circle-play"></i> ئەڵقەی ${i+1}</button>`).join("")}
+          </div>`).join("") : `<div class="episodes-container">${item.episodes.map((ep,i)=>`<button class="ep-btn" onclick="playContent('${item.id}',null,${i+1}, window.currentServer||'vidsrc')"><i class="fa-solid fa-circle-play"></i> ${ep.name}</button>`).join("")}</div>`}
         
         <div class="comments-section">
           <h3 style="color:#f8d64e; margin-bottom:15px;"><i class="fa-solid fa-comments"></i> سەرنج و کۆمێنتەکان</h3>
@@ -1276,7 +812,8 @@
           ${similar.map(s=>`<div class="mini-card" onclick="openDetail('${s.id}')"><img src="${s.img}" class="mini-img"><div class="mini-info">${s.title}</div></div>`).join("")}
         </div>` : ''}
       </div>`;
-    const modal = document.getElementById("detailModal");
+    
+    let modal = document.getElementById("detailModal");
     document.getElementById("modalCardBody").innerHTML = html;
     modal.style.display = "block"; document.body.style.overflow = "hidden";
     document.getElementById("closeModalBtn").onclick = () => { modal.style.display = "none"; document.body.style.overflow = "auto"; renderGrid(); };
@@ -1285,206 +822,79 @@
     updateDetailButtons(id);
   }
 
-  async function toggleArray(id, type) {
-    if (!currentUser) { showToast("تکایە سەرەتا بچۆژوورەوە", "error"); return; }
-    let arr = type==='fav' ? currentUser.favorites : currentUser.watchLater;
-    const idx = arr.indexOf(id);
-    if (idx !== -1) arr.splice(idx, 1);
-    else arr.push(id);
-    await saveUser(currentUser);
-    renderGrid();
-    if(document.getElementById("detailModal").style.display === "block") updateDetailButtons(id);
+  function addComment(id) {
+    if(!currentUser) return showToast("پێویستە سەرەتا بچیتە ژوورەوە","error");
+    let input = document.getElementById(`cmtInput_${id}`);
+    let text = input.value.trim();
+    if(!text) return;
+    if(!commentsData[id]) commentsData[id] =[];
+    let now = new Date();
+    let dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()}`;
+    commentsData[id].unshift({ name: currentUser.name || currentUser.username, text, date: dateStr });
+    saveState(); openDetail(id);
+    showToast("کۆمێنتەکەت بڵاوکرایەوە", "success");
+  }
+  
+  window.changeServer = function(btn, srv) {
+    document.querySelectorAll('.server-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active'); window.currentServer = srv; showToast("سێرڤەر گۆڕا", "info");
+  };
+
+  window.copyLink = function(id) {
+    let url = window.location.origin + window.location.pathname + "?v=" + id;
+    navigator.clipboard.writeText(url); showToast("لینکی فیلمەکە کۆپی کرا", "success");
+  }
+
+  let authMode = 'login';
+  function showAuthModal(mode) {
+    authMode = mode;
+    document.getElementById('authTitle').innerText = mode === 'login' ? 'چوونەژوورەوە' : 'خۆتۆمارکردن';
+    document.getElementById('nameGroup').style.display = mode === 'login' ? 'none' : 'block';
+    document.getElementById('authModal').style.display = 'block';
+    document.getElementById("userDropdown").classList.remove("show");
+  }
+
+  async function submitAuth() {
+    let email = document.getElementById('authEmail').value.trim();
+    let pass = document.getElementById('authPass').value.trim();
+    let name = document.getElementById('authName').value.trim();
+    if(!email || !pass) return showToast("تکایە خانەکان پڕبکەرەوە","error");
+    if(authMode === 'register') {
+      if(accounts.find(a=>a.email===email)) return showToast("ئەم ئیمەیڵە بوونی هەیە","error");
+      let hashed = await hashPassword(pass);
+      let newUser = { email, passHash: hashed, username: name||"بەکارهێنەر", name: name||"بەکارهێنەر", role: email===MASTER_EMAIL ? "admin":"user", favorites:[], watchLater:[], likedMovies:[], dislikedMovies:[], continueWatching:[] };
+      accounts.push(newUser); currentUser = newUser;
+      showToast("سەرکەوتوو بوو! بەخێربێیت","success");
+    } else {
+      let hashed = await hashPassword(pass);
+      let user = accounts.find(a=>a.email===email && a.passHash===hashed);
+      if(user) { currentUser = user; showToast("چوویتە ژوورەوە","success"); }
+      else return showToast("زانیارییەکان هەڵەن","error");
+    }
+    saveState(); updateAccountUI(); closeModal('authModal');
     renderSmartSuggestions();
   }
 
-  async function updateDetailButtons(id) {
+  function showProfileModal() {
     if(!currentUser) return;
-    const favBtn = document.getElementById("toggleFavoriteBtn");
-    const watchBtn = document.getElementById("toggleWatchLaterBtn");
-    if (favBtn) favBtn.innerHTML = currentUser.favorites.includes(id) ? `<i class="fa-solid fa-heart" style="color:#ff4757"></i> لابردن` : `<i class="fa-regular fa-heart"></i> دڵخوازەکان`;
-    if (watchBtn) watchBtn.innerHTML = currentUser.watchLater.includes(id) ? `<i class="fa-solid fa-check"></i> لە لیستدایە` : `<i class="fa-regular fa-clock"></i> دواتر ببینە`;
-    const likeBtn = document.getElementById("likeBtn");
-    const dislikeBtn = document.getElementById("dislikeBtn");
-    if (likeBtn) likeBtn.className = `vote-btn ${currentUser.likedMovies.includes(id)?'liked':''}`;
-    if (dislikeBtn) dislikeBtn.className = `vote-btn ${currentUser.dislikedMovies.includes(id)?'disliked':''}`;
+    document.getElementById("profileFavs").innerHTML = currentUser.favorites.map(id => {
+      let it = findItem(id); return it ? `<div class="movie-card" onclick="openDetail('${id}')"><img class="card-img" src="${it.img}"><div class="card-overlay"><h3 class="card-title">${it.title}</h3></div></div>` : '';
+    }).join('') || '<p style="color:#aaa; font-size:0.8rem; text-align:center; grid-column:1/-1;">هیچ فیلمێک نییە</p>';
+    document.getElementById("profileWatchLater").innerHTML = currentUser.watchLater.map(id => {
+      let it = findItem(id); return it ? `<div class="movie-card" onclick="openDetail('${id}')"><img class="card-img" src="${it.img}"><div class="card-overlay"><h3 class="card-title">${it.title}</h3></div></div>` : '';
+    }).join('') || '<p style="color:#aaa; font-size:0.8rem; text-align:center; grid-column:1/-1;">هیچ فیلمێک نییە</p>';
+    document.getElementById("profileModal").style.display = "block";
+    document.getElementById("userDropdown").classList.remove("show");
   }
 
-  async function likeItem(id) {
-    if (!currentUser) { showToast("پێویستە بچیتە ژوورەوە", "error"); return; }
-    if(currentUser.dislikedMovies.includes(id)) currentUser.dislikedMovies.splice(currentUser.dislikedMovies.indexOf(id),1);
-    if(currentUser.likedMovies.includes(id)) currentUser.likedMovies.splice(currentUser.likedMovies.indexOf(id),1);
-    else currentUser.likedMovies.push(id);
-    await saveUser(currentUser);
-    updateDetailButtons(id);
-    showToast("ڕای تۆ وەرگیرا", "success");
-    renderSmartSuggestions();
-  }
-  async function dislikeItem(id) {
-    if (!currentUser) { showToast("پێویستە بچیتە ژوورەوە", "error"); return; }
-    if(currentUser.likedMovies.includes(id)) currentUser.likedMovies.splice(currentUser.likedMovies.indexOf(id),1);
-    if(currentUser.dislikedMovies.includes(id)) currentUser.dislikedMovies.splice(currentUser.dislikedMovies.indexOf(id),1);
-    else currentUser.dislikedMovies.push(id);
-    await saveUser(currentUser);
-    updateDetailButtons(id);
-    showToast("ڕای تۆ وەرگیرا", "success");
-  }
+  function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
 
-  function getEmbedUrl(imdb, type, sn, ep) {
-    if(!imdb) return "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4";
-    if(type==='movie') {
-      if(currentServer==='vidsrc') return `https://vidsrc.me/embed/movie?imdb=${imdb}`;
-      if(currentServer==='vidmoly') return `https://vidmoly.to/embed/movie?imdb=${imdb}`;
-      return `https://streamsb.net/embed/movie/${imdb}`;
-    } else {
-      if(currentServer==='vidsrc') return `https://vidsrc.me/embed/tv?imdb=${imdb}&season=${sn}&episode=${ep}`;
-      if(currentServer==='vidmoly') return `https://vidmoly.to/embed/tv?imdb=${imdb}&season=${sn}&episode=${ep}`;
-      return `https://streamsb.net/embed/tv/${imdb}/${sn}/${ep}`;
-    }
-  }
-
-  async function playContent(id, sn, ep) {
-    const movies = await getAllMoviesFromDB();
-    const item = movies.find(x => x.id === id);
-    if(!item) return;
-    let url;
-    if(item.videoUrl) {
-      url = item.videoUrl;
-    } else {
-      let imdb = null;
-      if(item.seasons && sn && ep) {
-        const season = item.seasons.find(s => s.sNum == sn);
-        if(season) imdb = season.imdb;
-      } else if(item.episodes && item.episodes[0]) {
-        imdb = item.episodes[0].imdb;
-      }
-      url = getEmbedUrl(imdb, item.type, sn, ep);
-    }
-    const title = `${item.title} ${sn ? "- وەرز "+sn+" ئەڵقە "+ep : ""}`;
-    const html = `<div class="player-wrapper">
-      <div class="player-header"><h3>${title}</h3><button class="chip" onclick="openDetail('${id}')"><i class="fa-solid fa-arrow-right"></i> گەڕانەوە</button></div>
-      <div class="player-box"><iframe src="${url}" allowfullscreen></iframe></div>
-      <div class="player-controls-extra" style="background: rgba(0,0,0,0.5); padding: 10px; display: flex; gap: 10px; justify-content: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; flex-wrap: wrap;">
-        <span style="color:#fff; font-size:0.85rem;"><i class="fa-solid fa-closed-captioning"></i> ژێرنووس/دۆبلاژ:</span>
-        <select class="sort-select" style="padding:6px 10px;"><option>ژێرنووسی کوردی</option><option>English Sub</option><option>عەرەبی</option></select>
-        <select class="sort-select" style="padding:6px 10px;"><option>دەنگی ئینگلیزی (Original)</option><option>دۆبلاژی کوردی</option></select>
-      </div>
-    </div>`;
-    document.querySelector("#detailModal .modal-body").innerHTML = html;
-    updateContinueWatching(id, sn, ep);
-  }
-
-  async function updateContinueWatching(id, sn, ep) {
-    if(!currentUser) return;
-    const movies = await getAllMoviesFromDB();
-    const item = movies.find(x => x.id === id);
-    if(!item) return;
-    let cw = currentUser.continueWatching || [];
-    const existing = cw.findIndex(x => x.id === id);
-    if(existing !== -1) cw.splice(existing, 1);
-    cw.unshift({ id, title: item.title, img: item.img, sn, ep, ts: Date.now() });
-    if(cw.length>10) cw.pop();
-    currentUser.continueWatching = cw;
-    await saveUser(currentUser);
-    renderContinueWatching();
-  }
-
-  async function renderContinueWatching() {
-    const sec = document.getElementById("continueWatchingSection");
-    const grid = document.getElementById("continueWatchingGrid");
-    if(!currentUser || !currentUser.continueWatching || currentUser.continueWatching.length===0) { sec.style.display="none"; return; }
-    sec.style.display = "block";
-    grid.innerHTML = currentUser.continueWatching.map(c => `
-      <div class="mini-card" onclick="openDetail('${c.id}')">
-        <div style="position:relative;">
-          <img src="${c.img}" class="mini-img">
-          <div class="continue-btn"><i class="fa-solid fa-play"></i></div>
-        </div>
-        <div class="mini-info">${c.title}<br><span style="color:#f8d64e; font-weight:normal;">${c.sn?`S${c.sn} E${c.ep}`:'تەواوکردن'}</span></div>
-      </div>
-    `).join("");
-  }
-
-  async function renderSmartSuggestions() {
-    const movies = await getAllMoviesFromDB();
-    const sec = document.getElementById("aiRecSection");
-    const grid = document.getElementById("aiRecGrid");
-    if (!currentUser || currentUser.favorites.length === 0) {
-      const topRated = movies.sort((a,b)=>b.rating - a.rating).slice(0, 10);
-      sec.style.display = "block";
-      grid.innerHTML = topRated.map(m => `<div class="mini-card" onclick="openDetail('${m.id}')"><img src="${m.img}" class="mini-img"><div class="mini-info">${m.title}</div></div>`).join("");
-      return;
-    }
-    let favGenres = [];
-    currentUser.favorites.forEach(id => { let m = movies.find(x=>x.id===id); if(m) favGenres.push(...m.genre.split(' / ')); });
-    favGenres = [...new Set(favGenres)];
-    let recs = movies.filter(m => !currentUser.favorites.includes(m.id) && favGenres.some(g => m.genre.includes(g))).slice(0, 15);
-    if(recs.length === 0) {
-      const topRated = movies.sort((a,b)=>b.rating - a.rating).slice(0, 10);
-      grid.innerHTML = topRated.map(m => `<div class="mini-card" onclick="openDetail('${m.id}')"><img src="${m.img}" class="mini-img"><div class="mini-info">${m.title}</div></div>`).join("");
-    } else {
-      grid.innerHTML = recs.map(m => `<div class="mini-card" onclick="openDetail('${m.id}')"><img src="${m.img}" class="mini-img"><div class="mini-info">${m.title}</div></div>`).join("");
-    }
-    sec.style.display = "block";
-  }
-
-  // AI Recommendation: weighted random based on rating and user preferences
-  async function aiRecommendation() {
-    const movies = await getAllMoviesFromDB();
-    if (!movies.length) return;
-    
-    let candidates = [...movies];
-    
-    // If user is logged in, prefer movies from favorite genres
-    if (currentUser && (currentUser.favorites.length > 0 || currentUser.likedMovies.length > 0)) {
-      // Collect genres from favorites and liked movies
-      let likedGenres = new Set();
-      const likedIds = [...currentUser.favorites, ...currentUser.likedMovies];
-      likedIds.forEach(id => {
-        const m = movies.find(x => x.id === id);
-        if (m) {
-          m.genre.split(' / ').forEach(g => likedGenres.add(g));
-        }
-      });
-      if (likedGenres.size > 0) {
-        const genreMatches = movies.filter(m => {
-          return m.genre.split(' / ').some(g => likedGenres.has(g));
-        });
-        if (genreMatches.length > 0) candidates = genreMatches;
-      }
-    }
-    
-    // Weight by rating and views (higher rating + views = more chance)
-    let totalWeight = 0;
-    const weights = candidates.map(m => {
-      const weight = (parseFloat(m.rating) * 10) + (m.views / 10000);
-      totalWeight += weight;
-      return weight;
-    });
-    
-    // Random selection based on weight
-    let random = Math.random() * totalWeight;
-    let selectedIndex = 0;
-    let accum = 0;
-    for (let i = 0; i < candidates.length; i++) {
-      accum += weights[i];
-      if (random <= accum) {
-        selectedIndex = i;
-        break;
-      }
-    }
-    const selectedMovie = candidates[selectedIndex];
-    openDetail(selectedMovie.id);
-    showToast(`پێشنیار: ${selectedMovie.title}`, "info");
-  }
-
-  // Admin Panel
-  async function showAdminPanel() {
-    if (!currentUser || currentUser.role !== "admin") { showToast("تەنها بەڕێوبەر دەتوانێت بچێتە ژوورەوە", "error"); return; }
-    const movies = await getAllMoviesFromDB();
-    const users = await getAllUsers();
+  function showAdminPanel() {
+    if (currentUser?.email !== MASTER_EMAIL && currentUser?.role !== "admin") { showToast("تەنها بەڕێوبەر دەتوانێت بچێتە ژوورەوە", "error"); return; }
+    let isMaster = currentUser.email === MASTER_EMAIL;
     const modal = document.getElementById("actionModal");
     const body = document.getElementById("actionModalBody");
-    body.parentElement.style.maxWidth = "900px";
+    body.parentElement.style.maxWidth = "700px";
     body.innerHTML = `
       <div class="close-modal" onclick="closeActionModal()"><i class="fa-solid fa-xmark"></i></div>
       <div class="modal-hero" style="min-height: 150px; padding: 30px;"><h2><i class="fa-solid fa-shield-halved"></i> پانێڵی بەڕێوبەر</h2></div>
@@ -1493,24 +903,22 @@
           <div class="admin-tab active" onclick="switchAdminTab('stats', this)">ئامارەکان</div>
           <div class="admin-tab" onclick="switchAdminTab('users', this)">بەکارهێنەران</div>
           <div class="admin-tab" onclick="switchAdminTab('add', this)">زیادکردن</div>
-          <div class="admin-tab" onclick="switchAdminTab('edit', this)">دەستکاری فیلم</div>
         </div>
         <div id="tab-stats" class="tab-content active">
           <div class="stat-cards">
-            <div class="stat-card"><i class="fa-solid fa-film"></i><h2>${movies.length}</h2><p>کۆی بەرهەم</p></div>
-            <div class="stat-card"><i class="fa-solid fa-users"></i><h2>${users.length}</h2><p>بەکارهێنەر</p></div>
-            <div class="stat-card"><i class="fa-solid fa-eye"></i><h2>${formatViews(movies.reduce((a,b)=>a+(b.views||0),0))}</h2><p>کۆی بینین</p></div>
+            <div class="stat-card"><i class="fa-solid fa-film"></i><h2>${getAll().length}</h2><p>کۆی بەرهەم</p></div>
+            <div class="stat-card"><i class="fa-solid fa-users"></i><h2>${accounts.length}</h2><p>بەکارهێنەر</p></div>
+            <div class="stat-card"><i class="fa-solid fa-eye"></i><h2>${formatViews(getAll().reduce((a,b)=>a+(b.views||0),0))}</h2><p>کۆی بینین</p></div>
           </div>
-          <div class="stats-chart"><canvas id="viewsChart" width="400" height="200"></canvas></div>
         </div>
         <div id="tab-users" class="tab-content">
-          ${users.map(acc => `
+          ${accounts.map(acc => `
             <div class="user-list-item">
               <div class="user-info"><span class="user-name">${acc.name || acc.username}</span><span class="user-email">${acc.email}</span></div>
               <div>
                 <span class="user-role">${acc.role === "admin" ? "ئەدمین" : "بەکارهێنەر"}</span>
-                ${acc.role !== "admin" ? `<button class="promote-btn" onclick="promoteToAdmin('${acc.email}')">ئەدمین</button>` : (acc.email !== "twana@peshawacinema.com" ? `<button class="promote-btn" style="background:rgba(255,71,87,0.2); color:#ff4757;" onclick="demoteAdmin('${acc.email}')">لابردنی ئەدمین</button>` : '')}
-                ${acc.email !== "twana@peshawacinema.com" ? `<button class="promote-btn" style="background:#ff4757; color:#fff;" onclick="deleteAcc('${acc.email}')"><i class="fa-solid fa-trash"></i></button>` : ''}
+                ${acc.role !== "admin" ? (isMaster ? `<button class="promote-btn" onclick="promoteToAdmin('${acc.email}')">ئەدمین</button>` : '') : (isMaster && acc.email !== MASTER_EMAIL ? `<button class="promote-btn" style="background:rgba(255,71,87,0.2); color:#ff4757;" onclick="demoteAdmin('${acc.email}')">لابردنی ئەدمین</button>` : '')}
+                ${isMaster && acc.email !== MASTER_EMAIL ? `<button class="promote-btn" style="background:#ff4757; color:#fff;" onclick="deleteAcc('${acc.email}')"><i class="fa-solid fa-trash"></i></button>` : ''}
               </div>
             </div>`).join('')}
         </div>
@@ -1520,246 +928,170 @@
           <div class="form-group"><label>جۆر</label><select id="newType"><option value="movie">فیلم</option><option value="series">زنجیرە</option></select></div>
           <div class="form-group"><label>پۆستەر</label><input type="text" id="newImg"></div>
           <div class="form-group"><label>ترایلەر</label><input type="text" id="newTrailer" placeholder="لینکی یوتیوب لێرە دابنێ"></div>
-          <div class="form-group"><label>لینکی ڤیدیۆ (ئەگەر هەیە)</label><input type="text" id="newVideoUrl"></div>
-          <div class="form-group"><label>لینکەکانی داگرتن (JSON)</label><textarea id="newDownloads" rows="2" placeholder='[{"quality":"1080p","url":"https://..."}]'></textarea></div>
           <button class="hero-btn" id="saveNewBtn" style="width:100%; justify-content:center;">زیادکردن</button>
-        </div>
-        <div id="tab-edit" class="tab-content">
-          <div class="form-group"><label>هەڵبژاردنی فیلم</label><select id="editMovieSelect">${movies.map(m => `<option value="${m.id}">${m.title}</option>`).join('')}</select></div>
-          <div class="form-group"><label>ناونیشان</label><input type="text" id="editTitle"></div>
-          <div class="form-group"><label>چەشن</label><input type="text" id="editGenre"></div>
-          <div class="form-group"><label>ساڵ</label><input type="number" id="editYear"></div>
-          <div class="form-group"><label>پۆستەر</label><input type="text" id="editImg"></div>
-          <div class="form-group"><label>پێناسە</label><textarea id="editDesc" rows="3"></textarea></div>
-          <div class="form-group"><label>لینکی ڤیدیۆ</label><input type="text" id="editVideoUrl"></div>
-          <div class="form-group"><label>لینکەکانی داگرتن (JSON)</label><textarea id="editDownloads" rows="2"></textarea></div>
-          <button class="hero-btn" id="updateMovieBtn" style="width:100%;">نوێکردنەوە</button>
-          <button class="chip danger" id="deleteMovieBtn" style="margin-top:10px;">سڕینەوە</button>
         </div>
       </div>
     `;
-    modal.style.display = "block";
-    document.body.style.overflow = "hidden";
-    const ctx = document.getElementById('viewsChart')?.getContext('2d');
-    if(ctx) {
-      const last7Days = [];
-      for(let i=6;i>=0;i--) {
-        const d = new Date();
-        d.setDate(d.getDate()-i);
-        last7Days.push(d.toLocaleDateString());
-      }
-      new Chart(ctx, { type: 'line', data: { labels: last7Days, datasets: [{ label: 'بینینەکان', data: [120, 150, 200, 180, 220, 300, 280], borderColor: '#f8d64e' }] } });
+    modal.style.display = "block"; document.body.style.overflow = "hidden";
+    document.getElementById("saveNewBtn").onclick = () => {
+      let title = document.getElementById("newTitle").value;
+      if(!title) return;
+      let newItem = { id: document.getElementById("newId").value, title: title, type: document.getElementById("newType").value, category: "movie", rating: "7.0", genre: "ئەکشن", year: 2024, origin: "ئەمریکی", img: document.getElementById("newImg").value, bg: document.getElementById("newImg").value, desc: "پێناسە", views: 1000, duration: "120m", likes:0, dislikes:0, trailer: document.getElementById("newTrailer").value };
+      customMovies.push(newItem); saveState();
+      addLiveNotification("fa-film", `فیلمی نوێ زیادکرا: ${title}`);
+      showToast("سەرکەوتوو بوو", "success"); renderGrid(); closeActionModal();
     }
-    document.getElementById("saveNewBtn").onclick = async () => {
-      const newItem = {
-        id: document.getElementById("newId").value,
-        title: document.getElementById("newTitle").value,
-        type: document.getElementById("newType").value,
-        category: "movie",
-        rating: "7.0",
-        genre: "ئەکشن",
-        year: 2024,
-        origin: "ئەمریکی",
-        img: document.getElementById("newImg").value,
-        bg: document.getElementById("newImg").value,
-        desc: "پێناسە",
-        views: 1000,
-        duration: "120 خولەک",
-        likes: 0,
-        dislikes: 0,
-        trailer: document.getElementById("newTrailer").value,
-        videoUrl: document.getElementById("newVideoUrl").value,
-        downloadLinks: JSON.parse(document.getElementById("newDownloads").value || "[]")
-      };
-      await saveMovie(newItem);
-      showToast("سەرکەوتوو بوو", "success");
-      closeActionModal();
-      renderGrid();
-    };
-    const editSelect = document.getElementById("editMovieSelect");
-    const loadEdit = async () => {
-      const id = editSelect.value;
-      const movie = movies.find(m => m.id === id);
-      if(movie) {
-        document.getElementById("editTitle").value = movie.title;
-        document.getElementById("editGenre").value = movie.genre;
-        document.getElementById("editYear").value = movie.year;
-        document.getElementById("editImg").value = movie.img;
-        document.getElementById("editDesc").value = movie.desc;
-        document.getElementById("editVideoUrl").value = movie.videoUrl || '';
-        document.getElementById("editDownloads").value = JSON.stringify(movie.downloadLinks || []);
-      }
-    };
-    editSelect.onchange = loadEdit;
-    loadEdit();
-    document.getElementById("updateMovieBtn").onclick = async () => {
-      const id = editSelect.value;
-      const movie = movies.find(m => m.id === id);
-      if(movie) {
-        movie.title = document.getElementById("editTitle").value;
-        movie.genre = document.getElementById("editGenre").value;
-        movie.year = parseInt(document.getElementById("editYear").value);
-        movie.img = document.getElementById("editImg").value;
-        movie.bg = movie.img;
-        movie.desc = document.getElementById("editDesc").value;
-        movie.videoUrl = document.getElementById("editVideoUrl").value;
-        movie.downloadLinks = JSON.parse(document.getElementById("editDownloads").value || "[]");
-        await saveMovie(movie);
-        showToast("نوێکرایەوە", "success");
-        closeActionModal();
-        renderGrid();
-      }
-    };
-    document.getElementById("deleteMovieBtn").onclick = async () => {
-      const id = editSelect.value;
-      if(confirm("دڵنیای لە سڕینەوەی ئەم فیلمە؟")) {
-        await deleteMovie(id);
-        showToast("سڕایەوە", "success");
-        closeActionModal();
-        renderGrid();
-      }
-    };
+    document.getElementById("userDropdown").classList.remove("show");
   }
 
   window.switchAdminTab = function(tab, btn) {
     document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-'+tab).classList.add('active');
+    btn.classList.add('active'); document.getElementById('tab-'+tab).classList.add('active');
   };
-  window.promoteToAdmin = async (email) => {
-    const users = await getAllUsers();
-    const user = users.find(u=>u.email===email);
-    if(user) { user.role = "admin"; await saveUser(user); showAdminPanel(); }
+  window.promoteToAdmin = function(email) { let acc = accounts.find(a=>a.email===email); if(acc){ acc.role="admin"; saveState(); showAdminPanel(); } };
+  window.demoteAdmin = function(email) { let acc = accounts.find(a=>a.email===email); if(acc){ acc.role="user"; saveState(); showAdminPanel(); } };
+  window.deleteAcc = function(email) { if(confirm("دڵنیای لە سڕینەوە؟")) { accounts = accounts.filter(a=>a.email!==email); saveState(); showAdminPanel(); } };
+  window.deleteAnyItem = function(id) {
+    if(!confirm("دڵنیای؟")) return;
+    let idx = customMovies.findIndex(x=>x.id===id); if(idx!==-1) customMovies.splice(idx,1);
+    else { let sIdx = seedContent.findIndex(x=>x.id===id); if(sIdx!==-1) seedContent.splice(sIdx,1); }
+    saveState(); showToast("سڕایەوە", "success"); document.getElementById("detailModal").style.display="none"; document.body.style.overflow="auto"; renderGrid();
   };
-  window.demoteAdmin = async (email) => {
-    const users = await getAllUsers();
-    const user = users.find(u=>u.email===email);
-    if(user) { user.role = "user"; await saveUser(user); showAdminPanel(); }
-  };
-  window.deleteAcc = async (email) => {
-    if(confirm("دڵنیای لە سڕینەوەی ئەم بەکارهێنەرە؟")) {
-      await deleteUser(email);
-      showAdminPanel();
-    }
-  };
-  window.closeActionModal = function () { document.getElementById("actionModal").style.display = "none"; document.body.style.overflow = "auto"; };
 
-  // Notifications & other helpers
-  let notifications = [{ icon: "fa-film", text: "١٠٠+ فیلم و زنجیرە زیادکرا!", time: new Date(Date.now() - 3600000) }];
-  function updateNotifBadge() { const b = document.getElementById("notifBadge"); let uc = notifications.filter(n=>!n.read).length; b.textContent = uc; b.style.display = uc>0?"flex":"none"; }
-  function showNotifModal() { const list = document.getElementById("notificationList"); list.innerHTML=""; notifications.forEach(n => { list.innerHTML += `<div class="notification-item"><div class="notification-icon"><i class="fa-solid ${n.icon}"></i></div><div class="notification-content"><p>${n.text}</p><div class="notification-time"><i class="fa-regular fa-clock"></i> ${new Date(n.time).toLocaleTimeString()}</div></div></div>`; }); document.getElementById("notificationModal").classList.add("show"); notifications.forEach(n=>n.read=true); updateNotifBadge(); }
-  document.getElementById("bellIcon").onclick = (e) => { e.stopPropagation(); showNotifModal(); };
-  document.getElementById("closeNotification").onclick = () => document.getElementById("notificationModal").classList.remove("show");
+  window.toggleThemeSetting = function(key, val) { themeSettings[key]=val; saveState(); applyTheme(); }
 
-  window.changeServer = function(srv) {
-    currentServer = srv;
-    document.querySelectorAll('.server-btn').forEach(b=>b.classList.remove('active'));
-    document.querySelector(`.server-btn[onclick*="${srv}"]`).classList.add('active');
-    showToast("سێرڤەر گۆڕا", "info");
-  };
-  window.copyLink = function(id) {
-    const url = window.location.origin + window.location.pathname + "?v=" + id;
-    navigator.clipboard.writeText(url); showToast("لینکی فیلمەکە کۆپی کرا", "success");
-  };
-  window.downloadFile = function(url) { window.open(url, '_blank'); };
-  async function addComment(movieId) {
-    if(!currentUser) return showToast("پێویستە سەرەتا بچیتە ژوورەوە","error");
-    const input = document.getElementById(`cmtInput_${movieId}`);
-    const text = input.value.trim();
-    if(!text) return;
-    const comment = { movieId, userId: currentUser.email, userName: currentUser.name, text, date: new Date().toLocaleDateString(), replies: [] };
-    await addComment(comment);
-    showToast("کۆمێنتەکەت بڵاوکرایەوە", "success");
-    openDetail(movieId);
-  }
-  function showReplyInput(movieId, parentId) { showToast("وەڵامدانەوە زیادکرا", "info"); }
-  function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
-  function closeTrailerModal() { document.getElementById("trailerModal").style.display = "none"; document.getElementById("trailerBody").innerHTML=""; }
-  
-  async function playTrailer(id) {
-    const movies = await getAllMoviesFromDB();
-    const item = movies.find(x => x.id === id);
-    if (!item) return;
-    const trailerUrl = item.trailer;
-    if (trailerUrl) {
-      document.getElementById("trailerBody").innerHTML = `<div class="player-box"><iframe src="${trailerUrl}?autoplay=1" allowfullscreen></iframe></div>`;
-      document.getElementById("trailerModal").style.display = "block";
-    } else {
-      showToast("ترایلەر بۆ ئەم فیلمە نییە", "error");
+  function renderGrid() {
+    let term = document.getElementById("searchInput").value.trim().toLowerCase();
+    let list = getAll().filter(item => {
+      let matchNav = true;
+      if (currentNav === "movie") matchNav = item.type === "movie";
+      else if (currentNav === "series") matchNav = item.type === "series";
+      else if (currentNav === "drama") matchNav = item.genre.includes("دراما");
+      else if (currentNav === "top") matchNav = parseFloat(item.rating) >= 8.5;
+      else if (currentNav === "hollywood") matchNav = item.category === "hollywood";
+      else if (currentNav === "bollywood") matchNav = item.category === "bollywood";
+      else if (currentNav === "trending") matchNav = true;
+      if (currentNav === "all") matchNav = true;
+      let matchType = (currentFilter === "all" || item.type === currentFilter);
+      let matchGenre = (currentGenre === "all") ? true : item.genre.includes(currentGenre);
+      let matchYear = (currentYear === "all") ? true : item.year == currentYear;
+      let matchOrigin = (currentOrigin === "all") ? true : item.origin === currentOrigin;
+      let matchText =[item.title, item.genre].join(" ").toLowerCase().includes(term);
+      return matchNav && matchType && matchGenre && matchYear && matchOrigin && matchText;
+    });
+    if(currentNav === "trending") { list.sort((a,b)=>b.views - a.views); list = list.slice(0, 15); }
+    else {
+      if(currentSort === "views") list.sort((a,b)=>b.views - a.views);
+      else if(currentSort === "rating") list.sort((a,b)=>b.rating - a.rating);
     }
+    let totalPages = Math.ceil(list.length / itemsPerPage);
+    if(currentPage > totalPages) currentPage = 1;
+    let paged = list.slice((currentPage-1)*itemsPerPage, currentPage*itemsPerPage);
+    let grid = document.getElementById("moviesGrid");
+    if(paged.length===0) grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:40px;color:#aaa;">هیچ ئەنجامێک نەدۆزرایەوە</div>`;
+    else {
+      grid.innerHTML = paged.map((i, idx) => `
+        <div class="movie-card" onclick="openDetail('${i.id}')">
+          ${(currentNav==="trending" && idx<5) ? `<div class="trending-tag">🔥 Top ${idx+1}</div>` : ''}
+          <img class="card-img" src="${i.img}" loading="lazy">
+          <div class="card-overlay">
+            <h3 class="card-title">${i.title}</h3>
+            <div class="card-meta"><span>⭐ ${i.rating}</span><span class="duration"><i class="fa-regular fa-clock"></i> ${i.duration.split(' ')[0]}</span><span>${i.year}</span></div>
+            <div class="card-views"><i class="fa-regular fa-eye"></i> ${formatViews(i.views)}</div>
+          </div>
+        </div>`).join("");
+    }
+    document.getElementById("totalCountBadge").innerHTML = `📽️ ${list.length}`;
+    renderPagination(totalPages);
   }
 
-  function resetFilters() {
+  function renderPagination(total) {
+    let p = document.getElementById("paginationControls");
+    if(total <= 1) { p.innerHTML=""; return; }
+    let html = `<button class="page-btn" ${currentPage===1?'disabled':''} onclick="changePage(${currentPage-1})"><i class="fa-solid fa-chevron-right"></i></button>`;
+    for(let i=1; i<=total; i++) {
+      if(i===1 || i===total || (i>=currentPage-1 && i<=currentPage+1)) {
+        html += `<button class="page-btn ${currentPage===i?'active':''}" onclick="changePage(${i})">${i}</button>`;
+      } else if (i===currentPage-2 || i===currentPage+2) {
+        html += `<span style="color:#888; align-self:center;">...</span>`;
+      }
+    }
+    html += `<button class="page-btn" ${currentPage===total?'disabled':''} onclick="changePage(${currentPage+1})"><i class="fa-solid fa-chevron-left"></i></button>`;
+    p.innerHTML = html;
+  }
+  window.changePage = function(num) { currentPage=num; renderGrid(); window.scrollTo({top: document.querySelector(".controls-container")?.offsetTop||500, behavior:'smooth'}); }
+
+  window.resetFilters = function() {
     currentGenre="all"; currentYear="all"; currentOrigin="all"; document.getElementById("searchInput").value=""; currentSort="default"; document.getElementById("sortSelect").value="default";
     document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
     document.querySelectorAll('[data-genre="all"], [data-year="all"],[data-origin="all"]').forEach(b=>b.classList.add('active'));
     renderGrid(); showToast("فلتەرەکان خاوێنکرانەوە", "info");
   }
-  
-  function sendVerificationCode() { showToast("کۆدی ڤێرێفیکەیشن نێردرا", "info"); }
-  
-  function showProfileModal() {
-    if (!currentUser) return;
-    const favsDiv = document.getElementById("profileFavs");
-    const watchLaterDiv = document.getElementById("profileWatchLater");
-    (async () => {
-      const movies = await getAllMoviesFromDB();
-      favsDiv.innerHTML = currentUser.favorites.map(id => {
-        const it = movies.find(m => m.id === id);
-        return it ? `<div class="movie-card" onclick="openDetail('${id}')"><img class="card-img" src="${it.img}"><div class="card-overlay"><h3 class="card-title">${it.title}</h3></div></div>` : '';
-      }).join('') || '<p style="color:#aaa; font-size:0.8rem; text-align:center; grid-column:1/-1;">هیچ فیلمێک نییە</p>';
-      watchLaterDiv.innerHTML = currentUser.watchLater.map(id => {
-        const it = movies.find(m => m.id === id);
-        return it ? `<div class="movie-card" onclick="openDetail('${id}')"><img class="card-img" src="${it.img}"><div class="card-overlay"><h3 class="card-title">${it.title}</h3></div></div>` : '';
-      }).join('') || '<p style="color:#aaa; font-size:0.8rem; text-align:center; grid-column:1/-1;">هیچ فیلمێک نییە</p>';
-      document.getElementById("profileModal").style.display = "block";
-    })();
-  }
-  
-  async function deleteAnyItem(id) { if(confirm("دڵنیای؟")) { await deleteMovie(id); showToast("سڕایەوە", "success"); document.getElementById("detailModal").style.display="none"; document.body.style.overflow="auto"; renderGrid(); } }
 
-  // Hero
-  let heroSlides = [];
-  async function updateHeroSlides() { const movies = await getAllMoviesFromDB(); return movies.sort((a,b)=>b.rating-a.rating).slice(0,5); }
-  async function loadHero(i) {
+  window.closeActionModal = function () { document.getElementById("actionModal").style.display = "none"; document.body.style.overflow = "auto"; };
+  
+  function updateAccountUI() {
+    let isLogged = !!currentUser;
+    document.getElementById("userDropdown").innerHTML = `
+      <div style="display:flex; gap:16px; align-items:center; margin-bottom:16px; padding:16px; background:rgba(255,255,255,0.03); border-radius:18px;">
+        <div style="width:48px; height:48px; background:linear-gradient(135deg, #f8d64e, #d8b22a); border-radius:14px; display:flex; align-items:center; justify-content:center; color:#000;"><i class="fa-solid fa-user"></i></div>
+        <div><h4 style="margin:0;">${isLogged ? currentUser.username : "میوان"}</h4><span style="font-size:0.8rem; color:#aaa;">${isLogged ? (currentUser.role === "admin" ? "بەڕێوبەر" : "بەکارهێنەر") : "سەردانکەر"}</span></div>
+      </div>
+      ${isLogged ? `<div class="dropdown-item" onclick="showProfileModal()"><i class="fa-solid fa-circle-user"></i> پرۆفایلی من</div>` : ''}
+      ${isLogged && currentUser.role === "admin" ? `<div class="dropdown-item" onclick="showAdminPanel()"><i class="fa-solid fa-shield-halved"></i> پانێڵی بەڕێوبەر</div>` : ''}
+      <hr class="dropdown-sep">
+      <div class="dropdown-item" onclick="showSettingsPanel()"><i class="fa-solid fa-gear"></i> ڕێکخستنی پێشکەوتوو</div>
+      <hr class="dropdown-sep">
+      ${!isLogged ? `<div class="dropdown-item" onclick="showAuthModal('login')"><i class="fa-solid fa-right-to-bracket"></i> چوونەژوورەوە</div>` : ''}
+      ${!isLogged ? `<div class="dropdown-item" onclick="showAuthModal('register')"><i class="fa-solid fa-user-plus"></i> خۆتۆمارکردن</div>` : ''}
+      ${isLogged ? `<div class="dropdown-item" style="color:#ff6b6b;" onclick="currentUser=null;saveState();updateAccountUI();"><i class="fa-solid fa-right-from-bracket"></i> دەرچوون</div>` : ''}`;
+    
+    document.getElementById("avatarBtn").innerHTML = isLogged && currentUser.role==="admin" ? '<i class="fa-solid fa-crown"></i>' : '<i class="fa-solid fa-user"></i>';
+    renderContinueWatching();
+  }
+
+  function updateHeroSlides() { return [...getAll()].sort((a,b)=>b.rating-a.rating).slice(0,5); }
+  let heroSlides =[];
+  
+  function loadHero(i) {
     if(heroSlides.length===0) return;
     if(i>=heroSlides.length) i=0;
-    const s=heroSlides[i];
+    let s=heroSlides[i];
     currentHeroId=s.id;
-    const h=document.getElementById("heroSection");
+    let h=document.getElementById("heroSection");
+    
+    // Zoom & Fade animation logic
     h.classList.add("hero-fade-out");
+    
     setTimeout(() => {
       h.style.backgroundImage = `linear-gradient(10deg, rgba(8,8,12,0.95) 0%, rgba(8,8,12,0.3) 60%, transparent 100%), url('${s.bg}')`;
       document.getElementById("heroTitle").textContent=s.title;
       document.getElementById("heroDesc").textContent=s.desc;
       document.getElementById("heroMeta").innerHTML = `<span><i class="fa-solid fa-calendar"></i> ${s.year}</span> <span><i class="fa-solid fa-clock"></i> ${s.duration}</span> <span><i class="fa-solid fa-star" style="color:#f8d64e"></i> ${s.rating}</span>`;
+      
       h.classList.remove("hero-fade-out");
       h.classList.add("hero-animate-in");
-      setTimeout(() => h.classList.remove("hero-animate-in"), 800);
+      
+      setTimeout(() => {
+        h.classList.remove("hero-animate-in");
+      }, 800);
     }, 400);
   }
-  async function fadeHeroTo(i) { heroIndex=i; loadHero(heroIndex); }
-  setInterval(async () => { heroSlides = await updateHeroSlides(); if(heroSlides.length>1) fadeHeroTo((heroIndex+1)%heroSlides.length); }, 8000);
 
-  // Filter Grids
+  function fadeHeroTo(i) { heroIndex=i; loadHero(heroIndex); }
+  setInterval(()=>{ if(heroSlides.length>1) fadeHeroTo((heroIndex+1)%heroSlides.length); }, 8000);
+
   const genres =["دراما", "تاوانکاری", "هەستبزوێن", "زانستی خەیاڵی", "سەرکێشی", "ئەکشن", "خەیاڵی", "کۆمیدی", "ئەنیمەیشن", "ترسناک", "ڕۆمانسی"];
   document.getElementById("genreGrid").innerHTML = `<button class="filter-btn active" data-genre="all">هەموو</button>` + genres.map(g=>`<button class="filter-btn" data-genre="${g}">${g}</button>`).join('');
   document.getElementById("yearGrid").innerHTML = `<button class="filter-btn active" data-year="all">هەموو</button>` + Array.from({length:25},(_,i)=>2024-i).map(y=>`<button class="filter-btn" data-year="${y}">${y}</button>`).join('');
   document.getElementById("originGrid").innerHTML = `<button class="filter-btn active" data-origin="all">هەموو</button>` +["ئەمریکی", "بۆڵیود", "کۆری"].map(o=>`<button class="filter-btn" data-origin="${o}">${o}</button>`).join('');
+  
   document.querySelectorAll('.filter-grid').forEach(g => { g.addEventListener('click', e => { if(e.target.classList.contains('filter-btn')){ g.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); e.target.classList.add('active'); if(g.id==="genreGrid") currentGenre=e.target.dataset.genre; if(g.id==="yearGrid") currentYear=e.target.dataset.year; if(g.id==="originGrid") currentOrigin=e.target.dataset.origin; renderGrid(); } }); });
   document.querySelectorAll('.panel-header').forEach(h => { h.addEventListener('click', () => { let grid=h.nextElementSibling; grid.classList.toggle('open'); h.classList.toggle('open'); }); });
 
-  // On load
   window.onload = async () => {
-    await initDB();
-    const stored = localStorage.getItem("currentUser");
-    if (stored) {
-      const { email } = JSON.parse(stored);
-      const users = await getAllUsers();
-      currentUser = users.find(u => u.email === email);
-    }
-    applyTheme();
+    await migrateAccounts(); applyTheme();
     updateAccountUI();
     document.getElementById("avatarBtn").onclick = e => { e.stopPropagation(); document.getElementById("userDropdown").classList.toggle("show"); };
     window.addEventListener("click", e => { if (!e.target.closest(".user-area")) document.getElementById("userDropdown").classList.remove("show"); });
@@ -1769,16 +1101,14 @@
     document.getElementById("sortSelect").addEventListener("change", (e)=>{currentSort=e.target.value; currentPage=1; renderGrid();});
     document.getElementById("heroPlayBtn").onclick = () => openDetail(currentHeroId);
     document.getElementById("heroInfoBtn").onclick = () => openDetail(currentHeroId);
-    document.getElementById("heroTrailerBtn").onclick = () => playTrailer(currentHeroId);
-    document.getElementById("themeToggleBtn").onclick = () => toggleLightMode();
-    document.getElementById("aiRandomBtn").onclick = () => aiRecommendation();
-    heroSlides = await updateHeroSlides(); loadHero(0);
+    document.getElementById("heroTrailerBtn").onclick = () => { let item = findItem(currentHeroId); if(item) playTrailer(currentHeroId); };
+    heroSlides = updateHeroSlides(); loadHero(0);
     renderGrid();
     renderSmartSuggestions();
-    const urlParams = new URLSearchParams(window.location.search);
+    let urlParams = new URLSearchParams(window.location.search);
     if(urlParams.has('v')) { setTimeout(() => openDetail(urlParams.get('v')), 800); }
     setTimeout(() => { document.getElementById("loader").style.opacity="0"; setTimeout(()=>document.getElementById("loader").style.display="none",400); }, 800);
   };
 </script>
 </body>
-</html> 
+</html>
