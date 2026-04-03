@@ -462,7 +462,35 @@
 
 <div class="toast-container" id="toastContainer"></div>
 
-<script>
+<script>// لێرەدا دەبێت لە داهاتوودا لینکی فایەربەیس دابنێیت. بۆ ئێستا بە بەتاڵی جێی دەهێڵین بۆ ئەوەی سایتەکە کار بکات
+const firebaseConfig = {
+  databaseURL: "", 
+};
+
+// فەنکشن بۆ پاشەکەوتکردن (بە شێوەی پارێزراو کە سایتەکە ڕانەگرێت)
+async function saveToCloud(key, data) {
+  if (!firebaseConfig.databaseURL) return; 
+  try {
+    await fetch(`${firebaseConfig.databaseURL}/${key}.json`, {
+      method: 'PUT',
+      body: JSON.stringify(data)
+    });
+  } catch (e) {
+    console.log("پەیوەندی ئینتەرنێت نییە");
+  }
+}
+
+// فەنکشن بۆ خوێندنەوە (بە شێوەی پارێزراو کە سایتەکە ڕانەگرێت)
+async function loadFromCloud(key) {
+  if (!firebaseConfig.databaseURL) return null;
+  try {
+    const response = await fetch(`${firebaseConfig.databaseURL}/${key}.json`);
+    if (response.ok) return await response.json();
+  } catch (e) {
+    return null;
+  }
+  return null;
+}
   // ==================== Helper Functions & Setup ====================
   function showToast(message, type = 'info') {
     const container = document.getElementById('toastContainer');
@@ -472,7 +500,11 @@
     container.appendChild(toast);
     setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100%)'; setTimeout(() => toast.remove(), 300); }, 3000);
   }
-
+function sanitize(str) {
+  let p = document.createElement('p');
+  p.textContent = str;
+  return p.innerHTML;
+}
   async function hashPassword(password) {
     const encoder = new TextEncoder();
     const data = encoder.encode(password);
@@ -720,10 +752,10 @@
     }
   }
 
-  function playContent(id, sn, ep, srv="vidsrc") {
+  function playContent(id, sn, ep, srv="vidsrc"){
     let item = findItem(id); if(!item) return;
     let url = SAMPLE_VIDEO;
-    if(item.seasons && sn && ep) { let s=item.seasons.find(x=>x.sNum==sn); if(s&&s.imdb) url=getEmbedUrl(s.imdb,'tv',sn,ep,srv); }
+    if(item.seasons && sn && ep) { let s=item.seasons.find(x=>x.sNum==sn); if(s&&s.imdb) url=getEmbedUrl(s.imdb,'tv',sn,ep,srv);}
     else if(item.episodes && item.episodes[0] && item.episodes[0].imdb) url=getEmbedUrl(item.episodes[0].imdb,'movie',null,null,srv);
     let title = `${item.title} ${sn ? "- وەرز "+sn+" ئەڵقە "+ep : ""}`;
     let html = `<div class="player-wrapper">
@@ -752,8 +784,7 @@
     item.views++; 
     let similar = getAll().filter(x=>x.id!==id && x.genre.split('/')[0]===item.genre.split('/')[0]).slice(0,6);
     let cmts = commentsData[id] ||[];
-    let cmtsHtml = cmts.map(c => `<div class="comment-item"><div class="comment-header"><span><i class="fa-solid fa-user"></i> ${c.name}</span><span>${c.date}</span></div><div class="comment-text">${c.text}</div></div>`).join('');
-
+    let cmtsHtml = cmts.map(c => `<div class="comment-item"><div class="comment-header"><span><i class="fa-solid fa-user"></i> ${sanitize(c.name)}</span><span>${c.date}</span></div><div class="comment-text">${sanitize(c.text)}</div></div>`).join('');
     let html = `
       <div class="close-modal" id="closeModalBtn"><i class="fa-solid fa-xmark"></i></div>
       <div class="modal-hero" style="background-image:url('${item.bg||item.img}')">
@@ -767,6 +798,7 @@
         <div class="action-bar">
           <button class="chip" id="toggleFavoriteBtn"><i class="fa-regular fa-heart"></i> دڵخوازەکان</button>
           <button class="chip" id="toggleWatchLaterBtn"><i class="fa-regular fa-clock"></i> دواتر ببینە</button>
+          <button class="chip" onclick="playTrailer('${item.id}')"><i class="fa-brands fa-youtube" style="color:#ff4757"></i> تڕایلەر</button>
           <button class="chip" onclick="copyLink('${item.id}')"><i class="fa-solid fa-share-nodes"></i> شەیڕ</button>
           <button class="vote-btn" id="likeBtn" onclick="likeItem('${item.id}')"><i class="fa-solid fa-thumbs-up"></i> <span>${item.likes}</span></button>
           <button class="vote-btn" id="dislikeBtn" onclick="dislikeItem('${item.id}')"><i class="fa-solid fa-thumbs-down"></i></button>
@@ -888,7 +920,9 @@
   }
 
   function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
-
+  function showSettingsPanel() {
+  showToast("بەشی ڕێکخستن لە وەشانی داهاتوو زیاد دەکرێت", "info");
+}
   function showAdminPanel() {
     if (currentUser?.email !== MASTER_EMAIL && currentUser?.role !== "admin") { showToast("تەنها بەڕێوبەر دەتوانێت بچێتە ژوورەوە", "error"); return; }
     let isMaster = currentUser.email === MASTER_EMAIL;
@@ -936,6 +970,10 @@
     document.getElementById("saveNewBtn").onclick = () => {
       let title = document.getElementById("newTitle").value;
       if(!title) return;
+      if(getAll().find(x => x.id === document.getElementById("newId").value)) {
+  showToast("ئەم ئایدییە پێشتر هەبووە، تکایە دانەیەکی تر بنووسە", "error");
+  return;
+}
       let newItem = { id: document.getElementById("newId").value, title: title, type: document.getElementById("newType").value, category: "movie", rating: "7.0", genre: "ئەکشن", year: 2024, origin: "ئەمریکی", img: document.getElementById("newImg").value, bg: document.getElementById("newImg").value, desc: "پێناسە", views: 1000, duration: "120m", likes:0, dislikes:0, trailer: document.getElementById("newTrailer").value };
       customMovies.push(newItem); saveState();
       addLiveNotification("fa-film", `فیلمی نوێ زیادکرا: ${title}`);
@@ -1080,8 +1118,11 @@
   }
 
   function fadeHeroTo(i) { heroIndex=i; loadHero(heroIndex); }
-  setInterval(()=>{ if(heroSlides.length>1) fadeHeroTo((heroIndex+1)%heroSlides.length); }, 8000);
-
+  setInterval(() => {
+  if (document.visibilityState === 'visible' && heroSlides.length > 1) {
+    fadeHeroTo((heroIndex + 1) % heroSlides.length);
+  }
+}, 8000);
   const genres =["دراما", "تاوانکاری", "هەستبزوێن", "زانستی خەیاڵی", "سەرکێشی", "ئەکشن", "خەیاڵی", "کۆمیدی", "ئەنیمەیشن", "ترسناک", "ڕۆمانسی"];
   document.getElementById("genreGrid").innerHTML = `<button class="filter-btn active" data-genre="all">هەموو</button>` + genres.map(g=>`<button class="filter-btn" data-genre="${g}">${g}</button>`).join('');
   document.getElementById("yearGrid").innerHTML = `<button class="filter-btn active" data-year="all">هەموو</button>` + Array.from({length:25},(_,i)=>2024-i).map(y=>`<button class="filter-btn" data-year="${y}">${y}</button>`).join('');
@@ -1097,8 +1138,14 @@
     window.addEventListener("click", e => { if (!e.target.closest(".user-area")) document.getElementById("userDropdown").classList.remove("show"); });
     document.querySelectorAll(".nav-item").forEach(n => n.onclick=()=>{ document.querySelectorAll(".nav-item").forEach(x=>x.classList.remove("active")); n.classList.add("active"); currentNav=n.dataset.nav; currentPage=1; renderGrid(); });
     document.querySelectorAll(".menu-item").forEach(n => n.onclick=()=>{ document.querySelectorAll(".menu-item").forEach(x=>x.classList.remove("active")); n.classList.add("active"); currentFilter=n.dataset.menu; currentPage=1; renderGrid(); });
-    document.getElementById("searchInput").addEventListener("input", ()=>{currentPage=1;renderGrid();});
-    document.getElementById("sortSelect").addEventListener("change", (e)=>{currentSort=e.target.value; currentPage=1; renderGrid();});
+   let searchTimeout;
+document.getElementById("searchInput").addEventListener("input", () => {
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    currentPage = 1;
+    renderGrid();
+  }, 300);
+});
     document.getElementById("heroPlayBtn").onclick = () => openDetail(currentHeroId);
     document.getElementById("heroInfoBtn").onclick = () => openDetail(currentHeroId);
     document.getElementById("heroTrailerBtn").onclick = () => { let item = findItem(currentHeroId); if(item) playTrailer(currentHeroId); };
