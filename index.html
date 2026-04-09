@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <meta name="google-site-verification" content="TIhv0tt3FCEP4dnyjAzjaFoRtmCWvtB0UOwRyLWobH0" />
-  <title>Peshawa Qazi Cinema -سینەمایی پێشەوا قازی محمد</title>
+  <title>Peshawa Qazi Cinema - سینەمای پێشەوا قازی محمد</title>
   <meta name="description" content="ماڵپەرێک بۆ بینینی نوێترین و پربینەرترین فیلم و زنجیرەکان بە باشترین کوالێتی">
   <meta name="keywords" content="فیلم, زنجیرە, سینەما, Peshawa Cinema">
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    /* هەموو ستایلەکانی پێشوو بە تەواوی پارێزراو */
+    /* ========== BASE STYLES ========== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Vazirmatn', 'Segoe UI', system-ui, sans-serif;
@@ -24,11 +24,9 @@
     body::before {
       content: ''; position: fixed; inset: 0;
       background: rgba(8, 8, 12, 0.65);
-      backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
       z-index: -1; transition: all 0.4s;
     }
-    
-    /* تایبەتمەندی نوێ: دۆخی ڕووناکی (Light Mode) */
     body.light-theme { color: #111; }
     body.light-theme::before { background: rgba(240, 242, 245, 0.85); backdrop-filter: blur(25px); }
     body.light-theme .topbar, body.light-theme .nav-menu, body.light-theme .filter-panel { background: rgba(255, 255, 255, 0.7); border-color: rgba(0,0,0,0.1); }
@@ -72,20 +70,15 @@
     .stats-badge { background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); padding: 4px 10px; border-radius: 40px; font-size: 0.7rem; color: #f8d64e; border: 1px solid rgba(248,214,78,0.3); white-space: nowrap; }
     .user-area { display: flex; gap: 8px; align-items: center; position: relative; }
     .icon-btn, .avatar { width: 40px; height: 40px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s; color: #f8d64e; position: relative; }
-    @keyframes bellRing { 0% { transform: rotate(0deg); } 10% { transform: rotate(15deg); } 20% { transform: rotate(-15deg); } 30% { transform: rotate(10deg); } 40% { transform: rotate(-10deg); } 50% { transform: rotate(5deg); } 60% { transform: rotate(-5deg); } 70% { transform: rotate(2deg); } 80% { transform: rotate(-2deg); } 90% { transform: rotate(1deg); } 100% { transform: rotate(0deg); } }
-    .bell-live { animation: bellRing 0.8s ease-in-out; }
     .icon-btn:hover, .avatar:hover { background: rgba(248, 214, 78, 0.2); transform: translateY(-2px); }
     .notif-badge { position: absolute; top: -4px; right: -4px; background: #ff4757; color: white; font-size: 0.6rem; font-weight: 800; min-width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid #14141c; animation: pulseBadge 2s infinite; }
     @keyframes pulseBadge { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7); } 70% { transform: scale(1.05); box-shadow: 0 0 0 6px rgba(255, 71, 87, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); } }
     
     /* Modals & Dropdowns */
     .user-dropdown { position: absolute; top: 52px; left: 0; background: rgba(20, 20, 28, 0.9); border-radius: 20px; padding: 16px; min-width: 280px; border: 1px solid rgba(255, 255, 255, 0.1); z-index: 200; display: none; backdrop-filter: blur(24px); animation: dropFade 0.3s forwards; }
-    html[dir="ltr"] .user-dropdown { left: auto; right: 0; }
-    @keyframes dropFade { from { opacity: 0; transform: scale(0.95) translateY(-10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
     .user-dropdown.show { display: block; }
     .dropdown-item { padding: 10px 12px; border-radius: 12px; cursor: pointer; transition: all 0.2s; display: flex; gap: 12px; align-items: center; font-weight: 500; color: #e2e2e2; }
     .dropdown-item:hover { background: rgba(255, 255, 255, 0.06); color: #fff; transform: translateX(-4px); }
-    html[dir="ltr"] .dropdown-item:hover { transform: translateX(4px); }
     .dropdown-item:hover i { color: #f8d64e; }
     .dropdown-sep { margin: 12px 0; border-top: 1px solid rgba(255, 255, 255, 0.06); }
     
@@ -124,19 +117,12 @@
     .reset-btn { background: rgba(255, 71, 87, 0.15) !important; color: #ff4757 !important; border-color: rgba(255, 71, 87, 0.3) !important; font-weight: bold; }
     .reset-btn:hover { background: #ff4757 !important; color: #fff !important; }
 
-    /* Hero Section - UPDATED WITH ZOOM & FADE */
+    /* Hero Section */
     .hero-section { margin: 16px; border-radius: 28px; min-height: 420px; display: flex; align-items: flex-end; padding: 30px 20px; background-size: cover; transition: opacity 0.6s ease, transform 0.6s ease; border: 1px solid rgba(255, 255, 255, 0.08); position: relative; overflow: hidden; }
     .hero-section::after { content: ''; position: absolute; inset: 0; background: linear-gradient(10deg, rgba(8, 8, 12, 0.98) 0%, rgba(8, 8, 12, 0.5) 60%, transparent 100%); border-radius: 28px; }
-    
-    /* Animation classes for Hero transition */
     .hero-animate-in { opacity: 1 !important; transform: scale(1) !important; animation: heroZoomIn 0.8s ease-out; }
     .hero-fade-out { opacity: 0 !important; transform: scale(1.05) !important; transition: 0.4s ease-in; }
-    
-    @keyframes heroZoomIn {
-      from { transform: scale(1.1); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
+    @keyframes heroZoomIn { from { transform: scale(1.1); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     .hero-content { position: relative; z-index: 2; max-width: 750px; }
     .hero-label { background: rgba(248, 214, 78, 0.15); color: #f8d64e; display: inline-block; padding: 6px 16px; border-radius: 40px; font-size: 0.8rem; font-weight: 700; margin-bottom: 12px; border: 1px solid rgba(248, 214, 78, 0.3); }
     .hero-title { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 8px; line-height: 1.2; text-shadow: 0 4px 20px rgba(0,0,0,0.6); }
@@ -165,7 +151,6 @@
 
     /* Grids & Cards */
     .section-title { margin: 16px; font-size: 1.3rem; font-weight: 800; border-right: 4px solid #f8d64e; padding-right: 12px; color: #fff; display: flex; justify-content: space-between; align-items: center; }
-    html[dir="ltr"] .section-title { border-right: none; border-left: 4px solid #f8d64e; padding-right: 0; padding-left: 12px; }
     .movies-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; padding: 0 16px 20px; }
     @media(min-width: 768px) { .movies-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); } }
     .movie-card { background: rgba(20, 20, 28, 0.4); backdrop-filter: blur(12px); border-radius: 16px; overflow: hidden; cursor: pointer; transition: all 0.3s; border: 1px solid rgba(255, 255, 255, 0.08); position: relative; }
@@ -194,7 +179,6 @@
     .modal-hero-content h1 { font-size: 1.8rem; margin: 10px 0; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
     .close-modal { position: absolute; top: 16px; right: 16px; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 15; font-size: 1.2rem; color: #fff; transition: all 0.3s; }
     .close-modal:hover { background: #ff4757; transform: rotate(90deg); }
-    html[dir="ltr"] .close-modal { right: auto; left: 16px; }
     .modal-body { padding: 24px; }
     .modal-desc { background: rgba(255, 255, 255, 0.03); padding: 16px; border-radius: 20px; margin-bottom: 20px; border-right: 3px solid #f8d64e; line-height: 1.7; font-size: 0.95rem; }
     
@@ -269,21 +253,41 @@
     .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 3px; background-color: #aaa; transition: .4s; border-radius: 50%; }
     input:checked + .slider { background-color: #f8d64e; border-color: #f8d64e; }
     input:checked + .slider:before { transform: translateX(24px); background-color: #111; }
-    html[dir="ltr"] input:checked + .slider:before { transform: translateX(24px); }
 
     /* Trailer Modal Small */
     #trailerModal .modal-card { max-width: 800px; margin: 10vh auto; background: #000; border: none; }
     #trailerModal .modal-body { padding: 0; }
 
-    /* New CSS for Comments & Downloads */
+    /* Comments & Downloads */
     .comments-section { margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
     .comment-item { background: rgba(255,255,255,0.03); padding: 12px; border-radius: 12px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.05); }
     .comment-header { display: flex; justify-content: space-between; font-size: 0.8rem; color: #f8d64e; margin-bottom: 6px; font-weight: bold; }
-    .comment-text { font-size: 0.9rem; color: #ccc; }
+    .comment-text { font-size: 0.9rem; color: #ccc; margin-bottom: 6px; }
+    .comment-reply { margin-left: 20px; margin-top: 10px; border-left: 2px solid #f8d64e; padding-left: 12px; }
+    .reply-btn { font-size: 0.7rem; cursor: pointer; color: #f8d64e; }
     body.light-theme .comment-text { color: #444; }
     .download-section { margin-bottom: 20px; background: rgba(76, 175, 80, 0.1); border: 1px solid rgba(76, 175, 80, 0.3); padding: 15px; border-radius: 16px; }
 
     footer { text-align: center; padding: 30px 20px; background: rgba(10, 10, 15, 0.7); backdrop-filter: blur(10px); border-top: 1px solid rgba(255, 255, 255, 0.05); color: #888; font-size: 0.85rem; margin-top: 40px; }
+    
+    /* ========== Advanced Settings User Theme Styles ========== */
+    body.user-dark-theme {
+      background: #0a0a0f !important;
+      color: #eef2ff !important;
+    }
+    body.user-dark-theme::before {
+      background: rgba(0, 0, 0, 0.92) !important;
+    }
+    body.user-light-theme {
+      background: #f5f5f7 !important;
+      color: #111 !important;
+    }
+    body.user-light-theme::before {
+      background: rgba(255, 255, 255, 0.9) !important;
+    }
+    .setting-row select:focus, .setting-row select:hover {
+      border-color: var(--primary);
+    }
   </style>
 </head>
 <body>
@@ -296,7 +300,7 @@
 <header class="topbar">
   <div class="logo-area">
     <img class="header-logo" src="https://i.ibb.co/gbw9xwhW/19fe86fb85bfb1b15a386d7adab77856.jpg" alt="logo">
-    <div class="site-badge" data-i18n="siteTitle">سینەمایی پێشەوا قازیی محمد</div>
+    <div class="site-badge">سینەمای پێشەوا قازی محمد</div>
     <div class="clock-widget">
       <i class="fa-regular fa-clock"></i>
       <div>
@@ -307,7 +311,7 @@
     <div class="stats-badge" id="totalCountBadge">📊 بارکردن...</div>
   </div>
   <div class="user-area">
-    <div class="icon-btn" onclick="toggleLightMode()" title="دۆخی ڕووناکی/تاریکی"><i class="fa-solid fa-moon" id="themeIcon"></i></div>
+    <div class="icon-btn" id="themeToggleBtn" title="دۆخی ڕووناکی/تاریکی"><i class="fa-solid fa-moon" id="themeIcon"></i></div>
     <div class="icon-btn" id="bellIcon">
       <i class="fa-regular fa-bell"></i>
       <span class="notif-badge" id="notifBadge" style="display:none;">0</span>
@@ -338,7 +342,6 @@
 </div>
 
 <div class="filters-row">
-  <!-- چەشنەکان بە شێوەی ئارەزوومەندانە (Openable) -->
   <div class="filter-panel" id="genrePanel">
     <div class="panel-header" data-panel="genre">
       <div class="panel-title"><i class="fa-solid fa-filter"></i> چەشنەکان</div>
@@ -346,7 +349,6 @@
     </div>
     <div class="filter-grid" id="genreGrid"></div>
   </div>
-  
   <div class="filter-panel" id="yearPanel">
     <div class="panel-header" data-panel="year">
       <div class="panel-title"><i class="fa-regular fa-calendar"></i> ساڵ</div>
@@ -354,7 +356,6 @@
     </div>
     <div class="filter-grid" id="yearGrid"></div>
   </div>
-  
   <div class="filter-panel" id="originPanel">
     <div class="panel-header" data-panel="origin">
       <div class="panel-title"><i class="fa-solid fa-globe"></i> وڵات / زمان</div>
@@ -362,7 +363,6 @@
     </div>
     <div class="filter-grid" id="originGrid"></div>
   </div>
-  
   <div style="display:flex; justify-content:flex-end;">
     <button class="chip reset-btn" onclick="resetFilters()"><i class="fa-solid fa-xmark"></i> خاوێنکردنەوەی فلتەر</button>
   </div>
@@ -407,7 +407,6 @@
   <input type="text" id="searchInput" class="search-box" placeholder="🔍 گەڕان بە خێرایی... ناوی فیلم یان زنجیرە">
 </div>
 
-<!-- پێشنیاری زیرەک -->
 <div id="aiRecSection" style="display:none; margin: 0 16px 20px;">
   <h2 class="section-title" style="margin:0 0 10px; border-color:#f8d64e;"><i class="fa-solid fa-wand-magic-sparkles" style="color:#f8d64e;"></i> پێشنیاری زیرەک بۆ تۆ</h2>
   <div class="horizontal-grid" id="aiRecGrid"></div>
@@ -427,7 +426,6 @@
 <div id="actionModal" class="modal admin-modal"><div class="modal-card" id="actionModalBody"></div></div>
 <div id="trailerModal" class="modal"><div class="modal-card"><div class="close-modal" onclick="closeTrailerModal()"><i class="fa-solid fa-xmark"></i></div><div class="modal-body" id="trailerBody"></div></div></div>
 
-<!-- Auth Modal (نوێ) -->
 <div id="authModal" class="modal">
   <div class="modal-card" style="max-width: 400px; padding-bottom: 20px;">
     <div class="close-modal" onclick="closeModal('authModal')"><i class="fa-solid fa-xmark"></i></div>
@@ -441,7 +439,6 @@
   </div>
 </div>
 
-<!-- Profile Modal (نوێ) -->
 <div id="profileModal" class="modal">
   <div class="modal-card" style="max-width: 800px;">
     <div class="close-modal" onclick="closeModal('profileModal')"><i class="fa-solid fa-xmark"></i></div>
@@ -461,37 +458,330 @@
 </footer>
 
 <div class="toast-container" id="toastContainer"></div>
-
-<script>// لێرەدا دەبێت لە داهاتوودا لینکی فایەربەیس دابنێیت. بۆ ئێستا بە بەتاڵی جێی دەهێڵین بۆ ئەوەی سایتەکە کار بکات
-const firebaseConfig = {
-  databaseURL: "", 
-};
-
-// فەنکشن بۆ پاشەکەوتکردن (بە شێوەی پارێزراو کە سایتەکە ڕانەگرێت)
-async function saveToCloud(key, data) {
-  if (!firebaseConfig.databaseURL) return; 
-  try {
-    await fetch(`${firebaseConfig.databaseURL}/${key}.json`, {
-      method: 'PUT',
-      body: JSON.stringify(data)
+<!-- ========== پانێڵی ڕەنگەکانی بەڕێوبەر بە Firebase (بۆ هەموو بەکارهێنەران) ========== -->
+<script type="module">
+  // 🔥 لێرەدا کۆدی Firebase configـەکەی خۆت دابنێ (لە Consoleی Firebaseەوە وەریبگرە)
+  const firebaseConfig = {
+    apiKey: "PUT_YOUR_API_KEY_HERE",
+    authDomain: "PUT_YOUR_AUTH_DOMAIN_HERE",
+    databaseURL: "PUT_YOUR_DATABASE_URL_HERE",
+    projectId: "PUT_YOUR_PROJECT_ID_HERE",
+    storageBucket: "PUT_YOUR_STORAGE_BUCKET_HERE",
+    messagingSenderId: "PUT_YOUR_SENDER_ID_HERE",
+    appId: "PUT_YOUR_APP_ID_HERE"
+  };
+  
+  // ⚠️ ئەگەر هێشتا Firebase configـەکەت پڕ نەکردووە، ئەم کۆدە کار ناکات. تکایە سەرەتا Firebase دروست بکە.
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getDatabase, ref, set, onValue, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+  
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const colorsRef = ref(db, 'siteColors');
+  
+  // ڕەنگە بنەڕەتییەکان
+  const defaultColors = {
+    primary: '#f8d64e',
+    primaryDark: '#e0b82e',
+    bgOverlayDark: 'rgba(8, 8, 12, 0.85)',
+    bgOverlayLight: 'rgba(240, 242, 245, 0.85)',
+    textDark: '#eef2ff',
+    textLight: '#111111',
+    cardBgDark: 'rgba(20, 20, 28, 0.6)',
+    cardBgLight: 'rgba(255, 255, 255, 0.7)'
+  };
+  
+  // بارکردنی ڕەنگەکان لە Firebase بۆ هەموو بەکارهێنەران
+  function loadColorsForAll() {
+    onValue(colorsRef, (snapshot) => {
+      const colors = snapshot.val();
+      if (colors) {
+        applyColorsToCSS(colors);
+      } else {
+        // ئەگەر هیچ ڕەنگێک لە داتابەیسدا نەبوو، بنەڕەتییەکان جێبەجێ بکە
+        applyColorsToCSS(defaultColors);
+        // ئەگەر ئەدمین بێت، بنەڕەتییەکان بنێرە بۆ داتابەیس (تەنها جارێک)
+        if (window.currentUser?.email === 'twana@peshawacinema.com') {
+          set(colorsRef, defaultColors);
+        }
+      }
     });
-  } catch (e) {
-    console.log("پەیوەندی ئینتەرنێت نییە");
   }
-}
+  
+  function applyColorsToCSS(colors) {
+    for (let key in colors) {
+      const cssVar = `--${key.replace(/([A-Z])/g, '-$1').toLowerCase()}`;
+      document.documentElement.style.setProperty(cssVar, colors[key]);
+    }
+    // هەروەها پاشبنەمای ڕووکار (بۆ ڕەنگەکانی تری وەک body::before)
+    const isLight = document.body.classList.contains('light-theme');
+    const bgOverlay = isLight ? colors.bgOverlayLight : colors.bgOverlayDark;
+    document.body.style.setProperty('--bg-overlay', bgOverlay);
+    const textColor = isLight ? colors.textLight : colors.textDark;
+    document.body.style.setProperty('--text-color', textColor);
+    document.body.style.color = textColor;
+  }
+  
+  // پاشەکەوتکردنی ڕەنگەکان لە Firebase (تەنها ئەدمین)
+  async function saveColorsToFirebase(colors) {
+    if (window.currentUser?.email !== 'twana@peshawacinema.com') {
+      showToast('تەنها ئەدمین دەتوانێت ڕەنگەکان بگۆڕێت!', 'error');
+      return false;
+    }
+    try {
+      await set(colorsRef, colors);
+      showToast('✅ ڕەنگەکان بە سەرکەوتوویی پاشەکەوتکران و بۆ هەموو بەکارهێنەران نمایش دەکرێن!', 'success');
+      return true;
+    } catch (e) {
+      showToast('هەڵە لە پاشەکەوتکردندا: ' + e.message, 'error');
+      return false;
+    }
+  }
+  
+  // دروستکردنی پانێڵی ڕەنگەکان (تەنها بۆ ئەدمین)
+  function injectColorPanel() {
+    const interval = setInterval(() => {
+      const adminModal = document.getElementById('actionModal');
+      if (!adminModal || adminModal.style.display !== 'block') return;
+      if (document.getElementById('adminColorPanel')) return;
+      
+      // زیادکردنی تابی نوێ
+      const adminTabs = document.querySelector('.admin-tabs');
+      if (adminTabs && !document.querySelector('.admin-tab[data-tab="colors"]')) {
+        const colorTab = document.createElement('div');
+        colorTab.className = 'admin-tab';
+        colorTab.setAttribute('data-tab', 'colors');
+        colorTab.innerHTML = '<i class="fa-solid fa-palette"></i> ڕەنگەکان (هەموو بەکارهێنەران)';
+        colorTab.onclick = () => {
+          document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+          colorTab.classList.add('active');
+          document.getElementById('tab-colors').classList.add('active');
+        };
+        adminTabs.appendChild(colorTab);
+      }
+      
+      if (!document.getElementById('tab-colors')) {
+        const newTab = document.createElement('div');
+        newTab.id = 'tab-colors';
+        newTab.className = 'tab-content';
+        newTab.innerHTML = `
+          <div class="color-panel" id="adminColorPanel">
+            <h3 style="color: var(--primary); margin-bottom: 15px;"><i class="fa-solid fa-palette"></i> ڕەنگەکانی ماڵپەڕ (بۆ هەموو بەکارهێنەران)</h3>
+            <p style="font-size: 0.8rem; margin-bottom: 15px;">ڕەنگەکان هەڵبژێرە، پاشان کلیک لەسەر "Save Colors" بکە. گۆڕانکارییەکان بۆ هەموو بەکارهێنەران (لە هەر براوسەرێک) نمایش دەکرێن.</p>
+            <div class="color-grid">
+              <div class="color-item"><label>🔴 ڕەنگی سەرەکی</label><input type="color" id="color-primary" value="${getCurrentCSSVar('--primary', '#f8d64e')}"></div>
+              <div class="color-item"><label>🟠 ڕەنگی سەرەکی تاریکتر</label><input type="color" id="color-primaryDark" value="${getCurrentCSSVar('--primary-dark', '#e0b82e')}"></div>
+              <div class="color-item"><label>🌙 پاشبنەمای تاریک</label><input type="color" id="color-bgOverlayDark" value="${hexFromRgba(getCurrentCSSVar('--bg-overlay-dark', 'rgba(8,8,12,0.85)'))}"></div>
+              <div class="color-item"><label>☀️ پاشبنەمای ڕووناک</label><input type="color" id="color-bgOverlayLight" value="${hexFromRgba(getCurrentCSSVar('--bg-overlay-light', 'rgba(240,242,245,0.85)'))}"></div>
+              <div class="color-item"><label>📝 ڕەنگی تێکست (تاریک)</label><input type="color" id="color-textDark" value="${getCurrentCSSVar('--text-dark', '#eef2ff')}"></div>
+              <div class="color-item"><label>📝 ڕەنگی تێکست (ڕووناک)</label><input type="color" id="color-textLight" value="${getCurrentCSSVar('--text-light', '#111111')}"></div>
+              <div class="color-item"><label>🎴 پاشبنەمای کارت (تاریک)</label><input type="color" id="color-cardBgDark" value="${hexFromRgba(getCurrentCSSVar('--card-bg-dark', 'rgba(20,20,28,0.6)'))}"></div>
+              <div class="color-item"><label>🎴 پاشبنەمای کارت (ڕووناک)</label><input type="color" id="color-cardBgLight" value="${hexFromRgba(getCurrentCSSVar('--card-bg-light', 'rgba(255,255,255,0.7)'))}"></div>
+            </div>
+            <button class="hero-btn save-colors-btn" id="saveColorsBtn"><i class="fa-solid fa-globe"></i> Save Colors (بۆ هەموو بەکارهێنەران)</button>
+            <button class="hero-btn reset-colors-btn" id="resetColorsBtn"><i class="fa-solid fa-undo-alt"></i> گەڕاندنەوە بۆ بنەڕەت</button>
+          </div>
+        `;
+        
+        const addTab = document.getElementById('tab-add');
+        if (addTab && addTab.parentNode) {
+          addTab.parentNode.insertBefore(newTab, addTab.nextSibling);
+        } else {
+          document.querySelector('.modal-body').appendChild(newTab);
+        }
+        
+        // دوگمەی Save
+        document.getElementById('saveColorsBtn').onclick = async () => {
+          const newColors = {
+            primary: document.getElementById('color-primary').value,
+            primaryDark: document.getElementById('color-primaryDark').value,
+            bgOverlayDark: hexToRgba(document.getElementById('color-bgOverlayDark').value, 0.85),
+            bgOverlayLight: hexToRgba(document.getElementById('color-bgOverlayLight').value, 0.85),
+            textDark: document.getElementById('color-textDark').value,
+            textLight: document.getElementById('color-textLight').value,
+            cardBgDark: hexToRgba(document.getElementById('color-cardBgDark').value, 0.6),
+            cardBgLight: hexToRgba(document.getElementById('color-cardBgLight').value, 0.7)
+          };
+          await saveColorsToFirebase(newColors);
+        };
+        
+        // دوگمەی ڕێکخستنەوە
+        document.getElementById('resetColorsBtn').onclick = async () => {
+          if (confirm('دڵنیای لە گەڕاندنەوەی هەموو ڕەنگەکان بۆ شێوازی بنەڕەت؟ ئەمە کاریگەری لەسەر هەموو بەکارهێنەران دەبێت!')) {
+            await saveColorsToFirebase(defaultColors);
+            setTimeout(() => location.reload(), 800);
+          }
+        };
+      }
+      clearInterval(interval);
+    }, 500);
+  }
+  
+  // هاوکارەکان
+  function getCurrentCSSVar(varName, defaultValue) {
+    const val = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+    return val || defaultValue;
+  }
+  
+  function hexFromRgba(rgba) {
+    const match = rgba.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+    if (!match) return '#000000';
+    return '#' + ((1 << 24) + (parseInt(match[1]) << 16) + (parseInt(match[2]) << 8) + parseInt(match[3])).toString(16).slice(1);
+  }
+  
+  function hexToRgba(hex, alpha) {
+    const r = parseInt(hex.slice(1,3), 16);
+    const g = parseInt(hex.slice(3,5), 16);
+    const b = parseInt(hex.slice(5,7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+  
+  function showToast(msg, type) {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation'}"></i><span>${msg}</span>`;
+    container.appendChild(toast);
+    setTimeout(() => toast.remove(), 4000);
+  }
+  
+  // بارکردنی ڕەنگەکان لە Firebase بۆ هەموو بەکارهێنەران (ئەمە لە سەرەتای بارکردنی پەڕە جێبەجێ دەبێت)
+  loadColorsForAll();
+  
+  // چاوەڕێی کردنەوەی ئەدمین پانێڵ بۆ زیادکردنی پانێڵی ڕەنگەکان
+  const originalShowAdminPanel = window.showAdminPanel;
+  if (originalShowAdminPanel) {
+    window.showAdminPanel = async function() {
+      await originalShowAdminPanel();
+      injectColorPanel();
+    };
+  } else {
+    window.addEventListener('load', () => {
+      const observer = new MutationObserver(() => {
+        const modal = document.getElementById('actionModal');
+        if (modal && modal.style.display === 'block') {
+          injectColorPanel();
+          observer.disconnect();
+        }
+      });
+      observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ['style'] });
+    });
+  }
+</script>
+<script>
+  // ==================== IndexedDB Setup ====================
+  const DB_NAME = 'PeshawaCinemaDB_v2';
+  const DB_VERSION = 1;
+  let db = null;
 
-// فەنکشن بۆ خوێندنەوە (بە شێوەی پارێزراو کە سایتەکە ڕانەگرێت)
-async function loadFromCloud(key) {
-  if (!firebaseConfig.databaseURL) return null;
-  try {
-    const response = await fetch(`${firebaseConfig.databaseURL}/${key}.json`);
-    if (response.ok) return await response.json();
-  } catch (e) {
-    return null;
+  function openDB() {
+    return new Promise((resolve, reject) => {
+      const request = indexedDB.open(DB_NAME, DB_VERSION);
+      request.onerror = () => reject(request.error);
+      request.onsuccess = () => { db = request.result; resolve(db); };
+      request.onupgradeneeded = (event) => {
+        const db = event.target.result;
+        if (!db.objectStoreNames.contains('movies')) {
+          const movieStore = db.createObjectStore('movies', { keyPath: 'id' });
+          movieStore.createIndex('type', 'type');
+          movieStore.createIndex('year', 'year');
+        }
+        if (!db.objectStoreNames.contains('users')) {
+          db.createObjectStore('users', { keyPath: 'email' });
+        }
+        if (!db.objectStoreNames.contains('comments')) {
+          db.createObjectStore('comments', { keyPath: 'id', autoIncrement: true });
+        }
+        if (!db.objectStoreNames.contains('watchHistory')) {
+          db.createObjectStore('watchHistory', { keyPath: 'id', autoIncrement: true });
+        }
+        if (!db.objectStoreNames.contains('notifications')) {
+          db.createObjectStore('notifications', { keyPath: 'id', autoIncrement: true });
+        }
+      };
+    });
   }
-  return null;
-}
-  // ==================== Helper Functions & Setup ====================
+
+  async function getAllMovies() {
+    if (!db) await openDB();
+    return new Promise((resolve) => {
+      const tx = db.transaction('movies', 'readonly');
+      const store = tx.objectStore('movies');
+      const request = store.getAll();
+      request.onsuccess = () => resolve(request.result || []);
+      request.onerror = () => resolve([]);
+    });
+  }
+
+  async function saveMovie(movie) {
+    if (!db) await openDB();
+    const tx = db.transaction('movies', 'readwrite');
+    const store = tx.objectStore('movies');
+    store.put(movie);
+    return tx.complete;
+  }
+
+  async function deleteMovie(id) {
+    if (!db) await openDB();
+    const tx = db.transaction('movies', 'readwrite');
+    const store = tx.objectStore('movies');
+    store.delete(id);
+    return tx.complete;
+  }
+
+  async function getAllUsers() {
+    if (!db) await openDB();
+    return new Promise((resolve) => {
+      const tx = db.transaction('users', 'readonly');
+      const store = tx.objectStore('users');
+      const request = store.getAll();
+      request.onsuccess = () => resolve(request.result || []);
+      request.onerror = () => resolve([]);
+    });
+  }
+
+  async function saveUser(user) {
+    if (!db) await openDB();
+    const tx = db.transaction('users', 'readwrite');
+    const store = tx.objectStore('users');
+    store.put(user);
+    return tx.complete;
+  }
+
+  async function deleteUser(email) {
+    if (!db) await openDB();
+    const tx = db.transaction('users', 'readwrite');
+    const store = tx.objectStore('users');
+    store.delete(email);
+    return tx.complete;
+  }
+
+  async function getComments(movieId) {
+    if (!db) await openDB();
+    return new Promise((resolve) => {
+      const tx = db.transaction('comments', 'readonly');
+      const store = tx.objectStore('comments');
+      const request = store.getAll();
+      request.onsuccess = () => {
+        const all = request.result || [];
+        resolve(all.filter(c => c.movieId === movieId));
+      };
+      request.onerror = () => resolve([]);
+    });
+  }
+
+  async function addComment(comment) {
+    if (!db) await openDB();
+    const tx = db.transaction('comments', 'readwrite');
+    const store = tx.objectStore('comments');
+    store.add(comment);
+    return tx.complete;
+  }
+
+  // ========== Helper Functions ==========
   function showToast(message, type = 'info') {
     const container = document.getElementById('toastContainer');
     const toast = document.createElement('div');
@@ -500,11 +790,13 @@ async function loadFromCloud(key) {
     container.appendChild(toast);
     setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(100%)'; setTimeout(() => toast.remove(), 300); }, 3000);
   }
-function sanitize(str) {
-  let p = document.createElement('p');
-  p.textContent = str;
-  return p.innerHTML;
-}
+
+  function sanitize(str) {
+    let p = document.createElement('p');
+    p.textContent = str;
+    return p.innerHTML;
+  }
+
   async function hashPassword(password) {
     const encoder = new TextEncoder();
     const data = encoder.encode(password);
@@ -513,38 +805,31 @@ function sanitize(str) {
     return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
   }
 
-  // نوێ: کاتژمێری ١٢ کاتژمێری بە کاتی کوردستان
   function updateClock() {
     const now = new Date();
     const kurdistanTime = new Date(now.getTime() + (3 * 60 * 60 * 1000));
     let h = kurdistanTime.getUTCHours();
     let m = kurdistanTime.getUTCMinutes().toString().padStart(2,'0');
     let ampm = h >= 12 ? 'د.ن' : 'پ.ن';
-    h = h % 12; h = h ? h : 12; // convert 0 to 12
+    h = h % 12; h = h ? h : 12;
     document.getElementById('currentTime').innerHTML = `${h}:${m} ${ampm}`;
     document.getElementById('currentDate').innerHTML = `${kurdistanTime.getUTCDate().toString().padStart(2,'0')}/${(kurdistanTime.getUTCMonth()+1).toString().padStart(2,'0')}/${kurdistanTime.getUTCFullYear()}`;
   }
   setInterval(updateClock, 1000); updateClock();
 
-  // Variables
-  const MASTER_EMAIL = "twana@peshawacinema.com", MASTER_NAME = "Twana Yassin";
-  let MASTER_PASS_HASH = null;
-  let accounts = JSON.parse(localStorage.getItem("accounts")||"[]");
-  let currentUser = JSON.parse(localStorage.getItem("currentUser")||"null");
-  let lang = localStorage.getItem("lang")||"ckb";
-  let themeSettings = JSON.parse(localStorage.getItem("themeSettings")||'{"darker":false, "autoplay":false}');
+  // ========== Data & Variables ==========
+  const MASTER_EMAIL = "twana@peshawacinema.com";
+  const MASTER_NAME = "Twana Yassin";
+  let currentUser = null;
+  let lang = "ckb";
+  let themeSettings = { darker: false, autoplay: false };
   let isLightMode = localStorage.getItem("lightMode") === "true";
-  let customMovies = JSON.parse(localStorage.getItem("customMovies")||"[]");
-  let commentsData = JSON.parse(localStorage.getItem("siteComments")||"{}");
-  
-  let currentFilter="all", currentNav="all", currentGenre="all", currentYear="all", currentOrigin="all";
+  let currentFilter = "all", currentNav = "all", currentGenre = "all", currentYear = "all", currentOrigin = "all";
   let currentSort = "default", currentPage = 1, itemsPerPage = 12;
-  let heroIndex=0, heroTimer=null, currentHeroId=null;
-  const SAMPLE_VIDEO = "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4";
+  let heroIndex = 0, currentHeroId = null;
+  let currentServer = "vidsrc";
 
-  function toggleLightMode() { isLightMode = !isLightMode; saveState(); applyTheme(); }
-
-  // پێوەکراوی نوێ: تڕایلەرە ڕاستەقینەکان بۆ فیلمە کۆنەکان
+  // Real Trailers
   const realTrailers = {
     "got": "KPLWWIOCOOQ", "bb": "HhesaQXLuRY", "fast": "2TAOizHWNMU", "mi": "Ohws8y572KE", "jw": "C0VNXUPBsCQ",
     "dune": "n9xhKvBWNx4", "interstellar": "zSWdZVtXT7E", "joker": "zAGVQLHvwOY", "darkknight": "EXeTwQWrcwY",
@@ -553,12 +838,11 @@ function sanitize(str) {
     "witcher": "ndl1W4ltcmg", "stranger": "b9EkMc79ZSU", "lastofus": "uLtkt8BonwM", "moneyheist": "_InqQJRqGW4",
     "peaky": "2nsT9uQPIrk", "avengers": "eOrNdBpGMv8", "spiderman_nwh": "JfVOs4VSpmA", "rrr": "NgBoQKb3AK8",
     "harry_potter1": "VyHV0BRtcWg", "lotr_fellowship": "V75dSyCRWhc", "godfather": "UaVTIH8mujA", "pulpfiction": "s7EdQ4FqbhY",
-    "fightclub": "qtRKdVHc-cE",
-    "theboys": "M1bhOaLV4FU", "avatar2": "d9MyW72ELq0", "vikings": "9GgxinPwAGc", "spiderverse2": "shW9i6k8cB0", "thebatman": "mqqft2x_Aa4"
+    "fightclub": "qtRKdVHc-cE", "theboys": "M1bhOaLV4FU", "avatar2": "d9MyW72ELq0", "vikings": "9GgxinPwAGc", "spiderverse2": "shW9i6k8cB0", "thebatman": "mqqft2x_Aa4"
   };
 
-  // Full Seed Content
-  let seedContent =[
+  // Seed Content (unchanged)
+  let seedContent = [
     { id:"got", title:"Game of Thrones", type:"series", category:"series", rating:"9.2", genre:"فەنتازیا / دراما / ئەکشن", year:2011, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg", bg:"https://image.tmdb.org/t/p/original/suopoADq0k8YZr4dQXcU6pToj6s.jpg", desc:"خێزانی ستارک، لانستەر و تارگاریەن لە شەڕی تەختی ئاسنی وێستڕۆسدا.", seasons:[{name:"وەرزی ١",eps:10,sNum:1,imdb:"tt0944947"},{name:"وەرزی ٢",eps:10,sNum:2,imdb:"tt0944947"},{name:"وەرزی ٣",eps:10,sNum:3,imdb:"tt0944947"},{name:"وەرزی ٤",eps:10,sNum:4,imdb:"tt0944947"},{name:"وەرزی٥",eps:10,sNum:5,imdb:"tt0944947"},{name:"وەرزی ٦",eps:10,sNum:6,imdb:"tt0944947"},{name:"وەرزی ٧",eps:7,sNum:7,imdb:"tt0944947"},{name:"وەرزی ٨",eps:6,sNum:8,imdb:"tt0944947"}] },
     { id:"bb", title:"Breaking Bad", type:"series", category:"series", rating:"9.5", genre:"تاوانکاری / دراما / هەستبزوێن", year:2008, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg", bg:"https://image.tmdb.org/t/p/original/900tHlUYUkp7Ol04XFSoG6BE8TI.jpg", desc:"والتر وایت، مامۆستای کیمیا، دوای نەخۆشی شێرپەنجە دەست بە دروستکردنی مادەی هۆشبەر دەکات.", seasons:[{name:"وەرزی ١",eps:7,sNum:1,imdb:"tt0903747"},{name:"وەرزی ٢",eps:13,sNum:2,imdb:"tt0903747"},{name:"وەرزی ٣",eps:13,sNum:3,imdb:"tt0903747"},{name:"وەرزی ٤",eps:13,sNum:4,imdb:"tt0903747"},{name:"وەرزی ٥",eps:16,sNum:5,imdb:"tt0903747"}] },
     { id:"fast", title:"Fast & Furious", type:"movie", category:"movie", rating:"7.1", genre:"ئەکشن / خێرایی / سەرکێشی", year:2001, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/fiVW06jE7z9YnO4trhaMEdclSiC.jpg", bg:"https://image.tmdb.org/t/p/original/2cGjEGOE27fK17tEki26rLpWv1X.jpg", desc:"دۆم و برایان لە پێشبڕکێی خێراترین ئۆتۆمبێل و تاوانی نێودەوڵەتیدا.", episodes:[{name:"Fast 1",imdb:"tt0232500"}] },
@@ -595,108 +879,191 @@ function sanitize(str) {
     { id:"spiderverse2", title:"Spider-Man: Across the Spider-Verse", type:"movie", category:"hollywood", rating:"8.7", genre:"ئەنیمەیشن / ئەکشن", year:2023, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg", bg:"https://image.tmdb.org/t/p/original/4HodYYKEIsGOdinkGi2Ucz6X9i0.jpg", desc:"مایلز مۆرالێس گەشت دەکات بەناو جیهانە هاوتەریبەکاندا.", episodes:[{name:"فیلم",imdb:"tt9362722"}] },
     { id:"thebatman", title:"The Batman", type:"movie", category:"hollywood", rating:"7.8", genre:"ئەکشن / تاوانکاری", year:2022, origin:"ئەمریکی", img:"https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg", bg:"https://image.tmdb.org/t/p/original/b0PlSFdSmBgZAqfwSQIVyvTWcLA.jpg", desc:"باتمان لە دووەم ساڵی کارکردنیدا ڕووبەڕووی بکوژێکی زنجیرەیی دەبێتەوە.", episodes:[{name:"فیلم",imdb:"tt1877830"}] }
   ];
-  
+
+  // Add views, duration, likes, dislikes, trailer
   seedContent = seedContent.map(item => {
     let hash = 0; for (let i=0; i<item.title.length; i++) hash = ((hash<<5)-hash)+item.title.charCodeAt(i); hash = Math.abs(hash);
     let v = 5000 + (hash % 50000); if (item.rating>8.5) v*=3;
     let dur = item.type === 'movie' ? (90 + (hash%60)) + " خولەک" : (40 + (hash%20)) + " خولەک / ئەڵقە";
     let likes = 100 + (hash%2000); let dislikes = hash%50;
     let tUrl = realTrailers[item.id] ? `https://www.youtube.com/embed/${realTrailers[item.id]}` : "https://www.youtube.com/embed/dQw4w9WgXcQ";
-    return { ...item, views: v, duration: dur, likes: likes, dislikes: dislikes, trailer: tUrl };
+    return { ...item, views: v, duration: dur, likes: likes, dislikes: dislikes, trailer: tUrl, downloadLinks: [] };
   });
 
-  function getAll() { return [...seedContent, ...customMovies]; }
-  function findItem(id) { return getAll().find(x => x.id === id); }
-  function saveState() {
-    localStorage.setItem("lang", lang);
-    localStorage.setItem("customMovies", JSON.stringify(customMovies));
-    localStorage.setItem("accounts", JSON.stringify(accounts));
-    localStorage.setItem("currentUser", JSON.stringify(currentUser));
-    localStorage.setItem("themeSettings", JSON.stringify(themeSettings));
-    localStorage.setItem("lightMode", isLightMode);
-    localStorage.setItem("siteComments", JSON.stringify(commentsData));
-    applyTheme();
-  }
+  let customMovies = [];
 
-  function applyTheme() {
-    const icon = document.getElementById("themeIcon");
-    if(isLightMode) { document.body.classList.add("light-theme"); document.body.classList.remove("darker-theme"); if(icon) icon.className="fa-solid fa-sun"; }
-    else { document.body.classList.remove("light-theme"); if(themeSettings.darker) document.body.classList.add("darker-theme"); if(icon) icon.className="fa-solid fa-moon"; }
-  }
-
-  // Notification System
-  let notifications =[{ icon: "fa-film", text: "١٠٠+ فیلم و زنجیرە زیادکرا!", time: new Date(Date.now() - 3600000) }];
-  function formatNotifTime(d) { let df = new Date()-d; if(df<60000) return "ئێستا"; if(df<3600000) return `${Math.floor(df/60000)} خولەک پێش`; return `${Math.floor(df/3600000)} کاتژمێر پێش`; }
-  function updateNotifBadge() { const b = document.getElementById("notifBadge"); let uc = notifications.filter(n=>!n.read).length; b.textContent = uc; b.style.display = uc>0?"flex":"none"; }
-  function addLiveNotification(icon, text) { notifications.unshift({icon, text, time: new Date(), read: false}); if(notifications.length>10) notifications.pop(); updateNotifBadge(); document.getElementById("bellIcon").classList.add("bell-live"); setTimeout(()=>document.getElementById("bellIcon").classList.remove("bell-live"),800); showToast(text, "info"); }
-  function showNotifModal() { const list = document.getElementById("notificationList"); list.innerHTML=""; notifications.forEach(n => { list.innerHTML += `<div class="notification-item"><div class="notification-icon"><i class="fa-solid ${n.icon}"></i></div><div class="notification-content"><p>${n.text}</p><div class="notification-time"><i class="fa-regular fa-clock"></i> ${formatNotifTime(n.time)}</div></div></div>`; }); document.getElementById("notificationModal").classList.add("show"); notifications.forEach(n=>n.read=true); updateNotifBadge(); }
-  document.getElementById("bellIcon").onclick = (e) => { e.stopPropagation(); showNotifModal(); };
-  document.getElementById("closeNotification").onclick = () => document.getElementById("notificationModal").classList.remove("show");
-
-  // Accounts & Interactions
-  async function migrateAccounts() {
-    if (!MASTER_PASS_HASH) MASTER_PASS_HASH = await hashPassword("1342003");
-    let updated = false;
-    accounts = accounts.map(acc => {
-      if (!acc.email) { acc.email = acc.name === MASTER_NAME ? MASTER_EMAIL : acc.name + "@local.com"; updated = true; }
-      if (!acc.watchLater) acc.watchLater = []; if (!acc.favorites) acc.favorites =[];
-      if (!acc.likedMovies) acc.likedMovies = []; if (!acc.dislikedMovies) acc.dislikedMovies =[];
-      if (!acc.continueWatching) acc.continueWatching =[];
-      return acc;
-    });
-    if (!accounts.some(acc => acc.email === MASTER_EMAIL)) { accounts.unshift({ email: MASTER_EMAIL, username: MASTER_NAME, name: MASTER_NAME, passHash: MASTER_PASS_HASH, role: "admin", watchLater: [], favorites: [], likedMovies:[], dislikedMovies:[], continueWatching:[] }); updated = true; }
-    if (updated) localStorage.setItem("accounts", JSON.stringify(accounts));
-  }
-  function getCurrentUserData() { return currentUser ? accounts.find(acc => acc.email === currentUser.email) : null; }
-  function saveUserData(u) { let idx = accounts.findIndex(acc => acc.email === u.email); if (idx !== -1) accounts[idx] = u; saveState(); }
-  
-  function toggleArray(id, type) {
-    let u = getCurrentUserData(); if (!u) { showToast("تکایە سەرەتا بچۆژوورەوە", "error"); return; }
-    let arr = type==='fav' ? u.favorites : u.watchLater;
-    let exists = arr.includes(id);
-    if (exists) { arr.splice(arr.indexOf(id), 1); showToast("لابردرا", "info"); }
-    else { arr.push(id); showToast("زیادکرا", "success"); }
-    saveUserData(u); renderGrid();
-    if(document.getElementById("detailModal").style.display === "block") updateDetailButtons(id);
-    renderSmartSuggestions();
-  }
-  function updateDetailButtons(id) {
-    let u = getCurrentUserData();
-    if(u) {
-      document.getElementById("toggleFavoriteBtn").innerHTML = u.favorites.includes(id) ? `<i class="fa-solid fa-heart" style="color:#ff4757"></i> لابردن` : `<i class="fa-regular fa-heart"></i> دڵخوازەکان`;
-      document.getElementById("toggleWatchLaterBtn").innerHTML = u.watchLater.includes(id) ? `<i class="fa-solid fa-check"></i> لە لیستدایە` : `<i class="fa-regular fa-clock"></i> دواتر ببینە`;
-      document.getElementById("likeBtn").className = `vote-btn ${u.likedMovies.includes(id)?'liked':''}`;
-      document.getElementById("dislikeBtn").className = `vote-btn ${u.dislikedMovies.includes(id)?'disliked':''}`;
+  async function initDBAndSeed() {
+    await openDB();
+    const movies = await getAllMovies();
+    if (movies.length === 0) {
+      for (let movie of seedContent) {
+        await saveMovie(movie);
+      }
+    }
+    const users = await getAllUsers();
+    if (users.length === 0) {
+      const masterPassHash = await hashPassword("1342003");
+      const masterUser = { email: MASTER_EMAIL, username: MASTER_NAME, name: MASTER_NAME, passHash: masterPassHash, role: "admin", favorites: [], watchLater: [], likedMovies: [], dislikedMovies: [], continueWatching: [] };
+      await saveUser(masterUser);
+    }
+    // Load custom movies from localStorage backup (if any)
+    const storedCustom = localStorage.getItem("customMoviesBackup");
+    if (storedCustom) {
+      customMovies = JSON.parse(storedCustom);
+      for (let movie of customMovies) {
+        const existing = await getAllMovies();
+        if (!existing.find(m => m.id === movie.id)) {
+          await saveMovie(movie);
+        }
+      }
     }
   }
 
-  function likeItem(id) {
-    let u = getCurrentUserData(); if (!u) { showToast("پێویستە بچیتە ژوورەوە", "error"); return; }
-    if(u.dislikedMovies.includes(id)) u.dislikedMovies.splice(u.dislikedMovies.indexOf(id),1);
-    if(u.likedMovies.includes(id)) u.likedMovies.splice(u.likedMovies.indexOf(id),1); else u.likedMovies.push(id);
-    saveUserData(u); updateDetailButtons(id); showToast("ڕای تۆ وەرگیرا", "success");
-    renderSmartSuggestions();
-  }
-  function dislikeItem(id) {
-    let u = getCurrentUserData(); if (!u) { showToast("پێویستە بچیتە ژوورەوە", "error"); return; }
-    if(u.likedMovies.includes(id)) u.likedMovies.splice(u.likedMovies.indexOf(id),1);
-    if(u.dislikedMovies.includes(id)) u.dislikedMovies.splice(u.dislikedMovies.indexOf(id),1); else u.dislikedMovies.push(id);
-    saveUserData(u); updateDetailButtons(id); showToast("ڕای تۆ وەرگیرا", "success");
+  async function getAllItems() {
+    const movies = await getAllMovies();
+    return [...movies];
   }
 
-  function updateContinueWatching(id, sn, ep) {
-    let u = getCurrentUserData(); if(!u) return;
-    let item = findItem(id); if(!item) return;
-    let cw = u.continueWatching ||[];
+  async function findItem(id) {
+    const movies = await getAllMovies();
+    return movies.find(m => m.id === id);
+  }
+
+  async function saveCustomMovie(movie) {
+    customMovies.push(movie);
+    localStorage.setItem("customMoviesBackup", JSON.stringify(customMovies));
+    await saveMovie(movie);
+  }
+
+  // ========== UI & Core Functions ==========
+  function applyTheme() {
+    const icon = document.getElementById("themeIcon");
+    if(isLightMode) { 
+      document.body.classList.add("light-theme"); 
+      document.body.classList.remove("darker-theme"); 
+      if(icon) icon.className="fa-solid fa-sun"; 
+    } else { 
+      document.body.classList.remove("light-theme"); 
+      if(themeSettings.darker) document.body.classList.add("darker-theme"); 
+      if(icon) icon.className="fa-solid fa-moon"; 
+    }
+  }
+
+  function toggleLightMode() { 
+    isLightMode = !isLightMode; 
+    localStorage.setItem("lightMode", isLightMode);
+    applyTheme(); 
+  }
+
+  // Notifications
+  let notifications = [{ icon: "fa-film", text: "١٠٠+ فیلم و زنجیرە زیادکرا!", time: new Date(Date.now() - 3600000), read: false }];
+  function updateNotifBadge() { 
+    const b = document.getElementById("notifBadge"); 
+    let uc = notifications.filter(n=>!n.read).length; 
+    b.textContent = uc; 
+    b.style.display = uc>0?"flex":"none"; 
+  }
+  function addLiveNotification(icon, text) { 
+    notifications.unshift({icon, text, time: new Date(), read: false}); 
+    if(notifications.length>10) notifications.pop(); 
+    updateNotifBadge(); 
+    document.getElementById("bellIcon").classList.add("bell-live"); 
+    setTimeout(()=>document.getElementById("bellIcon").classList.remove("bell-live"),800); 
+    showToast(text, "info"); 
+  }
+  function showNotifModal() { 
+    const list = document.getElementById("notificationList"); 
+    list.innerHTML=""; 
+    notifications.forEach(n => { 
+      list.innerHTML += `<div class="notification-item"><div class="notification-icon"><i class="fa-solid ${n.icon}"></i></div><div class="notification-content"><p>${n.text}</p><div class="notification-time"><i class="fa-regular fa-clock"></i> ${new Date(n.time).toLocaleTimeString()}</div></div></div>`; 
+    }); 
+    document.getElementById("notificationModal").classList.add("show"); 
+    notifications.forEach(n=>n.read=true); 
+    updateNotifBadge(); 
+  }
+  document.getElementById("bellIcon").onclick = (e) => { e.stopPropagation(); showNotifModal(); };
+  document.getElementById("closeNotification").onclick = () => document.getElementById("notificationModal").classList.remove("show");
+
+  // User functions
+  async function getCurrentUserData() { 
+    if (!currentUser) return null;
+    const users = await getAllUsers();
+    return users.find(u => u.email === currentUser.email);
+  }
+  async function saveUserData(updatedUser) {
+    await saveUser(updatedUser);
+    if (currentUser && currentUser.email === updatedUser.email) {
+      currentUser = updatedUser;
+      localStorage.setItem("currentUser", JSON.stringify({ email: currentUser.email }));
+    }
+  }
+
+  async function toggleArray(id, type) {
+    let u = await getCurrentUserData(); 
+    if (!u) { showToast("تکایە سەرەتا بچۆژوورەوە", "error"); return; }
+    let arr = type === 'fav' ? u.favorites : u.watchLater;
+    let idx = arr.indexOf(id);
+    if (idx !== -1) arr.splice(idx, 1);
+    else arr.push(id);
+    await saveUserData(u);
+    renderGrid();
+    if(document.getElementById("detailModal").style.display === "block") updateDetailButtons(id);
+    renderSmartSuggestions();
+  }
+
+  async function updateDetailButtons(id) {
+    let u = await getCurrentUserData();
+    if(u) {
+      const favBtn = document.getElementById("toggleFavoriteBtn");
+      const watchBtn = document.getElementById("toggleWatchLaterBtn");
+      if(favBtn) favBtn.innerHTML = u.favorites.includes(id) ? `<i class="fa-solid fa-heart" style="color:#ff4757"></i> لابردن` : `<i class="fa-regular fa-heart"></i> دڵخوازەکان`;
+      if(watchBtn) watchBtn.innerHTML = u.watchLater.includes(id) ? `<i class="fa-solid fa-check"></i> لە لیستدایە` : `<i class="fa-regular fa-clock"></i> دواتر ببینە`;
+      const likeBtn = document.getElementById("likeBtn");
+      const dislikeBtn = document.getElementById("dislikeBtn");
+      if(likeBtn) likeBtn.className = `vote-btn ${u.likedMovies.includes(id)?'liked':''}`;
+      if(dislikeBtn) dislikeBtn.className = `vote-btn ${u.dislikedMovies.includes(id)?'disliked':''}`;
+    }
+  }
+
+  async function likeItem(id) {
+    let u = await getCurrentUserData(); 
+    if (!u) { showToast("پێویستە بچیتە ژوورەوە", "error"); return; }
+    if(u.dislikedMovies.includes(id)) u.dislikedMovies.splice(u.dislikedMovies.indexOf(id),1);
+    if(u.likedMovies.includes(id)) u.likedMovies.splice(u.likedMovies.indexOf(id),1);
+    else u.likedMovies.push(id);
+    await saveUserData(u);
+    updateDetailButtons(id);
+    showToast("ڕای تۆ وەرگیرا", "success");
+    renderSmartSuggestions();
+  }
+  async function dislikeItem(id) {
+    let u = await getCurrentUserData(); 
+    if (!u) { showToast("پێویستە بچیتە ژوورەوە", "error"); return; }
+    if(u.likedMovies.includes(id)) u.likedMovies.splice(u.likedMovies.indexOf(id),1);
+    if(u.dislikedMovies.includes(id)) u.dislikedMovies.splice(u.dislikedMovies.indexOf(id),1);
+    else u.dislikedMovies.push(id);
+    await saveUserData(u);
+    updateDetailButtons(id);
+    showToast("ڕای تۆ وەرگیرا", "success");
+  }
+
+  async function updateContinueWatching(id, sn, ep) {
+    let u = await getCurrentUserData(); 
+    if(!u) return;
+    let item = await findItem(id); 
+    if(!item) return;
+    let cw = u.continueWatching || [];
     let existing = cw.findIndex(x => x.id === id);
     if(existing !== -1) cw.splice(existing, 1);
     cw.unshift({ id, title: item.title, img: item.img, sn, ep, ts: Date.now() });
     if(cw.length>10) cw.pop();
-    u.continueWatching = cw; saveUserData(u); renderContinueWatching();
+    u.continueWatching = cw;
+    await saveUserData(u);
+    renderContinueWatching();
   }
-  
-  function renderContinueWatching() {
-    let u = getCurrentUserData();
+
+  async function renderContinueWatching() {
+    let u = await getCurrentUserData();
     let sec = document.getElementById("continueWatchingSection");
     let grid = document.getElementById("continueWatchingGrid");
     if(!u || !u.continueWatching || u.continueWatching.length===0) { sec.style.display="none"; return; }
@@ -712,51 +1079,66 @@ function sanitize(str) {
     `).join("");
   }
 
-  function renderSmartSuggestions() {
-    let u = getCurrentUserData();
+  async function renderSmartSuggestions() {
+    let u = await getCurrentUserData();
+    let movies = await getAllItems();
     let sec = document.getElementById("aiRecSection");
     let grid = document.getElementById("aiRecGrid");
     if (!u || u.favorites.length === 0) {
-      let topRated = getAll().sort((a,b) => b.rating - a.rating).slice(0, 10);
+      let topRated = [...movies].sort((a,b) => b.rating - a.rating).slice(0, 10);
       sec.style.display = "block";
       grid.innerHTML = topRated.map(m => `<div class="mini-card" onclick="openDetail('${m.id}')"><img src="${m.img}" class="mini-img"><div class="mini-info">${m.title}</div></div>`).join("");
       return;
     }
     let favGenres = [];
-    u.favorites.forEach(id => { let m = findItem(id); if(m) favGenres.push(...m.genre.split(' / ')); });
+    for (let id of u.favorites) {
+      let m = movies.find(x=>x.id===id);
+      if(m) favGenres.push(...m.genre.split(' / '));
+    }
     favGenres = [...new Set(favGenres)];
-    let recs = getAll().filter(m => !u.favorites.includes(m.id) && favGenres.some(g => m.genre.includes(g))).slice(0, 15);
+    let recs = movies.filter(m => !u.favorites.includes(m.id) && favGenres.some(g => m.genre.includes(g))).slice(0, 15);
     if(recs.length === 0) {
-        let topRated = getAll().sort((a,b) => b.rating - a.rating).slice(0, 10);
-        grid.innerHTML = topRated.map(m => `<div class="mini-card" onclick="openDetail('${m.id}')"><img src="${m.img}" class="mini-img"><div class="mini-info">${m.title}</div></div>`).join("");
+      let topRated = movies.sort((a,b) => b.rating - a.rating).slice(0, 10);
+      grid.innerHTML = topRated.map(m => `<div class="mini-card" onclick="openDetail('${m.id}')"><img src="${m.img}" class="mini-img"><div class="mini-info">${m.title}</div></div>`).join("");
     } else {
-        grid.innerHTML = recs.map(m => `<div class="mini-card" onclick="openDetail('${m.id}')"><img src="${m.img}" class="mini-img"><div class="mini-info">${m.title}</div></div>`).join("");
+      grid.innerHTML = recs.map(m => `<div class="mini-card" onclick="openDetail('${m.id}')"><img src="${m.img}" class="mini-img"><div class="mini-info">${m.title}</div></div>`).join("");
     }
     sec.style.display = "block";
   }
 
   function formatViews(n) { if(n>=1e6) return (n/1e6).toFixed(1)+'M'; if(n>=1e3) return (n/1e3).toFixed(1)+'K'; return n; }
-  
-  function getEmbedUrl(imdb, type, sn, ep, srv='vidsrc') {
-    if(!imdb) return SAMPLE_VIDEO;
-    if(type==='movie') {
-      if(srv==='vidsrc') return `https://vidsrc.me/embed/movie?imdb=${imdb}`;
-      if(srv==='vidmoly') return `https://vidmoly.to/embed/movie?imdb=${imdb}`;
-      if(srv==='streamsb') return `https://streamsb.net/embed/movie/${imdb}`;
+
+  function getEmbedUrl(imdb, type, sn, ep) {
+    if(!imdb) return "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4";
+    if(type === 'movie') {
+      if(currentServer === 'vidsrc') return `https://vidsrc.me/embed/movie?imdb=${imdb}`;
+      if(currentServer === 'vidmoly') return `https://vidmoly.to/embed/movie?imdb=${imdb}`;
+      if(currentServer === 'streamsb') return `https://streamsb.net/embed/movie/${imdb}`;
       return `https://vidsrc.me/embed/movie?imdb=${imdb}`;
     } else {
-      if(srv==='vidsrc') return `https://vidsrc.me/embed/tv?imdb=${imdb}&season=${sn}&episode=${ep}`;
-      if(srv==='vidmoly') return `https://vidmoly.to/embed/tv?imdb=${imdb}&season=${sn}&episode=${ep}`;
-      if(srv==='streamsb') return `https://streamsb.net/embed/tv/${imdb}/${sn}/${ep}`;
+      if(currentServer === 'vidsrc') return `https://vidsrc.me/embed/tv?imdb=${imdb}&season=${sn}&episode=${ep}`;
+      if(currentServer === 'vidmoly') return `https://vidmoly.to/embed/tv?imdb=${imdb}&season=${sn}&episode=${ep}`;
+      if(currentServer === 'streamsb') return `https://streamsb.net/embed/tv/${imdb}/${sn}/${ep}`;
       return `https://vidsrc.me/embed/tv?imdb=${imdb}&season=${sn}&episode=${ep}`;
     }
   }
 
-  function playContent(id, sn, ep, srv="vidsrc"){
-    let item = findItem(id); if(!item) return;
-    let url = SAMPLE_VIDEO;
-    if(item.seasons && sn && ep) { let s=item.seasons.find(x=>x.sNum==sn); if(s&&s.imdb) url=getEmbedUrl(s.imdb,'tv',sn,ep,srv);}
-    else if(item.episodes && item.episodes[0] && item.episodes[0].imdb) url=getEmbedUrl(item.episodes[0].imdb,'movie',null,null,srv);
+  async function playContent(id, sn, ep) {
+    let item = await findItem(id); 
+    if(!item) return;
+    let url;
+    if(item.videoUrl) {
+      url = item.videoUrl;
+    } else {
+      let imdb = null;
+      if(item.seasons && sn && ep) {
+        let season = item.seasons.find(s => s.sNum == sn);
+        if(season) imdb = season.imdb;
+      } else if(item.episodes && item.episodes[0]) {
+        imdb = item.episodes[0].imdb;
+      }
+      url = getEmbedUrl(imdb, item.type, sn, ep);
+    }
     let title = `${item.title} ${sn ? "- وەرز "+sn+" ئەڵقە "+ep : ""}`;
     let html = `<div class="player-wrapper">
       <div class="player-header"><h3>${title}</h3><button class="chip" onclick="openDetail('${id}')"><i class="fa-solid fa-arrow-right"></i> گەڕانەوە</button></div>
@@ -771,20 +1153,24 @@ function sanitize(str) {
     updateContinueWatching(id, sn, ep);
   }
 
-  function playTrailer(id) {
-    let item = findItem(id); if(!item) return;
+  async function playTrailer(id) {
+    let item = await findItem(id);
+    if (!item) return;
     document.getElementById("trailerBody").innerHTML = `<div class="player-box"><iframe src="${item.trailer}?autoplay=1" allowfullscreen></iframe></div>`;
     document.getElementById("trailerModal").style.display = "block";
   }
   window.closeTrailerModal = () => { document.getElementById("trailerModal").style.display = "none"; document.getElementById("trailerBody").innerHTML=""; };
 
-  function openDetail(id) {
-    let item = findItem(id); if (!item) return;
+  async function openDetail(id) {
+    let item = await findItem(id); 
+    if (!item) return;
     let isAdmin = currentUser && currentUser.email === MASTER_EMAIL;
-    item.views++; 
-    let similar = getAll().filter(x=>x.id!==id && x.genre.split('/')[0]===item.genre.split('/')[0]).slice(0,6);
-    let cmts = commentsData[id] ||[];
-    let cmtsHtml = cmts.map(c => `<div class="comment-item"><div class="comment-header"><span><i class="fa-solid fa-user"></i> ${sanitize(c.name)}</span><span>${c.date}</span></div><div class="comment-text">${sanitize(c.text)}</div></div>`).join('');
+    item.views++;
+    await saveMovie(item);
+    let movies = await getAllItems();
+    let similar = movies.filter(x=>x.id!==id && x.genre.split('/')[0]===item.genre.split('/')[0]).slice(0,6);
+    let comments = await getComments(id);
+    let cmtsHtml = comments.map(c => `<div class="comment-item"><div class="comment-header"><span><i class="fa-solid fa-user"></i> ${sanitize(c.userName)}</span><span>${c.date}</span></div><div class="comment-text">${sanitize(c.text)}</div></div>`).join('');
     let html = `
       <div class="close-modal" id="closeModalBtn"><i class="fa-solid fa-xmark"></i></div>
       <div class="modal-hero" style="background-image:url('${item.bg||item.img}')">
@@ -809,25 +1195,25 @@ function sanitize(str) {
         
         <div class="download-section">
           <h4 style="color:#4caf50; margin-bottom:10px;"><i class="fa-solid fa-download"></i> داگرتن بە کوالێتییەکان</h4>
-          <button class="chip" style="background:#4caf50; color:#fff;" onclick="showToast('داگرتنی 1080p دەستی پێکرد','success')">1080p FHD</button>
-          <button class="chip" style="background:#2196F3; color:#fff;" onclick="showToast('داگرتنی 720p دەستی پێکرد','success')">720p HD</button>
-          <button class="chip" style="background:#795548; color:#fff;" onclick="showToast('داگرتنی 480p دەستی پێکرد','success')">480p SD</button>
+          <button class="chip" style="background:#4caf50; color:#fff;" onclick="downloadFile('https://example.com/download/1080p/${item.id}.mp4')">1080p FHD</button>
+          <button class="chip" style="background:#2196F3; color:#fff;" onclick="downloadFile('https://example.com/download/720p/${item.id}.mp4')">720p HD</button>
+          <button class="chip" style="background:#795548; color:#fff;" onclick="downloadFile('https://example.com/download/480p/${item.id}.mp4')">480p SD</button>
         </div>
 
         <div class="server-selector">
           <div class="server-title"><i class="fa-solid fa-server"></i> سێرڤەرەکان</div>
           <div class="server-buttons">
-            <button class="server-btn active" onclick="changeServer(this,'vidsrc')">VIDSRC</button>
-            <button class="server-btn" onclick="changeServer(this,'vidmoly')">Vidmoly</button>
-            <button class="server-btn" onclick="changeServer(this,'streamsb')">StreamSB</button>
+            <button class="server-btn ${currentServer==='vidsrc' ? 'active':''}" onclick="changeServer('vidsrc')">VIDSRC</button>
+            <button class="server-btn ${currentServer==='vidmoly' ? 'active':''}" onclick="changeServer('vidmoly')">Vidmoly</button>
+            <button class="server-btn ${currentServer==='streamsb' ? 'active':''}" onclick="changeServer('streamsb')">StreamSB</button>
           </div>
         </div>
         <h3><i class="fa-solid fa-list"></i> ${item.seasons ? "وەرز و ئەڵقەکان" : "پەخشکردن"}</h3>
         ${item.seasons ? item.seasons.map(s => `
           <h4 style="margin:20px 0 10px; color:#f8d64e;">${s.name}</h4>
           <div class="episodes-container">
-            ${Array.from({length:s.eps}, (_,i)=>`<button class="ep-btn" onclick="playContent('${item.id}',${s.sNum},${i+1}, window.currentServer||'vidsrc')"><i class="fa-solid fa-circle-play"></i> ئەڵقەی ${i+1}</button>`).join("")}
-          </div>`).join("") : `<div class="episodes-container">${item.episodes.map((ep,i)=>`<button class="ep-btn" onclick="playContent('${item.id}',null,${i+1}, window.currentServer||'vidsrc')"><i class="fa-solid fa-circle-play"></i> ${ep.name}</button>`).join("")}</div>`}
+            ${Array.from({length:s.eps}, (_,i)=>`<button class="ep-btn" onclick="playContent('${item.id}',${s.sNum},${i+1})"><i class="fa-solid fa-circle-play"></i> ئەڵقەی ${i+1}</button>`).join("")}
+          </div>`).join("") : `<div class="episodes-container"><button class="ep-btn" onclick="playContent('${item.id}',null,null)"><i class="fa-solid fa-circle-play"></i> بینین</button></div>`}
         
         <div class="comments-section">
           <h3 style="color:#f8d64e; margin-bottom:15px;"><i class="fa-solid fa-comments"></i> سەرنج و کۆمێنتەکان</h3>
@@ -854,29 +1240,33 @@ function sanitize(str) {
     updateDetailButtons(id);
   }
 
-  function addComment(id) {
+  async function addComment(movieId) {
     if(!currentUser) return showToast("پێویستە سەرەتا بچیتە ژوورەوە","error");
-    let input = document.getElementById(`cmtInput_${id}`);
+    let input = document.getElementById(`cmtInput_${movieId}`);
     let text = input.value.trim();
     if(!text) return;
-    if(!commentsData[id]) commentsData[id] =[];
     let now = new Date();
     let dateStr = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()}`;
-    commentsData[id].unshift({ name: currentUser.name || currentUser.username, text, date: dateStr });
-    saveState(); openDetail(id);
+    let comment = { movieId, userId: currentUser.email, userName: currentUser.name || currentUser.username, text, date: dateStr };
+    await addComment(comment);
     showToast("کۆمێنتەکەت بڵاوکرایەوە", "success");
+    openDetail(movieId);
   }
-  
-  window.changeServer = function(btn, srv) {
+
+  window.changeServer = function(srv) {
+    currentServer = srv;
     document.querySelectorAll('.server-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active'); window.currentServer = srv; showToast("سێرڤەر گۆڕا", "info");
+    document.querySelector(`.server-btn[onclick*="${srv}"]`).classList.add('active');
+    showToast("سێرڤەر گۆڕا", "info");
   };
 
   window.copyLink = function(id) {
     let url = window.location.origin + window.location.pathname + "?v=" + id;
     navigator.clipboard.writeText(url); showToast("لینکی فیلمەکە کۆپی کرا", "success");
-  }
+  };
+  window.downloadFile = function(url) { window.open(url, '_blank'); };
 
+  // Auth functions
   let authMode = 'login';
   function showAuthModal(mode) {
     authMode = mode;
@@ -891,41 +1281,370 @@ function sanitize(str) {
     let pass = document.getElementById('authPass').value.trim();
     let name = document.getElementById('authName').value.trim();
     if(!email || !pass) return showToast("تکایە خانەکان پڕبکەرەوە","error");
-    if(authMode === 'register') {
-      if(accounts.find(a=>a.email===email)) return showToast("ئەم ئیمەیڵە بوونی هەیە","error");
-      let hashed = await hashPassword(pass);
-      let newUser = { email, passHash: hashed, username: name||"بەکارهێنەر", name: name||"بەکارهێنەر", role: email===MASTER_EMAIL ? "admin":"user", favorites:[], watchLater:[], likedMovies:[], dislikedMovies:[], continueWatching:[] };
-      accounts.push(newUser); currentUser = newUser;
+    let hashed = await hashPassword(pass);
+    let users = await getAllUsers();
+    if (authMode === 'register') {
+      if(users.find(u => u.email === email)) return showToast("ئەم ئیمەیڵە بوونی هەیە","error");
+      let newUser = { email, passHash: hashed, username: name||"بەکارهێنەر", name: name||"بەکارهێنەر", role: email===MASTER_EMAIL ? "admin":"user", favorites: [], watchLater: [], likedMovies: [], dislikedMovies: [], continueWatching: [] };
+      await saveUser(newUser);
+      currentUser = newUser;
+      localStorage.setItem("currentUser", JSON.stringify({ email: currentUser.email }));
       showToast("سەرکەوتوو بوو! بەخێربێیت","success");
     } else {
-      let hashed = await hashPassword(pass);
-      let user = accounts.find(a=>a.email===email && a.passHash===hashed);
-      if(user) { currentUser = user; showToast("چوویتە ژوورەوە","success"); }
-      else return showToast("زانیارییەکان هەڵەن","error");
+      let user = users.find(u => u.email === email && u.passHash === hashed);
+      if(user) { 
+        currentUser = user;
+        localStorage.setItem("currentUser", JSON.stringify({ email: currentUser.email }));
+        showToast("چوویتە ژوورەوە","success"); 
+      } else return showToast("زانیارییەکان هەڵەن","error");
     }
-    saveState(); updateAccountUI(); closeModal('authModal');
+    closeModal('authModal');
+    updateAccountUI();
     renderSmartSuggestions();
+    renderGrid();
+    
+    // ========== بارکردنی ڕێکخستنەکانی بەکارهێنەر لە Firebase دوای چوونەژوورەوە ==========
+    if (currentUser) {
+      try {
+        // Import Firebase functions (if not already imported globally)
+        const { getDatabase, ref, get } = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js");
+        const app = firebase.app();
+        const db = getDatabase(app);
+        const userId = currentUser.email.replace(/\./g, '_');
+        const settingsRef = ref(db, `userSettings/${userId}`);
+        const snap = await get(settingsRef);
+        if (snap.exists()) {
+          const settings = snap.val();
+          if (settings.defaultServer) currentServer = settings.defaultServer;
+          if (settings.themeMode === "dark") {
+            document.body.classList.add("user-dark-theme");
+            document.body.classList.remove("user-light-theme");
+          } else if (settings.themeMode === "light") {
+            document.body.classList.add("user-light-theme");
+            document.body.classList.remove("user-dark-theme");
+          }
+          if (!settings.notificationsEnabled) {
+            document.getElementById("bellIcon").style.opacity = "0.5";
+          }
+          if (settings.videoQuality) {
+            document.documentElement.style.setProperty('--default-quality', settings.videoQuality);
+          }
+        }
+      } catch(e) { console.error("Failed to load user settings", e); }
+    }
   }
 
-  function showProfileModal() {
+  function logout() {
+    currentUser = null;
+    localStorage.removeItem("currentUser");
+    updateAccountUI();
+    showToast("دەرچوویت", "info");
+    renderGrid();
+  }
+
+  async function updateAccountUI() {
+    let isLogged = !!currentUser;
+    let userData = isLogged ? await getCurrentUserData() : null;
+    document.getElementById("userDropdown").innerHTML = `
+      <div style="display:flex; gap:16px; align-items:center; margin-bottom:16px; padding:16px; background:rgba(255,255,255,0.03); border-radius:18px;">
+        <div style="width:48px; height:48px; background:linear-gradient(135deg, #f8d64e, #d8b22a); border-radius:14px; display:flex; align-items:center; justify-content:center; color:#000;"><i class="fa-solid fa-user"></i></div>
+        <div><h4 style="margin:0;">${isLogged ? (userData?.username || "بەکارهێنەر") : "میوان"}</h4><span style="font-size:0.8rem; color:#aaa;">${isLogged ? (userData?.role === "admin" ? "بەڕێوبەر" : "بەکارهێنەر") : "سەردانکەر"}</span></div>
+      </div>
+      ${isLogged ? `<div class="dropdown-item" onclick="showProfileModal()"><i class="fa-solid fa-circle-user"></i> پرۆفایلی من</div>` : ''}
+      ${isLogged && userData?.role === "admin" ? `<div class="dropdown-item" onclick="showAdminPanel()"><i class="fa-solid fa-shield-halved"></i> پانێڵی بەڕێوبەر</div>` : ''}
+      <hr class="dropdown-sep">
+      <div class="dropdown-item" onclick="showSettingsPanel()"><i class="fa-solid fa-gear"></i> ڕێکخستنی پێشکەوتوو</div>
+      <hr class="dropdown-sep">
+      ${!isLogged ? `<div class="dropdown-item" onclick="showAuthModal('login')"><i class="fa-solid fa-right-to-bracket"></i> چوونەژوورەوە</div>` : ''}
+      ${!isLogged ? `<div class="dropdown-item" onclick="showAuthModal('register')"><i class="fa-solid fa-user-plus"></i> خۆتۆمارکردن</div>` : ''}
+      ${isLogged ? `<div class="dropdown-item" style="color:#ff6b6b;" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> دەرچوون</div>` : ''}`;
+    document.getElementById("avatarBtn").innerHTML = isLogged && userData?.role === "admin" ? '<i class="fa-solid fa-crown"></i>' : '<i class="fa-solid fa-user"></i>';
+    renderContinueWatching();
+  }
+
+  async function showProfileModal() {
     if(!currentUser) return;
-    document.getElementById("profileFavs").innerHTML = currentUser.favorites.map(id => {
-      let it = findItem(id); return it ? `<div class="movie-card" onclick="openDetail('${id}')"><img class="card-img" src="${it.img}"><div class="card-overlay"><h3 class="card-title">${it.title}</h3></div></div>` : '';
+    let userData = await getCurrentUserData();
+    let movies = await getAllItems();
+    document.getElementById("profileFavs").innerHTML = (userData?.favorites || []).map(id => {
+      let it = movies.find(m => m.id === id);
+      return it ? `<div class="movie-card" onclick="openDetail('${id}')"><img class="card-img" src="${it.img}"><div class="card-overlay"><h3 class="card-title">${it.title}</h3></div></div>` : '';
     }).join('') || '<p style="color:#aaa; font-size:0.8rem; text-align:center; grid-column:1/-1;">هیچ فیلمێک نییە</p>';
-    document.getElementById("profileWatchLater").innerHTML = currentUser.watchLater.map(id => {
-      let it = findItem(id); return it ? `<div class="movie-card" onclick="openDetail('${id}')"><img class="card-img" src="${it.img}"><div class="card-overlay"><h3 class="card-title">${it.title}</h3></div></div>` : '';
+    document.getElementById("profileWatchLater").innerHTML = (userData?.watchLater || []).map(id => {
+      let it = movies.find(m => m.id === id);
+      return it ? `<div class="movie-card" onclick="openDetail('${id}')"><img class="card-img" src="${it.img}"><div class="card-overlay"><h3 class="card-title">${it.title}</h3></div></div>` : '';
     }).join('') || '<p style="color:#aaa; font-size:0.8rem; text-align:center; grid-column:1/-1;">هیچ فیلمێک نییە</p>';
     document.getElementById("profileModal").style.display = "block";
     document.getElementById("userDropdown").classList.remove("show");
   }
 
-  function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
-  function showSettingsPanel() {
-  showToast("بەشی ڕێکخستن لە وەشانی داهاتوو زیاد دەکرێت", "info");
-}
-  function showAdminPanel() {
-    if (currentUser?.email !== MASTER_EMAIL && currentUser?.role !== "admin") { showToast("تەنها بەڕێوبەر دەتوانێت بچێتە ژوورەوە", "error"); return; }
-    let isMaster = currentUser.email === MASTER_EMAIL;
+  // ========== بەشی ڕێکخستنی پێشکەوتوو (Advanced Settings) ==========
+  window.showSettingsPanel = async function() {
+    if (!currentUser) {
+      showToast("تکایە سەرەتا بچۆ ژوورەوە بۆ ڕێکخستنی تایبەت", "error");
+      return;
+    }
+
+    // Firebase import and db variable (use existing firebase app)
+    let db;
+    try {
+      const { getDatabase, ref, get, update } = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js");
+      // Reuse the existing firebase app (initialized in the module script)
+      // We need to access the already initialized app. Since the module script is separate, we can get it via firebase.app()
+      // but firebase might not be global. Instead, we'll initialize a new one with the same config (safe because it's idempotent)
+      const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js");
+      const app = initializeApp({
+        apiKey: "AIzaSyAst4isKbXTH7CaycPxalyCTfx9zuaPlv8",
+        authDomain: "peshawa-cinema.firebaseapp.com",
+        databaseURL: "https://peshawa-cinema-default-rtdb.firebaseio.com",
+        projectId: "peshawa-cinema",
+        storageBucket: "peshawa-cinema.firebasestorage.app",
+        messagingSenderId: "488619323302",
+        appId: "1:488619323302:web:407c7dffbc755afe5ea967"
+      });
+      db = getDatabase(app);
+    } catch(e) {
+      console.error("Firebase init error", e);
+      showToast("هەڵە لە پێوەندی بە Firebase", "error");
+      return;
+    }
+
+    const userId = currentUser.email.replace(/\./g, '_');
+    const userSettingsRef = ref(db, `userSettings/${userId}`);
+    
+    let userSettings = {};
+    try {
+      const snapshot = await get(userSettingsRef);
+      if (snapshot.exists()) {
+        userSettings = snapshot.val();
+      } else {
+        userSettings = {
+          videoQuality: "auto",
+          subtitleLang: "ckb",
+          autoplayNext: true,
+          notificationsEnabled: true,
+          dataSaver: false,
+          defaultServer: "vidsrc",
+          themeMode: "system",
+          language: "ckb",
+          skipIntro: false,
+          defaultPlaybackSpeed: 1.0
+        };
+        await set(userSettingsRef, userSettings);
+      }
+    } catch (e) {
+      showToast("هەڵە لە بارکردنی ڕێکخستنەکان", "error");
+      return;
+    }
+
+    const saveSettingToFirebase = async (key, value) => {
+      userSettings[key] = value;
+      try {
+        await update(userSettingsRef, { [key]: value });
+        applyUserSettings(userSettings);
+        showToast(`ڕێکخستنی ${key} گۆڕا و پاشەکەوت کرا لە هەموو شوێنێک`, "success");
+      } catch (e) {
+        showToast("هەڵە لە پاشەکەوتکردن", "error");
+      }
+    };
+
+    const applyUserSettings = (settings) => {
+      if (settings.videoQuality) {
+        document.documentElement.style.setProperty('--default-quality', settings.videoQuality);
+      }
+      if (settings.themeMode === "dark") {
+        document.body.classList.add("user-dark-theme");
+        document.body.classList.remove("user-light-theme");
+      } else if (settings.themeMode === "light") {
+        document.body.classList.add("user-light-theme");
+        document.body.classList.remove("user-dark-theme");
+      } else {
+        document.body.classList.remove("user-dark-theme", "user-light-theme");
+      }
+      if (settings.defaultServer) {
+        currentServer = settings.defaultServer;
+      }
+      if (!settings.notificationsEnabled) {
+        document.getElementById("bellIcon").style.opacity = "0.5";
+      } else {
+        document.getElementById("bellIcon").style.opacity = "1";
+      }
+    };
+
+    const modalHtml = `
+      <div class="modal" id="settingsAdvancedModal" style="display:block; z-index:10000;">
+        <div class="modal-card" style="max-width: 550px; margin: 50px auto;">
+          <div class="close-modal" onclick="closeSettingsModal()"><i class="fa-solid fa-xmark"></i></div>
+          <div class="modal-hero" style="min-height: 120px; padding: 20px;">
+            <h2 style="color: var(--primary);"><i class="fa-solid fa-sliders-h"></i> ڕێکخستنی پێشکەوتوو</h2>
+            <p style="font-size:0.8rem;">تایبەتمەندییە ناوازەکان بۆ باشترکردنی ئەزموونی بینینی تۆ - پاشەکەوتکراو لە Firebase</p>
+          </div>
+          <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+            
+            <div class="setting-row">
+              <div class="setting-info">
+                <h4><i class="fa-solid fa-tv"></i> کوالێتی پەخش</h4>
+                <p>هەڵبژاردنی کوالێتی خوازراو</p>
+              </div>
+              <select id="userQualitySelect" class="sort-select">
+                <option value="auto" ${userSettings.videoQuality === 'auto' ? 'selected' : ''}>خۆکار (Auto)</option>
+                <option value="4k" ${userSettings.videoQuality === '4k' ? 'selected' : ''}>٤K</option>
+                <option value="hd" ${userSettings.videoQuality === 'hd' ? 'selected' : ''}>HD</option>
+                <option value="sd" ${userSettings.videoQuality === 'sd' ? 'selected' : ''}>SD (کەمکردنی داتا)</option>
+              </select>
+            </div>
+            
+            <div class="setting-row">
+              <div class="setting-info">
+                <h4><i class="fa-solid fa-language"></i> زمانی ژێرنووس</h4>
+                <p>زمانی بنەڕەتی ژێرنووس</p>
+              </div>
+              <select id="userSubtitleLang" class="sort-select">
+                <option value="ckb" ${userSettings.subtitleLang === 'ckb' ? 'selected' : ''}>کوردی</option>
+                <option value="en" ${userSettings.subtitleLang === 'en' ? 'selected' : ''}>English</option>
+                <option value="ar" ${userSettings.subtitleLang === 'ar' ? 'selected' : ''}>العربية</option>
+              </select>
+            </div>
+            
+            <div class="setting-row">
+              <div class="setting-info">
+                <h4><i class="fa-solid fa-server"></i> سێرڤەری بنەڕەت</h4>
+                <p>سێرڤەری خوازراو بۆ پەخشکردن</p>
+              </div>
+              <select id="userDefaultServer" class="sort-select">
+                <option value="vidsrc" ${userSettings.defaultServer === 'vidsrc' ? 'selected' : ''}>VIDSRC</option>
+                <option value="vidmoly" ${userSettings.defaultServer === 'vidmoly' ? 'selected' : ''}>Vidmoly</option>
+                <option value="streamsb" ${userSettings.defaultServer === 'streamsb' ? 'selected' : ''}>StreamSB</option>
+              </select>
+            </div>
+            
+            <div class="setting-row">
+              <div class="setting-info">
+                <h4><i class="fa-solid fa-moon"></i> دۆخی ڕووناکی (تایبەت بە تۆ)</h4>
+                <p>سەربەخۆ لە ڕووکاری سەرەکی</p>
+              </div>
+              <select id="userThemeMode" class="sort-select">
+                <option value="system" ${userSettings.themeMode === 'system' ? 'selected' : ''}>شوێنکەوتنی سیستەم</option>
+                <option value="dark" ${userSettings.themeMode === 'dark' ? 'selected' : ''}>تاریک</option>
+                <option value="light" ${userSettings.themeMode === 'light' ? 'selected' : ''}>ڕووناک</option>
+              </select>
+            </div>
+            
+            <div class="setting-row">
+              <div class="setting-info">
+                <h4><i class="fa-solid fa-gauge-high"></i> خێرایی پەخش</h4>
+                <p>خێرایی بنەڕەتی ڤیدیۆ</p>
+              </div>
+              <select id="userPlaybackSpeed" class="sort-select">
+                <option value="0.5" ${userSettings.defaultPlaybackSpeed === 0.5 ? 'selected' : ''}>0.5x</option>
+                <option value="0.75" ${userSettings.defaultPlaybackSpeed === 0.75 ? 'selected' : ''}>0.75x</option>
+                <option value="1.0" ${userSettings.defaultPlaybackSpeed === 1.0 ? 'selected' : ''}>١x</option>
+                <option value="1.25" ${userSettings.defaultPlaybackSpeed === 1.25 ? 'selected' : ''}>١.٢٥x</option>
+                <option value="1.5" ${userSettings.defaultPlaybackSpeed === 1.5 ? 'selected' : ''}>١.٥x</option>
+                <option value="2.0" ${userSettings.defaultPlaybackSpeed === 2.0 ? 'selected' : ''}>٢x</option>
+              </select>
+            </div>
+            
+            <div class="setting-row">
+              <div class="setting-info">
+                <h4><i class="fa-solid fa-forward-step"></i> پەخشکردنی خۆکاری ئەڵقەی داهاتوو</h4>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="userAutoplayNext" ${userSettings.autoplayNext ? 'checked' : ''}>
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+            
+            <div class="setting-row">
+              <div class="setting-info">
+                <h4><i class="fa-solid fa-bell"></i> ئاگادارییەکان</h4>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="userNotificationsEnabled" ${userSettings.notificationsEnabled ? 'checked' : ''}>
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+            
+            <div class="setting-row">
+              <div class="setting-info">
+                <h4><i class="fa-solid fa-database"></i> ڕێژەی کەمکردنی داتا</h4>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="userDataSaver" ${userSettings.dataSaver ? 'checked' : ''}>
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+            
+            <div class="setting-row">
+              <div class="setting-info">
+                <h4><i class="fa-solid fa-forward"></i> پەڕاندنی سەرەتای فیلم/زنجیرە</h4>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="userSkipIntro" ${userSettings.skipIntro ? 'checked' : ''}>
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+            
+            <div style="margin-top: 30px; display: flex; gap: 10px; justify-content: space-between;">
+              <button class="hero-btn secondary" id="resetUserSettingsBtn" style="background:#ff4757; color:white;"><i class="fa-solid fa-trash"></i> ڕێکخستنەکان بگەڕێنەوە بۆ بنەڕەت</button>
+              <button class="hero-btn" id="closeSettingsBtn"><i class="fa-solid fa-check"></i> پەسەندکردن و داخستن</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    const existingModal = document.getElementById("settingsAdvancedModal");
+    if (existingModal) existingModal.remove();
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+    
+    document.getElementById("userQualitySelect").onchange = (e) => saveSettingToFirebase("videoQuality", e.target.value);
+    document.getElementById("userSubtitleLang").onchange = (e) => saveSettingToFirebase("subtitleLang", e.target.value);
+    document.getElementById("userDefaultServer").onchange = (e) => saveSettingToFirebase("defaultServer", e.target.value);
+    document.getElementById("userThemeMode").onchange = (e) => saveSettingToFirebase("themeMode", e.target.value);
+    document.getElementById("userPlaybackSpeed").onchange = (e) => saveSettingToFirebase("defaultPlaybackSpeed", parseFloat(e.target.value));
+    document.getElementById("userAutoplayNext").onchange = (e) => saveSettingToFirebase("autoplayNext", e.target.checked);
+    document.getElementById("userNotificationsEnabled").onchange = (e) => saveSettingToFirebase("notificationsEnabled", e.target.checked);
+    document.getElementById("userDataSaver").onchange = (e) => saveSettingToFirebase("dataSaver", e.target.checked);
+    document.getElementById("userSkipIntro").onchange = (e) => saveSettingToFirebase("skipIntro", e.target.checked);
+    
+    document.getElementById("closeSettingsBtn").onclick = () => closeSettingsModal();
+    document.getElementById("resetUserSettingsBtn").onclick = async () => {
+      if (confirm("دڵنیای لە گەڕاندنەوەی هەموو ڕێکخستنەکان بۆ شێوازی بنەڕەت؟")) {
+        const defaultSettings = {
+          videoQuality: "auto",
+          subtitleLang: "ckb",
+          autoplayNext: true,
+          notificationsEnabled: true,
+          dataSaver: false,
+          defaultServer: "vidsrc",
+          themeMode: "system",
+          language: "ckb",
+          skipIntro: false,
+          defaultPlaybackSpeed: 1.0
+        };
+        try {
+          await set(userSettingsRef, defaultSettings);
+          showToast("ڕێکخستنەکان گەڕێنرایەوە بۆ بنەڕەت", "success");
+          location.reload();
+        } catch(e) {
+          showToast("هەڵە لە ڕێکخستنەوە", "error");
+        }
+      }
+    };
+    
+    window.closeSettingsModal = function() {
+      const modal = document.getElementById("settingsAdvancedModal");
+      if (modal) modal.remove();
+    };
+    
+    applyUserSettings(userSettings);
+  };
+
+  async function showAdminPanel() {
+    if (currentUser?.email !== MASTER_EMAIL) { showToast("تەنها بەڕێوبەر دەتوانێت بچێتە ژوورەوە", "error"); return; }
+    let movies = await getAllItems();
+    let users = await getAllUsers();
     const modal = document.getElementById("actionModal");
     const body = document.getElementById("actionModalBody");
     body.parentElement.style.maxWidth = "700px";
@@ -940,19 +1659,19 @@ function sanitize(str) {
         </div>
         <div id="tab-stats" class="tab-content active">
           <div class="stat-cards">
-            <div class="stat-card"><i class="fa-solid fa-film"></i><h2>${getAll().length}</h2><p>کۆی بەرهەم</p></div>
-            <div class="stat-card"><i class="fa-solid fa-users"></i><h2>${accounts.length}</h2><p>بەکارهێنەر</p></div>
-            <div class="stat-card"><i class="fa-solid fa-eye"></i><h2>${formatViews(getAll().reduce((a,b)=>a+(b.views||0),0))}</h2><p>کۆی بینین</p></div>
+            <div class="stat-card"><i class="fa-solid fa-film"></i><h2>${movies.length}</h2><p>کۆی بەرهەم</p></div>
+            <div class="stat-card"><i class="fa-solid fa-users"></i><h2>${users.length}</h2><p>بەکارهێنەر</p></div>
+            <div class="stat-card"><i class="fa-solid fa-eye"></i><h2>${formatViews(movies.reduce((a,b)=>a+(b.views||0),0))}</h2><p>کۆی بینین</p></div>
           </div>
         </div>
         <div id="tab-users" class="tab-content">
-          ${accounts.map(acc => `
+          ${users.map(acc => `
             <div class="user-list-item">
               <div class="user-info"><span class="user-name">${acc.name || acc.username}</span><span class="user-email">${acc.email}</span></div>
               <div>
                 <span class="user-role">${acc.role === "admin" ? "ئەدمین" : "بەکارهێنەر"}</span>
-                ${acc.role !== "admin" ? (isMaster ? `<button class="promote-btn" onclick="promoteToAdmin('${acc.email}')">ئەدمین</button>` : '') : (isMaster && acc.email !== MASTER_EMAIL ? `<button class="promote-btn" style="background:rgba(255,71,87,0.2); color:#ff4757;" onclick="demoteAdmin('${acc.email}')">لابردنی ئەدمین</button>` : '')}
-                ${isMaster && acc.email !== MASTER_EMAIL ? `<button class="promote-btn" style="background:#ff4757; color:#fff;" onclick="deleteAcc('${acc.email}')"><i class="fa-solid fa-trash"></i></button>` : ''}
+                ${acc.role !== "admin" ? `<button class="promote-btn" onclick="promoteToAdmin('${acc.email}')">ئەدمین</button>` : (acc.email !== MASTER_EMAIL ? `<button class="promote-btn" style="background:rgba(255,71,87,0.2); color:#ff4757;" onclick="demoteAdmin('${acc.email}')">لابردنی ئەدمین</button>` : '')}
+                ${acc.email !== MASTER_EMAIL ? `<button class="promote-btn" style="background:#ff4757; color:#fff;" onclick="deleteAcc('${acc.email}')"><i class="fa-solid fa-trash"></i></button>` : ''}
               </div>
             </div>`).join('')}
         </div>
@@ -967,18 +1686,40 @@ function sanitize(str) {
       </div>
     `;
     modal.style.display = "block"; document.body.style.overflow = "hidden";
-    document.getElementById("saveNewBtn").onclick = () => {
+    document.getElementById("saveNewBtn").onclick = async () => {
+      let id = document.getElementById("newId").value;
       let title = document.getElementById("newTitle").value;
       if(!title) return;
-      if(getAll().find(x => x.id === document.getElementById("newId").value)) {
-  showToast("ئەم ئایدییە پێشتر هەبووە، تکایە دانەیەکی تر بنووسە", "error");
-  return;
-}
-      let newItem = { id: document.getElementById("newId").value, title: title, type: document.getElementById("newType").value, category: "movie", rating: "7.0", genre: "ئەکشن", year: 2024, origin: "ئەمریکی", img: document.getElementById("newImg").value, bg: document.getElementById("newImg").value, desc: "پێناسە", views: 1000, duration: "120m", likes:0, dislikes:0, trailer: document.getElementById("newTrailer").value };
-      customMovies.push(newItem); saveState();
+      let existing = await getAllItems();
+      if(existing.find(x => x.id === id)) {
+        showToast("ئەم ئایدییە پێشتر هەبووە", "error");
+        return;
+      }
+      let newItem = { 
+        id: id, 
+        title: title, 
+        type: document.getElementById("newType").value, 
+        category: "movie", 
+        rating: "7.0", 
+        genre: "ئەکشن", 
+        year: 2024, 
+        origin: "ئەمریکی", 
+        img: document.getElementById("newImg").value, 
+        bg: document.getElementById("newImg").value, 
+        desc: "پێناسە", 
+        views: 1000, 
+        duration: "120 خولەک", 
+        likes: 0, 
+        dislikes: 0, 
+        trailer: document.getElementById("newTrailer").value,
+        downloadLinks: []
+      };
+      await saveCustomMovie(newItem);
       addLiveNotification("fa-film", `فیلمی نوێ زیادکرا: ${title}`);
-      showToast("سەرکەوتوو بوو", "success"); renderGrid(); closeActionModal();
-    }
+      showToast("سەرکەوتوو بوو", "success");
+      renderGrid();
+      closeActionModal();
+    };
     document.getElementById("userDropdown").classList.remove("show");
   }
 
@@ -987,21 +1728,36 @@ function sanitize(str) {
     document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
     btn.classList.add('active'); document.getElementById('tab-'+tab).classList.add('active');
   };
-  window.promoteToAdmin = function(email) { let acc = accounts.find(a=>a.email===email); if(acc){ acc.role="admin"; saveState(); showAdminPanel(); } };
-  window.demoteAdmin = function(email) { let acc = accounts.find(a=>a.email===email); if(acc){ acc.role="user"; saveState(); showAdminPanel(); } };
-  window.deleteAcc = function(email) { if(confirm("دڵنیای لە سڕینەوە؟")) { accounts = accounts.filter(a=>a.email!==email); saveState(); showAdminPanel(); } };
-  window.deleteAnyItem = function(id) {
-    if(!confirm("دڵنیای؟")) return;
-    let idx = customMovies.findIndex(x=>x.id===id); if(idx!==-1) customMovies.splice(idx,1);
-    else { let sIdx = seedContent.findIndex(x=>x.id===id); if(sIdx!==-1) seedContent.splice(sIdx,1); }
-    saveState(); showToast("سڕایەوە", "success"); document.getElementById("detailModal").style.display="none"; document.body.style.overflow="auto"; renderGrid();
+  window.promoteToAdmin = async (email) => { 
+    let users = await getAllUsers();
+    let acc = users.find(a=>a.email===email); 
+    if(acc){ acc.role="admin"; await saveUser(acc); showAdminPanel(); } 
   };
+  window.demoteAdmin = async (email) => { 
+    let users = await getAllUsers();
+    let acc = users.find(a=>a.email===email); 
+    if(acc){ acc.role="user"; await saveUser(acc); showAdminPanel(); } 
+  };
+  window.deleteAcc = async (email) => { 
+    if(confirm("دڵنیای لە سڕینەوە؟")) { 
+      await deleteUser(email); 
+      showAdminPanel(); 
+    } 
+  };
+  window.deleteAnyItem = async (id) => {
+    if(!confirm("دڵنیای؟")) return;
+    await deleteMovie(id);
+    showToast("سڕایەوە", "success");
+    document.getElementById("detailModal").style.display="none";
+    document.body.style.overflow="auto";
+    renderGrid();
+  };
+  window.closeActionModal = function () { document.getElementById("actionModal").style.display = "none"; document.body.style.overflow = "auto"; };
 
-  window.toggleThemeSetting = function(key, val) { themeSettings[key]=val; saveState(); applyTheme(); }
-
-  function renderGrid() {
+  async function renderGrid() {
+    let movies = await getAllItems();
     let term = document.getElementById("searchInput").value.trim().toLowerCase();
-    let list = getAll().filter(item => {
+    let filtered = movies.filter(item => {
       let matchNav = true;
       if (currentNav === "movie") matchNav = item.type === "movie";
       else if (currentNav === "series") matchNav = item.type === "series";
@@ -1015,17 +1771,17 @@ function sanitize(str) {
       let matchGenre = (currentGenre === "all") ? true : item.genre.includes(currentGenre);
       let matchYear = (currentYear === "all") ? true : item.year == currentYear;
       let matchOrigin = (currentOrigin === "all") ? true : item.origin === currentOrigin;
-      let matchText =[item.title, item.genre].join(" ").toLowerCase().includes(term);
+      let matchText = [item.title, item.genre].join(" ").toLowerCase().includes(term);
       return matchNav && matchType && matchGenre && matchYear && matchOrigin && matchText;
     });
-    if(currentNav === "trending") { list.sort((a,b)=>b.views - a.views); list = list.slice(0, 15); }
+    if(currentNav === "trending") { filtered.sort((a,b)=>b.views - a.views); filtered = filtered.slice(0, 15); }
     else {
-      if(currentSort === "views") list.sort((a,b)=>b.views - a.views);
-      else if(currentSort === "rating") list.sort((a,b)=>b.rating - a.rating);
+      if(currentSort === "views") filtered.sort((a,b)=>b.views - a.views);
+      else if(currentSort === "rating") filtered.sort((a,b)=>b.rating - a.rating);
     }
-    let totalPages = Math.ceil(list.length / itemsPerPage);
+    let totalPages = Math.ceil(filtered.length / itemsPerPage);
     if(currentPage > totalPages) currentPage = 1;
-    let paged = list.slice((currentPage-1)*itemsPerPage, currentPage*itemsPerPage);
+    let paged = filtered.slice((currentPage-1)*itemsPerPage, currentPage*itemsPerPage);
     let grid = document.getElementById("moviesGrid");
     if(paged.length===0) grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:40px;color:#aaa;">هیچ ئەنجامێک نەدۆزرایەوە</div>`;
     else {
@@ -1040,7 +1796,7 @@ function sanitize(str) {
           </div>
         </div>`).join("");
     }
-    document.getElementById("totalCountBadge").innerHTML = `📽️ ${list.length}`;
+    document.getElementById("totalCountBadge").innerHTML = `📽️ ${filtered.length}`;
     renderPagination(totalPages);
   }
 
@@ -1060,69 +1816,41 @@ function sanitize(str) {
   }
   window.changePage = function(num) { currentPage=num; renderGrid(); window.scrollTo({top: document.querySelector(".controls-container")?.offsetTop||500, behavior:'smooth'}); }
 
-  window.resetFilters = function() {
+  function resetFilters() {
     currentGenre="all"; currentYear="all"; currentOrigin="all"; document.getElementById("searchInput").value=""; currentSort="default"; document.getElementById("sortSelect").value="default";
     document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
     document.querySelectorAll('[data-genre="all"], [data-year="all"],[data-origin="all"]').forEach(b=>b.classList.add('active'));
     renderGrid(); showToast("فلتەرەکان خاوێنکرانەوە", "info");
   }
 
-  window.closeActionModal = function () { document.getElementById("actionModal").style.display = "none"; document.body.style.overflow = "auto"; };
-  
-  function updateAccountUI() {
-    let isLogged = !!currentUser;
-    document.getElementById("userDropdown").innerHTML = `
-      <div style="display:flex; gap:16px; align-items:center; margin-bottom:16px; padding:16px; background:rgba(255,255,255,0.03); border-radius:18px;">
-        <div style="width:48px; height:48px; background:linear-gradient(135deg, #f8d64e, #d8b22a); border-radius:14px; display:flex; align-items:center; justify-content:center; color:#000;"><i class="fa-solid fa-user"></i></div>
-        <div><h4 style="margin:0;">${isLogged ? currentUser.username : "میوان"}</h4><span style="font-size:0.8rem; color:#aaa;">${isLogged ? (currentUser.role === "admin" ? "بەڕێوبەر" : "بەکارهێنەر") : "سەردانکەر"}</span></div>
-      </div>
-      ${isLogged ? `<div class="dropdown-item" onclick="showProfileModal()"><i class="fa-solid fa-circle-user"></i> پرۆفایلی من</div>` : ''}
-      ${isLogged && currentUser.role === "admin" ? `<div class="dropdown-item" onclick="showAdminPanel()"><i class="fa-solid fa-shield-halved"></i> پانێڵی بەڕێوبەر</div>` : ''}
-      <hr class="dropdown-sep">
-      <div class="dropdown-item" onclick="showSettingsPanel()"><i class="fa-solid fa-gear"></i> ڕێکخستنی پێشکەوتوو</div>
-      <hr class="dropdown-sep">
-      ${!isLogged ? `<div class="dropdown-item" onclick="showAuthModal('login')"><i class="fa-solid fa-right-to-bracket"></i> چوونەژوورەوە</div>` : ''}
-      ${!isLogged ? `<div class="dropdown-item" onclick="showAuthModal('register')"><i class="fa-solid fa-user-plus"></i> خۆتۆمارکردن</div>` : ''}
-      ${isLogged ? `<div class="dropdown-item" style="color:#ff6b6b;" onclick="currentUser=null;saveState();updateAccountUI();"><i class="fa-solid fa-right-from-bracket"></i> دەرچوون</div>` : ''}`;
-    
-    document.getElementById("avatarBtn").innerHTML = isLogged && currentUser.role==="admin" ? '<i class="fa-solid fa-crown"></i>' : '<i class="fa-solid fa-user"></i>';
-    renderContinueWatching();
-  }
+  function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
 
-  function updateHeroSlides() { return [...getAll()].sort((a,b)=>b.rating-a.rating).slice(0,5); }
-  let heroSlides =[];
-  
-  function loadHero(i) {
+  // Hero Slider
+  let heroSlides = [];
+  async function updateHeroSlides() { 
+    let movies = await getAllItems(); 
+    return movies.sort((a,b)=>b.rating - a.rating).slice(0,5); 
+  }
+  async function loadHero(i) {
     if(heroSlides.length===0) return;
     if(i>=heroSlides.length) i=0;
     let s=heroSlides[i];
     currentHeroId=s.id;
     let h=document.getElementById("heroSection");
-    
-    // Zoom & Fade animation logic
     h.classList.add("hero-fade-out");
-    
     setTimeout(() => {
       h.style.backgroundImage = `linear-gradient(10deg, rgba(8,8,12,0.95) 0%, rgba(8,8,12,0.3) 60%, transparent 100%), url('${s.bg}')`;
       document.getElementById("heroTitle").textContent=s.title;
       document.getElementById("heroDesc").textContent=s.desc;
       document.getElementById("heroMeta").innerHTML = `<span><i class="fa-solid fa-calendar"></i> ${s.year}</span> <span><i class="fa-solid fa-clock"></i> ${s.duration}</span> <span><i class="fa-solid fa-star" style="color:#f8d64e"></i> ${s.rating}</span>`;
-      
       h.classList.remove("hero-fade-out");
       h.classList.add("hero-animate-in");
-      
-      setTimeout(() => {
-        h.classList.remove("hero-animate-in");
-      }, 800);
+      setTimeout(() => h.classList.remove("hero-animate-in"), 800);
     }, 400);
   }
-
-  function fadeHeroTo(i) { heroIndex=i; loadHero(heroIndex); }
-  setInterval(() => {
-  if (document.visibilityState === 'visible' && heroSlides.length > 1) {
-    fadeHeroTo((heroIndex + 1) % heroSlides.length);
-  }
-}, 8000);
+  async function fadeHeroTo(i) { heroIndex=i; loadHero(heroIndex); }
+  
+  // Filter Grids
   const genres =["دراما", "تاوانکاری", "هەستبزوێن", "زانستی خەیاڵی", "سەرکێشی", "ئەکشن", "خەیاڵی", "کۆمیدی", "ئەنیمەیشن", "ترسناک", "ڕۆمانسی"];
   document.getElementById("genreGrid").innerHTML = `<button class="filter-btn active" data-genre="all">هەموو</button>` + genres.map(g=>`<button class="filter-btn" data-genre="${g}">${g}</button>`).join('');
   document.getElementById("yearGrid").innerHTML = `<button class="filter-btn active" data-year="all">هەموو</button>` + Array.from({length:25},(_,i)=>2024-i).map(y=>`<button class="filter-btn" data-year="${y}">${y}</button>`).join('');
@@ -1131,31 +1859,508 @@ function sanitize(str) {
   document.querySelectorAll('.filter-grid').forEach(g => { g.addEventListener('click', e => { if(e.target.classList.contains('filter-btn')){ g.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); e.target.classList.add('active'); if(g.id==="genreGrid") currentGenre=e.target.dataset.genre; if(g.id==="yearGrid") currentYear=e.target.dataset.year; if(g.id==="originGrid") currentOrigin=e.target.dataset.origin; renderGrid(); } }); });
   document.querySelectorAll('.panel-header').forEach(h => { h.addEventListener('click', () => { let grid=h.nextElementSibling; grid.classList.toggle('open'); h.classList.toggle('open'); }); });
 
+  // On Load
   window.onload = async () => {
-    await migrateAccounts(); applyTheme();
-    updateAccountUI();
-    document.getElementById("avatarBtn").onclick = e => { e.stopPropagation(); document.getElementById("userDropdown").classList.toggle("show"); };
-    window.addEventListener("click", e => { if (!e.target.closest(".user-area")) document.getElementById("userDropdown").classList.remove("show"); });
-    document.querySelectorAll(".nav-item").forEach(n => n.onclick=()=>{ document.querySelectorAll(".nav-item").forEach(x=>x.classList.remove("active")); n.classList.add("active"); currentNav=n.dataset.nav; currentPage=1; renderGrid(); });
-    document.querySelectorAll(".menu-item").forEach(n => n.onclick=()=>{ document.querySelectorAll(".menu-item").forEach(x=>x.classList.remove("active")); n.classList.add("active"); currentFilter=n.dataset.menu; currentPage=1; renderGrid(); });
-   let searchTimeout;
-document.getElementById("searchInput").addEventListener("input", () => {
-  clearTimeout(searchTimeout);
-  searchTimeout = setTimeout(() => {
-    currentPage = 1;
-    renderGrid();
-  }, 300);
-});
-    document.getElementById("heroPlayBtn").onclick = () => openDetail(currentHeroId);
-    document.getElementById("heroInfoBtn").onclick = () => openDetail(currentHeroId);
-    document.getElementById("heroTrailerBtn").onclick = () => { let item = findItem(currentHeroId); if(item) playTrailer(currentHeroId); };
-    heroSlides = updateHeroSlides(); loadHero(0);
-    renderGrid();
-    renderSmartSuggestions();
-    let urlParams = new URLSearchParams(window.location.search);
-    if(urlParams.has('v')) { setTimeout(() => openDetail(urlParams.get('v')), 800); }
-    setTimeout(() => { document.getElementById("loader").style.opacity="0"; setTimeout(()=>document.getElementById("loader").style.display="none",400); }, 800);
+    const loader = document.getElementById("loader");
+    const hideLoader = () => {
+      if (loader && loader.style.display !== "none") {
+        loader.style.opacity = "0";
+        setTimeout(() => loader.style.display = "none", 400);
+      }
+    };
+    const fallbackTimeout = setTimeout(hideLoader, 8000);
+    try {
+      await initDBAndSeed();
+      const stored = localStorage.getItem("currentUser");
+      if (stored) {
+        const { email } = JSON.parse(stored);
+        const users = await getAllUsers();
+        currentUser = users.find(u => u.email === email);
+      }
+      applyTheme();
+      updateAccountUI();
+      document.getElementById("avatarBtn").onclick = e => { e.stopPropagation(); document.getElementById("userDropdown").classList.toggle("show"); };
+      window.addEventListener("click", e => { if (!e.target.closest(".user-area")) document.getElementById("userDropdown").classList.remove("show"); });
+      document.querySelectorAll(".nav-item").forEach(n => n.onclick=()=>{ document.querySelectorAll(".nav-item").forEach(x=>x.classList.remove("active")); n.classList.add("active"); currentNav=n.dataset.nav; currentPage=1; renderGrid(); });
+      document.querySelectorAll(".menu-item").forEach(n => n.onclick=()=>{ document.querySelectorAll(".menu-item").forEach(x=>x.classList.remove("active")); n.classList.add("active"); currentFilter=n.dataset.menu; currentPage=1; renderGrid(); });
+      document.getElementById("searchInput").addEventListener("input", ()=>{currentPage=1;renderGrid();});
+      document.getElementById("sortSelect").addEventListener("change", (e)=>{currentSort=e.target.value; currentPage=1; renderGrid();});
+      document.getElementById("heroPlayBtn").onclick = () => openDetail(currentHeroId);
+      document.getElementById("heroInfoBtn").onclick = () => openDetail(currentHeroId);
+      document.getElementById("heroTrailerBtn").onclick = () => { if(currentHeroId) playTrailer(currentHeroId); };
+      document.getElementById("themeToggleBtn").onclick = () => toggleLightMode();
+      heroSlides = await updateHeroSlides(); loadHero(0);
+      renderGrid();
+      renderSmartSuggestions();
+      let urlParams = new URLSearchParams(window.location.search);
+      if(urlParams.has('v')) { setTimeout(() => openDetail(urlParams.get('v')), 800); }
+      clearTimeout(fallbackTimeout);
+      hideLoader();
+      setInterval(async () => { 
+        heroSlides = await updateHeroSlides(); 
+        if(heroSlides.length>1) fadeHeroTo((heroIndex+1)%heroSlides.length); 
+      }, 8000);
+    } catch (error) {
+      console.error("Initialization error:", error);
+      showToast("هەڵە لە بارکردندا، پەڕە نوێ بکەرەوە", "error");
+      clearTimeout(fallbackTimeout);
+      hideLoader();
+    }
   };
+</script>
+<!-- ========== پانێڵی ڕەنگەکانی بەڕێوبەر (Admin Color Panel with Save Button) ========== -->
+<style id="admin-color-style">
+  :root {
+    --primary: #f8d64e;
+    --primary-dark: #e0b82e;
+    --bg-overlay-dark: rgba(8, 8, 12, 0.85);
+    --bg-overlay-light: rgba(240, 242, 245, 0.85);
+    --text-dark: #eef2ff;
+    --text-light: #111;
+    --card-bg-dark: rgba(20, 20, 28, 0.6);
+    --card-bg-light: rgba(255, 255, 255, 0.7);
+  }
+  body::before { background: var(--bg-overlay) !important; }
+  body { color: var(--text-color) !important; }
+  body.light-theme { --bg-overlay: var(--bg-overlay-light); --text-color: var(--text-light); --card-bg: var(--card-bg-light); }
+  body:not(.light-theme) { --bg-overlay: var(--bg-overlay-dark); --text-color: var(--text-dark); --card-bg: var(--card-bg-dark); }
+  .hero-btn, .nav-item.active, .nav-item:hover, .menu-item.active, .menu-item:hover,
+  .filter-btn.active, .filter-btn:hover, .page-btn.active, .page-btn:hover,
+  .server-btn.active, .server-btn:hover, .chip:hover, .ai-recommend-btn,
+  .admin-tab.active, .toggle-switch input:checked + .slider {
+    background: var(--primary) !important;
+    color: #111 !important;
+    border-color: var(--primary) !important;
+  }
+  .clock-widget i, .stats-badge, .hero-label, .panel-title, .section-title,
+  .server-title, .comment-header, .notification-icon, .dropdown-item:hover i {
+    color: var(--primary) !important;
+  }
+  .color-panel {
+    background: rgba(20, 20, 28, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 28px;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid var(--primary);
+  }
+  .color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+  }
+  .color-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: rgba(255,255,255,0.05);
+    padding: 12px;
+    border-radius: 20px;
+  }
+  .color-item label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+  }
+  .color-item input {
+    width: 100%;
+    height: 40px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    background: rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .save-colors-btn {
+    background: #4caf50 !important;
+    color: white !important;
+    margin-top: 15px;
+    width: 100%;
+  }
+  .reset-colors-btn {
+    background: #ff4757 !important;
+    color: white !important;
+    margin-top: 10px;
+    width: 100%;
+  }
+  body.light-theme .color-panel {
+    background: rgba(255,255,255,0.9);
+  }
+</style>
+
+<script>
+(function() {
+  const STORAGE_KEY = 'admin_custom_colors_v2';
+  
+  const defaultColors = {
+    primary: '#f8d64e',
+    primaryDark: '#e0b82e',
+    bgOverlayDark: 'rgba(8, 8, 12, 0.85)',
+    bgOverlayLight: 'rgba(240, 242, 245, 0.85)',
+    textDark: '#eef2ff',
+    textLight: '#111',
+    cardBgDark: 'rgba(20, 20, 28, 0.6)',
+    cardBgLight: 'rgba(255, 255, 255, 0.7)'
+  };
+  
+  // بارکردنی ڕەنگە پاشەکەوتکراوەکان
+  function loadColors() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        const colors = JSON.parse(saved);
+        for (let key in defaultColors) {
+          if (colors[key]) {
+            document.documentElement.style.setProperty(`--${key.replace(/([A-Z])/g, '-$1').toLowerCase()}`, colors[key]);
+          } else {
+            document.documentElement.style.setProperty(`--${key.replace(/([A-Z])/g, '-$1').toLowerCase()}`, defaultColors[key]);
+          }
+        }
+      } catch(e) {}
+    } else {
+      for (let key in defaultColors) {
+        document.documentElement.style.setProperty(`--${key.replace(/([A-Z])/g, '-$1').toLowerCase()}`, defaultColors[key]);
+      }
+    }
+  }
+  
+  // پاشەکەوتکردنی ڕەنگەکان
+  function saveColors(colors) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(colors));
+    for (let key in colors) {
+      document.documentElement.style.setProperty(`--${key.replace(/([A-Z])/g, '-$1').toLowerCase()}`, colors[key]);
+    }
+    showToast('ڕەنگەکان پاشەکەوتکران!', 'success');
+  }
+  
+  // ڕێکخستنەوە بۆ بنەڕەت
+  function resetToDefault() {
+    saveColors(defaultColors);
+    showToast('ڕەنگەکان گەڕێنرایەوە بۆ شێوازی بنەڕەت', 'success');
+    setTimeout(() => location.reload(), 800);
+  }
+  
+  // دروستکردنی UIی پانێڵی ڕەنگەکان
+  function injectColorPanel() {
+    const interval = setInterval(() => {
+      const adminModal = document.getElementById('actionModal');
+      if (!adminModal || adminModal.style.display !== 'block') return;
+      
+      const tabUsers = document.getElementById('tab-users');
+      const tabStats = document.getElementById('tab-stats');
+      const tabAdd = document.getElementById('tab-add');
+      if (!tabUsers || !tabStats || !tabAdd) return;
+      
+      if (document.getElementById('adminColorPanel')) return;
+      
+      // زیادکردنی تابی نوێ
+      const adminTabs = document.querySelector('.admin-tabs');
+      if (adminTabs && !document.querySelector('.admin-tab[data-tab="colors"]')) {
+        const colorTab = document.createElement('div');
+        colorTab.className = 'admin-tab';
+        colorTab.setAttribute('data-tab', 'colors');
+        colorTab.innerHTML = '<i class="fa-solid fa-palette"></i> ڕەنگەکان';
+        colorTab.onclick = () => {
+          document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+          colorTab.classList.add('active');
+          document.getElementById('tab-colors').classList.add('active');
+        };
+        adminTabs.appendChild(colorTab);
+      }
+      
+      if (!document.getElementById('tab-colors')) {
+        const newTab = document.createElement('div');
+        newTab.id = 'tab-colors';
+        newTab.className = 'tab-content';
+        
+        // وەرگرتنی ڕەنگەکانی ئێستا
+        const getCurrentHex = (key, defaultValue) => {
+          const val = getComputedStyle(document.documentElement).getPropertyValue(`--${key.replace(/([A-Z])/g, '-$1').toLowerCase()}`).trim();
+          if (val && val.startsWith('#')) return val;
+          return defaultValue;
+        };
+        
+        newTab.innerHTML = `
+          <div class="color-panel" id="adminColorPanel">
+            <h3 style="color: var(--primary); margin-bottom: 15px;"><i class="fa-solid fa-palette"></i> ڕەنگەکانی ماڵپەڕ</h3>
+            <p style="font-size: 0.8rem; margin-bottom: 15px;">ڕەنگەکان هەڵبژێرە، پاشان کلیک لەسەر "Save Colors" بکە بۆ جێبەجێکردن. گۆڕانکارییەکان بە شێوەی هەمیشەیی دەمێننەوە.</p>
+            <div class="color-grid">
+              <div class="color-item"><label>🔴 ڕەنگی سەرەکی</label><input type="color" id="color-primary" value="${getCurrentHex('primary', '#f8d64e')}"></div>
+              <div class="color-item"><label>🟠 ڕەنگی سەرەکی تاریکتر</label><input type="color" id="color-primaryDark" value="${getCurrentHex('primaryDark', '#e0b82e')}"></div>
+              <div class="color-item"><label>🌙 پاشبنەمای تاریک</label><input type="color" id="color-bgOverlayDark" value="${getCurrentHex('bgOverlayDark', '#08080c')}"></div>
+              <div class="color-item"><label>☀️ پاشبنەمای ڕووناک</label><input type="color" id="color-bgOverlayLight" value="${getCurrentHex('bgOverlayLight', '#f0f2f5')}"></div>
+              <div class="color-item"><label>📝 ڕەنگی تێکست (تاریک)</label><input type="color" id="color-textDark" value="${getCurrentHex('textDark', '#eef2ff')}"></div>
+              <div class="color-item"><label>📝 ڕەنگی تێکست (ڕووناک)</label><input type="color" id="color-textLight" value="${getCurrentHex('textLight', '#111111')}"></div>
+              <div class="color-item"><label>🎴 پاشبنەمای کارت (تاریک)</label><input type="color" id="color-cardBgDark" value="${getCurrentHex('cardBgDark', '#202020')}"></div>
+              <div class="color-item"><label>🎴 پاشبنەمای کارت (ڕووناک)</label><input type="color" id="color-cardBgLight" value="${getCurrentHex('cardBgLight', '#ffffff')}"></div>
+            </div>
+            <button class="hero-btn save-colors-btn" id="saveColorsBtn"><i class="fa-solid fa-floppy-disk"></i> Save Colors</button>
+            <button class="hero-btn reset-colors-btn" id="resetColorsBtn"><i class="fa-solid fa-undo-alt"></i> گەڕاندنەوە بۆ بنەڕەت</button>
+          </div>
+        `;
+        
+        const addTab = document.getElementById('tab-add');
+        if (addTab && addTab.parentNode) {
+          addTab.parentNode.insertBefore(newTab, addTab.nextSibling);
+        } else {
+          document.querySelector('.modal-body').appendChild(newTab);
+        }
+        
+        // گرێدانی دوگمەکان
+        document.getElementById('saveColorsBtn').onclick = () => {
+          const newColors = {
+            primary: document.getElementById('color-primary').value,
+            primaryDark: document.getElementById('color-primaryDark').value,
+            bgOverlayDark: hexToRgba(document.getElementById('color-bgOverlayDark').value, 0.85),
+            bgOverlayLight: hexToRgba(document.getElementById('color-bgOverlayLight').value, 0.85),
+            textDark: document.getElementById('color-textDark').value,
+            textLight: document.getElementById('color-textLight').value,
+            cardBgDark: hexToRgba(document.getElementById('color-cardBgDark').value, 0.6),
+            cardBgLight: hexToRgba(document.getElementById('color-cardBgLight').value, 0.7)
+          };
+          saveColors(newColors);
+          showToast('✅ ڕەنگەکان پاشەکەوتکران و جێبەجێ بوون!', 'success');
+        };
+        
+        document.getElementById('resetColorsBtn').onclick = () => {
+          if (confirm('دڵنیای لە گەڕاندنەوەی هەموو ڕەنگەکان بۆ شێوازی بنەڕەت؟')) {
+            resetToDefault();
+          }
+        };
+      }
+      clearInterval(interval);
+    }, 500);
+  }
+  
+  function hexToRgba(hex, alpha) {
+    const r = parseInt(hex.slice(1,3), 16);
+    const g = parseInt(hex.slice(3,5), 16);
+    const b = parseInt(hex.slice(5,7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+  
+  function showToast(msg, type) {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check' : 'fa-circle-info'}"></i><span>${msg}</span>`;
+    container.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+  }
+  
+  loadColors();
+  
+  // چاوەڕێی کردنەوەی ئەدمین پانێڵ
+  const originalShowAdminPanel = window.showAdminPanel;
+  if (originalShowAdminPanel) {
+    window.showAdminPanel = async function() {
+      await originalShowAdminPanel();
+      injectColorPanel();
+    };
+  } else {
+    window.addEventListener('load', () => {
+      const observer = new MutationObserver(() => {
+        const modal = document.getElementById('actionModal');
+        if (modal && modal.style.display === 'block') {
+          injectColorPanel();
+          observer.disconnect();
+        }
+      });
+      observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ['style'] });
+    });
+  }
+})();
+</script>
+<!-- ========== پانێڵی ڕەنگەکانی بەڕێوبەر بە Firebase (بۆ هەموو بەکارهێنەران) ========== -->
+<script type="module">
+  // 🔥 کۆدی Firebase configـەکەی تۆ (پڕکراوە)
+  const firebaseConfig = {
+    apiKey: "AIzaSyAst4isKbXTH7CaycPxalyCTfx9zuaPlv8",
+    authDomain: "peshawa-cinema.firebaseapp.com",
+    databaseURL: "https://peshawa-cinema-default-rtdb.firebaseio.com",
+    projectId: "peshawa-cinema",
+    storageBucket: "peshawa-cinema.firebasestorage.app",
+    messagingSenderId: "488619323302",
+    appId: "1:488619323302:web:407c7dffbc755afe5ea967",
+    measurementId: "G-FZDXKDN1F6"
+  };
+  
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+  
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const colorsRef = ref(db, 'siteColors');
+  
+  const defaultColors = {
+    primary: '#f8d64e',
+    primaryDark: '#e0b82e',
+    bgOverlayDark: 'rgba(8, 8, 12, 0.85)',
+    bgOverlayLight: 'rgba(240, 242, 245, 0.85)',
+    textDark: '#eef2ff',
+    textLight: '#111111',
+    cardBgDark: 'rgba(20, 20, 28, 0.6)',
+    cardBgLight: 'rgba(255, 255, 255, 0.7)'
+  };
+  
+  function loadColorsForAll() {
+    onValue(colorsRef, (snapshot) => {
+      const colors = snapshot.val();
+      if (colors) {
+        applyColorsToCSS(colors);
+      } else {
+        applyColorsToCSS(defaultColors);
+        if (window.currentUser?.email === 'twana@peshawacinema.com') {
+          set(colorsRef, defaultColors);
+        }
+      }
+    });
+  }
+  
+  function applyColorsToCSS(colors) {
+    for (let key in colors) {
+      const cssVar = `--${key.replace(/([A-Z])/g, '-$1').toLowerCase()}`;
+      document.documentElement.style.setProperty(cssVar, colors[key]);
+    }
+    const isLight = document.body.classList.contains('light-theme');
+    const bgOverlay = isLight ? colors.bgOverlayLight : colors.bgOverlayDark;
+    document.body.style.setProperty('--bg-overlay', bgOverlay);
+    const textColor = isLight ? colors.textLight : colors.textDark;
+    document.body.style.setProperty('--text-color', textColor);
+    document.body.style.color = textColor;
+  }
+  
+  async function saveColorsToFirebase(colors) {
+    if (window.currentUser?.email !== 'twana@peshawacinema.com') {
+      alert('تەنها ئەدمین دەتوانێت ڕەنگەکان بگۆڕێت!');
+      return false;
+    }
+    try {
+      await set(colorsRef, colors);
+      alert('✅ ڕەنگەکان پاشەکەوتکران و بۆ هەموو بەکارهێنەران نمایش دەکرێن!');
+      return true;
+    } catch (e) {
+      alert('هەڵە لە پاشەکەوتکردندا: ' + e.message);
+      return false;
+    }
+  }
+  
+  function injectColorPanel() {
+    const interval = setInterval(() => {
+      const adminModal = document.getElementById('actionModal');
+      if (!adminModal || adminModal.style.display !== 'block') return;
+      if (document.getElementById('adminColorPanel')) return;
+      
+      const adminTabs = document.querySelector('.admin-tabs');
+      if (adminTabs && !document.querySelector('.admin-tab[data-tab="colors"]')) {
+        const colorTab = document.createElement('div');
+        colorTab.className = 'admin-tab';
+        colorTab.setAttribute('data-tab', 'colors');
+        colorTab.innerHTML = '<i class="fa-solid fa-palette"></i> ڕەنگەکان (هەموو بەکارهێنەران)';
+        colorTab.onclick = () => {
+          document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+          colorTab.classList.add('active');
+          document.getElementById('tab-colors').classList.add('active');
+        };
+        adminTabs.appendChild(colorTab);
+      }
+      
+      if (!document.getElementById('tab-colors')) {
+        const newTab = document.createElement('div');
+        newTab.id = 'tab-colors';
+        newTab.className = 'tab-content';
+        newTab.innerHTML = `
+          <div class="color-panel" id="adminColorPanel">
+            <h3 style="color: var(--primary); margin-bottom: 15px;"><i class="fa-solid fa-palette"></i> ڕەنگەکانی ماڵپەڕ (بۆ هەموو بەکارهێنەران)</h3>
+            <p style="font-size: 0.8rem; margin-bottom: 15px;">ڕەنگەکان هەڵبژێرە، پاشان کلیک لەسەر "Save Colors" بکە. گۆڕانکارییەکان بۆ هەموو بەکارهێنەران نمایش دەکرێن.</p>
+            <div class="color-grid">
+              <div class="color-item"><label>🔴 ڕەنگی سەرەکی</label><input type="color" id="color-primary" value="${getCurrentCSSVar('--primary', '#f8d64e')}"></div>
+              <div class="color-item"><label>🟠 ڕەنگی سەرەکی تاریکتر</label><input type="color" id="color-primaryDark" value="${getCurrentCSSVar('--primary-dark', '#e0b82e')}"></div>
+              <div class="color-item"><label>🌙 پاشبنەمای تاریک</label><input type="color" id="color-bgOverlayDark" value="${hexFromRgba(getCurrentCSSVar('--bg-overlay-dark', 'rgba(8,8,12,0.85)'))}"></div>
+              <div class="color-item"><label>☀️ پاشبنەمای ڕووناک</label><input type="color" id="color-bgOverlayLight" value="${hexFromRgba(getCurrentCSSVar('--bg-overlay-light', 'rgba(240,242,245,0.85)'))}"></div>
+              <div class="color-item"><label>📝 ڕەنگی تێکست (تاریک)</label><input type="color" id="color-textDark" value="${getCurrentCSSVar('--text-dark', '#eef2ff')}"></div>
+              <div class="color-item"><label>📝 ڕەنگی تێکست (ڕووناک)</label><input type="color" id="color-textLight" value="${getCurrentCSSVar('--text-light', '#111111')}"></div>
+              <div class="color-item"><label>🎴 پاشبنەمای کارت (تاریک)</label><input type="color" id="color-cardBgDark" value="${hexFromRgba(getCurrentCSSVar('--card-bg-dark', 'rgba(20,20,28,0.6)'))}"></div>
+              <div class="color-item"><label>🎴 پاشبنەمای کارت (ڕووناک)</label><input type="color" id="color-cardBgLight" value="${hexFromRgba(getCurrentCSSVar('--card-bg-light', 'rgba(255,255,255,0.7)'))}"></div>
+            </div>
+            <button class="hero-btn save-colors-btn" id="saveColorsBtn"><i class="fa-solid fa-globe"></i> Save Colors (بۆ هەموو بەکارهێنەران)</button>
+            <button class="hero-btn reset-colors-btn" id="resetColorsBtn"><i class="fa-solid fa-undo-alt"></i> گەڕاندنەوە بۆ بنەڕەت</button>
+          </div>
+        `;
+        
+        const addTab = document.getElementById('tab-add');
+        if (addTab && addTab.parentNode) {
+          addTab.parentNode.insertBefore(newTab, addTab.nextSibling);
+        } else {
+          document.querySelector('.modal-body').appendChild(newTab);
+        }
+        
+        document.getElementById('saveColorsBtn').onclick = async () => {
+          const newColors = {
+            primary: document.getElementById('color-primary').value,
+            primaryDark: document.getElementById('color-primaryDark').value,
+            bgOverlayDark: hexToRgba(document.getElementById('color-bgOverlayDark').value, 0.85),
+            bgOverlayLight: hexToRgba(document.getElementById('color-bgOverlayLight').value, 0.85),
+            textDark: document.getElementById('color-textDark').value,
+            textLight: document.getElementById('color-textLight').value,
+            cardBgDark: hexToRgba(document.getElementById('color-cardBgDark').value, 0.6),
+            cardBgLight: hexToRgba(document.getElementById('color-cardBgLight').value, 0.7)
+          };
+          await saveColorsToFirebase(newColors);
+        };
+        
+        document.getElementById('resetColorsBtn').onclick = async () => {
+          if (confirm('دڵنیای لە گەڕاندنەوەی هەموو ڕەنگەکان بۆ شێوازی بنەڕەت؟ ئەمە کاریگەری لەسەر هەموو بەکارهێنەران دەبێت!')) {
+            await saveColorsToFirebase(defaultColors);
+            setTimeout(() => location.reload(), 800);
+          }
+        };
+      }
+      clearInterval(interval);
+    }, 500);
+  }
+  
+  function getCurrentCSSVar(varName, defaultValue) {
+    const val = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+    return val || defaultValue;
+  }
+  
+  function hexFromRgba(rgba) {
+    const match = rgba.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+    if (!match) return '#000000';
+    return '#' + ((1 << 24) + (parseInt(match[1]) << 16) + (parseInt(match[2]) << 8) + parseInt(match[3])).toString(16).slice(1);
+  }
+  
+  function hexToRgba(hex, alpha) {
+    const r = parseInt(hex.slice(1,3), 16);
+    const g = parseInt(hex.slice(3,5), 16);
+    const b = parseInt(hex.slice(5,7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+  
+  loadColorsForAll();
+  
+  const originalShowAdminPanel = window.showAdminPanel;
+  if (originalShowAdminPanel) {
+    window.showAdminPanel = async function() {
+      await originalShowAdminPanel();
+      injectColorPanel();
+    };
+  } else {
+    window.addEventListener('load', () => {
+      const observer = new MutationObserver(() => {
+        const modal = document.getElementById('actionModal');
+        if (modal && modal.style.display === 'block') {
+          injectColorPanel();
+          observer.disconnect();
+        }
+      });
+      observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ['style'] });
+    });
+  }
 </script>
 </body>
 </html>
